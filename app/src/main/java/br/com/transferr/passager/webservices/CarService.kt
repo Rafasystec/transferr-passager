@@ -9,6 +9,7 @@ import br.com.transferr.passager.application.ApplicationTransferr
 import br.com.transferr.passager.model.Quadrant
 import br.com.transferr.passager.model.responses.ResponseCarsOnline
 import br.com.transferr.passager.util.CallRESTMethodsUtil
+import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 
 
@@ -25,21 +26,12 @@ class CarService {
         return car
     }
     var callRESTCarOnline = CallRESTMethodsUtil<MutableList<ResponseCarsOnline>>()
-    fun getCarOnline(quadrant:Quadrant):List<ResponseCarsOnline>{
-        var stringBuilder = StringBuilder("online/")
-        //Far points location
-        stringBuilder.append(quadrant.farLeft?.latitude).append("/")
-        stringBuilder.append(quadrant.farLeft?.longitude).append("/")
-        stringBuilder.append(quadrant.farRight?.latitude).append("/")
-        stringBuilder.append(quadrant.farRight?.longitude).append("/")
-        //Near points location
-        stringBuilder.append(quadrant.nearLeft?.latitude).append("/")
-        stringBuilder.append(quadrant.nearLeft?.longitude).append("/")
-        stringBuilder.append(quadrant.nearRight?.latitude).append("/")
-        stringBuilder.append(quadrant.nearRight?.longitude).append("")
+    fun getCarOnline(coordinatesStr:String):List<ResponseCarsOnline>{
+        var stringBuilder = StringBuilder("car/online/")
+        stringBuilder.append(coordinatesStr)
         var url = urlBase+stringBuilder.toString()
         //TODO comment it later
-
+/*
         var car1 = ResponseCarsOnline()
         car1.latitude = -3.73674356
         car1.longitude = -38.49615601
@@ -53,10 +45,19 @@ class CarService {
         car2.cor = "PRETO"
         car2.model = "S-10"
         car2.placa = "OHQ-5672"
-        var markers: MutableList<ResponseCarsOnline> = mutableListOf(car1,car2)
+
+        var car3 = ResponseCarsOnline()
+        car3.latitude  = -3.73682921
+        car3.longitude = -38.48748711
+        car3.cor = "BEGE DESERT"
+        car3.model = "D-20"
+        car3.placa = "OHJ-0072"
+
+        var markers: MutableList<ResponseCarsOnline> = mutableListOf(car1,car2,car3)
         return markers
+        */
         //TODO comment for a while
-        //var json = callRESTCarOnline.get(url)
-        //return callRESTCarOnline.fromJson<MutableList<ResponseCarsOnline>>(json)
+        var json = callRESTCarOnline.get(url)
+        return callRESTCarOnline.fromJson<MutableList<ResponseCarsOnline>>(json)
     }
 }

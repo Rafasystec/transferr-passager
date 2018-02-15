@@ -14,7 +14,7 @@ import br.com.transferr.util.Prefes
  * Created by root on 14/02/18.
  */
 @SuppressLint("Registered")
-class SuperClassActivity : AppCompatActivity(){
+open class SuperClassActivity : AppCompatActivity(){
     //Propriedade para acessar o contexto de qualquer lugar
     protected val context: Context get() = this
 

@@ -24,12 +24,16 @@ import com.google.android.gms.common.api.GoogleApiClient
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationRequest
 import com.google.android.gms.location.LocationServices
-import com.google.android.gms.maps.*
+import com.google.android.gms.maps.CameraUpdateFactory
+import com.google.android.gms.maps.GoogleMap
+import com.google.android.gms.maps.OnMapReadyCallback
+import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
-import com.google.android.gms.maps.model.Marker
-import com.google.android.gms.maps.model.MarkerOptions
 import com.google.android.gms.tasks.OnSuccessListener
+import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.toast
+import org.jetbrains.anko.uiThread
+import java.math.BigDecimal
 
 class MainActivity : AppCompatActivity(), GoogleApiClient.ConnectionCallbacks,GoogleApiClient.OnConnectionFailedListener, OnMapReadyCallback,com.google.android.gms.location.LocationListener {
 
@@ -42,7 +46,9 @@ class MainActivity : AppCompatActivity(), GoogleApiClient.ConnectionCallbacks,Go
     private var mLocationRequest: LocationRequest? = null
     private val UPDATE_INTERVAL = (2 * 1000).toLong()  /* 10 secs */
     private val FASTEST_INTERVAL: Long = 2000 /* 2 sec */
+    private val ZOOM = 15f
     lateinit var mLocation: Location
+    @SuppressLint("MissingPermission")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         locationManager = this.getSystemService(Context.LOCATION_SERVICE) as LocationManager
@@ -52,9 +58,10 @@ class MainActivity : AppCompatActivity(), GoogleApiClient.ConnectionCallbacks,Go
                 .addOnConnectionFailedListener(this)
                 .addApi(LocationServices.API)
                 .build()
-
+        startApi()
         mLocationManager = this.getSystemService(Context.LOCATION_SERVICE) as LocationManager
         checkLocation()
+        //mLocation = mLocationManager?.getLastKnownLocation(LocationManager.GPS_PROVIDER) as Location
         val mapFragment = supportFragmentManager
                 .findFragmentById(R.id.map) as SupportMapFragment
         mapFragment.getMapAsync(this)
@@ -72,6 +79,10 @@ class MainActivity : AppCompatActivity(), GoogleApiClient.ConnectionCallbacks,Go
     @SuppressLint("MissingPermission")
     override fun onMapReady(googleMap: GoogleMap) {
         this.mMap = googleMap
+        //startLocationUpdates()
+        //createCameraPosition()
+        //mLocation = mLocationManager?.getLastKnownLocation(LocationManager.GPS_PROVIDER) as Location
+        mMap.animateCamera(CameraUpdateFactory.zoomTo(ZOOM))
         mMap.setMaxZoomPreference(15f)
         mMap.mapType = GoogleMap.MAP_TYPE_NORMAL
         val allowed = PermissionUtil.validate(this,1,
@@ -80,15 +91,7 @@ class MainActivity : AppCompatActivity(), GoogleApiClient.ConnectionCallbacks,Go
         if(allowed) {
             mMap.isMyLocationEnabled = true
         }
-        /*
-        doAsync {
-            while (true) {
-                var update = updateMap()
-                uiThread { mMap.moveCamera(update) }
-                Thread.sleep(3*1000)
-            }
-        }
-        */
+
     }
 
     private fun checkLocation(): Boolean {
@@ -119,34 +122,47 @@ class MainActivity : AppCompatActivity(), GoogleApiClient.ConnectionCallbacks,Go
         var visibleRegion = mMap.projection.visibleRegion
         var quadrant      = Quadrant()
         if(visibleRegion != null){
-            var farLeft   = visibleRegion.farLeft
-            var farRight  = visibleRegion.farRight
-            var nearLeft  = visibleRegion.nearLeft
-            var nearRight = visibleRegion.nearRight
-            quadrant.nearRight  = nearRight
-            quadrant.nearLeft   = nearLeft
-            quadrant.farRight   = farRight
-            quadrant.farLeft    = farLeft
-            var carOnlineList   = CarService().getCarOnline(quadrant)
-            var marKers         = HelperCar.transformInMarkers(carOnlineList)
-            for (mark in marKers){
-                mMap.addMarker(mark)
+            quadrant.farLeftLat   = visibleRegion.farLeft.latitude
+            quadrant.farLeftLng   = visibleRegion.farLeft.longitude
+            quadrant.farRightLat  = visibleRegion.farRight.latitude
+            quadrant.farRightLng  = visibleRegion.farRight.longitude
+
+            quadrant.nearLeftLat  = visibleRegion.nearLeft.latitude
+            quadrant.nearLeftLng  = visibleRegion.nearLeft.longitude
+            quadrant.nearRightLat = visibleRegion.nearRight.latitude
+            quadrant.nearRightLng = visibleRegion.nearRight.longitude
+            //Far points location
+            var stringBuilder = StringBuilder("")
+            stringBuilder.append(BigDecimal.valueOf(visibleRegion.farLeft.latitude)).append("/")
+            stringBuilder.append(BigDecimal.valueOf(visibleRegion.farLeft.longitude)).append("/")
+            stringBuilder.append(visibleRegion.farRight.latitude).append("/")
+            stringBuilder.append(visibleRegion.farRight.longitude).append("/")
+            //Near points location
+            stringBuilder.append(visibleRegion.nearLeft.latitude).append("/")
+            stringBuilder.append(visibleRegion.nearLeft.longitude).append("/")
+            stringBuilder.append(visibleRegion.nearRight.latitude).append("/")
+            stringBuilder.append(visibleRegion.nearRight.longitude).append("")
+            doAsync {
+                var carOnlineList   = CarService().getCarOnline(stringBuilder.toString())
+                uiThread {
+                    if(carOnlineList != null) {
+                        var markers = HelperCar.transformInMarkers(carOnlineList)
+                        for (mark in markers) {
+                            mMap.addMarker(mark)
+                        }
+                    }
+                }
             }
+
+
         }
 
 
     }
 
     private fun updateMapScreen(location: Location?){
-        //var location = locationManager?.getLastKnownLocation(LocationManager.GPS_PROVIDER)
         val latLng = LatLng(location?.latitude!!,location?.longitude)
-        val update = CameraUpdateFactory.newLatLngZoom(latLng,13f)
-
-        var marker1:MarkerOptions = MarkerOptions().position(LatLng(-3.73682921,-38.48748711))
-                .title("Bem no PAPICU")
-                .snippet("Ok, this is my snippet")
-
-        mMap.addMarker(marker1)
+        val update = CameraUpdateFactory.newLatLngZoom(latLng,ZOOM)
         callWebService()
         mMap.moveCamera(update)
     }
@@ -190,6 +206,10 @@ class MainActivity : AppCompatActivity(), GoogleApiClient.ConnectionCallbacks,Go
 
     override fun onStart() {
         super.onStart()
+        startApi()
+    }
+
+    fun startApi(){
         if (mGoogleApiClient != null) {
             mGoogleApiClient.connect()
         }
@@ -217,5 +237,17 @@ class MainActivity : AppCompatActivity(), GoogleApiClient.ConnectionCallbacks,Go
                 mLocationRequest, this)
 
     }
+    /*
+    @SuppressLint("MissingPermission")
+    private fun createCameraPosition(){
+        locationManager = getSystemService(Context.LOCATION_SERVICE) as LocationManager
+        mLocation       = locationManager?.getLastKnownLocation(LocationManager.GPS_PROVIDER) as Location
+        if(mLocation != null) {
+            //mMap.animateCamera(CameraUpdateFactory.newCameraPosition(CameraPosition(LatLng(mLocation.latitude,mLocation.longitude),13f,70f,25f)))
+           // mMap = GoogleMap(CameraUpdateFactory.newCameraPosition(CameraPosition(LatLng(mLocation.latitude,mLocation.longitude),13f,70f,25f)))
+            mMap.moveCamera(CameraUpdateFactory.newCameraPosition(CameraPosition(LatLng(mLocation.latitude,mLocation.longitude),13f,70f,25f)))
+        }
+    }
+    */
 
 }
