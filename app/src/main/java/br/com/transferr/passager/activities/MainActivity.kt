@@ -10,6 +10,7 @@ import android.location.Location
 import android.location.LocationManager
 import android.os.Bundle
 import android.provider.Settings
+import android.support.design.widget.Snackbar
 import android.support.v4.app.ActivityCompat
 import android.support.v7.app.AlertDialog
 import android.support.v7.app.AppCompatActivity
@@ -30,12 +31,14 @@ import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.tasks.OnSuccessListener
+import kotlinx.android.synthetic.main.price_button.*
+import org.jetbrains.anko.contentView
 import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.toast
 import org.jetbrains.anko.uiThread
 import java.math.BigDecimal
 
-class MainActivity : AppCompatActivity(), GoogleApiClient.ConnectionCallbacks,GoogleApiClient.OnConnectionFailedListener, OnMapReadyCallback,com.google.android.gms.location.LocationListener {
+class MainActivity : SuperClassActivity(), GoogleApiClient.ConnectionCallbacks,GoogleApiClient.OnConnectionFailedListener, OnMapReadyCallback,com.google.android.gms.location.LocationListener {
 
 
     private val TAG = "LOCATION"
@@ -48,6 +51,7 @@ class MainActivity : AppCompatActivity(), GoogleApiClient.ConnectionCallbacks,Go
     private val FASTEST_INTERVAL: Long = 2000 /* 2 sec */
     private val ZOOM = 15f
     lateinit var mLocation: Location
+    var numCarFound:Int = 0
     @SuppressLint("MissingPermission")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -58,13 +62,20 @@ class MainActivity : AppCompatActivity(), GoogleApiClient.ConnectionCallbacks,Go
                 .addOnConnectionFailedListener(this)
                 .addApi(LocationServices.API)
                 .build()
+        addActionPrice()
         startApi()
         mLocationManager = this.getSystemService(Context.LOCATION_SERVICE) as LocationManager
         checkLocation()
-        //mLocation = mLocationManager?.getLastKnownLocation(LocationManager.GPS_PROVIDER) as Location
         val mapFragment = supportFragmentManager
                 .findFragmentById(R.id.map) as SupportMapFragment
         mapFragment.getMapAsync(this)
+    }
+
+    private fun addActionPrice(){
+        price.setOnClickListener { view ->
+            Snackbar.make(view, "Custo médio do translado é R$ 20,00", Snackbar.LENGTH_LONG)
+                    .setAction("Action", null).show()
+        }
     }
 
     /**
@@ -78,20 +89,21 @@ class MainActivity : AppCompatActivity(), GoogleApiClient.ConnectionCallbacks,Go
      */
     @SuppressLint("MissingPermission")
     override fun onMapReady(googleMap: GoogleMap) {
+
         this.mMap = googleMap
-        //startLocationUpdates()
-        //createCameraPosition()
-        //mLocation = mLocationManager?.getLastKnownLocation(LocationManager.GPS_PROVIDER) as Location
+        if(isMapAllowed()) {
+            mMap.isMyLocationEnabled = true
+        }
         mMap.animateCamera(CameraUpdateFactory.zoomTo(ZOOM))
         mMap.setMaxZoomPreference(15f)
         mMap.mapType = GoogleMap.MAP_TYPE_NORMAL
-        val allowed = PermissionUtil.validate(this,1,
+
+    }
+
+    private fun isMapAllowed():Boolean{
+        return PermissionUtil.validate(this,1,
                 Manifest.permission.ACCESS_FINE_LOCATION,
                 Manifest.permission.ACCESS_COARSE_LOCATION)
-        if(allowed) {
-            mMap.isMyLocationEnabled = true
-        }
-
     }
 
     private fun checkLocation(): Boolean {
@@ -131,22 +143,23 @@ class MainActivity : AppCompatActivity(), GoogleApiClient.ConnectionCallbacks,Go
             quadrant.nearLeftLng  = visibleRegion.nearLeft.longitude
             quadrant.nearRightLat = visibleRegion.nearRight.latitude
             quadrant.nearRightLng = visibleRegion.nearRight.longitude
-            //Far points location
-            var stringBuilder = StringBuilder("")
-            stringBuilder.append(BigDecimal.valueOf(visibleRegion.farLeft.latitude)).append("/")
-            stringBuilder.append(BigDecimal.valueOf(visibleRegion.farLeft.longitude)).append("/")
-            stringBuilder.append(visibleRegion.farRight.latitude).append("/")
-            stringBuilder.append(visibleRegion.farRight.longitude).append("/")
-            //Near points location
-            stringBuilder.append(visibleRegion.nearLeft.latitude).append("/")
-            stringBuilder.append(visibleRegion.nearLeft.longitude).append("/")
-            stringBuilder.append(visibleRegion.nearRight.latitude).append("/")
-            stringBuilder.append(visibleRegion.nearRight.longitude).append("")
+
             doAsync {
-                var carOnlineList   = CarService().getCarOnline(stringBuilder.toString())
+                var carOnlineList   = CarService().getCarOnline(quadrant)
                 uiThread {
                     if(carOnlineList != null) {
                         var markers = HelperCar.transformInMarkers(carOnlineList)
+                        if(numCarFound == 0){
+                            numCarFound = markers.size
+                        }else{
+                            var size = markers.size
+                            if(size != numCarFound){
+                                numCarFound = size
+                                //Snackbar.make(contex, "Replace with your own action", Snackbar.LENGTH_LONG)
+                                        //.setAction("Action", null).show()
+                            }
+                        }
+
                         for (mark in markers) {
                             mMap.addMarker(mark)
                         }

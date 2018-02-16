@@ -26,9 +26,18 @@ class CarService {
         return car
     }
     var callRESTCarOnline = CallRESTMethodsUtil<MutableList<ResponseCarsOnline>>()
-    fun getCarOnline(coordinatesStr:String):List<ResponseCarsOnline>{
+    fun getCarOnline(quadrant:Quadrant):List<ResponseCarsOnline>{
         var stringBuilder = StringBuilder("car/online/")
-        stringBuilder.append(coordinatesStr)
+        //Far points location
+        stringBuilder.append(quadrant.farLeftLng).append("/")
+        stringBuilder.append(quadrant.farLeftLat).append("/")
+        stringBuilder.append(quadrant.farRightLng).append("/")
+        stringBuilder.append(quadrant.farRightLat).append("/")
+        //Near points location
+        stringBuilder.append(quadrant.nearLeftLng).append("/")
+        stringBuilder.append(quadrant.nearLeftLat).append("/")
+        stringBuilder.append(quadrant.nearLeftLng).append("/")
+        stringBuilder.append(quadrant.nearRightLat).append("")
         var url = urlBase+stringBuilder.toString()
         //TODO comment it later
 /*
@@ -53,9 +62,16 @@ class CarService {
         car3.model = "D-20"
         car3.placa = "OHJ-0072"
 
-        var markers: MutableList<ResponseCarsOnline> = mutableListOf(car1,car2,car3)
+        var car4 = ResponseCarsOnline()
+        car4.latitude  = -3.79621216
+        car4.longitude = -38.48369808
+        car4.cor = "BEGE DESERT"
+        car4.model = "D-20"
+        car4.placa = "OHJ-0072"
+
+        var markers: MutableList<ResponseCarsOnline> = mutableListOf(car1,car2,car3,car4)
         return markers
-        */
+*/
         //TODO comment for a while
         var json = callRESTCarOnline.get(url)
         return callRESTCarOnline.fromJson<MutableList<ResponseCarsOnline>>(json)

@@ -13,7 +13,7 @@ import android.support.v4.app.ActivityCompat
 import android.support.v7.app.AlertDialog
 import android.util.Log
 import android.widget.Toast
-import br.com.transferr.fragments.MapsFragment
+//import br.com.transferr.fragments.MapsFragment
 import br.com.transferr.model.Car
 import br.com.transferr.model.Coordinates
 import br.com.transferr.model.Driver
@@ -58,12 +58,12 @@ class InitialActivity : SuperClassActivity(), GoogleApiClient.ConnectionCallback
         mLocationManager = this.getSystemService(Context.LOCATION_SERVICE) as LocationManager
 
         checkLocation()
-        val mapsFragment = MapsFragment()
-        mapsFragment.arguments = intent.extras
-        supportFragmentManager
-                .beginTransaction()
-                .replace(R.id.map,mapsFragment)
-                .commit()
+        //val mapsFragment = MapsFragment()
+        //mapsFragment.arguments = intent.extras
+        //supportFragmentManager
+         //       .beginTransaction()
+          //      .replace(R.id.map,mapsFragment)
+          //      .commit()
         //startService(Intent(this,SuperIntentService::class.java))
         //startService(Intent(this,LocationTrackingService::class.java))
     }
