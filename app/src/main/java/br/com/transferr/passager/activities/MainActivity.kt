@@ -13,13 +13,14 @@ import android.provider.Settings
 import android.support.design.widget.Snackbar
 import android.support.v4.app.ActivityCompat
 import android.support.v7.app.AlertDialog
-import android.support.v7.app.AppCompatActivity
 import android.util.Log
 import br.com.transferr.passager.R
 import br.com.transferr.passager.helpers.HelperCar
 import br.com.transferr.passager.model.Quadrant
+import br.com.transferr.passager.util.MyLocationLister
 import br.com.transferr.passager.webservices.CarService
 import br.com.transferr.util.PermissionUtil
+import br.com.transferr.util.Prefes
 import com.google.android.gms.common.ConnectionResult
 import com.google.android.gms.common.api.GoogleApiClient
 import com.google.android.gms.location.FusedLocationProviderClient
@@ -29,14 +30,11 @@ import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
-import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.tasks.OnSuccessListener
 import kotlinx.android.synthetic.main.price_button.*
-import org.jetbrains.anko.contentView
 import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.toast
 import org.jetbrains.anko.uiThread
-import java.math.BigDecimal
 
 class MainActivity : SuperClassActivity(), GoogleApiClient.ConnectionCallbacks,GoogleApiClient.OnConnectionFailedListener, OnMapReadyCallback,com.google.android.gms.location.LocationListener {
 
@@ -66,6 +64,7 @@ class MainActivity : SuperClassActivity(), GoogleApiClient.ConnectionCallbacks,G
         startApi()
         mLocationManager = this.getSystemService(Context.LOCATION_SERVICE) as LocationManager
         checkLocation()
+        setTempTokenForTests()
         val mapFragment = supportFragmentManager
                 .findFragmentById(R.id.map) as SupportMapFragment
         mapFragment.getMapAsync(this)
@@ -89,7 +88,12 @@ class MainActivity : SuperClassActivity(), GoogleApiClient.ConnectionCallbacks,G
      */
     @SuppressLint("MissingPermission")
     override fun onMapReady(googleMap: GoogleMap) {
-
+        var mylocationListener = MyLocationLister()
+        var myLocationLatLng = mylocationListener.getLocation(this.context)
+        if(myLocationLatLng != null) {
+            val update = CameraUpdateFactory.newLatLngZoom(myLocationLatLng, 16f)
+            googleMap.moveCamera(update)
+        }
         this.mMap = googleMap
         if(isMapAllowed()) {
             mMap.isMyLocationEnabled = true
@@ -155,8 +159,6 @@ class MainActivity : SuperClassActivity(), GoogleApiClient.ConnectionCallbacks,G
                             var size = markers.size
                             if(size != numCarFound){
                                 numCarFound = size
-                                //Snackbar.make(contex, "Replace with your own action", Snackbar.LENGTH_LONG)
-                                        //.setAction("Action", null).show()
                             }
                         }
 
@@ -174,10 +176,10 @@ class MainActivity : SuperClassActivity(), GoogleApiClient.ConnectionCallbacks,G
     }
 
     private fun updateMapScreen(location: Location?){
-        val latLng = LatLng(location?.latitude!!,location?.longitude)
-        val update = CameraUpdateFactory.newLatLngZoom(latLng,ZOOM)
+        //val latLng = LatLng(location?.latitude!!,location?.longitude)
+        //val update = CameraUpdateFactory.newLatLngZoom(latLng,ZOOM)
         callWebService()
-        mMap.moveCamera(update)
+        //mMap.moveCamera(update)
     }
 
 
@@ -250,17 +252,10 @@ class MainActivity : SuperClassActivity(), GoogleApiClient.ConnectionCallbacks,G
                 mLocationRequest, this)
 
     }
-    /*
-    @SuppressLint("MissingPermission")
-    private fun createCameraPosition(){
-        locationManager = getSystemService(Context.LOCATION_SERVICE) as LocationManager
-        mLocation       = locationManager?.getLastKnownLocation(LocationManager.GPS_PROVIDER) as Location
-        if(mLocation != null) {
-            //mMap.animateCamera(CameraUpdateFactory.newCameraPosition(CameraPosition(LatLng(mLocation.latitude,mLocation.longitude),13f,70f,25f)))
-           // mMap = GoogleMap(CameraUpdateFactory.newCameraPosition(CameraPosition(LatLng(mLocation.latitude,mLocation.longitude),13f,70f,25f)))
-            mMap.moveCamera(CameraUpdateFactory.newCameraPosition(CameraPosition(LatLng(mLocation.latitude,mLocation.longitude),13f,70f,25f)))
-        }
+
+    fun setTempTokenForTests(){
+        //TODO remove before production
+        Prefes(this).prefsToken = "1"
     }
-    */
 
 }
