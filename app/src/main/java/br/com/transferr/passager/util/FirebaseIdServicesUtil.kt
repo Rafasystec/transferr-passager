@@ -5,14 +5,17 @@ import com.google.firebase.iid.FirebaseInstanceId
 import com.google.firebase.iid.FirebaseInstanceIdService
 
 /**
- * Created by idoctor on 02/02/2018.
+ * Created by Rafael Rocha on 02/02/2018.
  */
 class FirebaseIdServicesUtil : FirebaseInstanceIdService() {
     val CURRENT_TOKEN: String = "TOKEN"
+    var prefes: Prefes? = null
     override fun onTokenRefresh() {
         super.onTokenRefresh()
         val  recentToken: String? = FirebaseInstanceId.getInstance().token
         sendRegistrationToServer(recentToken)
+        prefes = Prefes(this)
+        prefes!!.prefsToken = recentToken!!
     }
 
     private fun sendRegistrationToServer(refreshedToken: String?){

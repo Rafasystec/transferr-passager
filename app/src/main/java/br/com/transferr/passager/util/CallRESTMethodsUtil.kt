@@ -34,6 +34,14 @@ class CallRESTMethodsUtil <T>{
         val request =Request.Builder().url(url).post(body).build()
         return getJson(request)
     }
+
+    fun put(url: String,json:String):String{
+        log("PUT $url --> $json")
+        val body = RequestBody.create(JSON,json)
+        val request =Request.Builder().url(url).put(body).build()
+        return getJson(request)
+    }
+
     //delete
     fun delete(url: String):String{
         val request = Request.Builder().url(url).delete().build()

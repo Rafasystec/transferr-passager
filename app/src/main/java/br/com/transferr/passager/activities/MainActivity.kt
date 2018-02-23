@@ -13,10 +13,9 @@ import android.provider.Settings
 import android.support.design.widget.Snackbar
 import android.support.v4.app.ActivityCompat
 import android.support.v7.app.AlertDialog
+import android.support.v7.app.AppCompatActivity
 import android.util.Log
 import br.com.transferr.passager.R
-import br.com.transferr.passager.adapter.MapInfoWindowsAdapter
-import br.com.transferr.passager.extensions.loadUrl
 import br.com.transferr.passager.helpers.HelperCar
 import br.com.transferr.passager.model.Quadrant
 import br.com.transferr.passager.webservices.CarService
@@ -30,9 +29,8 @@ import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
-import com.google.android.gms.maps.model.Marker
+import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.tasks.OnSuccessListener
-import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.price_button.*
 import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.toast
@@ -76,6 +74,7 @@ class MainActivity : SuperClassActivity(),
         startApi()
         mLocationManager = this.getSystemService(Context.LOCATION_SERVICE) as LocationManager
         checkLocation()
+        setTempTokenForTests()
         val mapFragment = supportFragmentManager
                 .findFragmentById(R.id.map) as SupportMapFragment
         mapFragment.getMapAsync(this)
@@ -99,20 +98,21 @@ class MainActivity : SuperClassActivity(),
      */
     @SuppressLint("MissingPermission")
     override fun onMapReady(googleMap: GoogleMap) {
-
+        var mylocationListener = MyLocationLister()
+        var myLocationLatLng = mylocationListener.getLocation(this.context)
+        if(myLocationLatLng != null) {
+            val update = CameraUpdateFactory.newLatLngZoom(myLocationLatLng, 16f)
+            googleMap.moveCamera(update)
+        }
         this.mMap = googleMap
-        //this.mMap.setOnMarkerClickListener(this)
         if(isMapAllowed()) {
             mMap.isMyLocationEnabled = true
         }
-        mMap.setInfoWindowAdapter(MapInfoWindowsAdapter(context))
         mMap.animateCamera(CameraUpdateFactory.zoomTo(ZOOM))
         mMap.setMaxZoomPreference(15f)
         mMap.mapType = GoogleMap.MAP_TYPE_NORMAL
-        callWebService()
 
     }
-
 
     private fun isMapAllowed():Boolean{
         return PermissionUtil.validate(this,1,
@@ -201,6 +201,7 @@ class MainActivity : SuperClassActivity(),
     }
 
 
+
     override fun onConnected(p0: Bundle?) {
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             return
@@ -263,17 +264,11 @@ class MainActivity : SuperClassActivity(),
                 mLocationRequest, this)
 
     }
-    /*
-    @SuppressLint("MissingPermission")
-    private fun createCameraPosition(){
-        locationManager = getSystemService(Context.LOCATION_SERVICE) as LocationManager
-        mLocation       = locationManager?.getLastKnownLocation(LocationManager.GPS_PROVIDER) as Location
-        if(mLocation != null) {
-            //mMap.animateCamera(CameraUpdateFactory.newCameraPosition(CameraPosition(LatLng(mLocation.latitude,mLocation.longitude),13f,70f,25f)))
-           // mMap = GoogleMap(CameraUpdateFactory.newCameraPosition(CameraPosition(LatLng(mLocation.latitude,mLocation.longitude),13f,70f,25f)))
-            mMap.moveCamera(CameraUpdateFactory.newCameraPosition(CameraPosition(LatLng(mLocation.latitude,mLocation.longitude),13f,70f,25f)))
-        }
+
+    fun setTempTokenForTests(){
+        //TODO remove before production
+        Prefes(this).prefsToken = "1"
     }
-    */
+
 
 }
