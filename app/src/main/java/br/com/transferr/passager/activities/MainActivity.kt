@@ -16,8 +16,10 @@ import android.support.v7.app.AlertDialog
 import android.support.v7.app.AppCompatActivity
 import android.util.Log
 import br.com.transferr.passager.R
+import br.com.transferr.passager.adapter.MapInfoWindowsAdapter
 import br.com.transferr.passager.helpers.HelperCar
 import br.com.transferr.passager.model.Quadrant
+import br.com.transferr.passager.util.MyLocationLister
 import br.com.transferr.passager.webservices.CarService
 import br.com.transferr.util.PermissionUtil
 import com.google.android.gms.common.ConnectionResult
@@ -30,6 +32,7 @@ import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
+import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.tasks.OnSuccessListener
 import kotlinx.android.synthetic.main.price_button.*
 import org.jetbrains.anko.doAsync
@@ -74,7 +77,6 @@ class MainActivity : SuperClassActivity(),
         startApi()
         mLocationManager = this.getSystemService(Context.LOCATION_SERVICE) as LocationManager
         checkLocation()
-        setTempTokenForTests()
         val mapFragment = supportFragmentManager
                 .findFragmentById(R.id.map) as SupportMapFragment
         mapFragment.getMapAsync(this)
@@ -110,6 +112,7 @@ class MainActivity : SuperClassActivity(),
         }
         mMap.animateCamera(CameraUpdateFactory.zoomTo(ZOOM))
         mMap.setMaxZoomPreference(15f)
+        mMap.setInfoWindowAdapter(MapInfoWindowsAdapter(this))
         mMap.mapType = GoogleMap.MAP_TYPE_NORMAL
 
     }
@@ -265,10 +268,6 @@ class MainActivity : SuperClassActivity(),
 
     }
 
-    fun setTempTokenForTests(){
-        //TODO remove before production
-        Prefes(this).prefsToken = "1"
-    }
 
 
 }
