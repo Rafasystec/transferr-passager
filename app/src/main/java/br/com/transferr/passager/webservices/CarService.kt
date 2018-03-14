@@ -39,40 +39,6 @@ class CarService {
         stringBuilder.append(quadrant.nearLeftLng).append("/")
         stringBuilder.append(quadrant.nearRightLat).append("")
         var url = urlBase+stringBuilder.toString()
-        //TODO comment it later
-/*
-        var car1 = ResponseCarsOnline()
-        car1.latitude = -3.73674356
-        car1.longitude = -38.49615601
-        car1.cor = "AZUL"
-        car1.model = "HILUX"
-        car1.placa = "HHW-9870"
-
-        var car2 = ResponseCarsOnline()
-        car2.latitude = -3.73957428
-        car2.longitude = -38.4938627
-        car2.cor = "PRETO"
-        car2.model = "S-10"
-        car2.placa = "OHQ-5672"
-
-        var car3 = ResponseCarsOnline()
-        car3.latitude  = -3.73682921
-        car3.longitude = -38.48748711
-        car3.cor = "BEGE DESERT"
-        car3.model = "D-20"
-        car3.placa = "OHJ-0072"
-
-        var car4 = ResponseCarsOnline()
-        car4.latitude  = -3.79621216
-        car4.longitude = -38.48369808
-        car4.cor = "BEGE DESERT"
-        car4.model = "D-20"
-        car4.placa = "OHJ-0072"
-
-        var markers: MutableList<ResponseCarsOnline> = mutableListOf(car1,car2,car3,car4)
-        return markers
-*/
-        //TODO comment for a while
         var json = callRESTCarOnline.get(url)
         return callRESTCarOnline.fromJson<MutableList<ResponseCarsOnline>>(json)
     }

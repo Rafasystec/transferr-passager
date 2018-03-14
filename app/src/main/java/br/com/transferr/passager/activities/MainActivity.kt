@@ -13,14 +13,15 @@ import android.provider.Settings
 import android.support.design.widget.Snackbar
 import android.support.v4.app.ActivityCompat
 import android.support.v7.app.AlertDialog
+import android.support.v7.app.AppCompatActivity
 import android.util.Log
 import br.com.transferr.passager.R
+import br.com.transferr.passager.adapter.MapInfoWindowsAdapter
 import br.com.transferr.passager.helpers.HelperCar
 import br.com.transferr.passager.model.Quadrant
 import br.com.transferr.passager.util.MyLocationLister
 import br.com.transferr.passager.webservices.CarService
 import br.com.transferr.util.PermissionUtil
-import br.com.transferr.util.Prefes
 import com.google.android.gms.common.ConnectionResult
 import com.google.android.gms.common.api.GoogleApiClient
 import com.google.android.gms.location.FusedLocationProviderClient
@@ -30,13 +31,25 @@ import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
+import com.google.android.gms.maps.model.LatLng
+import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.tasks.OnSuccessListener
 import kotlinx.android.synthetic.main.price_button.*
 import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.toast
 import org.jetbrains.anko.uiThread
 
-class MainActivity : SuperClassActivity(), GoogleApiClient.ConnectionCallbacks,GoogleApiClient.OnConnectionFailedListener, OnMapReadyCallback,com.google.android.gms.location.LocationListener {
+class MainActivity : SuperClassActivity(),
+        GoogleApiClient.ConnectionCallbacks,
+        GoogleApiClient.OnConnectionFailedListener,
+        OnMapReadyCallback,com.google.android.gms.location.LocationListener,
+        GoogleMap.OnMarkerClickListener{
+
+
+    override fun onMarkerClick(p0: Marker?): Boolean {
+
+        return true
+    }
 
 
     private val TAG = "LOCATION"
@@ -64,7 +77,6 @@ class MainActivity : SuperClassActivity(), GoogleApiClient.ConnectionCallbacks,G
         startApi()
         mLocationManager = this.getSystemService(Context.LOCATION_SERVICE) as LocationManager
         checkLocation()
-        setTempTokenForTests()
         val mapFragment = supportFragmentManager
                 .findFragmentById(R.id.map) as SupportMapFragment
         mapFragment.getMapAsync(this)
@@ -100,6 +112,7 @@ class MainActivity : SuperClassActivity(), GoogleApiClient.ConnectionCallbacks,G
         }
         mMap.animateCamera(CameraUpdateFactory.zoomTo(ZOOM))
         mMap.setMaxZoomPreference(15f)
+        mMap.setInfoWindowAdapter(MapInfoWindowsAdapter(this))
         mMap.mapType = GoogleMap.MAP_TYPE_NORMAL
 
     }
@@ -159,6 +172,8 @@ class MainActivity : SuperClassActivity(), GoogleApiClient.ConnectionCallbacks,G
                             var size = markers.size
                             if(size != numCarFound){
                                 numCarFound = size
+                                //Snackbar.make(contex, "Replace with your own action", Snackbar.LENGTH_LONG)
+                                        //.setAction("Action", null).show()
                             }
                         }
 
@@ -253,9 +268,6 @@ class MainActivity : SuperClassActivity(), GoogleApiClient.ConnectionCallbacks,G
 
     }
 
-    fun setTempTokenForTests(){
-        //TODO remove before production
-        Prefes(this).prefsToken = "1"
-    }
+
 
 }
