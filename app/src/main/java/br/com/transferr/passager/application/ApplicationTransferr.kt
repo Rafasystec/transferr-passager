@@ -7,9 +7,9 @@ import android.app.Application
  */
 class ApplicationTransferr : Application() {
     private val TAG = "APPLICATION"
-    //val URL_BASE = "http://192.168.0.102:8080/transferr-rest/rest/"
-    //val URL_BASE = "http://192.168.15.3:8080/transferr-rest/rest/"
-    val URL_BASE = "http://petmooby.com.br/transferr-rest/rest/"
+    //val URL_BASE = "http://192.168.0.102:8080/transferr-rest/rest/" //Windows
+    val URL_BASE = "http://192.168.15.9:8080/transferr-rest/rest/" //Linux
+    //val URL_BASE = "http://petmooby.com.br/transferr-rest/rest/"
     override fun onCreate() {
         super.onCreate()
         //Salva a intancia para termos acesso como Sigleton

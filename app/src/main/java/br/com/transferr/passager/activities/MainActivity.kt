@@ -12,6 +12,7 @@ import android.os.Bundle
 import android.provider.Settings
 import android.support.design.widget.Snackbar
 import android.support.v4.app.ActivityCompat
+import android.support.v4.content.ContextCompat
 import android.support.v7.app.AlertDialog
 import android.support.v7.app.AppCompatActivity
 import android.util.Log
@@ -109,6 +110,8 @@ class MainActivity : SuperClassActivity(),
         this.mMap = googleMap
         if(isMapAllowed()) {
             mMap.isMyLocationEnabled = true
+        }else{
+            toast("Acesso ao GPS negado. O aplicativo pode não funcionar corretamente.")
         }
         mMap.animateCamera(CameraUpdateFactory.zoomTo(ZOOM))
         mMap.setMaxZoomPreference(15f)
@@ -191,18 +194,12 @@ class MainActivity : SuperClassActivity(),
     }
 
     private fun updateMapScreen(location: Location?){
-        //val latLng = LatLng(location?.latitude!!,location?.longitude)
-        //val update = CameraUpdateFactory.newLatLngZoom(latLng,ZOOM)
         callWebService()
-        //mMap.moveCamera(update)
     }
-
 
     override fun onLocationChanged(location: Location?) {
         updateMapScreen(location)
-        toast("Minha localização mudou")
     }
-
 
 
     override fun onConnected(p0: Bundle?) {
@@ -214,13 +211,9 @@ class MainActivity : SuperClassActivity(),
         var fusedLocationProviderClient :
                 FusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
         fusedLocationProviderClient .getLastLocation()
-                .addOnSuccessListener(this, OnSuccessListener<Location> { location ->
-                    // Got last known location. In some rare situations this can be null.
+                .addOnSuccessListener(this, { location ->
                     if (location != null) {
-                        // Logic to handle location object
                         mLocation = location
-                        //txt_latitude.setText("" + mLocation.latitude)
-                        //txt_longitude.setText("" + mLocation.longitude)
                     }
                 })
     }
@@ -268,6 +261,16 @@ class MainActivity : SuperClassActivity(),
 
     }
 
+    @SuppressLint("MissingPermission")
+    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        for(result in grantResults){
+           if(result == PackageManager.PERMISSION_GRANTED){
+               mMap.isMyLocationEnabled = true
+               return
+           }
+        }
+    }
 
 
 }

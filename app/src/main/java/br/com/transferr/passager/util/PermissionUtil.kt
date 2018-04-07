@@ -23,7 +23,7 @@ object PermissionUtil{
             return true
         }
         val newPermissions = arrayOfNulls<String>(list.size)
-        ActivityCompat.requestPermissions(activity,newPermissions,1)
+        ActivityCompat.requestPermissions(activity,newPermissions,code)
         return false
     }
 }
