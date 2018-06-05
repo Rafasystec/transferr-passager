@@ -1,4 +1,8 @@
 <resources>
     <string name="app_name">transferr-passager</string>
     <string name="title_activity_main">transferr-pass</string>
+    <string name="camera">câmera</string>
+    <string name="gallery">galeria</string>
+    <string name="sales">compras</string>
+    <string name="comments">comentários</string>
 </resources>

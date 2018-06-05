@@ -10,12 +10,14 @@ import android.location.Location
 import android.location.LocationManager
 import android.os.Bundle
 import android.provider.Settings
+import android.support.design.widget.NavigationView
 import android.support.design.widget.Snackbar
 import android.support.v4.app.ActivityCompat
-import android.support.v4.content.ContextCompat
+import android.support.v4.widget.DrawerLayout
 import android.support.v7.app.AlertDialog
-import android.support.v7.app.AppCompatActivity
+import android.util.AttributeSet
 import android.util.Log
+import android.view.View
 import br.com.transferr.passager.R
 import br.com.transferr.passager.adapter.MapInfoWindowsAdapter
 import br.com.transferr.passager.helpers.HelperCar
@@ -32,9 +34,8 @@ import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
-import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.Marker
-import com.google.android.gms.tasks.OnSuccessListener
+import kotlinx.android.synthetic.main.left_menu_drawer.*
 import kotlinx.android.synthetic.main.price_button.*
 import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.toast
@@ -64,6 +65,8 @@ class MainActivity : SuperClassActivity(),
     private val ZOOM = 15f
     lateinit var mLocation: Location
     var numCarFound:Int = 0
+    private lateinit var mDrawerLayout: DrawerLayout
+    private lateinit var navigationView: NavigationView
     @SuppressLint("MissingPermission")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -78,15 +81,36 @@ class MainActivity : SuperClassActivity(),
         startApi()
         mLocationManager = this.getSystemService(Context.LOCATION_SERVICE) as LocationManager
         checkLocation()
+        drawerLeftMenu()
         val mapFragment = supportFragmentManager
                 .findFragmentById(R.id.map) as SupportMapFragment
         mapFragment.getMapAsync(this)
+
     }
 
     private fun addActionPrice(){
         price.setOnClickListener { view ->
             Snackbar.make(view, "Custo médio do translado é R$ 20,00", Snackbar.LENGTH_LONG)
                     .setAction("Action", null).show()
+        }
+    }
+
+    private fun drawerLeftMenu(){
+        //----------------------------------------
+        //Left Menu navigation
+        //----------------------------------------
+        //mDrawerLayout = findViewById(R.id.drawer_layout)
+        mDrawerLayout  = findViewById(R.id.drawer_layout)
+        navigationView = findViewById(R.id.nav_view)
+        navigationView.setNavigationItemSelectedListener {  menuItem ->
+            // set item as selected to persist highlight
+            menuItem.isChecked = true
+            // close drawer when item is tapped
+            //mDrawerLayout.closeDrawers()
+            mDrawerLayout.closeDrawers()
+            // Add code here to update the UI based on the item selected
+            // For example, swap UI fragments here
+            true
         }
     }
 
@@ -117,6 +141,7 @@ class MainActivity : SuperClassActivity(),
         mMap.setMaxZoomPreference(15f)
         mMap.setInfoWindowAdapter(MapInfoWindowsAdapter(this))
         mMap.mapType = GoogleMap.MAP_TYPE_NORMAL
+        //drawerLeftMenu()
 
     }
 
@@ -271,6 +296,8 @@ class MainActivity : SuperClassActivity(),
            }
         }
     }
+
+
 
 
 }
