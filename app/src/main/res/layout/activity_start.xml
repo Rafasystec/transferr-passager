@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="br.com.transferr.passager.activities.StartActivity"
+    android:orientation="vertical"
+    >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:layout_marginBottom="60dp"
+        >
+
+        <android.support.v7.widget.AppCompatButton
+            android:id="@+id/btnOptionTwo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            app:backgroundTint="@color/colorPrimaryDark"
+            android:text="Opção 1"
+            android:textColor="@color/colorSecondary" />
+
+        <android.support.v7.widget.AppCompatButton
+            android:id="@+id/btnSeeNearDriver"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            app:backgroundTint="@color/colorPrimaryDark"
+            android:text="@string/driversNear"
+            android:textColor="@color/colorSecondary" />
+
+        <android.support.v7.widget.AppCompatButton
+            android:id="@+id/btnSeeTours"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            app:backgroundTint="@color/colorPrimaryDark"
+            android:text="@string/tours"
+            android:textColor="@color/colorSecondary" />
+
+        <android.support.v7.widget.AppCompatButton
+            android:id="@+id/btnExit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            app:backgroundTint="@color/bootstrapBtnDanger"
+            android:text="@string/exit"
+            android:textColor="@color/colorSecondary"
+            android:layout_marginBottom="3dp"
+            android:paddingTop="10dp"
+            />
+
+    </LinearLayout>
+
+
+
+</LinearLayout>

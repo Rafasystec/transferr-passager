@@ -77,23 +77,24 @@ class MainActivity : SuperClassActivity(),
                 .addOnConnectionFailedListener(this)
                 .addApi(LocationServices.API)
                 .build()
-        addActionPrice()
+        //addActionPrice()
         startApi()
         mLocationManager = this.getSystemService(Context.LOCATION_SERVICE) as LocationManager
         checkLocation()
-        drawerLeftMenu()
+        //drawerLeftMenu()
         val mapFragment = supportFragmentManager
                 .findFragmentById(R.id.map) as SupportMapFragment
         mapFragment.getMapAsync(this)
 
     }
-
+/*
     private fun addActionPrice(){
         price.setOnClickListener { view ->
             Snackbar.make(view, "Custo médio do translado é R$ 20,00", Snackbar.LENGTH_LONG)
                     .setAction("Action", null).show()
         }
     }
+    */
 
     private fun drawerLeftMenu(){
         //----------------------------------------
