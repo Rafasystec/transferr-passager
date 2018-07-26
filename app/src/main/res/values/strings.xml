@@ -9,4 +9,5 @@
     <string name="exit">Sair</string>
     <string name="driversNear">Carros Próximos</string>
     <string name="chooseState">Escolha o Estado:</string>
+    <string name="chooseLocation">Escolha o passeio</string>
 </resources>

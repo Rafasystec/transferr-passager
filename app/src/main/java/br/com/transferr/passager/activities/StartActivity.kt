@@ -15,7 +15,9 @@ class StartActivity : AppCompatActivity() {
         btnSeeNearDriver.setOnClickListener {
             startActivity(Intent(this, MainActivity::class.java))
         }
-        btnSeeTours.setOnClickListener { toast("Ver os passeios") }
+        btnSeeTours.setOnClickListener {
+            startActivity(Intent(this,TourListActivity::class.java))
+        }
     }
 
 

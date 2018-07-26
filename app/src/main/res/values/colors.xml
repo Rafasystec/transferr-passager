@@ -5,4 +5,5 @@
     <color name="colorAccent">#33b5e5</color>
     <color name="colorSecondary">#ffffff</color>
     <color name="bootstrapBtnDanger">#dc3545</color>
+    <color name="colorPrimaryDarkClient">#DF3A01</color>
 </resources>
