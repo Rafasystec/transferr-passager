@@ -32,15 +32,31 @@ class LocationResponseAdapter(val locations : List<ResponseLocation>, val onClic
         this.context = holder!!.itemView.context
         val responseDrivers = locations[position]
         holder.tvName.text = responseDrivers.name
-        holder.cardView.setOnClickListener { this }
+        var urlPhoto: String
+        urlPhoto = responseDrivers.urlMainPicture;
+
+        Picasso.with(context).load(urlPhoto).fit().into(holder.ivMainLocation,
+                object : com.squareup.picasso.Callback {
+                    override fun onSuccess() {
+                        //Stop progress bar
+                    }
+
+                    override fun onError() {
+                        //Stop progress bar
+                    }
+                })
+        holder.cardView.setOnClickListener { onClick(responseDrivers) }
+
     }
 
     class LocationsResponseViewHolder(view: View): RecyclerView.ViewHolder(view){
-        var tvName    : TextView
-        var cardView : CardView
+        var tvName          : TextView
+        var cardView        : CardView
+        var ivMainLocation  : ImageView
         init {
             tvName      = view.findViewById(R.id.tvLocationName)
             cardView    = view.findViewById(R.id.cvLocation)
+            ivMainLocation = view.findViewById(R.id.ivMainLocation)
         }
     }
 }

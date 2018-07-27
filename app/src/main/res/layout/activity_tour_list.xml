@@ -19,6 +19,7 @@
             android:text="@string/chooseState"
             />
         <android.support.v7.widget.AppCompatSpinner
+            android:id="@+id/spCountry"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
         </android.support.v7.widget.AppCompatSpinner>
@@ -28,6 +29,7 @@
             android:text="@string/chooseLocation"
             />
         <android.support.v7.widget.AppCompatSpinner
+            android:id="@+id/spSubCountry"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
         </android.support.v7.widget.AppCompatSpinner>

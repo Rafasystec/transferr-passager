@@ -55,4 +55,14 @@ dependencies {
     implementation "com.android.support:recyclerview-v7:$APIVersion"
     implementation "com.android.support:cardview-v7:$APIVersion"
     //-------------------------------------------------------------------------------
+    //-------------------------------------------------------------------------------
+    //For RESTful API
+    //-------------------------------------------------------------------------------
+    implementation 'com.google.code.gson:gson:2.8.0'
+    //-------------------------------------------------------------------------------
+    //         Retrofit dependencies
+    //-------------------------------------------------------------------------------
+    implementation 'com.squareup.retrofit2:retrofit:2.3.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.1.0'
+    //-------------------------------------------------------------------------------
 }
