@@ -89,7 +89,9 @@ class TourListActivity : SuperClassActivity() {
 
     }
     fun onLocationClick(responseLocation: ResponseLocation){
-        startActivity(Intent(this,LocationActivity::class.java))
+        val intent = Intent(this,LocationActivity::class.java)
+        intent.putExtra(ResponseLocation.LOCATION_PARAMETER_KEY,responseLocation.id)
+        startActivity(intent)
     }
 
     fun loadSpCountry(){

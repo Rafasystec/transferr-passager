@@ -3,23 +3,28 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/tvLocationTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Lagoinha-Paraipaba"
+        android:textAlignment="center"
+        android:textSize="18sp"
+        android:textColor="@color/colorText"
+        android:textStyle="bold" />
+
     <ImageView
+        android:id="@+id/ivMainPicture"
         android:layout_width="180dp"
         android:layout_height="120dp"
         android:layout_gravity="center"
         android:src="@drawable/lagoinhamain"
-        android:layout_marginTop="60dp"
+        android:layout_marginTop="10dp"
         />
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Lagoinha-Paraipaba"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        android:textAlignment="center"
-        />
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -32,23 +37,26 @@
             android:orientation="horizontal"
             >
             <ImageView
-                android:layout_width="80dp"
-                android:layout_height="80dp"
-                android:src="@drawable/lagoinha1"
+                android:id="@+id/ivPictureOne"
+                android:layout_width="@dimen/locationPictureWidth"
+                android:layout_height="@dimen/locationPictureHeigth"
+                android:src="@drawable/no_photo_64"
                 android:layout_weight="1"
                 android:padding="5dp"
                 />
             <ImageView
-                android:layout_width="80dp"
-                android:layout_height="80dp"
-                android:src="@drawable/lagoinha2"
+                android:id="@+id/ivPictureTwo"
+                android:layout_width="@dimen/locationPictureWidth"
+                android:layout_height="@dimen/locationPictureHeigth"
+                android:src="@drawable/no_photo_64"
                 android:layout_weight="1"
                 android:padding="5dp"
                 />
             <ImageView
-                android:layout_width="80dp"
-                android:layout_height="80dp"
-                android:src="@drawable/lagoinha3"
+                android:id="@+id/ivPictureThree"
+                android:layout_width="@dimen/locationPictureWidth"
+                android:layout_height="@dimen/locationPictureHeigth"
+                android:src="@drawable/no_photo_64"
                 android:layout_weight="1"
                 android:padding="5dp"
                 />
@@ -60,39 +68,46 @@
             android:orientation="horizontal"
             >
             <ImageView
-                android:layout_width="80dp"
-                android:layout_height="80dp"
-                android:src="@drawable/lagoinha4"
+                android:id="@+id/ivPictureFour"
+                android:layout_width="@dimen/locationPictureWidth"
+                android:layout_height="@dimen/locationPictureHeigth"
+                android:src="@drawable/no_photo_64"
                 android:layout_weight="1"
                 android:padding="5dp"
                 />
             <ImageView
-                android:layout_width="80dp"
-                android:layout_height="80dp"
-                android:src="@drawable/lagoinha5"
+                android:id="@+id/ivPictureFive"
+                android:layout_width="@dimen/locationPictureWidth"
+                android:layout_height="@dimen/locationPictureHeigth"
+                android:src="@drawable/no_photo_64"
                 android:layout_weight="1"
                 android:padding="5dp"
                 />
             <ImageView
-                android:layout_width="80dp"
-                android:layout_height="80dp"
-                android:src="@drawable/lagoinha6"
+                android:id="@+id/ivPictureSix"
+                android:layout_width="@dimen/locationPictureWidth"
+                android:layout_height="@dimen/locationPictureHeigth"
+                android:src="@drawable/no_photo_64"
                 android:layout_weight="1"
                 android:padding="5dp"
                 />
         </LinearLayout>
 
     </LinearLayout>
-    <Button
+    <android.support.v7.widget.AppCompatButton
+        android:id="@+id/btnSeeDrivers"
         android:layout_width="match_parent"
-        android:layout_height="45dp"
-        android:text="ver motoristas"
-        />
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        app:backgroundTint="@color/colorPrimaryDark"
+        android:text="@string/seeDrivers"
+        android:textColor="@color/colorSecondary" />
     <TextView
+        android:id="@+id/tvLocationDescription"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
-        android:textColor="@color/colorPrimaryDark"
-        android:text="Se tudo o que você quer da vida é sombra e água fresca, seja bem vindo à Praia da Lagoinha, no município de Paraipaba, a 100 Km da capital Fortaleza. Lá, o azul do mar e do céu só é quebrado pelas velas coloridas da grande quantidade de windsurfes e pelo branco da espuma das ondas que quebram na areia avermelhada. Tudo bem, tem o verde dos coqueiros que margeiam a praia e da vegetação rasteira que toma conta das dunas que ceram o local. O lugar parece uma pintura, com pequenas enseadas desenhadas nas areias pelas ondas."
+        android:textColor="@color/colorText"
+        android:text="Local description"
         />
 </LinearLayout>

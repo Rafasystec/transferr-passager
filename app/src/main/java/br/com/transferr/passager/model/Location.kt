@@ -10,4 +10,5 @@ class Location : Entity() {
     var name: String? = null
     var photoProfile: String? = null
     var images: List<String>? = null
+    var description: String? = null
 }

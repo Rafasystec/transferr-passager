@@ -9,13 +9,14 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import br.com.transferr.passager.R
+import br.com.transferr.passager.model.responses.ResponseDriver
 import br.com.transferr.passager.model.responses.ResponseDrivers
 import com.squareup.picasso.Picasso
 
 /**
  * Created by root on 25/07/18.
  */
-class DriversResponseAdapter(val drivers : List<ResponseDrivers>,val onClick: (ResponseDrivers) -> Unit)
+class DriversResponseAdapter(val drivers : List<ResponseDriver>,val onClick: (ResponseDriver) -> Unit)
     :RecyclerView.Adapter<DriversResponseAdapter.DriversResponseViewHolder>()
 {
     var context: Context?=null
@@ -31,8 +32,9 @@ class DriversResponseAdapter(val drivers : List<ResponseDrivers>,val onClick: (R
         this.context = holder!!.itemView.context
         val responseDrivers = drivers[position]
         holder.tvName.text = responseDrivers.name
-        holder.tvDriverDetail.text = "Placa: ${responseDrivers.countryRegister} - ${responseDrivers.email}"
-        if(responseDrivers.imgProfileUrl?.isEmpty()!!){
+        holder.tvDriverDetail.text = "${responseDrivers.countryRegister} - ${responseDrivers.email}"
+
+        if(responseDrivers.imgProfileUrl != null && responseDrivers.imgProfileUrl?.isEmpty()!!){
             responseDrivers.imgProfileUrl = null
         }
         //Start progressBar
