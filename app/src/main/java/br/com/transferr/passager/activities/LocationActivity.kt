@@ -1,8 +1,8 @@
 package br.com.transferr.passager.activities
 
 import android.content.Intent
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import br.com.transferr.passager.R
 import br.com.transferr.passager.interfaces.OnResponseInterface
 import br.com.transferr.passager.model.Location
@@ -10,7 +10,9 @@ import br.com.transferr.passager.model.responses.ResponseLocation
 import br.com.transferr.passager.webservices.WSLocation
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.layout_location_details.*
-import org.jetbrains.anko.toast
+import kotlinx.android.synthetic.main.progress_bar_layout.view.*
+import org.jetbrains.anko.progressDialog
+
 
 class LocationActivity : SuperClassActivity() {
 
@@ -32,17 +34,21 @@ class LocationActivity : SuperClassActivity() {
     }
 
     private fun loadLocation() {
+        val dialog = progressDialog(message = "Carregando os campos",title = "Aguarde...")
         WSLocation.doGetById(idLocation!!, object :OnResponseInterface<Location>{
             override fun onSuccess(body: Location?) {
                 loadFields(body!!)
+                dialog.dismiss()
             }
 
             override fun onError(message: String) {
                 alertWarning(message)
+                dialog.dismiss()
             }
 
             override fun onFailure(t: Throwable?) {
                 alertErro(t?.message!!)
+                dialog.dismiss()
             }
 
         })

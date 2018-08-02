@@ -16,6 +16,7 @@
     card_view:cardConerRadius="2dp"
     card_view:cardElevation="6dp"
     android:foreground="?attr/selectableItemBackground"
+    android:layout_margin="8dp"
 
     >
     <RelativeLayout

@@ -7,10 +7,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.ProgressBar
 import android.widget.TextView
 import br.com.transferr.passager.R
 import br.com.transferr.passager.model.responses.ResponseDrivers
 import br.com.transferr.passager.model.responses.ResponseLocation
+import com.squareup.picasso.MemoryPolicy
 import com.squareup.picasso.Picasso
 
 /**
@@ -34,15 +36,15 @@ class LocationResponseAdapter(val locations : List<ResponseLocation>, val onClic
         holder.tvName.text = responseDrivers.name
         var urlPhoto: String
         urlPhoto = responseDrivers.urlMainPicture;
-
-        Picasso.with(context).load(urlPhoto).fit().into(holder.ivMainLocation,
+        holder.progress.visibility = View.VISIBLE
+        Picasso.with(context).load(urlPhoto).fit().memoryPolicy(MemoryPolicy.NO_CACHE,MemoryPolicy.NO_STORE).into(holder.ivMainLocation,
                 object : com.squareup.picasso.Callback {
                     override fun onSuccess() {
-                        //Stop progress bar
+                        holder.progress.visibility = View.GONE
                     }
 
                     override fun onError() {
-                        //Stop progress bar
+                        holder.progress.visibility = View.GONE
                     }
                 })
         holder.cardView.setOnClickListener { onClick(responseDrivers) }
@@ -53,10 +55,12 @@ class LocationResponseAdapter(val locations : List<ResponseLocation>, val onClic
         var tvName          : TextView
         var cardView        : CardView
         var ivMainLocation  : ImageView
+        var progress        : ProgressBar
         init {
             tvName      = view.findViewById(R.id.tvLocationName)
             cardView    = view.findViewById(R.id.cvLocation)
             ivMainLocation = view.findViewById(R.id.ivMainLocation)
+            progress    = view.findViewById(R.id.progress)
         }
     }
 }

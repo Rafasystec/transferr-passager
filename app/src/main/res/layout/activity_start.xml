@@ -6,16 +6,29 @@
     android:layout_height="match_parent"
     tools:context="br.com.transferr.passager.activities.StartActivity"
     android:orientation="vertical"
-    >
 
+    >
+    <include layout="@layout/toolbar_layout"/>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:gravity="center"
         android:layout_marginBottom="60dp"
+        android:layout_margin="8dp"
         >
 
+        <!--
+         <android.support.v7.widget.AppCompatButton
+        android:id="@+id/btnSeeDrivers"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        app:backgroundTint="@color/colorPrimaryDark"
+        android:text="@string/seeDrivers"
+        android:textColor="@color/colorSecondary" />
+        -->
+        <!--
         <android.support.v7.widget.AppCompatButton
             android:id="@+id/btnOptionTwo"
             android:layout_width="match_parent"
@@ -24,7 +37,7 @@
             app:backgroundTint="@color/colorPrimaryDark"
             android:text="Opção 1"
             android:textColor="@color/colorSecondary" />
-
+        -->
         <android.support.v7.widget.AppCompatButton
             android:id="@+id/btnSeeNearDriver"
             android:layout_width="match_parent"
@@ -47,11 +60,11 @@
             android:id="@+id/btnExit"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
             app:backgroundTint="@color/bootstrapBtnDanger"
             android:text="@string/exit"
             android:textColor="@color/colorSecondary"
             android:layout_marginBottom="3dp"
+            android:layout_marginTop="30dp"
             android:paddingTop="10dp"
             />
 

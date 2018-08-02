@@ -1,11 +1,35 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
 
     <!-- Base application theme. -->
+    <!--
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
-        <!-- Customize your theme here. -->
+
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
     </style>
+    -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
 
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorPrimaryDark</item>
+        <!-- item name="android:textColorPrimary">@color/white</item--> // I don't want to set this, changes everywhere.
+        <!--
+        <item name="android:textColorSecondary">@color/white</item>
+        -->
+        <item name="android:toolbarStyle" tools:targetApi="lollipop">@style/AppTheme.ToolbarStyle</item>
+        <item name="toolbarStyle">@style/AppTheme.ToolbarStyle</item>
+    </style>
+    <style name="AppTheme.ToolbarStyle" parent="Base.Widget.AppCompat.Toolbar">
+        <!--<item name="actionOverflowButtonStyle">@style/AppTheme.OverflowButtonStyle</item>-->
+        <item name="android:textColor">@android:color/white</item> // doesn't work
+        <item name="titleTextAppearance">@style/AppTheme.ToolbarStyle.TextAppearance</item>
+        <item name="android:titleTextAppearance" tools:targetApi="lollipop">@style/TextAppearance.AppCompat.Widget.ActionBar.Title.Inverse</item>
+        <item name="subtitleTextAppearance">@style/TextAppearance.Widget.AppCompat.Toolbar.Subtitle</item>
+        <item name="android:textAlignment" tools:targetApi="jelly_bean_mr1">center</item>
+    </style>
+    <style name="AppTheme.ToolbarStyle.TextAppearance">
+        <item name="android:textAlignment" tools:targetApi="jelly_bean_mr1">center</item>
+    </style>
 </resources>

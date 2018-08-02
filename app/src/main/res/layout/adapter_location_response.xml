@@ -21,9 +21,8 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="horizontal"
         >
-
+        <include layout="@layout/progress_bar_layout"/>
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/ivMainLocation"
             android:layout_width="70dp"

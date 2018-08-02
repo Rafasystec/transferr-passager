@@ -18,6 +18,8 @@ import br.com.transferr.passager.webservices.WSCountry
 import br.com.transferr.passager.webservices.WSLocation
 import br.com.transferr.passager.webservices.WSSubCountry
 import kotlinx.android.synthetic.main.activity_tour_list.*
+import kotlinx.android.synthetic.main.progress_bar_layout.*
+import org.jetbrains.anko.startActivity
 
 class TourListActivity : SuperClassActivity() {
 
@@ -71,27 +73,33 @@ class TourListActivity : SuperClassActivity() {
             urlMainPicture = "https://segredosdomundo.r7.com/wp-content/uploads/2017/07/destaque-23-758x456.jpg"
         }
         */
+        progress.visibility = View.VISIBLE
         WSLocation.doGetBySubCountry(subCountry.id!!, object : OnResponseInterface<List<ResponseLocation>>{
             override fun onSuccess(body: List<ResponseLocation>?) {
                 recycleView!!.adapter = LocationResponseAdapter(body!!,
                         {responseLocation: ResponseLocation -> onLocationClick(responseLocation) })
+                progress.visibility  = View.GONE
             }
 
             override fun onError(message: String) {
                 alertWarning(message)
+                progress.visibility  = View.GONE
             }
 
             override fun onFailure(t: Throwable?) {
                 alertErro(t?.message!!)
+                progress.visibility  = View.GONE
             }
 
         })
 
     }
     fun onLocationClick(responseLocation: ResponseLocation){
-        val intent = Intent(this,LocationActivity::class.java)
-        intent.putExtra(ResponseLocation.LOCATION_PARAMETER_KEY,responseLocation.id)
-        startActivity(intent)
+        //val intent = Intent(this,LocationActivity::class.java)
+       // intent.putExtra(ResponseLocation.LOCATION_PARAMETER_KEY,responseLocation.id)
+       // startActivity(intent)
+
+        startActivity<LocationActivity>(ResponseLocation.LOCATION_PARAMETER_KEY to responseLocation.id)
     }
 
     fun loadSpCountry(){

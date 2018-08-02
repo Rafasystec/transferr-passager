@@ -14,7 +14,7 @@ import br.com.transferr.passager.model.responses.ResponseDrivers
 import com.squareup.picasso.Picasso
 
 /**
- * Created by root on 25/07/18.
+ * Created by Rafael Rocha on 25/07/18.
  */
 class DriversResponseAdapter(val drivers : List<ResponseDriver>,val onClick: (ResponseDriver) -> Unit)
     :RecyclerView.Adapter<DriversResponseAdapter.DriversResponseViewHolder>()
@@ -37,6 +37,7 @@ class DriversResponseAdapter(val drivers : List<ResponseDriver>,val onClick: (Re
         if(responseDrivers.imgProfileUrl != null && responseDrivers.imgProfileUrl?.isEmpty()!!){
             responseDrivers.imgProfileUrl = null
         }
+
         //Start progressBar
         //holder.progress.visibility = View.Visible
         Picasso.with(context).load(responseDrivers.imgProfileUrl).placeholder(R.drawable.no_photo_64).fit().into(holder.img,
@@ -50,7 +51,7 @@ class DriversResponseAdapter(val drivers : List<ResponseDriver>,val onClick: (Re
                 }
 
             })
-
+        holder.cardView.setOnClickListener { onClick(responseDrivers) }
     }
 
     class DriversResponseViewHolder(view: View):RecyclerView.ViewHolder(view){

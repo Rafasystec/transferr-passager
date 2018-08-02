@@ -30,26 +30,7 @@ class DriverListActivity : SuperClassActivity() {
     }
 
     private fun loadDriversByLocation() {
-        /*
-        var driverList = ResponseDrivers()
-        var driver = ResponseDriver()
-        with (driver) {
-            name = "Assunção de almeida"
-            email = "assdealm@gmail.com"
-            birthDate = "05/04/1989"
-            countryRegister = "UHD-7052"
 
-        }
-        var driver1 = ResponseDriver()
-        with (driver1) {
-            name = "Avelino Aldeia"
-            email = "avelinadd28399@gmail.com"
-            birthDate = "05/04/1978"
-            countryRegister = "PWS-0221"
-        }
-
-        driverList.drivers = listOf(driver,driver1)
-        */
         WSDriver.doGetByLocation(idLocation, object : OnResponseInterface<ResponseDrivers>{
             override fun onSuccess(body: ResponseDrivers?) {
                 recycleView?.adapter = DriversResponseAdapter(body?.drivers!!,onClick = { driver:ResponseDriver -> cardViewOnClick(drivers = driver)})
