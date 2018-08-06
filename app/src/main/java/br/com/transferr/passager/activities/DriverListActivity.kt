@@ -10,6 +10,7 @@ import br.com.transferr.passager.model.responses.ResponseDriver
 import br.com.transferr.passager.model.responses.ResponseDrivers
 import br.com.transferr.passager.model.responses.ResponseLocation
 import br.com.transferr.passager.webservices.WSDriver
+import org.jetbrains.anko.progressDialog
 import org.jetbrains.anko.toast
 
 class DriverListActivity : SuperClassActivity() {
@@ -30,18 +31,21 @@ class DriverListActivity : SuperClassActivity() {
     }
 
     private fun loadDriversByLocation() {
-
+        val dialog = progressDialog(message = R.string.loading, title = R.string.wait)
         WSDriver.doGetByLocation(idLocation, object : OnResponseInterface<ResponseDrivers>{
             override fun onSuccess(body: ResponseDrivers?) {
                 recycleView?.adapter = DriversResponseAdapter(body?.drivers!!,onClick = { driver:ResponseDriver -> cardViewOnClick(drivers = driver)})
+                dialog.dismiss()
             }
 
             override fun onError(message: String) {
                 alertWarning(message)
+                dialog.dismiss()
             }
 
             override fun onFailure(t: Throwable?) {
                 alertErro(t?.message!!)
+                dialog.dismiss()
             }
 
         })

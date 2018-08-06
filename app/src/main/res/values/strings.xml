@@ -12,4 +12,6 @@
     <string name="chooseLocation">Escolha o passeio</string>
     <string name="seeDrivers">ver motoristas</string>
     <string name="chooseCountry">Escolha o país:</string>
+    <string name="wait">Aguarde</string>
+    <string name="loading">Carregando</string>
 </resources>

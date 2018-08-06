@@ -2,7 +2,6 @@ package br.com.transferr.passager.activities
 
 import android.content.Intent
 import android.os.Bundle
-import android.view.View
 import br.com.transferr.passager.R
 import br.com.transferr.passager.interfaces.OnResponseInterface
 import br.com.transferr.passager.model.Location
@@ -10,7 +9,6 @@ import br.com.transferr.passager.model.responses.ResponseLocation
 import br.com.transferr.passager.webservices.WSLocation
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.layout_location_details.*
-import kotlinx.android.synthetic.main.progress_bar_layout.view.*
 import org.jetbrains.anko.progressDialog
 
 
