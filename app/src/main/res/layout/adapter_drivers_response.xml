@@ -56,6 +56,14 @@
             android:layout_below="@+id/tvNameDriver"
             android:layout_alignStart="@+id/tvNameDriver"
             android:layout_alignLeft="@+id/tvNameDriver" />
+        <TextView
+            android:id="@+id/tvDriverEmail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Área do Profissional"
+            android:layout_below="@+id/tvDriverDetail"
+            android:layout_alignStart="@+id/tvDriverDetail"
+            android:layout_alignLeft="@+id/tvDriverDetail" />
 
         <LinearLayout
             android:id="@+id/llPriceService"
@@ -106,7 +114,15 @@
             android:layout_marginBottom="5dp"
             android:orientation="horizontal"
             android:layout_alignParentRight="true">
-
+            <TextView
+                android:id="@+id/tvDriverPhone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="(XX) XXXXXXX"
+                android:textStyle="bold"
+                android:textColor="@color/colorPrimaryDark"
+                />
+            <!--
             <ImageView
                 android:id="@+id/ivStarRate1"
                 android:layout_width="wrap_content"
@@ -140,7 +156,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:src="@drawable/ic_star" />
-
+            -->
         </LinearLayout>
     </RelativeLayout>
 

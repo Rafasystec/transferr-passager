@@ -1,7 +1,7 @@
 package br.com.transferr.passager.model.responses
 
 /**
- * Created by idoctor on 31/07/2018.
+ * Created by Rafael Rocha on 31/07/2018.
  */
 class ResponseDriver {
 
@@ -11,4 +11,5 @@ class ResponseDriver {
     var countryRegister = ""
     var email=""
     var imgProfileUrl:String?=null
+    var phone = ""
 }

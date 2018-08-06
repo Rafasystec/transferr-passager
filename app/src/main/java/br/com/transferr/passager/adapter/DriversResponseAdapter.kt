@@ -32,12 +32,13 @@ class DriversResponseAdapter(val drivers : List<ResponseDriver>,val onClick: (Re
         this.context = holder!!.itemView.context
         val responseDrivers = drivers[position]
         holder.tvName.text = responseDrivers.name
-        holder.tvDriverDetail.text = "${responseDrivers.countryRegister} - ${responseDrivers.email}"
+        holder.tvDriverDetail.text = "${responseDrivers.countryRegister}"
 
         if(responseDrivers.imgProfileUrl != null && responseDrivers.imgProfileUrl?.isEmpty()!!){
             responseDrivers.imgProfileUrl = null
         }
-
+        holder.tvDriverPhone.text = responseDrivers.phone
+        holder.tvDriverEmail.text = responseDrivers.email
         //Start progressBar
         //holder.progress.visibility = View.Visible
         Picasso.with(context).load(responseDrivers.imgProfileUrl).placeholder(R.drawable.no_photo_64).fit().into(holder.img,
@@ -58,24 +59,33 @@ class DriversResponseAdapter(val drivers : List<ResponseDriver>,val onClick: (Re
         var tvName    : TextView
         var tvPrice   : TextView
         var img: ImageView
+        /*
         var ivStarRate1: ImageView
         var ivStarRate2: ImageView
         var ivStarRate3: ImageView
         var ivStarRate4: ImageView
         var ivStarRate5: ImageView
+        */
         var tvDriverDetail : TextView
+        var tvDriverEmail : TextView
         var cardView: CardView
+        var tvDriverPhone: TextView
         init {
-            tvName      = view.findViewById(R.id.tvNameDriver)
-            img         = view.findViewById(R.id.ivProfile)
-            tvPrice     = view.findViewById(R.id.tvPrice)
-            tvDriverDetail = view.findViewById(R.id.tvDriverDetail)
-            cardView    = view.findViewById(R.id.cvProfessional)
+            tvName          = view.findViewById(R.id.tvNameDriver)
+            img             = view.findViewById(R.id.ivProfile)
+            tvPrice         = view.findViewById(R.id.tvPrice)
+            tvDriverDetail  = view.findViewById(R.id.tvDriverDetail)
+            cardView        = view.findViewById(R.id.cvProfessional)
+            tvDriverEmail   = view.findViewById(R.id.tvDriverEmail)
+            /*
+            //If sometime it has rate
             ivStarRate1    = view.findViewById(R.id.ivStarRate1)
             ivStarRate2    = view.findViewById(R.id.ivStarRate2)
             ivStarRate3    = view.findViewById(R.id.ivStarRate3)
             ivStarRate4    = view.findViewById(R.id.ivStarRate4)
             ivStarRate5    = view.findViewById(R.id.ivStarRate5)
+            */
+            tvDriverPhone  = view.findViewById(R.id.tvDriverPhone)
         }
     }
 }

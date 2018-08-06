@@ -26,7 +26,7 @@ class StartActivity : AppCompatActivity() {
             this.finish()
             System.exit(0)
         }
-        setupToolbar(R.id.toolbar,"Escolha uma opção.")
+        //setupToolbar(R.id.toolbar,"Escolha uma opção.")
     }
 
 
