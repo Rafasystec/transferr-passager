@@ -1,13 +1,10 @@
 package br.com.transferr.passager.activities
 
-import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import br.com.transferr.passager.R
-import br.com.transferr.passager.extensions.setupToolbar
 import kotlinx.android.synthetic.main.activity_start.*
 import org.jetbrains.anko.startActivity
-import org.jetbrains.anko.toast
 
 class StartActivity : AppCompatActivity() {
 
@@ -16,7 +13,7 @@ class StartActivity : AppCompatActivity() {
         setContentView(R.layout.activity_start)
         btnSeeNearDriver.setOnClickListener {
             //startActivity(Intent(this, MainActivity::class.java))
-            startActivity<MainActivity>()
+            startActivity<MapsActivity>()
         }
         btnSeeTours.setOnClickListener {
             //startActivity(Intent(this,TourListActivity::class.java))

@@ -16,7 +16,7 @@ object HelperCar {
 
     fun transformInMarkers(list:List<ResponseCarsOnline>):MutableList<MarkerOptions>{
         var markers:MutableList<MarkerOptions>?= mutableListOf()
-        if(list != null && !list.isEmpty()){
+        if(!list.isEmpty()){
             list.map {
                         //MarkerOptions()
                         //        .icon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_car_black_24dp))

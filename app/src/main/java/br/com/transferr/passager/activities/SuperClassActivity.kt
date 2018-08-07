@@ -10,7 +10,7 @@ import org.jetbrains.anko.alert
 import org.jetbrains.anko.okButton
 
 /**
- * Created by root on 14/02/18.
+ * Created by Rafael Rocha on 14/02/18.
  */
 @SuppressLint("Registered")
 open class SuperClassActivity : AppCompatActivity(){
@@ -34,5 +34,7 @@ open class SuperClassActivity : AppCompatActivity(){
             okButton { it.dismiss() }
         }.show()
     }
+
+
 
 }

@@ -2,7 +2,9 @@ package br.com.transferr.passager.activities
 
 import android.content.Intent
 import android.os.Bundle
+import android.support.v4.view.GravityCompat
 import android.support.v7.widget.RecyclerView
+import android.view.MenuItem
 import android.view.View
 import android.widget.Adapter
 import android.widget.AdapterView
@@ -18,8 +20,10 @@ import br.com.transferr.passager.webservices.WSCountry
 import br.com.transferr.passager.webservices.WSLocation
 import br.com.transferr.passager.webservices.WSSubCountry
 import kotlinx.android.synthetic.main.activity_tour_list.*
+import kotlinx.android.synthetic.main.layout_navigation_view.*
 import kotlinx.android.synthetic.main.progress_bar_layout.*
 import org.jetbrains.anko.startActivity
+import org.jetbrains.anko.toast
 
 class TourListActivity : SuperClassActivity() {
 
@@ -28,6 +32,8 @@ class TourListActivity : SuperClassActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_tour_list)
         recycleView = defaultRecycleView(this,R.id.rcTourList)
+        initNavigationBottomMenu()
+        /*
         spCountry.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
             override fun onNothingSelected(parent: AdapterView<*>?) {
 
@@ -50,14 +56,12 @@ class TourListActivity : SuperClassActivity() {
             }
 
         }
-
-
-
+        */
     }
 
     override fun onResume() {
         super.onResume()
-        loadSpCountry()
+        //loadSpCountry()
     }
 
     private fun loadTourList(subCountry: SubCountry) {
@@ -145,4 +149,28 @@ class TourListActivity : SuperClassActivity() {
     fun injectAdapterSpSubCountry(list:List<SubCountry>){
         spSubCountry.adapter = ArrayAdapter<SubCountry>(this,R.layout.support_simple_spinner_dropdown_item,list)
     }
+
+    fun initNavigationBottomMenu(){
+        btnNavigationClient.setOnNavigationItemSelectedListener { item ->
+            when (item.itemId) {
+                R.id.menuHomeCli -> {
+                    toast("Inicio")
+                    true
+                }
+                R.id.menuAgendaCli -> {
+                    toast("Agenda")
+                    true
+                }
+                R.id.menuHistoryCli -> {
+                    toast("Histórico")
+                    true
+                }
+
+                else ->{ true}
+            }
+
+        }
+    }
+
+
 }
