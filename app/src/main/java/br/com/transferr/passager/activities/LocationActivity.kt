@@ -5,8 +5,10 @@ import android.os.Bundle
 import br.com.transferr.passager.R
 import br.com.transferr.passager.interfaces.OnResponseInterface
 import br.com.transferr.passager.model.Location
+import br.com.transferr.passager.model.TourOption
 import br.com.transferr.passager.model.responses.ResponseLocation
 import br.com.transferr.passager.webservices.WSLocation
+import com.squareup.picasso.MemoryPolicy
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.layout_location_details.*
 import org.jetbrains.anko.progressDialog
@@ -15,10 +17,11 @@ import org.jetbrains.anko.progressDialog
 class LocationActivity : SuperClassActivity() {
 
     var idLocation:Long?=null
+    var tourOption:TourOption?=null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_location)
-        idLocation = intent.getLongExtra(ResponseLocation.LOCATION_PARAMETER_KEY,0L)
+        tourOption = intent.getSerializableExtra(TourOption.TOUR_PARAMETER_KEY) as TourOption
         btnSeeDrivers.setOnClickListener {
             var intent = Intent(this,DriverListActivity::class.java)
             intent.putExtra(ResponseLocation.LOCATION_PARAMETER_KEY,idLocation!!)
@@ -28,10 +31,13 @@ class LocationActivity : SuperClassActivity() {
 
     override fun onResume() {
         super.onResume()
-        loadLocation()
+        //loadLocation()
+        loadFields()
     }
-
+/*
     private fun loadLocation() {
+
+        /*
         val dialog = progressDialog(message = "Carregando os campos",title = "Aguarde...")
         WSLocation.doGetById(idLocation!!, object :OnResponseInterface<Location>{
             override fun onSuccess(body: Location?) {
@@ -50,14 +56,18 @@ class LocationActivity : SuperClassActivity() {
             }
 
         })
+        */
     }
-
-    fun loadFields(location: Location){
-        Picasso.with(this).load(location.photoProfile).into(ivMainPicture)
-        tvLocationTitle.text = location.name
-        tvLocationDescription.text = location.description
+*/
+    private fun loadFields(){
+        if(tourOption == null){
+            return
+        }
+        Picasso.with(this).load(tourOption?.profileUrl).memoryPolicy(MemoryPolicy.NO_STORE,MemoryPolicy.NO_CACHE).into(ivMainPicture)
+        tvLocationTitle.text = tourOption?.name
+        tvLocationDescription.text = tourOption?.description
         var i = 0
-        location.images?.forEach {
+        tourOption?.images?.forEach {
             ++i
             when (i) {
                 1 -> Picasso.with(this).load(it).into(ivPictureOne)

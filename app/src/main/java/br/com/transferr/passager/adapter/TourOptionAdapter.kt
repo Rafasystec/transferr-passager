@@ -32,11 +32,11 @@ class TourOptionAdapter(val options : List<TourOption>, val onClick: (TourOption
 
     override fun onBindViewHolder(holder: TourOptionViewHolder, position: Int) {
         this.context = holder!!.itemView.context
-        val responseDrivers = options[position]
-        /*
-        holder.tvName.text = responseDrivers.name
+        val tour = options[position]
+
+        holder.tvName.text = tour.name
         var urlPhoto: String
-        urlPhoto = responseDrivers.urlMainPicture;
+        urlPhoto = tour.profileUrl!!
         holder.progress.visibility = View.VISIBLE
         Picasso.with(context).load(urlPhoto).fit().memoryPolicy(MemoryPolicy.NO_CACHE, MemoryPolicy.NO_STORE).into(holder.ivMainLocation,
                 object : com.squareup.picasso.Callback {
@@ -48,8 +48,8 @@ class TourOptionAdapter(val options : List<TourOption>, val onClick: (TourOption
                         holder.progress.visibility = View.GONE
                     }
                 })
-        holder.cardView.setOnClickListener { onClick(responseDrivers) }
-    */
+        holder.cardView.setOnClickListener { onClick(tour) }
+
     }
 
     class TourOptionViewHolder(view: View): RecyclerView.ViewHolder(view){

@@ -1,13 +1,13 @@
 package br.com.transferr.passager.application
 
-import android.app.Application
+import android.support.multidex.MultiDexApplication
 
 /**
  * Created by Rafael Rocha on 15/02/2018.
  */
-class ApplicationTransferr : Application() {
+class ApplicationTransferr : MultiDexApplication() {
     private val TAG = "APPLICATION"
-    val URL_BASE = "http://192.168.0.103:8080/transferr-rest/rest/" //Windows
+    val URL_BASE = "http://192.168.1.4:8080/transferr-rest/rest/" //Windows
     //val URL_BASE = "http://192.168.15.7:8080/transferr-rest/rest/" //Linux
     //val URL_BASE = "http://petmooby.com.br/transferr-rest/rest/"
     override fun onCreate() {

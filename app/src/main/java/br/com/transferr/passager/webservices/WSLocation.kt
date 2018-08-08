@@ -20,10 +20,16 @@ object WSLocation : BaseWebService(){
         service.doGetById(idLocation).enqueue(CallBackWS(responseInterface))
     }
 
+    fun getAll(responseInterface: OnResponseInterface<List<Location>>){
+        service.doGetAll().enqueue(CallBackWS(responseInterface))
+    }
+
     interface IWSLocation{
         @GET(ROOT_URL_LOCATION+"/by/subcountry/{idSubcountry}")
         fun doGetBySubCountry(@Path("idSubcountry") idSubcountry:Long):Call<List<ResponseLocation>>
         @GET(ROOT_URL_LOCATION+"/{idLocation}")
         fun doGetById(@Path("idLocation")idLocation:Long):Call<Location>
+        @GET(ROOT_URL_LOCATION)
+        fun doGetAll():Call<List<Location>>
     }
 }

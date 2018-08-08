@@ -8,9 +8,14 @@ import java.math.BigDecimal
  */
 class TourOption : Entity() {
 
-    private var name: String? = null
-    private var description: String? = null
-    private var value: BigDecimal? = null
-    private var location: Location? = null
-    private var images: List<String>? = null
+    var name: String? = null
+    var description: String? = null
+    var value: BigDecimal? = null
+    var location: Location? = null
+    var images: List<String>? = null
+    var profileUrl: String? = null
+
+    companion object {
+        const val TOUR_PARAMETER_KEY = "touroption"
+    }
 }
