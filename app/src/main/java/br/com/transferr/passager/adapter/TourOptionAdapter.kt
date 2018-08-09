@@ -24,7 +24,7 @@ class TourOptionAdapter(val options : List<TourOption>, val onClick: (TourOption
     var context: Context?=null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TourOptionViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.adapter_location_response,parent,false)
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.adapter_tour_option,parent,false)
         return TourOptionViewHolder(view)
     }
 

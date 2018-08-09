@@ -13,10 +13,10 @@ import org.jetbrains.anko.progressDialog
  */
 
 open class SuperClassFragment : Fragment(){
-    protected var dialog: ProgressDialog? = null
+    //protected var dialog: ProgressDialog? = null
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        dialog = activity?.progressDialog(message = R.string.loading, title = R.string.wait)
+        //dialog = activity?.progressDialog(message = R.string.loading, title = R.string.wait)
         super.onViewCreated(view, savedInstanceState)
     }
 
