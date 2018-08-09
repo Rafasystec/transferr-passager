@@ -16,6 +16,7 @@ import br.com.transferr.passager.extensions.setupToolbar
 import br.com.transferr.passager.interfaces.OnResponseInterface
 import br.com.transferr.passager.model.Location
 import br.com.transferr.passager.webservices.WSLocation
+import kotlinx.android.synthetic.main.fragment_location_list.*
 import org.jetbrains.anko.progressDialog
 import org.jetbrains.anko.toast
 
@@ -45,6 +46,7 @@ class LocationListFragment : SuperClassFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         recycleView = defaultRecycleView(activity!!,R.id.rcLocationList)
+        initSearchView()
         requestAllLocations()
     }
 
@@ -83,11 +85,14 @@ class LocationListFragment : SuperClassFragment() {
     fun onLocationClick(location: Location){
         activity?.toast("Clicou em ${location.name}")
     }
-
+/*
     override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
         inflater?.inflate(R.menu.menu_seacher,menu)
         var searchItem : MenuItem? = menu?.findItem(R.id.menuSearch)
-        var searchView : SearchView = MenuItemCompat.getActionView(searchItem) as SearchView
+
+
+        //var searchView : SearchView = MenuItemCompat.getActionView(searchItem) as SearchView
+        //searchItem?.actionView = searchView
         searchView.setOnQueryTextListener(
             object : SearchView.OnQueryTextListener{
                 override fun onQueryTextSubmit(query: String?): Boolean {
@@ -102,6 +107,23 @@ class LocationListFragment : SuperClassFragment() {
             }
         )
         super.onCreateOptionsMenu(menu, inflater)
+    }
+    */
+
+    fun initSearchView(){
+        searchView.setOnQueryTextListener(
+                object : SearchView.OnQueryTextListener{
+                    override fun onQueryTextSubmit(query: String?): Boolean {
+                        return false
+                    }
+
+                    override fun onQueryTextChange(newText: String?): Boolean {
+                        locationAdapter?.filter?.filter(newText)
+                        return false
+                    }
+
+                }
+        )
     }
 
 }
