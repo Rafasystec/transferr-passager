@@ -22,32 +22,69 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         >
-        <include layout="@layout/progress_bar_layout"/>
-        <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/ivMainLocation"
-            android:layout_width="70dp"
-            android:layout_height="70dp"
-            android:layout_alignParentStart="true"
-            android:layout_centerVertical="true"
-            android:layout_marginStart="8dp"
-            android:src="@drawable/no_photo_64"
-            android:layout_alignParentLeft="true"
-            android:layout_marginLeft="8dp" />
+        <LinearLayout
+            android:id="@+id/llTvProfile"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <!--
+            <include layout="@layout/progress_bar_layout"
+                android:id="@+id/include" />
+                -->
+            <ProgressBar
+                xmlns:android="http://schemas.android.com/apk/res/android"
+                android:id="@+id/progress"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/Widget.AppCompat.ProgressBar"
+                android:layout_gravity="center|center_vertical"
+                android:gravity="center"
+                android:visibility="gone"
+                />
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/ivMainLocation"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:layout_alignParentStart="true"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="8dp"
+                android:src="@drawable/no_photo_64"
+                android:layout_alignParentLeft="true"
+                android:layout_marginLeft="8dp" />
+        </LinearLayout>
+
 
         <TextView
             android:id="@+id/tvLocationName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_toEndOf="@+id/ivMainLocation"
-            android:layout_toRightOf="@+id/ivMainLocation"
+            android:layout_toEndOf="@+id/llTvProfile"
+            android:layout_toRightOf="@+id/llTvProfile"
             android:gravity="start"
-            android:padding="8dp"
             android:text="Location Name"
             android:textAlignment="textStart"
-            android:textSize="20sp"
             android:textStyle="bold" />
 
+        <TextView
+            android:id="@+id/tvTourDescription"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tvLocationName"
+            android:layout_toEndOf="@+id/llTvProfile"
+            android:layout_toRightOf="@+id/llTvProfile"
+            android:text="Detalhe" />
+
+        <TextView
+            android:id="@+id/tvLocation"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/llTvProfile"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginEnd="20dp"
+            android:layout_marginRight="20dp"
+            android:text="Detalhe" />
+
+        <!--
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -58,104 +95,9 @@
             android:layout_marginRight="20dp"
             android:textSize="20sp"
             android:textStyle="bold"
-            android:text=">" />
-        <!--
-        <TextView
-            android:id="@+id/tvDriverDetail"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Área do Profissional"
-            android:layout_below="@+id/tvNameDriver"
-            android:layout_alignStart="@+id/tvNameDriver"
-            android:layout_alignLeft="@+id/tvNameDriver" />
-
-        <LinearLayout
-            android:id="@+id/llPriceService"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignStart="@+id/tvNameDriver"
-            android:layout_below="@+id/tvDriverDetail"
-            android:orientation="horizontal"
-            android:layout_marginTop="5dp"
-            android:visibility="gone"
-            android:layout_alignLeft="@+id/tvNameDriver">
-
-            <ImageView
-                android:id="@+id/ivPriceMoney"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:tint="@color/colorPrimaryDarkClient"
-                android:src="@drawable/currency_usd" />
-            <TextView
-                android:id="@+id/tvPrice"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:paddingLeft="5dp"
-                android:textColor="@color/colorPrimaryDarkClient"
-                android:textStyle="bold"
-                android:text="300,00" />
-        </LinearLayout>
-        -->
-        <!--
-        <ImageView
-            android:id="@+id/ivFavoritePro"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_centerVertical="true"
-            android:layout_marginEnd="10dp"
-            android:clickable="true"
-            android:src="@drawable/favorite_heart"
-            android:tint="@android:color/holo_red_light"
-            android:layout_alignParentRight="true"
-            android:layout_marginRight="10dp" />
+            android:text=">"
+            android:id="@+id/textView" />
             -->
-        <!--
-        <LinearLayout
-            android:layout_width="150dp"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentBottom="true"
-            android:layout_marginBottom="5dp"
-            android:orientation="horizontal"
-            android:layout_alignParentRight="true">
-
-            <ImageView
-                android:id="@+id/ivStarRate1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:src="@drawable/ic_star" />
-            <ImageView
-                android:id="@+id/ivStarRate2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:src="@drawable/ic_star" />
-
-            <ImageView
-                android:id="@+id/ivStarRate3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:src="@drawable/ic_star" />
-
-            <ImageView
-                android:id="@+id/ivStarRate4"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:src="@drawable/ic_star" />
-
-            <ImageView
-                android:id="@+id/ivStarRate5"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:src="@drawable/ic_star" />
-
-        </LinearLayout>
-        -->
     </RelativeLayout>
 
 </android.support.v7.widget.CardView>

@@ -49,19 +49,24 @@ class TourOptionAdapter(val options : List<TourOption>, val onClick: (TourOption
                     }
                 })
         holder.cardView.setOnClickListener { onClick(tour) }
-
+        holder.tvLocation.text = tour.location?.name!!
+        holder.tvTourDescription.text = tour.description
     }
 
     class TourOptionViewHolder(view: View): RecyclerView.ViewHolder(view){
-        var tvName          : TextView
-        var cardView        : CardView
-        var ivMainLocation  : ImageView
-        var progress        : ProgressBar
+        var tvName              : TextView
+        var cardView            : CardView
+        var ivMainLocation      : ImageView
+        var progress            : ProgressBar
+        var tvTourDescription   : TextView
+        var tvLocation          : TextView
         init {
-            tvName      = view.findViewById(R.id.tvLocationName)
-            cardView    = view.findViewById(R.id.cvLocation)
-            ivMainLocation = view.findViewById(R.id.ivMainLocation)
-            progress    = view.findViewById(R.id.progress)
+            tvName              = view.findViewById(R.id.tvLocationName)
+            cardView            = view.findViewById(R.id.cvLocation)
+            ivMainLocation      = view.findViewById(R.id.ivMainLocation)
+            tvTourDescription   = view.findViewById(R.id.tvTourDescription)
+            tvLocation          = view.findViewById(R.id.tvLocation)
+            progress            = view.findViewById(R.id. progress)
         }
     }
 }

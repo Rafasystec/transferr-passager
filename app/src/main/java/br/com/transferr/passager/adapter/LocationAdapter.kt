@@ -33,8 +33,11 @@ class LocationAdapter(val locations: List<Location>, val onClick:(Location)->Uni
         holder.tvName.text = location.name
         var urlPhoto: String
         urlPhoto = location.photoProfile!!
+        holder.tvLocationDescription.text = location.description
         holder.progress.visibility = View.VISIBLE
-        Picasso.with(holder.itemView.context).load(urlPhoto).fit().memoryPolicy(MemoryPolicy.NO_CACHE, MemoryPolicy.NO_STORE).into(holder.ivMainLocation,
+        Picasso.with(holder.itemView.context).load(urlPhoto).fit()
+                //.memoryPolicy(MemoryPolicy.NO_CACHE, MemoryPolicy.NO_STORE)
+                .into(holder.ivMainLocation,
                 object : com.squareup.picasso.Callback {
                     override fun onSuccess() {
                         holder.progress.visibility = View.GONE
@@ -56,12 +59,15 @@ class LocationAdapter(val locations: List<Location>, val onClick:(Location)->Uni
         var tvName          : TextView
         var cardView        : CardView
         var ivMainLocation  : ImageView
+        var tvLocationDescription : TextView
         var progress        : ProgressBar
         init {
             tvName      = view.findViewById(R.id.tvLocationName)
             cardView    = view.findViewById(R.id.cvLocation)
             ivMainLocation = view.findViewById(R.id.ivMainLocation)
+            tvLocationDescription = view.findViewById(R.id.tvLocationDescription)
             progress    = view.findViewById(R.id.progress)
+
         }
     }
 
