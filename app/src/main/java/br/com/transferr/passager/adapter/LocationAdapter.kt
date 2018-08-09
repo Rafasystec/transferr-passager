@@ -1,5 +1,6 @@
 package br.com.transferr.passager.adapter
 
+import android.content.Context
 import android.support.v7.widget.CardView
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
@@ -12,17 +13,23 @@ import com.squareup.picasso.MemoryPolicy
 import com.squareup.picasso.Picasso
 
 /**
- * Created by idoctor on 08/08/2018.
+ * Created by Rafael Rocha on 08/08/2018.
  */
 class LocationAdapter(val locations: List<Location>, val onClick:(Location)->Unit) : RecyclerView.Adapter<LocationAdapter.LocationViewHolder>(),Filterable {
+
+    var context:Context?=null
+    //NOTE:Important! Don't forget to associate the initial list passed by parameter with the filtered list.
+    var locationListFiltered:List<Location>?=locations
+    //var locations: List<Location>?=null
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): LocationViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.adapter_location_response,parent,false)
         return LocationViewHolder(view)
     }
 
-    var locationListFiltered:List<Location>?=null
+
     override fun onBindViewHolder(holder: LocationViewHolder, position: Int) {
-        val location = locations[position]
+        //val location = locations[position]
+        val location = locationListFiltered!![position]
         holder.tvName.text = location.name
         var urlPhoto: String
         urlPhoto = location.photoProfile!!
@@ -39,8 +46,8 @@ class LocationAdapter(val locations: List<Location>, val onClick:(Location)->Uni
                 })
         holder.cardView.setOnClickListener { onClick(location) }
     }
-
-    override fun getItemCount() = locations.size
+    //NOTE: Notice a important thing here that we need to use the filtered lit size instead of one passed as parameter
+    override fun getItemCount() = locationListFiltered?.size!!
 
 
 

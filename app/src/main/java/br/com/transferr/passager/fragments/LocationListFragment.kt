@@ -12,6 +12,7 @@ import br.com.transferr.fragments.SuperClassFragment
 import br.com.transferr.passager.R
 import br.com.transferr.passager.adapter.LocationAdapter
 import br.com.transferr.passager.extensions.defaultRecycleView
+import br.com.transferr.passager.extensions.setupToolbar
 import br.com.transferr.passager.interfaces.OnResponseInterface
 import br.com.transferr.passager.model.Location
 import br.com.transferr.passager.webservices.WSLocation
@@ -30,13 +31,15 @@ class LocationListFragment : SuperClassFragment() {
     private var locationAdapter:LocationAdapter?=null
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
-        activity?.actionBar?.title = "Locais"
+
+
         return inflater.inflate(R.layout.fragment_location_list, container, false)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setHasOptionsMenu(true)
+        setupToolbar(R.id.toolbar,"Locais")
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

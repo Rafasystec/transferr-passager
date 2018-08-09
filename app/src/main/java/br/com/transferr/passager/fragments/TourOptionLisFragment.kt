@@ -13,6 +13,7 @@ import br.com.transferr.passager.R
 import br.com.transferr.passager.activities.LocationActivity
 import br.com.transferr.passager.adapter.TourOptionAdapter
 import br.com.transferr.passager.extensions.defaultRecycleView
+import br.com.transferr.passager.extensions.switchFragment
 import br.com.transferr.passager.interfaces.OnResponseInterface
 import br.com.transferr.passager.model.TourOption
 import br.com.transferr.passager.webservices.WSTourOption
@@ -37,7 +38,8 @@ class TourOptionLisFragment : SuperClassFragment() {
         recycleView = defaultRecycleView(activity!!,R.id.rcTourList)
         requestTourOption()
         btnWhereToGo.setOnClickListener{
-            includeFragmentOnMainActivity(LocationListFragment())
+            //includeFragmentOnMainActivity(LocationListFragment())
+            switchFragment(LocationListFragment())
         }
     }
 
@@ -72,7 +74,7 @@ class TourOptionLisFragment : SuperClassFragment() {
         }
     }
 
-    fun onTourClick(tourOption: TourOption){
+    private fun onTourClick(tourOption: TourOption){
         startActivity(Intent(activity,LocationActivity::class.java).putExtra(TourOption.TOUR_PARAMETER_KEY,tourOption))
     }
 
