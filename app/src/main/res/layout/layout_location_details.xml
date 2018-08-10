@@ -107,7 +107,7 @@
         android:layout_alignParentBottom="true"
         app:backgroundTint="@color/colorPrimaryDark"
         android:text="@string/seeDrivers"
-        android:textColor="@color/colorSecondary" />
+        android:textColor="@color/colorButtonText" />
     <TextView
         android:id="@+id/tvLocationDescription"
         android:layout_width="match_parent"

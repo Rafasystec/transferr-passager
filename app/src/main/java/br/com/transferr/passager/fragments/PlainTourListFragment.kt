@@ -11,12 +11,17 @@ import br.com.transferr.fragments.SuperClassFragment
 
 import br.com.transferr.passager.R
 import br.com.transferr.passager.adapter.DriversResponseAdapter
+import br.com.transferr.passager.adapter.PlainTourListAdapter
 import br.com.transferr.passager.extensions.defaultRecycleView
 import br.com.transferr.passager.interfaces.OnResponseInterface
 import br.com.transferr.passager.model.Location
+import br.com.transferr.passager.model.PlainTour
+import br.com.transferr.passager.model.TourOption
 import br.com.transferr.passager.model.responses.ResponseDriver
 import br.com.transferr.passager.model.responses.ResponseDrivers
+import br.com.transferr.passager.model.responses.ResponsePlainsByTourAndLocation
 import br.com.transferr.passager.webservices.WSDriver
+import br.com.transferr.passager.webservices.WSPlainTour
 import kotlinx.android.synthetic.main.layout_empty_list.*
 import kotlinx.android.synthetic.main.layout_empty_list.view.*
 import org.jetbrains.anko.progressDialog
@@ -27,8 +32,11 @@ import org.jetbrains.anko.progressDialog
  */
 class PlainTourListFragment : SuperClassFragment() {
 
-    private var recycleView: RecyclerView?=null
-    private var location: Location?=null
+    private var recycleViewFromTour: RecyclerView?=null
+    private var recycleViewFromLocation: RecyclerView?=null
+   // private var location: Location?=null
+    private var response:ResponsePlainsByTourAndLocation?=null
+    private var tourOption:TourOption?=null
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
@@ -37,8 +45,10 @@ class PlainTourListFragment : SuperClassFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        location = arguments?.getSerializable(Location.LOCATION) as Location
-        recycleView = defaultRecycleView(activity!!,R.id.rcDriversFromLocation)
+        tourOption = arguments?.getSerializable(TourOption.TOUR_PARAMETER_KEY) as TourOption
+        recycleViewFromTour = defaultRecycleView(activity!!,R.id.rcPlainTourFromTour)
+        recycleViewFromLocation = defaultRecycleView(activity!!,R.id.rcPlainTourFromLocation)
+        loadPlainsByTourAndLocation()
         if(llEmptyList != null) {
             llEmptyList.tvTextToAdd.text = "Sem Passeios no momento."
         }
@@ -46,18 +56,19 @@ class PlainTourListFragment : SuperClassFragment() {
 
     override fun onResume() {
         super.onResume()
-        loadDriversByLocation()
+        loadRecyclesView(response)
+        //loadPlainsByTourAndLocation()
     }
 
-    private fun loadDriversByLocation() {
+    private fun loadPlainsByTourAndLocation() {
 
-        if(location != null) {
+        if(tourOption != null) {
             val dialog = activity?.progressDialog(message = R.string.loading, title = R.string.wait)
-            WSDriver.doGetByLocation(location?.id!!, object : OnResponseInterface<ResponseDrivers> {
-                override fun onSuccess(body: ResponseDrivers?) {
+            WSPlainTour.getByTourAndLocation(tourOption?.id!!, object : OnResponseInterface<ResponsePlainsByTourAndLocation> {
+                override fun onSuccess(body: ResponsePlainsByTourAndLocation?) {
                     dialog?.dismiss()
-                   // recycleView?.adapter = DriversResponseAdapter(body?.drivers!!, onClick = { driver: ResponseDriver -> cardViewOnClick(drivers = driver) })
-                    checkIfIsEmpty(body!!)
+                    response = body
+                    loadRecyclesView(body!!)
                 }
 
                 override fun onError(message: String) {
@@ -76,7 +87,14 @@ class PlainTourListFragment : SuperClassFragment() {
 
     }
 
-    fun checkIfIsEmpty(responseDrivers: ResponseDrivers){
+    private fun loadRecyclesView(responsePlainsByTourAndLocation: ResponsePlainsByTourAndLocation?){
+        if(responsePlainsByTourAndLocation != null) {
+            recycleViewFromTour?.adapter = PlainTourListAdapter(responsePlainsByTourAndLocation.plainsFromTour!!, { plainTour: PlainTour -> onClickPlain(plainTour) })
+            recycleViewFromLocation?.adapter = PlainTourListAdapter(responsePlainsByTourAndLocation.plainsFromLocation!!, { plainTour: PlainTour -> onClickPlain(plainTour) })
+        }
+    }
+
+    /*fun checkIfIsEmpty(responseDrivers: ResponseDrivers){
         if(responseDrivers != null){
             val drivers = responseDrivers.drivers
             if(drivers?.isEmpty()!!){
@@ -85,6 +103,12 @@ class PlainTourListFragment : SuperClassFragment() {
                 llEmptyList.visibility = View.GONE
             }
         }
+    }*/
+
+    fun onClickPlain(plainTour: PlainTour){
+
     }
+
+
 
 }

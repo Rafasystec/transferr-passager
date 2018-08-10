@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:card_view="http://schemas.android.com/tools"
+    android:id="@+id/cvProfessional"
+    android:layout_height="100dp"
+    android:layout_width="match_parent"
+    android:clickable="true"
+    android:padding="5dp"
+    android:background="@android:color/white"
+    android:layout_marginBottom="5dp"
+    app:cardElevation="3dp"
+    app:cardPreventCornerOverlap="false"
+    app:cardUseCompatPadding="false"
+    card_view:cardConerRadius="2dp"
+    card_view:cardElevation="6dp"
+    android:foreground="?attr/selectableItemBackground"
+    android:layout_margin="8dp"
+
+    >
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        >
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/ivProfile"
+            android:layout_width="90dp"
+            android:layout_height="90dp"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="13dp"
+            android:src="@drawable/no_photo_64"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="13dp" />
+
+        <TextView
+            android:id="@+id/tvNameDriver"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/ivProfile"
+            android:layout_marginStart="17dp"
+            android:layout_toEndOf="@+id/ivProfile"
+            android:text="Driver Name"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:layout_marginLeft="17dp"
+            android:layout_toRightOf="@+id/ivProfile" />
+        <TextView
+            android:id="@+id/tvDriverDetail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Área do Profissional"
+            android:layout_below="@+id/tvNameDriver"
+            android:layout_alignStart="@+id/tvNameDriver"
+            android:layout_alignLeft="@+id/tvNameDriver" />
+        <TextView
+            android:id="@+id/tvDriverEmail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Área do Profissional"
+            android:layout_below="@+id/tvDriverDetail"
+            android:layout_alignStart="@+id/tvDriverDetail"
+            android:layout_alignLeft="@+id/tvDriverDetail" />
+
+        <LinearLayout
+            android:id="@+id/llPriceService"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignStart="@+id/tvNameDriver"
+            android:layout_below="@+id/tvDriverDetail"
+            android:orientation="horizontal"
+            android:layout_marginTop="5dp"
+            android:visibility="gone"
+            android:layout_alignLeft="@+id/tvNameDriver">
+
+            <ImageView
+                android:id="@+id/ivPriceMoney"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:tint="@color/colorPrimaryDarkClient"
+                android:src="@drawable/currency_usd" />
+            <TextView
+                android:id="@+id/tvPrice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingLeft="5dp"
+                android:textColor="@color/colorPrimaryDarkClient"
+                android:textStyle="bold"
+                android:text="300,00" />
+        </LinearLayout>
+
+        <!--
+        <ImageView
+            android:id="@+id/ivFavoritePro"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="10dp"
+            android:clickable="true"
+            android:src="@drawable/favorite_heart"
+            android:tint="@android:color/holo_red_light"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="10dp" />
+            -->
+        <LinearLayout
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="5dp"
+            android:orientation="horizontal"
+            android:layout_alignParentRight="true">
+            <TextView
+                android:id="@+id/tvDriverPhone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="(XX) XXXXXXX"
+                android:textStyle="bold"
+                android:textColor="@color/colorPrimaryDark"
+                />
+            <!--
+            <ImageView
+                android:id="@+id/ivStarRate1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:src="@drawable/ic_star" />
+            <ImageView
+                android:id="@+id/ivStarRate2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:src="@drawable/ic_star" />
+
+            <ImageView
+                android:id="@+id/ivStarRate3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:src="@drawable/ic_star" />
+
+            <ImageView
+                android:id="@+id/ivStarRate4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:src="@drawable/ic_star" />
+
+            <ImageView
+                android:id="@+id/ivStarRate5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:src="@drawable/ic_star" />
+            -->
+        </LinearLayout>
+    </RelativeLayout>
+
+</android.support.v7.widget.CardView>

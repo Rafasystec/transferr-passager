@@ -37,9 +37,9 @@ class TourOptionLisFragment : SuperClassFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         recycleView = defaultRecycleView(activity!!,R.id.rcTourList)
-        var location = arguments?.getSerializable(Location.LOCATION) as Location
-        if(location != null){
-            requestTourOptionByLocation(location)
+        var locationTmp = arguments?.getSerializable(Location.LOCATION)
+        if(locationTmp != null){
+            requestTourOptionByLocation(locationTmp as Location)
         }else {
             requestTourOption()
         }

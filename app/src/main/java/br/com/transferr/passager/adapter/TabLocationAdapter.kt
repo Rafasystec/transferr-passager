@@ -11,11 +11,12 @@ import br.com.transferr.passager.fragments.DriverListFragment
 import br.com.transferr.passager.fragments.LocationDetailFragment
 import br.com.transferr.passager.fragments.PlainTourListFragment
 import br.com.transferr.passager.model.Location
+import br.com.transferr.passager.model.TourOption
 
 /**
  * Created by Rafael Rocha on 10/08/2018.
  */
-class TabLocationAdapter(private val context: Context, fm: FragmentManager,val location:Location): FragmentPagerAdapter(fm) {
+class TabLocationAdapter(private val context: Context, fm: FragmentManager,val tourOption:TourOption): FragmentPagerAdapter(fm) {
    
     override fun getItem(position: Int): Fragment {
        val fragment :Fragment = when (position) {
@@ -26,7 +27,7 @@ class TabLocationAdapter(private val context: Context, fm: FragmentManager,val l
 
         with(fragment){
             arguments = Bundle()
-            arguments!!.putSerializable(Location.LOCATION,location)
+            arguments!!.putSerializable(TourOption.TOUR_PARAMETER_KEY,tourOption)
         }
 
        //fragment.arguments = Bundle()

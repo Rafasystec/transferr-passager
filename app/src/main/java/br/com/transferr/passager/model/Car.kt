@@ -10,6 +10,9 @@ data class Car(var model: String,
                var color:String,
                 var externalEquip:Boolean,
                var driver:Driver,
-               var status:EnumStatus) : Entity()
+               var status:EnumStatus) : Entity(){
+    var photo: String? = null
+
+}
 
 

@@ -9,7 +9,8 @@ class Driver (var name: String,
                    var countryRegister: String,
                    var birthDate: Int): Entity(){
 
-   // private val name: String? = null
-   // private val countryRegister: String? = null
-   // private val birthDate: Date? = null
+
+    var phone: Long? = null
+    var ddd: Int? = null
+    var car: Car? = null
 }

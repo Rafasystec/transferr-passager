@@ -2,6 +2,7 @@ package br.com.transferr.passager.webservices
 
 import br.com.transferr.passager.interfaces.OnResponseInterface
 import br.com.transferr.passager.model.PlainTour
+import br.com.transferr.passager.model.responses.ResponsePlainsByTourAndLocation
 import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Path
@@ -15,8 +16,14 @@ object WSPlainTour : BaseWebService(){
     fun getByTourOption(idTourOption: Long,responseInterface: OnResponseInterface<List<PlainTour>>){
         service.doGetByTourOption(idTourOption).enqueue(CallBackWS(responseInterface))
     }
+
+    fun getByTourAndLocation(idTourOption: Long,responseInterface: OnResponseInterface<ResponsePlainsByTourAndLocation>){
+        service.doGetByTourAndLocation(idTourOption).enqueue(CallBackWS(responseInterface))
+    }
     interface IWSPlainTour{
         @GET(ROOT_URL_PLAIN_TOUR)
         fun doGetByTourOption(@Path("idTourOption") idTourOption:Long):Call<List<PlainTour>>
+        @GET(ROOT_URL_PLAIN_TOUR+"/by/tour/and/location/{idTourOption}")
+        fun doGetByTourAndLocation(@Path("idTourOption") idTourOption:Long):Call<ResponsePlainsByTourAndLocation>
     }
 }

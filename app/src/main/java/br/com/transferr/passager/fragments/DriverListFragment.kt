@@ -13,6 +13,7 @@ import br.com.transferr.passager.adapter.DriversResponseAdapter
 import br.com.transferr.passager.extensions.defaultRecycleView
 import br.com.transferr.passager.interfaces.OnResponseInterface
 import br.com.transferr.passager.model.Location
+import br.com.transferr.passager.model.TourOption
 import br.com.transferr.passager.model.responses.ResponseDriver
 import br.com.transferr.passager.model.responses.ResponseDrivers
 import br.com.transferr.passager.webservices.WSDriver
@@ -28,7 +29,7 @@ import org.jetbrains.anko.toast
 class DriverListFragment : SuperClassFragment() {
 
     private var recycleView: RecyclerView?=null
-    private var idLocation = 0
+    //private var idLocation = 0
     private var location:Location?=null
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -38,7 +39,7 @@ class DriverListFragment : SuperClassFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        location = arguments?.getSerializable(Location.LOCATION) as Location
+        location = (arguments?.getSerializable(TourOption.TOUR_PARAMETER_KEY) as TourOption).location
         recycleView = defaultRecycleView(activity!!,R.id.rcDriversFromLocation)
         if(llEmptyList != null) {
             llEmptyList.tvTextToAdd.text = "Sem Motoristas no momento."

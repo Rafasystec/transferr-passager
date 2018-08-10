@@ -13,19 +13,24 @@ import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.layout_location_details.*
 import org.jetbrains.anko.progressDialog
 
-@Deprecated("Don't use anymore")
+
 class LocationActivity : SuperClassActivity() {
 
-    var idLocation:Long?=null
+    //var idLocation:Long?=null
     var tourOption:TourOption?=null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_location)
         tourOption = intent.getSerializableExtra(TourOption.TOUR_PARAMETER_KEY) as TourOption
         btnSeeDrivers.setOnClickListener {
-            var intent = Intent(this,DriverListActivity::class.java)
-            intent.putExtra(ResponseLocation.LOCATION_PARAMETER_KEY,idLocation!!)
+            var intent = Intent(context,LocationDetailActivity::class.java)
+            //intent.putExtra(Location.LOCATION,tourOption?.location)
+            intent.putExtra(TourOption.TOUR_PARAMETER_KEY,tourOption)
             startActivity(intent)
+
+            //var intent = Intent(this,DriverListActivity::class.java)
+            //intent.putExtra(ResponseLocation.LOCATION_PARAMETER_KEY,idLocation!!)
+            //startActivity(intent)
         }
     }
 
