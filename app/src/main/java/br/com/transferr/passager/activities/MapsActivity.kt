@@ -90,7 +90,7 @@ class MapsActivity : SuperClassActivity(),
         }
     }
     */
-
+/*
     private fun drawerLeftMenu(){
         //----------------------------------------
         //Left Menu navigation
@@ -109,6 +109,7 @@ class MapsActivity : SuperClassActivity(),
             true
         }
     }
+    */
 
     /**
      * Manipulates the map once available.
