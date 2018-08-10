@@ -1,9 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
+    <!--
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#33b5e5</color>
+    -->
+    <color name="colorPrimary">#D3C7A2</color>
+    <color name="colorPrimaryDark">#b19d5e</color>
+    <color name="colorAccent">#33b5e5</color>
+    <!--
     <color name="colorSecondary">#ffffff</color>
+    -->
+    <color name="colorSecondary">#33b5e5</color>
     <color name="bootstrapBtnDanger">#dc3545</color>
     <color name="colorPrimaryDarkClient">#DF3A01</color>
     <color name="colorText">#000</color>

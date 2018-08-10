@@ -52,6 +52,7 @@
             android:layout_height="wrap_content"
             android:text="Área do Profissional"
             android:scrollbars="vertical"
+            android:isScrollContainer="true"
             android:layout_below="@+id/tvLocationName"
             android:layout_alignStart="@+id/tvLocationName"
             android:layout_alignLeft="@+id/tvLocationName" />

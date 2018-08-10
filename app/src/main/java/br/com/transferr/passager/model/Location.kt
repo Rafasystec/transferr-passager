@@ -11,4 +11,8 @@ class Location : Entity() {
     var photoProfile: String? = null
     var images: List<String>? = null
     var description: String? = null
+
+    companion object {
+        val LOCATION = "location"
+    }
 }

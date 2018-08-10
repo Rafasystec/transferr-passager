@@ -35,7 +35,7 @@ inline fun Fragment.setupToolbar(@IdRes id: Int, title:String?= null, upNavigati
     return activityCompat.supportActionBar!!
 }
 
-fun Fragment.switchFragment(fragment: Fragment){
+fun Fragment.switchFragmentToMainContent(fragment: Fragment){
     fragmentManager?.beginTransaction()
             ?.replace(R.id.mainFragment,fragment)
             ?.commit()

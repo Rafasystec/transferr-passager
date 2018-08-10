@@ -6,6 +6,9 @@ import android.support.v4.app.Fragment
 import android.view.View
 import br.com.transferr.passager.R
 import br.com.transferr.passager.fragments.TourOptionLisFragment
+import br.com.transferr.passager.util.AlertUtil
+import org.jetbrains.anko.alert
+import org.jetbrains.anko.okButton
 import org.jetbrains.anko.progressDialog
 
 /**
@@ -27,4 +30,17 @@ open class SuperClassFragment : Fragment(){
             fm?.commit()
         }
     }
+
+    protected fun alertWarning(message: String){
+        activity!!.alert ( message, AlertUtil.DEFAULT_VALIDATE_TITLE){
+            okButton { it.dismiss() }
+        }.show()
+    }
+
+    protected fun alertErro(message: String){
+        activity!!.alert ( message, AlertUtil.DEFAULT_ERROR_TITLE){
+            okButton { it.dismiss() }
+        }.show()
+    }
+
 }

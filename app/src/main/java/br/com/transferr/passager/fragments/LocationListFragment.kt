@@ -1,6 +1,7 @@
 package br.com.transferr.passager.fragments
 
 
+import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v4.view.MenuItemCompat
@@ -10,9 +11,11 @@ import android.view.*
 import br.com.transferr.fragments.SuperClassFragment
 
 import br.com.transferr.passager.R
+import br.com.transferr.passager.activities.LocationDetailActivity
 import br.com.transferr.passager.adapter.LocationAdapter
 import br.com.transferr.passager.extensions.defaultRecycleView
 import br.com.transferr.passager.extensions.setupToolbar
+import br.com.transferr.passager.extensions.switchFragmentToMainContent
 import br.com.transferr.passager.interfaces.OnResponseInterface
 import br.com.transferr.passager.model.Location
 import br.com.transferr.passager.webservices.WSLocation
@@ -83,32 +86,14 @@ class LocationListFragment : SuperClassFragment() {
     }
 
     fun onLocationClick(location: Location){
-        activity?.toast("Clicou em ${location.name}")
+        //var intent = Intent(context,LocationDetailActivity::class.java)
+        //intent.putExtra(Location.LOCATION,location)
+        //startActivity(intent)
+        var fragment = TourOptionLisFragment()
+        fragment.arguments = Bundle()
+        fragment.arguments!!.putSerializable(Location.LOCATION,location)
+        switchFragmentToMainContent(fragment)
     }
-/*
-    override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
-        inflater?.inflate(R.menu.menu_seacher,menu)
-        var searchItem : MenuItem? = menu?.findItem(R.id.menuSearch)
-
-
-        //var searchView : SearchView = MenuItemCompat.getActionView(searchItem) as SearchView
-        //searchItem?.actionView = searchView
-        searchView.setOnQueryTextListener(
-            object : SearchView.OnQueryTextListener{
-                override fun onQueryTextSubmit(query: String?): Boolean {
-                    return false
-                }
-
-                override fun onQueryTextChange(newText: String?): Boolean {
-                   locationAdapter?.filter?.filter(newText)
-                    return false
-                }
-
-            }
-        )
-        super.onCreateOptionsMenu(menu, inflater)
-    }
-    */
 
     fun initSearchView(){
         searchView.setOnQueryTextListener(

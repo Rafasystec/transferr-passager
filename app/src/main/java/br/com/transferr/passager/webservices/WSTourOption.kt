@@ -18,8 +18,11 @@ object WSTourOption : BaseWebService(){
     fun doGetAll(responseInterface: OnResponseInterface<List<TourOption>>){
         service.doGetAll().enqueue(CallBackWS(responseInterface))
     }
-    fun doGetById(idLocation:Long,responseInterface: OnResponseInterface<TourOption>){
-        service.doGetById(idLocation).enqueue(CallBackWS(responseInterface))
+    fun doGetById(idTourOption:Long,responseInterface: OnResponseInterface<TourOption>){
+        service.doGetById(idTourOption).enqueue(CallBackWS(responseInterface))
+    }
+    fun getByLocation(idLocation:Long,responseInterface: OnResponseInterface<List<TourOption>>){
+        service.doGetByLocation(idLocation).enqueue(CallBackWS(responseInterface))
     }
 
     interface IWSTourOption{
@@ -27,5 +30,7 @@ object WSTourOption : BaseWebService(){
         fun doGetAll(): Call<List<TourOption>>
         @GET(ROOT_URL_TOUR_OPTION +"/{idTourOption}")
         fun doGetById(@Path("idTourOption")idTourOption:Long): Call<TourOption>
+        @GET(ROOT_URL_TOUR_OPTION+"by/location/{idLocation}")
+        fun doGetByLocation(@Path("idLocation")idLocation:Long): Call<List<TourOption>>
     }
 }

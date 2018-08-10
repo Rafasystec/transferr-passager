@@ -13,8 +13,9 @@ import br.com.transferr.passager.R
 import br.com.transferr.passager.activities.LocationActivity
 import br.com.transferr.passager.adapter.TourOptionAdapter
 import br.com.transferr.passager.extensions.defaultRecycleView
-import br.com.transferr.passager.extensions.switchFragment
+import br.com.transferr.passager.extensions.switchFragmentToMainContent
 import br.com.transferr.passager.interfaces.OnResponseInterface
+import br.com.transferr.passager.model.Location
 import br.com.transferr.passager.model.TourOption
 import br.com.transferr.passager.webservices.WSTourOption
 import kotlinx.android.synthetic.main.fragment_tour_option_lis.*
@@ -36,10 +37,15 @@ class TourOptionLisFragment : SuperClassFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         recycleView = defaultRecycleView(activity!!,R.id.rcTourList)
-        requestTourOption()
+        var location = arguments?.getSerializable(Location.LOCATION) as Location
+        if(location != null){
+            requestTourOptionByLocation(location)
+        }else {
+            requestTourOption()
+        }
         btnWhereToGo.setOnClickListener{
             //includeFragmentOnMainActivity(LocationListFragment())
-            switchFragment(LocationListFragment())
+            switchFragmentToMainContent(LocationListFragment())
         }
     }
 
@@ -76,6 +82,26 @@ class TourOptionLisFragment : SuperClassFragment() {
 
     private fun onTourClick(tourOption: TourOption){
         startActivity(Intent(activity,LocationActivity::class.java).putExtra(TourOption.TOUR_PARAMETER_KEY,tourOption))
+    }
+
+    fun requestTourOptionByLocation(location:Location){
+        WSTourOption.getByLocation(location.id!!,object : OnResponseInterface<List<TourOption>>{
+            val dialog = activity?.progressDialog(message = R.string.loading, title = R.string.wait)
+            override fun onSuccess(body: List<TourOption>?) {
+                dialog?.dismiss()
+                tourOptionList = body
+                setTourOptionListAdapter()
+            }
+
+            override fun onError(message: String) {
+                dialog?.dismiss()
+            }
+
+            override fun onFailure(t: Throwable?) {
+                dialog?.dismiss()
+            }
+
+        })
     }
 
 }

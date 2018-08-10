@@ -13,7 +13,7 @@ import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.layout_location_details.*
 import org.jetbrains.anko.progressDialog
 
-
+@Deprecated("Don't use anymore")
 class LocationActivity : SuperClassActivity() {
 
     var idLocation:Long?=null

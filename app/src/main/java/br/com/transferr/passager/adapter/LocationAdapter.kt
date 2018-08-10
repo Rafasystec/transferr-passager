@@ -3,6 +3,7 @@ package br.com.transferr.passager.adapter
 import android.content.Context
 import android.support.v7.widget.CardView
 import android.support.v7.widget.RecyclerView
+import android.text.method.ScrollingMovementMethod
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -28,11 +29,12 @@ class LocationAdapter(val locations: List<Location>, val onClick:(Location)->Uni
 
 
     override fun onBindViewHolder(holder: LocationViewHolder, position: Int) {
-        //val location = locations[position]
         val location = locationListFiltered!![position]
         holder.tvName.text = location.name
         var urlPhoto: String
         urlPhoto = location.photoProfile!!
+        //NOTE: This create a scroll effect on TextView
+        //holder.tvLocationDescription.movementMethod = ScrollingMovementMethod()
         holder.tvLocationDescription.text = location.description
         holder.progress.visibility = View.VISIBLE
         Picasso.with(holder.itemView.context).load(urlPhoto).fit()
