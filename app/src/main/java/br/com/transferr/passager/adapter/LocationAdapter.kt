@@ -31,8 +31,13 @@ class LocationAdapter(val locations: List<Location>, val onClick:(Location)->Uni
     override fun onBindViewHolder(holder: LocationViewHolder, position: Int) {
         val location = locationListFiltered!![position]
         holder.tvName.text = location.name
-        var urlPhoto: String
-        urlPhoto = location.photoProfile!!
+        var urlPhoto: String?
+        urlPhoto = if(location.photoProfile != null && !location.photoProfile!!.isEmpty()) {
+            location.photoProfile
+        }else{
+            null
+        }
+
         //NOTE: This create a scroll effect on TextView
         //holder.tvLocationDescription.movementMethod = ScrollingMovementMethod()
         holder.tvLocationDescription.text = location.description

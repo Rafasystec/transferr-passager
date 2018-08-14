@@ -35,8 +35,8 @@ class TourOptionAdapter(val options : List<TourOption>, val onClick: (TourOption
         val tour = options[position]
 
         holder.tvName.text = tour.name
-        var urlPhoto: String
-        urlPhoto = tour.profileUrl!!
+        var urlPhoto: String?
+        urlPhoto = tour.profileUrl
         holder.progress.visibility = View.VISIBLE
         Picasso.with(context).load(urlPhoto).fit().memoryPolicy(MemoryPolicy.NO_CACHE, MemoryPolicy.NO_STORE).into(holder.ivMainLocation,
                 object : com.squareup.picasso.Callback {

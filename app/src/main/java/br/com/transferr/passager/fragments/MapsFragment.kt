@@ -21,7 +21,10 @@ import android.view.ViewGroup
 import br.com.transferr.fragments.SuperClassFragment
 import br.com.transferr.passager.R
 import br.com.transferr.passager.adapter.MapInfoWindowsAdapter
+import br.com.transferr.passager.helpers.HelperCar
+import br.com.transferr.passager.model.Quadrant
 import br.com.transferr.passager.util.MyLocationLister
+import br.com.transferr.passager.webservices.CarService
 import br.com.transferr.util.PermissionUtil
 import com.google.android.gms.common.ConnectionResult
 import com.google.android.gms.common.api.GoogleApiClient
@@ -31,7 +34,10 @@ import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
+import com.google.android.gms.maps.model.Marker
+import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.toast
+import org.jetbrains.anko.uiThread
 
 
 /**
@@ -39,7 +45,9 @@ import org.jetbrains.anko.toast
  */
 class MapsFragment : SuperClassFragment(), OnMapReadyCallback,
 GoogleApiClient.ConnectionCallbacks,
-GoogleApiClient.OnConnectionFailedListener, Parcelable {
+GoogleApiClient.OnConnectionFailedListener,
+        com.google.android.gms.location.LocationListener,
+        GoogleMap.OnMarkerClickListener{
 
 
 
@@ -118,7 +126,7 @@ GoogleApiClient.OnConnectionFailedListener, Parcelable {
             val update = CameraUpdateFactory.newLatLngZoom(myLocationLatLng, 16f)
             googleMap?.moveCamera(update)
         }
-        this.mMap = googleMap
+        this.mMap = googleMap!!
         if(isMapAllowed()) {
             mMap.isMyLocationEnabled = true
         }else{
@@ -146,6 +154,57 @@ GoogleApiClient.OnConnectionFailedListener, Parcelable {
     }
 
     override fun onConnectionFailed(p0: ConnectionResult) {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
+    override fun onLocationChanged(location: Location?) {
+        updateMapScreen(location)
+    }
+
+    private fun updateMapScreen(location: Location?){
+        callWebService()
+    }
+
+    private fun callWebService() {
+        var visibleRegion = mMap.projection.visibleRegion
+        var quadrant = Quadrant()
+        if (visibleRegion != null) {
+            quadrant.farLeftLat = visibleRegion.farLeft.latitude
+            quadrant.farLeftLng = visibleRegion.farLeft.longitude
+            quadrant.farRightLat = visibleRegion.farRight.latitude
+            quadrant.farRightLng = visibleRegion.farRight.longitude
+
+            quadrant.nearLeftLat = visibleRegion.nearLeft.latitude
+            quadrant.nearLeftLng = visibleRegion.nearLeft.longitude
+            quadrant.nearRightLat = visibleRegion.nearRight.latitude
+            quadrant.nearRightLng = visibleRegion.nearRight.longitude
+
+            doAsync {
+                var carOnlineList = CarService().getCarOnline(quadrant)
+                uiThread {
+                    if (carOnlineList != null) {
+                        var markers = HelperCar.transformInMarkers(carOnlineList)
+                        if (numCarFound == 0) {
+                            numCarFound = markers.size
+                        } else {
+                            var size = markers.size
+                            if (size != numCarFound) {
+                                numCarFound = size
+                                //Snackbar.make(contex, "Replace with your own action", Snackbar.LENGTH_LONG)
+                                //.setAction("Action", null).show()
+                            }
+                        }
+
+                        for (mark in markers) {
+                            mMap.addMarker(mark)
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    override fun onMarkerClick(p0: Marker?): Boolean {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
