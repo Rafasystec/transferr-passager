@@ -2,13 +2,14 @@ package br.com.transferr.passager.extensions
 
 import android.app.Activity
 import android.support.annotation.IdRes
+import android.support.v4.app.Fragment
 import android.support.v7.app.ActionBar
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.DefaultItemAnimator
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.support.v7.widget.Toolbar
-import android.view.View
+import br.com.transferr.passager.R
 
 /**
  * Created by Rafael Rocha on 25/07/18.
@@ -40,4 +41,10 @@ fun AppCompatActivity.setupToolbar(@IdRes id: Int,  idString: Int, upNavigation:
     }
     supportActionBar?.setDisplayHomeAsUpEnabled(upNavigation)
     return supportActionBar!!
+}
+
+fun AppCompatActivity.switchFragmentToMainContent(fragment: Fragment){
+    supportFragmentManager.beginTransaction()
+            ?.replace(R.id.mainFragment,fragment)
+            ?.commit()
 }

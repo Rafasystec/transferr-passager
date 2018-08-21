@@ -6,15 +6,17 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.content.DialogInterface
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.location.Location
 import android.location.LocationManager
 import android.os.Bundle
-import android.os.Parcelable
 import android.provider.Settings
 import android.support.design.widget.NavigationView
+import android.support.v4.app.ActivityCompat.checkSelfPermission
 import android.support.v4.app.Fragment
 import android.support.v4.widget.DrawerLayout
 import android.support.v7.app.AlertDialog
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -28,6 +30,7 @@ import br.com.transferr.passager.webservices.CarService
 import br.com.transferr.util.PermissionUtil
 import com.google.android.gms.common.ConnectionResult
 import com.google.android.gms.common.api.GoogleApiClient
+import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationRequest
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.maps.CameraUpdateFactory
@@ -79,15 +82,21 @@ GoogleApiClient.OnConnectionFailedListener,
         mLocationManager = activity?.getSystemService(Context.LOCATION_SERVICE) as LocationManager
         checkLocation()
 
-        return inflater.inflate(R.layout.fragment_maps, container, false)
+        val view = inflater.inflate(R.layout.fragment_maps, container, false)
+        //Start the map
+        val mapFragment = childFragmentManager.findFragmentById(R.id.mapFragment) as SupportMapFragment
+        mapFragment.getMapAsync(this)
+        return view
     }
 
+    /*
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val mapFragment = activity?.supportFragmentManager
                 ?.findFragmentById(R.id.map) as SupportMapFragment
         mapFragment.getMapAsync(this)
     }
+    */
 
     fun startApi(){
         if (mGoogleApiClient != null) {
@@ -107,14 +116,14 @@ GoogleApiClient.OnConnectionFailedListener,
     }
 
     private fun showAlert() {
-        val dialog = AlertDialog.Builder(this!!.context!!)
+        val dialog = AlertDialog.Builder(this!!.activity!!)
         dialog.setTitle("Habilitar Localização")
                 .setMessage("Precisamos ativar o GPS.\nPor favor ative-o.")
                 .setPositiveButton("Ativar GPS", DialogInterface.OnClickListener { paramDialogInterface, paramInt ->
                     val myIntent = Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS)
                     startActivity(myIntent)
                 })
-                .setNegativeButton("Cancel", DialogInterface.OnClickListener { paramDialogInterface, paramInt -> })
+                .setNegativeButton("Cancel", null)
         dialog.show()
     }
 
@@ -146,15 +155,29 @@ GoogleApiClient.OnConnectionFailedListener,
     }
 
     override fun onConnected(p0: Bundle?) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        if (checkSelfPermission(this!!.activity!!, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED &&
+                checkSelfPermission(this!!.activity!!, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            return
+        }
+        startLocationUpdates()
+
+        var fusedLocationProviderClient :
+                FusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this!!.activity!!)
+        fusedLocationProviderClient .getLastLocation()
+                .addOnSuccessListener(this!!.activity!!, { location ->
+                    if (location != null) {
+                        mLocation = location
+                    }
+                })
     }
 
     override fun onConnectionSuspended(p0: Int) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        Log.d(TAG, "Connection Suspended")
+        mGoogleApiClient.connect()
     }
 
     override fun onConnectionFailed(p0: ConnectionResult) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        Log.d("DEBUG","Failed on connection")
     }
 
     override fun onLocationChanged(location: Location?) {
@@ -205,7 +228,23 @@ GoogleApiClient.OnConnectionFailedListener,
     }
 
     override fun onMarkerClick(p0: Marker?): Boolean {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        return true
+    }
+
+    private fun startLocationUpdates() {
+
+        // Create the location request
+        mLocationRequest = LocationRequest.create()
+                .setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY)
+                .setInterval(UPDATE_INTERVAL)
+                .setFastestInterval(FASTEST_INTERVAL)
+        // Request location updates
+        if (checkSelfPermission(this!!.activity!!, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && checkSelfPermission(this!!.activity!!, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            return
+        }
+        LocationServices.FusedLocationApi.requestLocationUpdates(mGoogleApiClient,
+                mLocationRequest, this)
+
     }
 
 }
