@@ -78,7 +78,7 @@ class PlainTourListFragment : SuperClassFragment() {
 
                 override fun onFailure(t: Throwable?) {
                     dialog?.dismiss()
-                    alertErro(t?.message!!)
+                    //alertErro(t?.message!!)
 
                 }
 

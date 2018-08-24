@@ -107,7 +107,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activities.LocationDetailActivity"></activity>
+        <activity android:name=".activities.LocationDetailActivity" />
+        <activity android:name=".activities.GalleryActivity"></activity>
     </application>
 
 </manifest>
