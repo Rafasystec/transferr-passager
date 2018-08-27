@@ -28,4 +28,6 @@
     <string name="empty">Vazio</string>
     <string name="seatsRemaining">Vagas</string>
     <string name="seeMorePlainTourOption">Mais Opções de Passeio</string>
+    <string name="callPhone">Ligar</string>
+    <string name="talk">Conversar</string>
 </resources>

@@ -2,16 +2,17 @@ package br.com.transferr.passager.activities
 
 import android.content.Intent
 import android.os.Bundle
+import android.support.v7.widget.DefaultItemAnimator
+import android.support.v7.widget.GridLayoutManager
+import android.support.v7.widget.RecyclerView
+import android.view.View
 import br.com.transferr.passager.R
-import br.com.transferr.passager.interfaces.OnResponseInterface
-import br.com.transferr.passager.model.Location
+import br.com.transferr.passager.adapter.GalleryAdapter
+import br.com.transferr.passager.fragments.dialogs.SlideshowDialogFragment
 import br.com.transferr.passager.model.TourOption
-import br.com.transferr.passager.model.responses.ResponseLocation
-import br.com.transferr.passager.webservices.WSLocation
 import com.squareup.picasso.MemoryPolicy
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.layout_location_details.*
-import org.jetbrains.anko.progressDialog
 import org.jetbrains.anko.startActivity
 
 
@@ -19,6 +20,9 @@ class LocationActivity : SuperClassActivity() {
 
     //var idLocation:Long?=null
     var tourOption:TourOption?=null
+    private var recyclerView: RecyclerView? = null
+    private var imagens:ArrayList<String>?=null
+    private var mAdapter: GalleryAdapter? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_location)
@@ -41,31 +45,7 @@ class LocationActivity : SuperClassActivity() {
         //loadLocation()
         loadFields()
     }
-/*
-    private fun loadLocation() {
 
-        /*
-        val dialog = progressDialog(message = "Carregando os campos",title = "Aguarde...")
-        WSLocation.doGetById(idLocation!!, object :OnResponseInterface<Location>{
-            override fun onSuccess(body: Location?) {
-                loadFields(body!!)
-                dialog.dismiss()
-            }
-
-            override fun onError(message: String) {
-                alertWarning(message)
-                dialog.dismiss()
-            }
-
-            override fun onFailure(t: Throwable?) {
-                alertErro(t?.message!!)
-                dialog.dismiss()
-            }
-
-        })
-        */
-    }
-*/
     private fun loadFields(){
         if(tourOption == null){
             return
@@ -73,6 +53,7 @@ class LocationActivity : SuperClassActivity() {
         Picasso.with(this).load(tourOption?.profileUrl).memoryPolicy(MemoryPolicy.NO_STORE,MemoryPolicy.NO_CACHE).into(ivMainPicture)
         tvLocationTitle.text = tourOption?.name
         tvLocationDescription.text = tourOption?.description
+        /*
         var i = 0
         tourOption?.images?.forEach {
             ++i
@@ -104,9 +85,40 @@ class LocationActivity : SuperClassActivity() {
         ivPictureSix.setOnClickListener {
             callGalleryActivity(images)
         }
+        */
+        val images: List<String> = tourOption!!.images!!
+        initGallery(images)
     }
 
     private fun callGalleryActivity(images: List<String>){
         startActivity<GalleryActivity>(TourOption.IMAGE_LIST_KEY to images)
+    }
+
+    private fun initGallery(images: List<String>){
+        //imagens = intent.getSerializableExtra(TourOption.IMAGE_LIST_KEY) as ArrayList<String>
+        imagens = images as ArrayList<String>
+        mAdapter = GalleryAdapter(this,imagens)
+        var mLayoutManager = GridLayoutManager(this, 3)
+        recyclerView = findViewById(R.id.recycler_view)
+        recyclerView?.layoutManager = mLayoutManager
+        recyclerView?.itemAnimator = DefaultItemAnimator()
+        recyclerView?.adapter = mAdapter
+        //mAdapter?.notifyDataSetChanged()
+        recyclerView?.addOnItemTouchListener(GalleryAdapter.RecyclerTouchListener(applicationContext, recyclerView, object : GalleryAdapter.ClickListener {
+            override fun onClick(view: View, position: Int) {
+                val bundle = Bundle()
+                bundle.putSerializable("images", imagens)
+                bundle.putInt("position", position)
+
+                val ft = supportFragmentManager.beginTransaction()
+                val newFragment = SlideshowDialogFragment()//.newInstance()
+                newFragment.arguments = bundle
+                newFragment.show(ft, "slideshow")
+            }
+
+            override fun onLongClick(view: View, position: Int) {
+
+            }
+        }))
     }
 }

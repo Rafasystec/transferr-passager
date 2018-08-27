@@ -1,6 +1,11 @@
 package br.com.transferr.passager.adapter
 
+import android.annotation.SuppressLint
+import android.app.PendingIntent.getActivity
 import android.content.Context
+import android.content.Intent
+import android.net.Uri
+import android.support.v7.widget.AppCompatButton
 import android.support.v7.widget.CardView
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
@@ -8,10 +13,12 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import br.com.transferr.passager.R
 import br.com.transferr.passager.model.responses.ResponseDriver
 import br.com.transferr.passager.model.responses.ResponseDrivers
 import com.squareup.picasso.Picasso
+import org.jetbrains.anko.startActivity
 
 /**
  * Created by Rafael Rocha on 25/07/18.
@@ -28,6 +35,7 @@ class DriversResponseAdapter(val drivers : List<ResponseDriver>,val onClick: (Re
 
     override fun getItemCount() = this.drivers.size
 
+    @SuppressLint("MissingPermission")
     override fun onBindViewHolder(holder: DriversResponseViewHolder, position: Int) {
         this.context = holder!!.itemView.context
         val responseDrivers = drivers[position]
@@ -37,7 +45,7 @@ class DriversResponseAdapter(val drivers : List<ResponseDriver>,val onClick: (Re
         if(responseDrivers.imgProfileUrl != null && responseDrivers.imgProfileUrl?.isEmpty()!!){
             responseDrivers.imgProfileUrl = null
         }
-        holder.tvDriverPhone.text = responseDrivers.phone
+        //holder.tvDriverPhone.text = responseDrivers.phone
         holder.tvDriverEmail.text = responseDrivers.email
         //Start progressBar
         //holder.progress.visibility = View.Visible
@@ -52,7 +60,22 @@ class DriversResponseAdapter(val drivers : List<ResponseDriver>,val onClick: (Re
                 }
 
             })
-        holder.cardView.setOnClickListener { onClick(responseDrivers) }
+        //holder.cardView.setOnClickListener { onClick(responseDrivers) }
+        holder.btnWhatsapp.setOnClickListener {
+            //var sendIntent = Intent(Intent.ACTION_SENDTO,Uri.parse("smsto:${responseDrivers.phone}"))
+            var sendIntent = Intent(Intent.ACTION_SEND)
+            sendIntent.putExtra(Intent.EXTRA_TEXT,"Somente teste")
+            sendIntent.putExtra("jid", "${responseDrivers.phone.replace("+","")}@s.whatsapp.net")
+            //sendIntent.action = Intent.ACTION_SEND
+            sendIntent.setPackage("com.whatsapp")
+            sendIntent.type = "text/plain"
+
+            context!!.startActivity(sendIntent)
+        }
+
+        holder.btnCallPhone.setOnClickListener {
+            context!!.startActivity(Intent(Intent.ACTION_CALL, Uri.parse("tel:${responseDrivers.phone}")))
+        }
     }
 
     class DriversResponseViewHolder(view: View):RecyclerView.ViewHolder(view){
@@ -69,7 +92,9 @@ class DriversResponseAdapter(val drivers : List<ResponseDriver>,val onClick: (Re
         var tvDriverDetail : TextView
         var tvDriverEmail : TextView
         var cardView: CardView
-        var tvDriverPhone: TextView
+        //var tvDriverPhone: TextView
+        var btnCallPhone : AppCompatButton
+        var btnWhatsapp : AppCompatButton
         init {
             tvName          = view.findViewById(R.id.tvNameDriver)
             img             = view.findViewById(R.id.ivProfile)
@@ -77,6 +102,8 @@ class DriversResponseAdapter(val drivers : List<ResponseDriver>,val onClick: (Re
             tvDriverDetail  = view.findViewById(R.id.tvDriverDetail)
             cardView        = view.findViewById(R.id.cvProfessional)
             tvDriverEmail   = view.findViewById(R.id.tvDriverEmail)
+            btnCallPhone    = view.findViewById(R.id.btnCallPhone)
+            btnWhatsapp     = view.findViewById(R.id.btnWhatsapp)
             /*
             //If sometime it has rate
             ivStarRate1    = view.findViewById(R.id.ivStarRate1)
@@ -85,7 +112,7 @@ class DriversResponseAdapter(val drivers : List<ResponseDriver>,val onClick: (Re
             ivStarRate4    = view.findViewById(R.id.ivStarRate4)
             ivStarRate5    = view.findViewById(R.id.ivStarRate5)
             */
-            tvDriverPhone  = view.findViewById(R.id.tvDriverPhone)
+            //tvDriverPhone  = view.findViewById(R.id.tvDriverPhone)
         }
     }
 }

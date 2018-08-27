@@ -7,16 +7,15 @@
     android:layout_height="100dp"
     android:layout_width="match_parent"
     android:clickable="true"
-    android:padding="5dp"
     android:background="@android:color/white"
-    android:layout_marginBottom="5dp"
+    android:layout_marginBottom="2dp"
     app:cardElevation="3dp"
     app:cardPreventCornerOverlap="false"
     app:cardUseCompatPadding="false"
     card_view:cardConerRadius="2dp"
     card_view:cardElevation="6dp"
     android:foreground="?attr/selectableItemBackground"
-    android:layout_margin="8dp"
+    android:layout_margin="2dp"
 
     >
     <RelativeLayout
@@ -107,13 +106,34 @@
             android:layout_marginRight="10dp" />
             -->
         <LinearLayout
-            android:layout_width="150dp"
-            android:layout_height="wrap_content"
+            android:layout_width="100dp"
+            android:layout_height="35dp"
             android:layout_alignParentEnd="true"
             android:layout_alignParentBottom="true"
             android:layout_marginBottom="5dp"
             android:orientation="horizontal"
             android:layout_alignParentRight="true">
+            <android.support.v7.widget.AppCompatButton
+                android:id="@+id/btnCallPhone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:drawableLeft="@drawable/phone_outgoing"
+
+                android:background="@android:color/transparent"
+                />
+
+            <android.support.v7.widget.AppCompatButton
+                android:id="@+id/btnWhatsapp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:drawableLeft="@drawable/whatsapp"
+
+                android:background="@android:color/transparent"
+                />
+
+            <!--
             <TextView
                 android:id="@+id/tvDriverPhone"
                 android:layout_width="wrap_content"
@@ -122,6 +142,7 @@
                 android:textStyle="bold"
                 android:textColor="@color/colorPrimaryDark"
                 />
+                -->
             <!--
             <ImageView
                 android:id="@+id/ivStarRate1"
