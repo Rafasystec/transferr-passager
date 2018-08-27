@@ -49,6 +49,7 @@
                 android:src="@drawable/no_photo_64"
                 android:layout_weight="1"
                 android:padding="5dp"
+                android:clickable="true"
                 />
             <ImageView
                 android:id="@+id/ivPictureTwo"
@@ -57,6 +58,7 @@
                 android:src="@drawable/no_photo_64"
                 android:layout_weight="1"
                 android:padding="5dp"
+                android:clickable="true"
                 />
             <ImageView
                 android:id="@+id/ivPictureThree"
@@ -65,6 +67,7 @@
                 android:src="@drawable/no_photo_64"
                 android:layout_weight="1"
                 android:padding="5dp"
+                android:clickable="true"
                 />
         </LinearLayout>
 
@@ -80,6 +83,7 @@
                 android:src="@drawable/no_photo_64"
                 android:layout_weight="1"
                 android:padding="5dp"
+                android:clickable="true"
                 />
             <ImageView
                 android:id="@+id/ivPictureFive"
@@ -88,6 +92,7 @@
                 android:src="@drawable/no_photo_64"
                 android:layout_weight="1"
                 android:padding="5dp"
+                android:clickable="true"
                 />
             <ImageView
                 android:id="@+id/ivPictureSix"
@@ -96,6 +101,7 @@
                 android:src="@drawable/no_photo_64"
                 android:layout_weight="1"
                 android:padding="5dp"
+                android:clickable="true"
                 />
         </LinearLayout>
 

@@ -8,5 +8,5 @@
     tools:context="br.com.transferr.passager.activities.GalleryActivity">
 
 
-    <include layout="@layout/content_main" />
+    <include layout="@layout/layout_content_gallery" />
 </android.support.constraint.ConstraintLayout>

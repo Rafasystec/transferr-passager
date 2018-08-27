@@ -12,6 +12,7 @@ import com.squareup.picasso.MemoryPolicy
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.layout_location_details.*
 import org.jetbrains.anko.progressDialog
+import org.jetbrains.anko.startActivity
 
 
 class LocationActivity : SuperClassActivity() {
@@ -32,6 +33,7 @@ class LocationActivity : SuperClassActivity() {
             //intent.putExtra(ResponseLocation.LOCATION_PARAMETER_KEY,idLocation!!)
             //startActivity(intent)
         }
+
     }
 
     override fun onResume() {
@@ -83,5 +85,28 @@ class LocationActivity : SuperClassActivity() {
                 6 -> Picasso.with(this).load(it).into(ivPictureSix)
             }
         }
+        val images: List<String> = tourOption!!.images!!
+        ivPictureOne.setOnClickListener {
+            callGalleryActivity(images)
+        }
+        ivPictureTwo.setOnClickListener {
+            callGalleryActivity(images)
+        }
+        ivPictureThree.setOnClickListener {
+            callGalleryActivity(images)
+        }
+        ivPictureFour.setOnClickListener {
+            callGalleryActivity(images)
+        }
+        ivPictureFive.setOnClickListener {
+            callGalleryActivity(images)
+        }
+        ivPictureSix.setOnClickListener {
+            callGalleryActivity(images)
+        }
+    }
+
+    private fun callGalleryActivity(images: List<String>){
+        startActivity<GalleryActivity>(TourOption.IMAGE_LIST_KEY to images)
     }
 }

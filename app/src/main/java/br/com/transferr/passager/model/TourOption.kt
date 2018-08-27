@@ -17,5 +17,6 @@ class TourOption : Entity() {
 
     companion object {
         const val TOUR_PARAMETER_KEY = "touroption"
+        const val IMAGE_LIST_KEY     = "images"
     }
 }
