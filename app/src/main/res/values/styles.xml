@@ -46,5 +46,7 @@
         <item name="searchHintIcon">@null</item>
         <!-- The hint text that appears when the user has not typed anything -->
         <item name="queryHint">@string/search_hint</item>
+        <item name="android:label">@string/search_hint</item>
+        <item name="android:tint">@color/colorPrimaryDark</item>
     </style>
 </resources>

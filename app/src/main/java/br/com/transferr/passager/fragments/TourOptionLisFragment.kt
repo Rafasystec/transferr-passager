@@ -75,8 +75,11 @@ class TourOptionLisFragment : SuperClassFragment() {
     }
 
     fun setTourOptionListAdapter(){
-        if(tourOptionList != null) {
+        if(tourOptionList != null && !tourOptionList!!.isEmpty()) {
+            tvNoResultByLocation.visibility = View.GONE
             recycleView?.adapter = TourOptionAdapter(tourOptionList!!, { tourOption: TourOption -> onTourClick(tourOption) })
+        }else{
+            tvNoResultByLocation.visibility = View.VISIBLE
         }
     }
 

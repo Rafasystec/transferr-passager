@@ -99,16 +99,21 @@ class LocationListFragment : SuperClassFragment() {
         searchView.setOnQueryTextListener(
                 object : SearchView.OnQueryTextListener{
                     override fun onQueryTextSubmit(query: String?): Boolean {
+                        btnClickOnSearch.visibility = View.VISIBLE
                         return false
                     }
 
                     override fun onQueryTextChange(newText: String?): Boolean {
+                        btnClickOnSearch.visibility = View.GONE
                         locationAdapter?.filter?.filter(newText)
                         return false
                     }
 
                 }
         )
+
+
+
     }
 
 }

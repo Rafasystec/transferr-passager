@@ -4,15 +4,15 @@
     <item
         android:id="@+id/menuHomeCli"
         android:enabled="true"
-        android:icon="@drawable/home"
-        android:title="@string/home"
+        android:icon="@drawable/google_maps"
+        android:title="@string/map"
         app:showAsAction="ifRoom" />
 
     <item
         android:id="@+id/menuAgendaCli"
         android:enabled="true"
-        android:icon="@drawable/book_multiple"
-        android:title="@string/nav_agenda"
+        android:icon="@drawable/bus_alert"
+        android:title="@string/tour"
         app:showAsAction="ifRoom" />
 
     <item

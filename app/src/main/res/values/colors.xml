@@ -6,8 +6,12 @@
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#33b5e5</color>
     -->
-    <color name="colorPrimary">#D3C7A2</color>
-    <color name="colorPrimaryDark">#b19d5e</color>
+    <!--
+    <color name="colorPrimary">#FFCC66</color>
+    <color name="colorPrimaryDark">#FFCC66</color>
+    -->
+    <color name="colorPrimary">#FFD966</color>
+    <color name="colorPrimaryDark">#FFB218</color>
     <color name="colorAccent">#DF3A01</color>
     <!--
     <color name="colorSecondary">#ffffff</color>
@@ -19,4 +23,5 @@
     <color name="colorText">#000</color>
     <color name="selectedItemClient">#FF8C00</color>
     <color name="UnselectedItemClient">#BDBDBD</color>
+    <color name="activityBackground">#E5D4AD</color>
 </resources>

@@ -50,7 +50,11 @@ class LocationActivity : SuperClassActivity() {
         if(tourOption == null){
             return
         }
-        Picasso.with(this).load(tourOption?.profileUrl).memoryPolicy(MemoryPolicy.NO_STORE,MemoryPolicy.NO_CACHE).into(ivMainPicture)
+        Picasso.with(this).load(tourOption?.profileUrl)
+                .memoryPolicy(MemoryPolicy.NO_STORE,MemoryPolicy.NO_CACHE)
+                .fit()
+                .centerCrop()
+                .into(ivMainPicture)
         tvLocationTitle.text = tourOption?.name
         tvLocationDescription.text = tourOption?.description
         /*

@@ -155,11 +155,12 @@ GoogleApiClient.OnConnectionFailedListener,
                 Manifest.permission.ACCESS_COARSE_LOCATION)
     }
 
+    @SuppressLint("MissingPermission")
     override fun onConnected(p0: Bundle?) {
-        if (checkSelfPermission(this!!.activity!!, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED &&
-                checkSelfPermission(this!!.activity!!, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            return
-        }
+        //if (checkSelfPermission(this!!.activity!!, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED &&
+        //        checkSelfPermission(this!!.activity!!, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+        //    return
+        //}
         startLocationUpdates()
 
         var fusedLocationProviderClient :
@@ -190,6 +191,9 @@ GoogleApiClient.OnConnectionFailedListener,
     }
 
     private fun callWebService() {
+        if(mMap == null){
+            return
+        }
         var visibleRegion = mMap.projection.visibleRegion
         var quadrant = Quadrant()
         if (visibleRegion != null) {
