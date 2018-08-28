@@ -1,7 +1,6 @@
 package br.com.transferr.passager.adapter
 
 import android.annotation.SuppressLint
-import android.app.PendingIntent.getActivity
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
@@ -13,12 +12,11 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import android.widget.Toast
 import br.com.transferr.passager.R
 import br.com.transferr.passager.model.responses.ResponseDriver
-import br.com.transferr.passager.model.responses.ResponseDrivers
 import com.squareup.picasso.Picasso
-import org.jetbrains.anko.startActivity
+import java.net.URLEncoder
+
 
 /**
  * Created by Rafael Rocha on 25/07/18.
@@ -62,15 +60,7 @@ class DriversResponseAdapter(val drivers : List<ResponseDriver>,val onClick: (Re
             })
         //holder.cardView.setOnClickListener { onClick(responseDrivers) }
         holder.btnWhatsapp.setOnClickListener {
-            //var sendIntent = Intent(Intent.ACTION_SENDTO,Uri.parse("smsto:${responseDrivers.phone}"))
-            var sendIntent = Intent(Intent.ACTION_SEND)
-            sendIntent.putExtra(Intent.EXTRA_TEXT,"Somente teste")
-            sendIntent.putExtra("jid", "${responseDrivers.phone.replace("+","")}@s.whatsapp.net")
-            //sendIntent.action = Intent.ACTION_SEND
-            sendIntent.setPackage("com.whatsapp")
-            sendIntent.type = "text/plain"
-
-            context!!.startActivity(sendIntent)
+           callWhatsapp(responseDrivers.whatsapp)
         }
 
         holder.btnCallPhone.setOnClickListener {
@@ -114,5 +104,22 @@ class DriversResponseAdapter(val drivers : List<ResponseDriver>,val onClick: (Re
             */
             //tvDriverPhone  = view.findViewById(R.id.tvDriverPhone)
         }
+    }
+
+    fun callWhatsapp(phone:String){
+        val packageManager = context?.getPackageManager()
+        val i = Intent(Intent.ACTION_VIEW)
+
+        try {
+            val url = "https://api.whatsapp.com/send?phone=" + phone + "&text=" + URLEncoder.encode("Olá", "UTF-8")
+            i.`package` = "com.whatsapp"
+            i.data = Uri.parse(url)
+            if (i.resolveActivity(packageManager) != null) {
+                context?.startActivity(i)
+            }
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+
     }
 }

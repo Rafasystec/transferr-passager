@@ -12,4 +12,5 @@ class ResponseDriver {
     var email=""
     var imgProfileUrl:String?=null
     var phone = ""
+    var whatsapp=""
 }

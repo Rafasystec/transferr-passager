@@ -30,4 +30,6 @@
     <string name="seeMorePlainTourOption">Mais Opções de Passeio</string>
     <string name="callPhone">Ligar</string>
     <string name="talk">Conversar</string>
+    <string name="needPermission">Precisamos de Permissão</string>
+    <string name="permissionToAccessLocation">Precisamos ter acessar a sua localização para mostrar os motoristas próximos a você!</string>
 </resources>

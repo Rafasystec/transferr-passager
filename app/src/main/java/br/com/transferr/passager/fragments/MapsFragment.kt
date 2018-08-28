@@ -12,8 +12,10 @@ import android.location.LocationManager
 import android.os.Bundle
 import android.provider.Settings
 import android.support.design.widget.NavigationView
+import android.support.v4.app.ActivityCompat
 import android.support.v4.app.ActivityCompat.checkSelfPermission
 import android.support.v4.app.Fragment
+import android.support.v4.content.ContextCompat
 import android.support.v4.widget.DrawerLayout
 import android.support.v7.app.AlertDialog
 import android.util.Log
@@ -38,9 +40,7 @@ import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.Marker
-import org.jetbrains.anko.doAsync
-import org.jetbrains.anko.toast
-import org.jetbrains.anko.uiThread
+import org.jetbrains.anko.*
 
 
 /**
@@ -68,7 +68,7 @@ GoogleApiClient.OnConnectionFailedListener,
     private lateinit var mDrawerLayout: DrawerLayout
     private lateinit var navigationView: NavigationView
 
-
+    val PERMISSION_TO_ACCESS_LOCATION = 1
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -136,6 +136,7 @@ GoogleApiClient.OnConnectionFailedListener,
             googleMap?.moveCamera(update)
         }
         this.mMap = googleMap!!
+        checkPermissionToAccessLocation()
         if(isMapAllowed()) {
             mMap.isMyLocationEnabled = true
         }else{
@@ -149,7 +150,7 @@ GoogleApiClient.OnConnectionFailedListener,
     }
 
     private fun isMapAllowed():Boolean{
-        return PermissionUtil.validate(this!!.activity!!,1,
+        return PermissionUtil.requestPermission(this!!.activity!!,1,
                 Manifest.permission.ACCESS_FINE_LOCATION,
                 Manifest.permission.ACCESS_COARSE_LOCATION)
     }
@@ -245,6 +246,42 @@ GoogleApiClient.OnConnectionFailedListener,
         LocationServices.FusedLocationApi.requestLocationUpdates(mGoogleApiClient,
                 mLocationRequest, this)
 
+    }
+
+    private fun checkPermissionToAccessLocation(){
+        if(ContextCompat.checkSelfPermission(activity!!,Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED){
+            //Should We show an explanation
+            if(ActivityCompat.shouldShowRequestPermissionRationale(activity!!,Manifest.permission.ACCESS_FINE_LOCATION)){
+                activity!!.alert(R.string.needPermission,R.string.permissionToAccessLocation){
+                    yesButton {
+
+                    }
+                    noButton {  }
+                }.show()
+            }else{
+                ActivityCompat.requestPermissions(activity!!, arrayOf(Manifest.permission.ACCESS_FINE_LOCATION),PERMISSION_TO_ACCESS_LOCATION)
+            }
+        }
+    }
+
+    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
+        when(requestCode){
+            PERMISSION_TO_ACCESS_LOCATION -> {
+                // If request is cancelled, the result arrays are empty.
+                if (grantResults.isNotEmpty()
+                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+
+                    // permission was granted, yay! Do the
+                    // contacts-related task you need to do.
+                    activity?.toast("Permissão concedida")
+                } else {
+
+                    // permission denied, boo! Disable the
+                    // functionality that depends on this permission.
+                    activity?.toast("Permissão negada")
+                }
+            }
+        }
     }
 
 }
