@@ -28,7 +28,7 @@ class LocationDetailActivity : SuperClassActivity() {
         viewPageLocation.offscreenPageLimit = 1
         viewPageLocation.adapter = TabLocationAdapter(context,supportFragmentManager,intent.getSerializableExtra(TourOption.TOUR_PARAMETER_KEY) as TourOption)
         tabLayoutLocation.setupWithViewPager(viewPageLocation)
-        val colorText = ContextCompat.getColor(context,R.color.colorPrimaryDark)
+        val colorText = ContextCompat.getColor(context,R.color.selectedItemClient)
         tabLayoutLocation.setTabTextColors(colorText,colorText)
     }
 

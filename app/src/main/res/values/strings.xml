@@ -36,4 +36,5 @@
     <string name="tour">passeio</string>
     <string name="clickOnSearchBeside">Clique no ícone da lupa logo abaixo para pesquisar.</string>
     <string name="noResultFound">Nenhum resultado!</string>
+    <string name="seeTours">Ver passeios</string>
 </resources>

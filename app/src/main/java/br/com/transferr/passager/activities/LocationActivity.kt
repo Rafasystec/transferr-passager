@@ -12,6 +12,7 @@ import br.com.transferr.passager.fragments.dialogs.SlideshowDialogFragment
 import br.com.transferr.passager.model.TourOption
 import com.squareup.picasso.MemoryPolicy
 import com.squareup.picasso.Picasso
+import kotlinx.android.synthetic.main.activity_location.*
 import kotlinx.android.synthetic.main.layout_location_details.*
 import org.jetbrains.anko.startActivity
 

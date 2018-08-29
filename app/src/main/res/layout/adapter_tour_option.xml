@@ -9,18 +9,19 @@
     android:clickable="true"
     android:padding="5dp"
     android:background="@android:color/white"
-    android:layout_marginBottom="5dp"
+    android:layout_marginBottom="2dp"
     app:cardElevation="3dp"
     app:cardPreventCornerOverlap="false"
     app:cardUseCompatPadding="false"
     card_view:cardConerRadius="2dp"
-    card_view:cardElevation="6dp"
+    card_view:cardElevation="2dp"
     android:foreground="?attr/selectableItemBackground"
 
     >
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@color/activityBackground"
         >
         <LinearLayout
             android:id="@+id/llTvProfile"

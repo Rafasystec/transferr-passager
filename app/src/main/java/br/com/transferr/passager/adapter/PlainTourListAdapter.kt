@@ -2,6 +2,9 @@ package br.com.transferr.passager.adapter
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.content.Intent
+import android.net.Uri
+import android.support.v7.widget.AppCompatButton
 import android.support.v7.widget.CardView
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
@@ -11,6 +14,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import br.com.transferr.passager.R
 import br.com.transferr.passager.model.PlainTour
+import br.com.transferr.passager.util.WhatsAppUtil
 import com.squareup.picasso.Picasso
 
 /**
@@ -22,7 +26,7 @@ class PlainTourListAdapter(val plainsTour: List<PlainTour> ,val onClick: (PlainT
     var context:Context?=null
     override fun getItemCount():Int = plainsTour.size
 
-    @SuppressLint("SetTextI18n")
+    @SuppressLint("SetTextI18n", "MissingPermission")
     override fun onBindViewHolder(holder: PlainTourViewHolder, position: Int) {
         this.context = holder!!.itemView.context
         val plain = plainsTour[position]
@@ -33,7 +37,7 @@ class PlainTourListAdapter(val plainsTour: List<PlainTour> ,val onClick: (PlainT
         }else{
             plain.driver?.car?.photo
         }
-        holder.tvDriverPhone.text = ""+plain.driver?.phone
+        //holder.tvDriverPhone.text = ""+plain.driver?.phone
         //holder.tvDriverEmail.text = plain.driver.
         //Start progressBar
         //holder.progress.visibility = View.Visible
@@ -49,6 +53,14 @@ class PlainTourListAdapter(val plainsTour: List<PlainTour> ,val onClick: (PlainT
 
                 })
         holder.cardView.setOnClickListener { onClick(plain) }
+        holder.btnWhatsapp.setOnClickListener {
+            WhatsAppUtil.callWhatsapp(""+plain.driver?.whatsapp,context!!)
+        }
+
+        holder.btnCallPhone.setOnClickListener {
+            var phoneNumber = "${plain.driver?.ddd}${plain.driver?.phone}"
+            context!!.startActivity(Intent(Intent.ACTION_CALL, Uri.parse("tel:$phoneNumber")))
+        }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PlainTourViewHolder {
@@ -64,6 +76,7 @@ class PlainTourListAdapter(val plainsTour: List<PlainTour> ,val onClick: (PlainT
         var tvDriverDetail  : TextView  = view.findViewById(R.id.tvDriverDetail)
         var tvDriverEmail   : TextView  = view.findViewById(R.id.tvDriverEmail)
         var cardView        : CardView  = view.findViewById(R.id.cvProfessional)
-        var tvDriverPhone   : TextView  = view.findViewById(R.id.tvDriverPhone)
+        var btnCallPhone    : AppCompatButton = view.findViewById(R.id.btnCallPhone)
+        var btnWhatsapp     : AppCompatButton = view.findViewById(R.id.btnWhatsapp)
     }
 }

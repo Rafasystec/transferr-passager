@@ -14,6 +14,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import br.com.transferr.passager.R
 import br.com.transferr.passager.model.responses.ResponseDriver
+import br.com.transferr.passager.util.WhatsAppUtil
 import com.squareup.picasso.Picasso
 import java.net.URLEncoder
 
@@ -60,7 +61,8 @@ class DriversResponseAdapter(val drivers : List<ResponseDriver>,val onClick: (Re
             })
         //holder.cardView.setOnClickListener { onClick(responseDrivers) }
         holder.btnWhatsapp.setOnClickListener {
-           callWhatsapp(responseDrivers.whatsapp)
+           //callWhatsapp(responseDrivers.whatsapp)
+            WhatsAppUtil.callWhatsapp(responseDrivers.whatsapp,context!!)
         }
 
         holder.btnCallPhone.setOnClickListener {
@@ -105,7 +107,7 @@ class DriversResponseAdapter(val drivers : List<ResponseDriver>,val onClick: (Re
             //tvDriverPhone  = view.findViewById(R.id.tvDriverPhone)
         }
     }
-
+/*
     fun callWhatsapp(phone:String){
         val packageManager = context?.getPackageManager()
         val i = Intent(Intent.ACTION_VIEW)
@@ -122,4 +124,5 @@ class DriversResponseAdapter(val drivers : List<ResponseDriver>,val onClick: (Re
         }
 
     }
+    */
 }

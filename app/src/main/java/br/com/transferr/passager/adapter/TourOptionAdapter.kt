@@ -50,7 +50,16 @@ class TourOptionAdapter(val options : List<TourOption>, val onClick: (TourOption
                 })
         holder.cardView.setOnClickListener { onClick(tour) }
         holder.tvLocation.text = tour.location?.name!!
-        holder.tvTourDescription.text = tour.description
+        var descriptionMax = 70
+        var description = tour.description
+        if(description != null){
+            var size = description.length
+            if(size > descriptionMax){
+                description = description.substring(0,descriptionMax-5)+" ..."
+            }
+        }
+        //holder.tvTourDescription.text = tour.description
+        holder.tvTourDescription.text = description
     }
 
     class TourOptionViewHolder(view: View): RecyclerView.ViewHolder(view){

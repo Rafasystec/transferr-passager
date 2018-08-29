@@ -13,4 +13,5 @@ class Driver (var name: String,
     var phone: Long? = null
     var ddd: Int? = null
     var car: Car? = null
+    var whatsapp = 0L
 }

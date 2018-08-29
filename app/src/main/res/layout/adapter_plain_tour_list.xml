@@ -92,71 +92,34 @@
                 android:text="300,00" />
         </LinearLayout>
 
-        <!--
-        <ImageView
-            android:id="@+id/ivFavoritePro"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_centerVertical="true"
-            android:layout_marginEnd="10dp"
-            android:clickable="true"
-            android:src="@drawable/favorite_heart"
-            android:tint="@android:color/holo_red_light"
-            android:layout_alignParentRight="true"
-            android:layout_marginRight="10dp" />
-            -->
+
         <LinearLayout
-            android:layout_width="150dp"
-            android:layout_height="wrap_content"
+            android:layout_width="100dp"
+            android:layout_height="35dp"
             android:layout_alignParentEnd="true"
             android:layout_alignParentBottom="true"
             android:layout_marginBottom="5dp"
             android:orientation="horizontal"
             android:layout_alignParentRight="true">
-            <TextView
-                android:id="@+id/tvDriverPhone"
+            <android.support.v7.widget.AppCompatButton
+                android:id="@+id/btnCallPhone"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="(XX) XXXXXXX"
-                android:textStyle="bold"
-                android:textColor="@color/colorPrimaryDark"
+                android:layout_weight="1"
+                android:drawableLeft="@drawable/phone_outgoing"
+
+                android:background="@android:color/transparent"
                 />
-            <!--
-            <ImageView
-                android:id="@+id/ivStarRate1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:src="@drawable/ic_star" />
-            <ImageView
-                android:id="@+id/ivStarRate2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:src="@drawable/ic_star" />
 
-            <ImageView
-                android:id="@+id/ivStarRate3"
+            <android.support.v7.widget.AppCompatButton
+                android:id="@+id/btnWhatsapp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:src="@drawable/ic_star" />
+                android:drawableLeft="@drawable/whatsapp"
 
-            <ImageView
-                android:id="@+id/ivStarRate4"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:src="@drawable/ic_star" />
-
-            <ImageView
-                android:id="@+id/ivStarRate5"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:src="@drawable/ic_star" />
-            -->
+                android:background="@android:color/transparent"
+                />
         </LinearLayout>
     </RelativeLayout>
 

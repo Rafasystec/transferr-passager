@@ -35,7 +35,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignParentBottom="true"
-                app:backgroundTint="@color/colorPrimaryDark"
+                app:backgroundTint="@color/colorPrimary"
                 android:clickable="false"
                 android:drawableLeft="@drawable/ic_arrow_down"
                 android:drawableRight="@drawable/ic_arrow_down"
