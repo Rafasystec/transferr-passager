@@ -31,7 +31,8 @@ class PlainTourListAdapter(val plainsTour: List<PlainTour> ,val onClick: (PlainT
         this.context = holder!!.itemView.context
         val plain = plainsTour[position]
         holder.tvName.text = plain.driver?.name
-        holder.tvDriverDetail.text = "${this.context!!.getString(R.string.seatsRemaining)} ${plain.seatsRemaining}"
+        //holder.tvDriverDetail.text = "${this.context!!.getString(R.string.seatsRemaining)} ${plain.seatsRemaining}"
+        holder.tvSeatsRemindingNumber.text = ""+plain.seatsRemaining
         var photoUrl = if(plain.driver?.car?.photo != null && plain.driver?.car?.photo!!.isEmpty()!!){
             null
         }else{
@@ -79,5 +80,6 @@ class PlainTourListAdapter(val plainsTour: List<PlainTour> ,val onClick: (PlainT
         var cardView        : CardView  = view.findViewById(R.id.cvProfessional)
         var btnCallPhone    : AppCompatButton = view.findViewById(R.id.btnCallPhone)
         var btnWhatsapp     : AppCompatButton = view.findViewById(R.id.btnWhatsapp)
+        var tvSeatsRemindingNumber : TextView = view.findViewById(R.id.tvSeatsRemindingNumber)
     }
 }
