@@ -89,7 +89,7 @@ class PlainTourListFragment : SuperClassFragment() {
 
     private fun loadRecyclesView(responsePlainsByTourAndLocation: ResponsePlainsByTourAndLocation?){
         if(responsePlainsByTourAndLocation != null) {
-            recycleViewFromTour?.adapter = PlainTourListAdapter(responsePlainsByTourAndLocation.plainsFromTour!!, { plainTour: PlainTour -> onClickPlain(plainTour) })
+            recycleViewFromTour?.adapter    = PlainTourListAdapter(responsePlainsByTourAndLocation.plainsFromTour!!, { plainTour: PlainTour -> onClickPlain(plainTour) })
             recycleViewFromLocation?.adapter = PlainTourListAdapter(responsePlainsByTourAndLocation.plainsFromLocation!!, { plainTour: PlainTour -> onClickPlain(plainTour) })
         }
     }

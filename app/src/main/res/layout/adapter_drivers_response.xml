@@ -55,6 +55,7 @@
             android:layout_below="@+id/tvNameDriver"
             android:layout_alignStart="@+id/tvNameDriver"
             android:layout_alignLeft="@+id/tvNameDriver" />
+        <!--
         <TextView
             android:id="@+id/tvDriverEmail"
             android:layout_width="match_parent"
@@ -63,7 +64,7 @@
             android:layout_below="@+id/tvDriverDetail"
             android:layout_alignStart="@+id/tvDriverDetail"
             android:layout_alignLeft="@+id/tvDriverDetail" />
-
+        -->
         <LinearLayout
             android:id="@+id/llPriceService"
             android:layout_width="wrap_content"
@@ -90,21 +91,6 @@
                 android:textStyle="bold"
                 android:text="300,00" />
         </LinearLayout>
-
-        <!--
-        <ImageView
-            android:id="@+id/ivFavoritePro"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_centerVertical="true"
-            android:layout_marginEnd="10dp"
-            android:clickable="true"
-            android:src="@drawable/favorite_heart"
-            android:tint="@android:color/holo_red_light"
-            android:layout_alignParentRight="true"
-            android:layout_marginRight="10dp" />
-            -->
         <LinearLayout
             android:layout_width="100dp"
             android:layout_height="35dp"
@@ -132,52 +118,6 @@
 
                 android:background="@android:color/transparent"
                 />
-
-            <!--
-            <TextView
-                android:id="@+id/tvDriverPhone"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="(XX) XXXXXXX"
-                android:textStyle="bold"
-                android:textColor="@color/colorPrimaryDark"
-                />
-                -->
-            <!--
-            <ImageView
-                android:id="@+id/ivStarRate1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:src="@drawable/ic_star" />
-            <ImageView
-                android:id="@+id/ivStarRate2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:src="@drawable/ic_star" />
-
-            <ImageView
-                android:id="@+id/ivStarRate3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:src="@drawable/ic_star" />
-
-            <ImageView
-                android:id="@+id/ivStarRate4"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:src="@drawable/ic_star" />
-
-            <ImageView
-                android:id="@+id/ivStarRate5"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:src="@drawable/ic_star" />
-            -->
         </LinearLayout>
     </RelativeLayout>
 

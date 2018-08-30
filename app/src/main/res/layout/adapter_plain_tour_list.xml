@@ -57,10 +57,10 @@
             android:layout_alignStart="@+id/tvNameDriver"
             android:layout_alignLeft="@+id/tvNameDriver" />
         <TextView
-            android:id="@+id/tvDriverEmail"
+            android:id="@+id/tvDriverCarPlate"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Área do Profissional"
+            android:text="XXX-0000"
             android:layout_below="@+id/tvDriverDetail"
             android:layout_alignStart="@+id/tvDriverDetail"
             android:layout_alignLeft="@+id/tvDriverDetail" />

@@ -45,7 +45,7 @@ class DriversResponseAdapter(val drivers : List<ResponseDriver>,val onClick: (Re
             responseDrivers.imgProfileUrl = null
         }
         //holder.tvDriverPhone.text = responseDrivers.phone
-        holder.tvDriverEmail.text = responseDrivers.email
+        //holder.tvDriverEmail.text = responseDrivers.email
         //Start progressBar
         //holder.progress.visibility = View.Visible
         Picasso.with(context).load(responseDrivers.imgProfileUrl).placeholder(R.drawable.no_photo_64).fit().into(holder.img,
@@ -82,7 +82,7 @@ class DriversResponseAdapter(val drivers : List<ResponseDriver>,val onClick: (Re
         var ivStarRate5: ImageView
         */
         var tvDriverDetail : TextView
-        var tvDriverEmail : TextView
+        //var tvDriverEmail : TextView
         var cardView: CardView
         //var tvDriverPhone: TextView
         var btnCallPhone : AppCompatButton
@@ -93,7 +93,7 @@ class DriversResponseAdapter(val drivers : List<ResponseDriver>,val onClick: (Re
             tvPrice         = view.findViewById(R.id.tvPrice)
             tvDriverDetail  = view.findViewById(R.id.tvDriverDetail)
             cardView        = view.findViewById(R.id.cvProfessional)
-            tvDriverEmail   = view.findViewById(R.id.tvDriverEmail)
+            //tvDriverEmail   = view.findViewById(R.id.tvDriverEmail)
             btnCallPhone    = view.findViewById(R.id.btnCallPhone)
             btnWhatsapp     = view.findViewById(R.id.btnWhatsapp)
             /*

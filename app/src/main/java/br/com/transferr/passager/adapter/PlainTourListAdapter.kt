@@ -35,8 +35,9 @@ class PlainTourListAdapter(val plainsTour: List<PlainTour> ,val onClick: (PlainT
         var photoUrl = if(plain.driver?.car?.photo != null && plain.driver?.car?.photo!!.isEmpty()!!){
             null
         }else{
-            plain.driver?.car?.photo
+             plain.driver?.car?.photo
         }
+        holder.tvDriverCarPlate.text = plain.driver?.car?.carIdentity
         //holder.tvDriverPhone.text = ""+plain.driver?.phone
         //holder.tvDriverEmail.text = plain.driver.
         //Start progressBar
@@ -71,10 +72,10 @@ class PlainTourListAdapter(val plainsTour: List<PlainTour> ,val onClick: (PlainT
 
     class PlainTourViewHolder(view: View) : RecyclerView.ViewHolder(view){
         var tvName          : TextView  = view.findViewById(R.id.tvNameDriver)
-        var tvPrice         : TextView  = view.findViewById(R.id.tvPrice)
+        //var tvPrice         : TextView  = view.findViewById(R.id.tvPrice)
         var img             : ImageView = view.findViewById(R.id.ivProfile)
         var tvDriverDetail  : TextView  = view.findViewById(R.id.tvDriverDetail)
-        var tvDriverEmail   : TextView  = view.findViewById(R.id.tvDriverEmail)
+        var tvDriverCarPlate: TextView  = view.findViewById(R.id.tvDriverCarPlate)
         var cardView        : CardView  = view.findViewById(R.id.cvProfessional)
         var btnCallPhone    : AppCompatButton = view.findViewById(R.id.btnCallPhone)
         var btnWhatsapp     : AppCompatButton = view.findViewById(R.id.btnWhatsapp)
