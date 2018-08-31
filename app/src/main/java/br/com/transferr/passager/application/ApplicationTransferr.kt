@@ -1,6 +1,7 @@
 package br.com.transferr.passager.application
 
 import android.support.multidex.MultiDexApplication
+import java.util.*
 
 /**
  * Created by Rafael Rocha on 15/02/2018.
@@ -19,7 +20,7 @@ class ApplicationTransferr : MultiDexApplication() {
     companion object {
         //Singleton da classe application
         private var appInstance: ApplicationTransferr? = null
-
+        var DEVICE_LANGUAGE = Locale.getDefault().displayLanguage
         fun getInstance(): ApplicationTransferr {
             if (appInstance == null) {
                 throw IllegalStateException("Configure the Application class on Manifest xml.")

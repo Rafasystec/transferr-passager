@@ -14,6 +14,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import br.com.transferr.passager.R
 import br.com.transferr.passager.model.PlainTour
+import br.com.transferr.passager.util.DateUtil
 import br.com.transferr.passager.util.WhatsAppUtil
 import com.squareup.picasso.Picasso
 
@@ -32,15 +33,17 @@ class PlainTourListAdapter(val plainsTour: List<PlainTour> ,val onClick: (PlainT
         val plain = plainsTour[position]
         holder.tvName.text = plain.driver?.name
         //holder.tvDriverDetail.text = "${this.context!!.getString(R.string.seatsRemaining)} ${plain.seatsRemaining}"
-        holder.tvSeatsRemindingNumber.text = ""+plain.seatsRemaining
+        holder.tvSeatsRemindingNumber.text  = ""+plain.seatsRemaining
+        holder.tvDriverDetail.text          = plain.driver?.car?.model
         var photoUrl = if(plain.driver?.car?.photo != null && plain.driver?.car?.photo!!.isEmpty()!!){
             null
         }else{
              plain.driver?.car?.photo
         }
         holder.tvDriverCarPlate.text = plain.driver?.car?.carIdentity
-        //holder.tvDriverPhone.text = ""+plain.driver?.phone
-        //holder.tvDriverEmail.text = plain.driver.
+        holder.tvPlainDate.text = DateUtil.format(plain.date!!,"dd/MM/yyyy HH:mm")
+        holder.tvPliantourName.text = plain.tourOption?.name
+
         //Start progressBar
         //holder.progress.visibility = View.Visible
         Picasso.with(context).load(photoUrl).placeholder(R.drawable.no_photo_64).fit().into(holder.img,
@@ -73,7 +76,7 @@ class PlainTourListAdapter(val plainsTour: List<PlainTour> ,val onClick: (PlainT
 
     class PlainTourViewHolder(view: View) : RecyclerView.ViewHolder(view){
         var tvName          : TextView  = view.findViewById(R.id.tvNameDriver)
-        //var tvPrice         : TextView  = view.findViewById(R.id.tvPrice)
+        var tvPliantourName : TextView  = view.findViewById(R.id.tvPlainTourName)
         var img             : ImageView = view.findViewById(R.id.ivProfile)
         var tvDriverDetail  : TextView  = view.findViewById(R.id.tvDriverDetail)
         var tvDriverCarPlate: TextView  = view.findViewById(R.id.tvDriverCarPlate)
@@ -81,5 +84,6 @@ class PlainTourListAdapter(val plainsTour: List<PlainTour> ,val onClick: (PlainT
         var btnCallPhone    : AppCompatButton = view.findViewById(R.id.btnCallPhone)
         var btnWhatsapp     : AppCompatButton = view.findViewById(R.id.btnWhatsapp)
         var tvSeatsRemindingNumber : TextView = view.findViewById(R.id.tvSeatsRemindingNumber)
+        var tvPlainDate : TextView = view.findViewById(R.id.tvPlainDate)
     }
 }

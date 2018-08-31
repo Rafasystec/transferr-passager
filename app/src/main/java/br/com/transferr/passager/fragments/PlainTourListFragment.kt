@@ -4,6 +4,7 @@ package br.com.transferr.passager.fragments
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.RecyclerView
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,6 +13,7 @@ import br.com.transferr.fragments.SuperClassFragment
 import br.com.transferr.passager.R
 import br.com.transferr.passager.adapter.DriversResponseAdapter
 import br.com.transferr.passager.adapter.PlainTourListAdapter
+import br.com.transferr.passager.application.ApplicationTransferr
 import br.com.transferr.passager.extensions.defaultRecycleView
 import br.com.transferr.passager.interfaces.OnResponseInterface
 import br.com.transferr.passager.model.Location
@@ -45,10 +47,11 @@ class PlainTourListFragment : SuperClassFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        tourOption = arguments?.getSerializable(TourOption.TOUR_PARAMETER_KEY) as TourOption
-        recycleViewFromTour = defaultRecycleView(activity!!,R.id.rcPlainTourFromTour)
+        tourOption              = arguments?.getSerializable(TourOption.TOUR_PARAMETER_KEY) as TourOption
+        recycleViewFromTour     = defaultRecycleView(activity!!,R.id.rcPlainTourFromTour)
         recycleViewFromLocation = defaultRecycleView(activity!!,R.id.rcPlainTourFromLocation)
         loadPlainsByTourAndLocation()
+        Log.i("INFO","Language device ${ApplicationTransferr.DEVICE_LANGUAGE}")
         if(llEmptyList != null) {
             llEmptyList.tvTextToAdd.text = "Sem Passeios no momento."
         }

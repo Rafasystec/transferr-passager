@@ -187,7 +187,11 @@ GoogleApiClient.OnConnectionFailedListener,
     }
 
     private fun updateMapScreen(location: Location?){
-        callWebService()
+        try {
+            callWebService()
+        }catch (e:Exception){
+            Log.e("FATAL_ERRO","try to call car to show on map",e)
+        }
     }
 
     private fun callWebService() {

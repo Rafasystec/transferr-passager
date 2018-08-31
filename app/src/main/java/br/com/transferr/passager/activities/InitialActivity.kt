@@ -96,22 +96,22 @@ class InitialActivity : SuperClassActivity(), GoogleApiClient.ConnectionCallback
         //txt_latitude.setText(""+location.latitude)
         //txt_longitude.setText(""+location.longitude)
         Toast.makeText(this, msg, Toast.LENGTH_SHORT).show()
-        var car:Car = getDefaultCar()
+        //var car:Car = getDefaultCar()
         var coordinates = Coordinates()
         coordinates.id = 0
-        coordinates.car         = car
+        coordinates.car         = Car()
         coordinates.latitude    = location.latitude
         coordinates.longitude   = location.longitude
         callWebService(coordinates)
     }
-
+/*
     private fun getDefaultCar(): Car {
 
         var driver:Driver = Driver("Jose","664764", 19880305)
         var car:Car = Car("cheve","2215563","azul",true,driver,EnumStatus.OFFLINE)
         return car
     }
-
+*/
     private fun callWebService(coordinates: Coordinates) {
         doAsync {
             //val response = CoordinateService.save(coordinates)

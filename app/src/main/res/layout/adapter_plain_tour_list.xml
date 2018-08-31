@@ -43,7 +43,7 @@
             android:layout_alignRight="@+id/tvNameDriver"
             android:layout_marginEnd="37dp"
             android:layout_marginRight="37dp"
-            android:text="Jericocoara"
+            android:text="@string/local"
             android:textSize="18sp"
             android:textStyle="bold" />
 
@@ -77,6 +77,15 @@
             android:layout_alignLeft="@+id/tvDriverDetail" />
 
         <TextView
+            android:id="@+id/tvPlainDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/tvDriverCarPlate"
+            android:layout_alignStart="@+id/tvDriverCarPlate"
+            android:layout_below="@+id/tvDriverCarPlate"
+            android:text="-" />
+
+        <TextView
             android:id="@+id/tvSeatsReminding"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -84,6 +93,7 @@
             android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
             android:layout_marginRight="5dp"
+            android:textColor="@color/colorPrimaryDark"
             android:text="@string/seatsRemaining" />
 
         <TextView
@@ -93,9 +103,10 @@
             android:layout_alignBottom="@+id/ivProfile"
             android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
-            android:text="3"
+            android:text="0"
             android:textSize="40sp"
             android:layout_marginRight="5dp"
+            android:textColor="@color/colorPrimaryDark"
             android:textStyle="bold" />
 
         <LinearLayout

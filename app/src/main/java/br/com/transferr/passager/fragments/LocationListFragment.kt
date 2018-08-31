@@ -43,7 +43,7 @@ class LocationListFragment : SuperClassFragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setHasOptionsMenu(true)
-        setupToolbar(R.id.toolbar,"Locais")
+        setupToolbar(R.id.toolbar,context?.getString(R.string.localAndTours))
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
