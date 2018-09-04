@@ -20,7 +20,7 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="whereToGo">Where to go?</string>
+    <string name="whereToGo">Where to?</string>
     <string name="search">Search</string>
     <string name="search_hint">Search</string>
     <string name="drivers">Drivers</string>
@@ -39,4 +39,9 @@
     <string name="seeTours">See Tours</string>
     <string name="local">Local</string>
     <string name="localAndTours"><![CDATA[Places & Tours]]></string>
+    <!--Pages title -->
+    <string name="page_title_map">Map</string>
+    <string name="page_title_tour">Tour</string>
+    <string name="page_title_menu">Menu</string>
+    <string name="searchByDescription">Search by location</string>
 </resources>

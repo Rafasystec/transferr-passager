@@ -39,7 +39,9 @@ class TourOptionLisFragment : SuperClassFragment() {
         recycleView = defaultRecycleView(activity!!,R.id.rcTourList)
         var locationTmp = arguments?.getSerializable(Location.LOCATION)
         if(locationTmp != null){
-            requestTourOptionByLocation(locationTmp as Location)
+            locationTmp = locationTmp as Location
+            btnWhereToGo.text = locationTmp.name
+            requestTourOptionByLocation(locationTmp)
         }else {
             requestTourOption()
         }
@@ -47,6 +49,7 @@ class TourOptionLisFragment : SuperClassFragment() {
             //includeFragmentOnMainActivity(LocationListFragment())
             switchFragmentToMainContent(LocationListFragment())
         }
+        setMainTitle(R.string.page_title_tour)
     }
 
     fun requestTourOption(){

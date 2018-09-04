@@ -15,6 +15,7 @@ import br.com.transferr.passager.adapter.DriversResponseAdapter
 import br.com.transferr.passager.adapter.PlainTourListAdapter
 import br.com.transferr.passager.application.ApplicationTransferr
 import br.com.transferr.passager.extensions.defaultRecycleView
+import br.com.transferr.passager.extensions.setupToolbar
 import br.com.transferr.passager.interfaces.OnResponseInterface
 import br.com.transferr.passager.model.Location
 import br.com.transferr.passager.model.PlainTour

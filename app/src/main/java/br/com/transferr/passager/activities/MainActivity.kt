@@ -20,11 +20,14 @@ class MainActivity : AppCompatActivity() {
         initNavigationBottomMenu()
     }
 
+    fun setActionBarTitle(title: String) {
+        supportActionBar!!.title = title
+    }
 
     private fun includeFragment(){
         val fm = supportFragmentManager.beginTransaction()
-        val choose = MapsFragment()
-        fm.add(R.id.mainFragment,choose,R.string.home.toString())
+        val choose = TourOptionLisFragment()//MapsFragment()
+        fm.add(R.id.mainFragment,choose,R.string.tour.toString())
         fm.commit()
     }
 

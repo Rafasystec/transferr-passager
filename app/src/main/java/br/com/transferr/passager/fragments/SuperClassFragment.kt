@@ -2,9 +2,12 @@ package br.com.transferr.fragments
 
 import android.app.ProgressDialog
 import android.os.Bundle
+import android.support.annotation.IdRes
+import android.support.annotation.StringRes
 import android.support.v4.app.Fragment
 import android.view.View
 import br.com.transferr.passager.R
+import br.com.transferr.passager.activities.MainActivity
 import br.com.transferr.passager.fragments.TourOptionLisFragment
 import br.com.transferr.passager.util.AlertUtil
 import org.jetbrains.anko.alert
@@ -41,6 +44,12 @@ open class SuperClassFragment : Fragment(){
         activity!!.alert ( message, AlertUtil.DEFAULT_ERROR_TITLE){
             okButton { it.dismiss() }
         }.show()
+    }
+
+    fun setMainTitle(@StringRes resId:Int){
+        if(activity != null) {
+            (activity as MainActivity).setActionBarTitle(getString(resId))
+        }
     }
 
 }

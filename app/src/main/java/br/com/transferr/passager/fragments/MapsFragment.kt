@@ -25,6 +25,7 @@ import android.view.ViewGroup
 import br.com.transferr.fragments.SuperClassFragment
 import br.com.transferr.passager.R
 import br.com.transferr.passager.adapter.MapInfoWindowsAdapter
+import br.com.transferr.passager.extensions.setupToolbar
 import br.com.transferr.passager.helpers.HelperCar
 import br.com.transferr.passager.model.Quadrant
 import br.com.transferr.passager.util.MyLocationLister
@@ -81,7 +82,7 @@ GoogleApiClient.OnConnectionFailedListener,
         startApi()
         mLocationManager = activity?.getSystemService(Context.LOCATION_SERVICE) as LocationManager
         checkLocation()
-
+        setMainTitle(R.string.page_title_map)
         val view = inflater.inflate(R.layout.fragment_maps, container, false)
         //Start the map
         val mapFragment = childFragmentManager.findFragmentById(R.id.mapFragment) as SupportMapFragment
@@ -248,8 +249,10 @@ GoogleApiClient.OnConnectionFailedListener,
                 .setInterval(UPDATE_INTERVAL)
                 .setFastestInterval(FASTEST_INTERVAL)
         // Request location updates
-        if (checkSelfPermission(this!!.activity!!, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && checkSelfPermission(this!!.activity!!, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            return
+        if(activity != null) {
+            if (checkSelfPermission(this?.activity!!, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && checkSelfPermission(this!!.activity!!, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                return
+            }
         }
         LocationServices.FusedLocationApi.requestLocationUpdates(mGoogleApiClient,
                 mLocationRequest, this)

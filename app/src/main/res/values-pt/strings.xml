@@ -38,5 +38,10 @@
     <string name="noResultFound">Nenhum resultado!</string>
     <string name="seeTours">Ver passeios</string>
     <string name="local">Local</string>
-    <string name="localAndTours"><![CDATA[Places & Tours]]></string>
+    <string name="localAndTours"><![CDATA[Locais & Passeios]]></string>
+    <!--Pages title -->
+    <string name="page_title_map">Map</string>
+    <string name="page_title_tour">Tour</string>
+    <string name="page_title_menu">Menu</string>
+    <string name="searchByDescription">Search by location</string>
 </resources>

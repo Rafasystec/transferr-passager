@@ -1,7 +1,7 @@
 package br.com.transferr.passager.fragments
 
 
-import android.content.Intent
+//import br.com.transferr.passager.R.id.searchView
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v4.view.MenuItemCompat
@@ -9,9 +9,7 @@ import android.support.v7.widget.RecyclerView
 import android.support.v7.widget.SearchView
 import android.view.*
 import br.com.transferr.fragments.SuperClassFragment
-
 import br.com.transferr.passager.R
-import br.com.transferr.passager.activities.LocationDetailActivity
 import br.com.transferr.passager.adapter.LocationAdapter
 import br.com.transferr.passager.extensions.defaultRecycleView
 import br.com.transferr.passager.extensions.setupToolbar
@@ -19,9 +17,7 @@ import br.com.transferr.passager.extensions.switchFragmentToMainContent
 import br.com.transferr.passager.interfaces.OnResponseInterface
 import br.com.transferr.passager.model.Location
 import br.com.transferr.passager.webservices.WSLocation
-import kotlinx.android.synthetic.main.fragment_location_list.*
 import org.jetbrains.anko.progressDialog
-import org.jetbrains.anko.toast
 
 
 /**
@@ -49,7 +45,7 @@ class LocationListFragment : SuperClassFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         recycleView = defaultRecycleView(activity!!,R.id.rcLocationList)
-        initSearchView()
+        //initSearchView()
         requestAllLocations()
     }
 
@@ -63,6 +59,29 @@ class LocationListFragment : SuperClassFragment() {
             locationAdapter = LocationAdapter(locationList!!,{location -> onLocationClick(location) })
             recycleView?.adapter = locationAdapter
         }
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
+        inflater?.inflate(R.menu.menu_seacher,menu)
+        var searchItem = menu?.findItem(R.id.menuSearch)
+        var searchView = MenuItemCompat.getActionView(searchItem) as SearchView
+        searchView.setOnQueryTextListener(
+                object : SearchView.OnQueryTextListener{
+                    override fun onQueryTextSubmit(query: String?): Boolean {
+                        //btnClickOnSearch.visibility = View.VISIBLE
+                        return false
+                    }
+
+                    override fun onQueryTextChange(newText: String?): Boolean {
+                        //btnClickOnSearch.visibility = View.GONE
+                        locationAdapter?.filter?.filter(newText)
+                        return false
+                    }
+
+                }
+        )
+
+
     }
 
     fun requestAllLocations(){
@@ -94,7 +113,7 @@ class LocationListFragment : SuperClassFragment() {
         fragment.arguments!!.putSerializable(Location.LOCATION,location)
         switchFragmentToMainContent(fragment)
     }
-
+/*
     fun initSearchView(){
         searchView.setOnQueryTextListener(
                 object : SearchView.OnQueryTextListener{
@@ -115,5 +134,6 @@ class LocationListFragment : SuperClassFragment() {
 
 
     }
+    */
 
 }
