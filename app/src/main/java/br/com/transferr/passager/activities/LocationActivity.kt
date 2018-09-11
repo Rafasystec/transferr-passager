@@ -8,6 +8,7 @@ import android.support.v7.widget.RecyclerView
 import android.view.View
 import br.com.transferr.passager.R
 import br.com.transferr.passager.adapter.GalleryAdapter
+import br.com.transferr.passager.extensions.setupToolbar
 import br.com.transferr.passager.fragments.dialogs.SlideshowDialogFragment
 import br.com.transferr.passager.model.TourOption
 import com.squareup.picasso.MemoryPolicy
@@ -28,6 +29,7 @@ class LocationActivity : SuperClassActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_location)
         tourOption = intent.getSerializableExtra(TourOption.TOUR_PARAMETER_KEY) as TourOption
+        setupToolbar(R.id.toolbarLocation,tourOption?.name,true)
         btnSeeDrivers.setOnClickListener {
             var intent = Intent(context,LocationDetailActivity::class.java)
             //intent.putExtra(Location.LOCATION,tourOption?.location)
@@ -56,7 +58,7 @@ class LocationActivity : SuperClassActivity() {
                 .fit()
                 .centerCrop()
                 .into(ivMainPicture)
-        tvLocationTitle.text = tourOption?.name
+        //tvLocationTitle.text = tourOption?.name
         tvLocationDescription.text = tourOption?.description
         /*
         var i = 0

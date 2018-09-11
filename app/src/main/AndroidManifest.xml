@@ -85,7 +85,9 @@
             </intent-filter>
             -->
         </activity>
-        <activity android:name=".activities.LocationActivity">
+        <activity android:name=".activities.LocationActivity"
+            android:parentActivityName=".activities.MainActivity"
+            >
 
             <!--
             <intent-filter>
@@ -94,7 +96,8 @@
             -->
         </activity>
         <activity android:name=".activities.DriverListActivity" />
-        <activity android:name=".activities.MainActivity">
+        <activity android:name=".activities.MainActivity"
+            android:screenOrientation="portrait">
             <meta-data
                 android:name="android.app.searchable"
                 android:resource="@xml/searchable" />

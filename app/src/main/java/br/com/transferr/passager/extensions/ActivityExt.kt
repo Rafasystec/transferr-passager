@@ -22,7 +22,7 @@ inline fun Activity.defaultRecycleView(view: Activity, resId:Int): RecyclerView 
     recycleView?.setHasFixedSize(true)
     return recycleView
 }
-@Deprecated("Please replace with setupToolbar(@IdRes id: Int, @IdRes idString: Int, upNavigation: Boolean = false) : ActionBar")
+//@Deprecated("Please replace with setupToolbar(@IdRes id: Int, @IdRes idString: Int, upNavigation: Boolean = false) : ActionBar")
 inline fun AppCompatActivity.setupToolbar(@IdRes id: Int,title:String?= null,upNavigation: Boolean = false) : ActionBar{
     val toolbar = findViewById<Toolbar>(id)
     setSupportActionBar(toolbar)

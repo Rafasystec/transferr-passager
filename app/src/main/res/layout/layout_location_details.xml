@@ -6,13 +6,14 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/activityBackground"
     android:orientation="vertical">
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-
+        android:layout_marginBottom="50dp"
         >
-
+        <!--
         <TextView
             android:id="@+id/tvLocationTitle"
             android:layout_width="match_parent"
@@ -23,7 +24,7 @@
             android:textColor="@color/colorText"
             android:layout_marginBottom="8dp"
             android:textStyle="bold" />
-
+        -->
         <ImageView
             android:id="@+id/ivMainPicture"
             android:layout_width="150dp"
@@ -33,7 +34,7 @@
             android:adjustViewBounds="true"
             android:layout_gravity="center"
             android:layout_marginBottom="8dp"
-
+            android:layout_marginTop="8dp"
             />
 
         <TextView
