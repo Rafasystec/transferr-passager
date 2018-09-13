@@ -44,4 +44,5 @@
     <string name="page_title_tour">Tour</string>
     <string name="page_title_menu">Menu</string>
     <string name="searchByDescription">Search by location</string>
+    <string name="driverAppName">Driver</string>
 </resources>

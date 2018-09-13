@@ -48,3 +48,9 @@ fun AppCompatActivity.switchFragmentToMainContent(fragment: Fragment){
             ?.replace(R.id.mainFragment,fragment)
             ?.commit()
 }
+
+fun AppCompatActivity.switchFragmentToMainContentDriver(fragment: Fragment){
+    supportFragmentManager.beginTransaction()
+            ?.replace(R.id.mainFragmentDriver,fragment)
+            ?.commit()
+}
