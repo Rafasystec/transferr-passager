@@ -6,6 +6,7 @@ import android.support.annotation.IdRes
 import android.support.annotation.StringRes
 import android.support.v4.app.Fragment
 import android.view.View
+import android.widget.ProgressBar
 import br.com.transferr.passager.R
 import br.com.transferr.passager.activities.MainActivity
 import br.com.transferr.passager.fragments.TourOptionLisFragment
@@ -19,10 +20,9 @@ import org.jetbrains.anko.progressDialog
  */
 
 open class SuperClassFragment : Fragment(){
-    //protected var dialog: ProgressDialog? = null
-
+    var progress: ProgressBar?=null
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        //dialog = activity?.progressDialog(message = R.string.loading, title = R.string.wait)
+        progress = view.findViewById(R.id.ProgressBar)
         super.onViewCreated(view, savedInstanceState)
     }
 
@@ -52,4 +52,18 @@ open class SuperClassFragment : Fragment(){
         }
     }
 
+    fun startProgressBar(){
+        progress?.visibility = View.VISIBLE
+    }
+
+    fun stopProgressBar(){
+
+        Thread({
+            Thread.sleep(1000)
+            activity?.runOnUiThread({
+                progress?.visibility = View.GONE
+            })
+        }).start()
+
+    }
 }

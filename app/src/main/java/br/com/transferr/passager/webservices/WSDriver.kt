@@ -1,5 +1,6 @@
 package br.com.transferr.passager.webservices
 
+import br.com.transferr.model.Driver
 import br.com.transferr.passager.interfaces.OnResponseInterface
 import br.com.transferr.passager.model.responses.ResponseDrivers
 import retrofit2.Call
@@ -18,8 +19,14 @@ object WSDriver : BaseWebService() {
         service.doGetByLocation(idLocation).enqueue(CallBackWS(responseInterface))
     }
 
+    fun doGetByUserId(userId: Long,responseInterface: OnResponseInterface<Driver>){
+        service.doGetByUserId(userId).enqueue(CallBackWS(responseInterface))
+    }
+
     interface IWSDriver{
         @GET(ROOT_URL_DRIVER+"/by/location/{idLocation}")
         fun doGetByLocation(@Path("idLocation") idLocation:Long):Call<ResponseDrivers>
+        @GET(ROOT_URL_DRIVER+"/by/user/{userId}")
+        fun doGetByUserId(@Path("userId") userId:Long):Call<Driver>
     }
 }

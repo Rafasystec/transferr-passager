@@ -53,6 +53,7 @@
                 android:layout_alignParentLeft="true"
                 android:layout_margin="4dp"
                 android:layout_gravity="center"
+                android:visibility="visible"
                 />
         </LinearLayout>
 

@@ -8,6 +8,7 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ProgressBar
 import br.com.transferr.fragments.SuperClassFragment
 import br.com.transferr.passager.R
 import br.com.transferr.passager.activities.LocationActivity
@@ -28,6 +29,7 @@ class TourOptionLisFragment : SuperClassFragment() {
 
 
     var tourOptionList:List<TourOption>?=null
+
     private var recycleView : RecyclerView?=null
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -53,20 +55,22 @@ class TourOptionLisFragment : SuperClassFragment() {
     }
 
     fun requestTourOption(){
+        startProgressBar()
         WSTourOption.doGetAll(object : OnResponseInterface<List<TourOption>>{
-            val dialog = activity?.progressDialog(message = R.string.loading, title = R.string.wait)
+            //val dialog = activity?.progressDialog(message = R.string.loading, title = R.string.wait)
             override fun onSuccess(body: List<TourOption>?) {
-                dialog?.dismiss()
+                //dialog?.dismiss()
                 tourOptionList = body
                 setTourOptionListAdapter()
+                stopProgressBar()
             }
 
             override fun onError(message: String) {
-                dialog?.dismiss()
+                stopProgressBar()
             }
 
             override fun onFailure(t: Throwable?) {
-                dialog?.dismiss()
+                stopProgressBar()
             }
 
         })

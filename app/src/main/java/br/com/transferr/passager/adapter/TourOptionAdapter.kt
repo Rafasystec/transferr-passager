@@ -42,10 +42,12 @@ class TourOptionAdapter(val options : List<TourOption>, val onClick: (TourOption
                 object : com.squareup.picasso.Callback {
                     override fun onSuccess() {
                         holder.progress.visibility = View.GONE
+                        //holder.ivMainLocation.visibility = View.VISIBLE
                     }
 
                     override fun onError() {
                         holder.progress.visibility = View.GONE
+                        //holder.ivMainLocation.visibility = View.VISIBLE
                     }
                 })
         holder.cardView.setOnClickListener { onClick(tour) }
