@@ -1,0 +1,8 @@
+<!-- drawable/plus_circle.xml -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:height="80dp"
+    android:width="80dp"
+    android:viewportWidth="25"
+    android:viewportHeight="25">
+    <path android:fillColor="#FFF" android:pathData="M17,13H13V17H11V13H7V11H11V7H13V11H17M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2Z" />
+</vector>

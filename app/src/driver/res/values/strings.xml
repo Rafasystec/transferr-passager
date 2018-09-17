@@ -1,0 +1,24 @@
+<resources>
+    <string name="app_name">transferr</string>
+    <string name="user">usuário:</string>
+    <string name="password">senha:</string>
+    <string name="btnLogin">Entrar</string>
+    <string name="registernewuser">Cadastrar-se</string>
+    <string name="btnLocation">Ver localização</string>
+    <string name="name">Nome:</string>
+    <string name="exit">Sair</string>
+    <string name="seeMap">Mapa</string>
+    <string name="plainTour">Passeios</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="tvLocation">Selecione o local:</string>
+    <string name="tvSeats">Qtde inicial Passageiros:</string>
+    <string name="tvEmptySeats">Vagas sobrando:</string>
+    <string name="tvCarCapacite">Capacidade do Carro</string>
+    <string name="btnSave">Salvar</string>
+    <string name="camera">câmera</string>
+    <string name="gallery">galeria</string>
+    <string name="sales">compras</string>
+    <string name="comments">cometários</string>
+</resources>

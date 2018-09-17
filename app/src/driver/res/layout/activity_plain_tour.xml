@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="br.com.transferr.activities.PlainTourActivity">
+
+
+    <!-- including the toolbar -->
+    <include layout="@layout/toolbar"/>
+    <ProgressBar
+        style="?android:attr/progressBarStyleLarge"
+        android:id="@+id/progressBar"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="10dp"
+        android:background="@color/black"
+        android:visibility="gone"/>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rcviewTours"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_marginTop="60dp"/>
+
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fabAddPlainTour"
+        android:layout_width="68dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|right"
+        android:layout_marginBottom="16dp"
+        android:layout_marginRight="80dp"
+        android:src="@drawable/plus_circle"
+        app:layout_anchorGravity="bottom|right|end"
+        tools:layout_editor_absoluteX="300dp" />
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fabRefeshPlainTour"
+        android:layout_width="68dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="right"
+        app:layout_anchorGravity="top|right"
+        android:src="@drawable/quantum_ic_refresh_white_24"
+        android:layout_marginTop="60dp"
+        android:layout_marginRight="15dp"
+        app:layout_anchor="@+id/rcviewTours"
+         />
+
+
+</android.support.design.widget.CoordinatorLayout>

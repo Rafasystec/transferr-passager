@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <!-- "Mark Favorite", should appear as action button if possible -->
+    <item
+        android:id="@+id/action_exit"
+        android:icon="@drawable/ic_exit_to_app_white_24dp"
+        android:title="@string/exit"
+        android:tooltipText="@string/exit"
+        android:contentDescription="Sair Agora"
+        android:iconTint="@color/primary"
+        android:iconTintMode="multiply"
+        app:showAsAction="withText">
+
+        <TextView
+            android:text="Sair"
+            android:textSize="15dp"
+            >
+
+        </TextView>
+    </item>
+    <item
+        android:id="@+id/action_mapa"
+        android:icon="@drawable/ic_exit_to_app_white_24dp"
+        android:title="@string/seeMap"
+        android:tooltipText="@string/seeMap"
+        android:contentDescription="Sair Agora"
+        android:iconTint="@color/primary"
+        android:iconTintMode="multiply"
+        app:showAsAction="withText">
+    </item>
+    <item
+        android:id="@+id/action_plain_tour"
+        android:icon="@drawable/ic_exit_to_app_white_24dp"
+        android:title="@string/plainTour"
+        android:tooltipText="@string/plainTour"
+        android:contentDescription="Planejar passeio"
+        android:iconTint="@color/primary"
+        android:iconTintMode="multiply"
+        app:showAsAction="withText">
+    </item>
+
+
+</menu>

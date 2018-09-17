@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Cores do Tema Material -->
+    <color name="primary">#2BBBAD</color>
+    <color name="primary_dark">#00695C</color>
+    <color name="accent">#FF4081</color>
+    <color name="control_highlight">#B3E5FC</color>
+
+    <!-- Outras cores -->
+    <color name="transparent">#0000</color>
+    <color name="white">#fff</color>
+    <color name="black">#000</color>
+    <color name="blue">#00f</color>
+    <color name="green">#0f0</color>
+    <color name="gray">#cccccc</color>
+
+    <!-- SwipeRefreshLayout -->
+    <color name="refresh_progress_1">#33B5E5</color>
+    <!-- azul -->
+    <color name="refresh_progress_2">#99CC00</color>
+    <!-- verde -->
+    <color name="refresh_progress_3">#CC0000</color>
+    <!-- vermelho -->
+
+    <!-- Favoritos -->
+    <color name="favorito_on">#E91E63</color>
+    <color name="favorito_off">#cccccc</color>
+    <!-- More colors from MaterialDocs -->
+    <color name="petrol_100">#00BAD1</color>
+    <color name="petrol_200">#008192</color>
+
+    <color name="bg_color">#F9F9F9</color>
+    <color name="color_white_semitransparent">#80ffffff</color>
+
+    <color name="grey_100">#F0F1F3</color>
+    <color name="grey_200">#CFCFCF</color>
+    <color name="grey_300">#A0A0A1</color>
+    <color name="grey_400">#606060</color>
+    <color name="grey_500">#ff4b4b4b</color>
+    <color name="grey_600">#424242</color>
+    <color name="grey_700">#ff3c3c3c</color>
+
+    <color name="pink">#FF4081</color>
+    <color name="indigo">#3F51B5</color>
+
+    <color name="blue_100">#00BCD4</color>
+    <color name="blue_200">#00A0B4</color>
+
+    <color name="violet_100">#3F51B5</color>
+    <color name="violet_200">#1A237E</color>
+
+    <color name="red">#ef1010</color>
+    <color name="yellow">#f4d301</color>
+    <color name="violet">#AC58FA</color>
+</resources>

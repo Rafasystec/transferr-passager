@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">transferr-passager</string>
+    <string name="app_name">passenger</string>
     <string name="title_activity_main">transferr-pass</string>
     <string name="camera">camera</string>
     <string name="gallery">gallery</string>

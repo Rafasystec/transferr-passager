@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="15dp"
+    android:orientation="vertical">
+
+        <TextView
+            android:text="Adicionar passageiros"
+            android:layout_width="wrap_content"
+            android:textSize="@dimen/form_text_size"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:textStyle="bold"
+            android:textColor="@color/primary_dark"
+            android:layout_marginBottom="10dp"/>
+        <TextView
+            android:text="ATENÇÃO: Não será permitido adicionar mais passageiros do que a capacidade informada do veículo."
+            android:layout_width="wrap_content"
+            android:textSize="12sp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:textStyle="bold"
+            android:textColor="@color/red"
+            android:layout_marginBottom="10dp"/>
+
+        <LinearLayout
+            android:layout_gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+                <Button
+                    android:id="@+id/btnLessPassenger"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="-"
+                    android:textSize="30dp"
+                    android:textStyle="bold"
+                    />
+                <TextView
+                    android:id="@+id/lblAddPassenger"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="0"
+                    android:textSize="30dp"
+                    android:textStyle="bold"
+                    android:layout_marginRight="15dp"
+                    android:layout_marginLeft="15dp"/>
+                <Button
+                    android:id="@+id/btnAddPassenger"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="+"
+                    android:textSize="30dp"
+                    android:textStyle="bold"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="20dp">
+                <Button
+                    android:text="OK"
+                    android:textColor="@color/white"
+                    android:textSize="15dp"
+                    android:background="#0069d9"
+                    android:id="@+id/btnSavePlain"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="10dp"/>
+                <Button
+                    android:text="Cancelar"
+                    android:textColor="@color/white"
+                    android:textSize="15dp"
+                    android:background="#bd2130"
+                    android:id="@+id/btnCancelPlain"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+
+        </LinearLayout>
+
+</LinearLayout>

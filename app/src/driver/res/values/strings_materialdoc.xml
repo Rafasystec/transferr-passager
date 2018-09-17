@@ -1,0 +1,71 @@
+<resources>
+
+    <!-- test strings start -->
+
+    <string name="test_small">Lorem ipsum</string>
+    <string name="test_medium">Lorem ipsum dolor sit amet, saperet minimum ei nam, ea dicat menandri pericula vel.</string>
+    <string name="test_large">Lorem ipsum dolor sit amet, saperet minimum ei nam, ea dicat menandri pericula vel. Modus dicam eligendi cu mea, et pri viris audiam disputando, an vix choro constituto comprehensam. Eu qui ignota accusam persecuti. Eu pro probo interesset, his solum utroque insolens ex.</string>
+
+    <!-- test strings end -->
+    <string name="normal">normal</string>
+    <string name="disabled">disabled</string>
+    <string name="Button">Button</string>
+    <string name="enabled">enabled</string>
+    <string name="single_line">single line</string>
+    <string name="styled">styled</string>
+    <string name="multi_line">multi line</string>
+    <string name="determinate">determinate</string>
+    <string name="indeterminate">indeterminate</string>
+    <string name="buffered">buffered</string>
+    <string name="indeterminate_and_determinate">indeterminate and determinate</string>
+    <string name="Check_Box">Check Box</string>
+    <string name="Radio_Button">Radio Button</string>
+    <string name="Hint_text">Hint text</string>
+    <string name="To">To</string>
+    <string name="Subject">Subject</string>
+    <string name="Message">Message</string>
+    <string name="Title">Title</string>
+    <string name="Price">Price</string>
+    <string name="Location">Location (optional)</string>
+    <string name="Description">Description</string>
+    <string name="Vintage">Vintage 50</string>
+    <string name="Personal_info">Personal info</string>
+    <string name="First_name">First name</string>
+    <string name="Birthday">Birthday</string>
+    <string name="Show_error">Show error</string>
+    <string name="Hide_error">Hide error</string>
+    <string name="First_name_is_required">First name is required</string>
+    <string name="Date_pattern">MM/DD/YYYY"</string>
+    <string name="Show_dialog">Show dialog</string>
+    <string name="Show_styled_dialog">Show styled dialog</string>
+    <string name="show_single_choice_dialog">Show single choice dialog</string>
+    <string name="show_multi_choice_dialog">Show multi choice dialog</string>
+    <string name="dialog_title">Use Google\'s location service?</string>
+    <string name="confirmation_dialog_title">Phone ringtone</string>
+    <string name="dialog_message">Let Google help apps determine location. This means sending anonymous location data to Google, even when no apps are running.</string>
+    <string name="show_snack_bar">show snack bar</string>
+    <string name="hide_snack_bar">hide snack bar</string>
+    <string name="show_styled_snack_bar">show styled stack bar</string>
+    <string name="show_toast">show toast</string>
+    <string name="show_styled_toast">show styled toast</string>
+    <string name="hide_toast">hide toast</string>
+    <string name="toolbar">Toolbar</string>
+    <string name="action_settings">Settings</string>
+    <string name="search">Search</string>
+    <string name="favorite">Favorite</string>
+    <string name="action_refresh">Refresh</string>
+    <string name="action_feedback">Feedback</string>
+    <string name="action_leave">Leave</string>
+    <string name="show_date_picker">Show Date Picker</string>
+    <string name="hide_date_picker">Hide Date Picker</string>
+    <string name="show_styled_date_picker">Show Styled Date Picker</string>
+    <string name="show_time_picker">Show Time Picker</string>
+    <string name="show_styled_time_picker">Show Styled Time Picker</string>
+
+    <string-array name="ringtone_list">
+        <item>None</item>
+        <item>Callisto</item>
+        <item>Dione</item>
+    </string-array>
+
+</resources>
