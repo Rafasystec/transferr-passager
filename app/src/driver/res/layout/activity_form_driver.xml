@@ -65,7 +65,7 @@
         android:text="Data de Nascimento:"
         android:textSize="@dimen/form_text_size"
         android:layout_marginLeft="@dimen/form_margin_left"
-        android:textAppearance="@style/CodeFont"
+
         />
 
     <EditText

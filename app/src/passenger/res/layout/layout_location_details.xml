@@ -29,7 +29,7 @@
             android:id="@+id/ivMainPicture"
             android:layout_width="150dp"
             android:layout_height="150dp"
-            android:src="@drawable/lagoinhamain"
+            android:src="@drawable/no_photo_64"
             android:scaleType="fitXY"
             android:adjustViewBounds="true"
             android:layout_gravity="center"

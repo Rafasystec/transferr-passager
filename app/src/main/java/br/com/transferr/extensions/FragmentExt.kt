@@ -1,6 +1,5 @@
-package br.com.transferr.passenger.extensions
+package br.com.transferr.extensions
 
-import android.app.Activity
 import android.support.annotation.IdRes
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentActivity
@@ -10,6 +9,7 @@ import android.support.v7.widget.DefaultItemAnimator
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.support.v7.widget.Toolbar
+import android.widget.Toast
 import br.com.transferr.R
 
 /**
@@ -42,5 +42,19 @@ fun Fragment.switchFragmentToMainContent(fragment: Fragment){
 
 }
 
+fun Fragment.toast(message: CharSequence, length: Int = Toast.LENGTH_SHORT) =
+        Toast.makeText(context,message,length).show()
+
+fun Fragment.showValidation(message: CharSequence) {
+    Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
+}
+
+fun Fragment.showError(throwable: Throwable?) {
+    var message = "Erro desconecido"
+    if(throwable?.message != null){
+        message = throwable.message!!
+    }
+    Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
+}
 
 

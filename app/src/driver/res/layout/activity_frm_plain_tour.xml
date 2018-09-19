@@ -23,7 +23,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="25sp"
-        android:text="@string/tvLocation"
+        android:text="@string/local"
         android:paddingRight="10dp"
         android:paddingLeft="10dp"
         android:textColor="@color/primary_dark"
@@ -37,14 +37,14 @@
         android:paddingLeft="10dp"
         android:paddingRight="10dp"
         android:gravity="center"
-        style="@style/spinner_style"
+
         />
     <TextView
         android:padding="10dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="25sp"
-        android:text="@string/tvSeats"
+        android:text="@string/seats"
         android:paddingRight="10dp"
         android:paddingLeft="10dp"
         android:textColor="@color/primary_dark"
@@ -57,7 +57,7 @@
         android:padding="10dp"
         android:paddingLeft="10dp"
         android:paddingRight="10dp"
-        style="@style/spinner_style"
+
 
         />
 
@@ -73,7 +73,7 @@
 
             android:layout_width="161dp"
             android:layout_height="wrap_content"
-            android:text="@string/tvEmptySeats"
+            android:text="@string/seatsRemaining"
             android:textSize="@dimen/form_text_size"
             android:textColor="@color/violet"
             android:textStyle="bold"/>
@@ -100,7 +100,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="@dimen/form_text_size"
-            android:text="@string/tvCarCapacite"
+            android:text="@string/capacity"
             android:textColor="@color/violet"
             android:textStyle="bold"/>
         <TextView

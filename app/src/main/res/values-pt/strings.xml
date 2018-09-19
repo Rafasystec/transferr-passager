@@ -45,4 +45,15 @@
     <string name="page_title_menu">Menu</string>
     <string name="searchByDescription">Search by location</string>
     <string name="driverAppName">Driver</string>
+    <string name="myInformation">Meu Dados</string>
+    <string name="seats">Seats</string>
+    <string name="capacity">Capacity</string>
+    <string name="btnSave">Save</string>
+    <string name="name">Name</string>
+    <string name="user">User</string>
+    <string name="login">Login</string>
+    <string name="seeMap">See Map</string>
+    <string name="plainTour">Plan Tuor</string>
+    <string name="youAreOffLine">You\'re OFF-LINE</string>
+
 </resources>

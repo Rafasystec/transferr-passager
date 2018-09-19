@@ -4,6 +4,8 @@ import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import br.com.transferr.R
 import br.com.transferr.extensions.setupToolbar
+import br.com.transferr.fragments.DriverEditInfo
+import br.com.transferr.fragments.DriverShowInfoFragment
 import br.com.transferr.fragments.MapsFragment
 import br.com.transferr.passenger.extensions.switchFragmentToMainContent
 import kotlinx.android.synthetic.driver.content_main.*
@@ -40,7 +42,7 @@ class MainActivity : AppCompatActivity() {
                     true
                 }
                 R.id.menuInfoDriver -> {
-                    toast("Ainda em desenvolvimento.")
+                    switchFragmentToMainContent(DriverShowInfoFragment())
                     true
                 }
                 R.id.menuDriver -> {

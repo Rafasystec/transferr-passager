@@ -78,7 +78,7 @@ class LoginActivity : SuperClassActivity() {
     }
 
     private fun callMainActivity(){
-        startActivity(Intent(context,MainActivity::class.java))
+        //startActivity(Intent(context,MainActivity::class.java))
         finish()
     }
 
