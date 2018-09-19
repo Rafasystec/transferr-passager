@@ -10,21 +10,18 @@ import android.view.View
 import android.view.ViewGroup
 import br.com.transferr.R
 import br.com.transferr.application.ApplicationTransferr
-import br.com.transferr.extensions.log
+import br.com.transferr.extensions.*
 import br.com.transferr.helpers.HelperCamera
 import br.com.transferr.model.AnexoPhoto
 import br.com.transferr.model.Driver
 import br.com.transferr.model.responses.OnResponseInterface
 import br.com.transferr.model.responses.ResponseOK
-import br.com.transferr.extensions.setupToolbar
-import br.com.transferr.extensions.showError
-import br.com.transferr.extensions.showValidation
-import br.com.transferr.extensions.toast
 import br.com.transferr.util.FileUtil
 import br.com.transferr.util.ImageUtil
 import br.com.transferr.util.Prefes
 import br.com.transferr.webservices.DriverService
 import br.com.transferr.webservices.UserService
+import com.squareup.picasso.MemoryPolicy
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.driver.fragment_driver_edit_info.*
 import java.io.File
@@ -33,12 +30,29 @@ import java.io.File
 /**
  * A simple [Fragment] subclass.
  */
-class DriverEditInfo : Fragment() {
-
+class DriverEditInfo : SuperClassFragment() {
+    /*
+    override fun onBackStackChanged() {
+        shouldDisplayHomeUp()
+    }
+*/
     private val camera      = HelperCamera()
     private val photoName   = "photoProfile.jpg"
     private var driver: Driver?=null
     var file: File? = null
+    /*
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        activity?.supportFragmentManager?.addOnBackStackChangedListener(this)
+    }
+*/
+
+/*
+    private fun shouldDisplayHomeUp() {
+        val canBack:Boolean = activity?.supportFragmentManager?.backStackEntryCount!! >0
+        activity?.actionBar?.setDisplayHomeAsUpEnabled(canBack)
+    }
+*/
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
 
@@ -63,7 +77,7 @@ class DriverEditInfo : Fragment() {
 
     private fun loadPhoto(idCar:String){
         var url = ApplicationTransferr.getInstance().URL_BASE_IMG + "/car/$idCar"+"/$photoName"
-        Picasso.with(context).load(url).into(imgProfile)
+        Picasso.with(context).load(url).memoryPolicy(MemoryPolicy.NO_CACHE,MemoryPolicy.NO_STORE).placeholder(R.drawable.no_photo_64).into(imgProfile)
     }
 
     private fun initScreenFields(driver:Driver){

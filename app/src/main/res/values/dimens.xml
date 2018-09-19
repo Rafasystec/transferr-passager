@@ -2,4 +2,6 @@
 <resources>
     <dimen name="locationPictureWidth">85dp</dimen>
     <dimen name="locationPictureHeigth">85dp</dimen>
+    <dimen name="icon_width">25dp</dimen>
+    <dimen name="icon_height">25dp</dimen>
 </resources>

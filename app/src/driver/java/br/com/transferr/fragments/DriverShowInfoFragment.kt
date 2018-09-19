@@ -17,17 +17,13 @@ import android.support.v4.app.Fragment
 import android.support.v4.content.LocalBroadcastManager
 import android.support.v7.app.AlertDialog
 import android.util.Log
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import br.com.transferr.R
 import br.com.transferr.activities.DriverInforActivity
 import br.com.transferr.activities.LoginActivity
+import br.com.transferr.activities.newlayout.DriverEditInfoActivity
 import br.com.transferr.broadcast.InternetBroadCast
-import br.com.transferr.extensions.log
-import br.com.transferr.extensions.setupToolbar
-import br.com.transferr.extensions.showError
-import br.com.transferr.extensions.toast
+import br.com.transferr.extensions.*
 import br.com.transferr.model.Car
 import br.com.transferr.model.Driver
 import br.com.transferr.model.enums.EnumStatus
@@ -51,12 +47,30 @@ class DriverShowInfoFragment : SuperClassFragment() {
     lateinit var locationManager: LocationManager
     var car:Car?=null
     var internetBroadCast = InternetBroadCast()
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setHasOptionsMenu(true)
+    }
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_driver_show_info, container, false)
     }
 
+    override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
+        super.onCreateOptionsMenu(menu, inflater)
+        inflater?.inflate(R.menu.menu_edit_driver,menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        return when(item?.itemId){
+            R.id.action_edit_driver->{
+                switchFragmentToMainContent(DriverEditInfo())
+                //startActivity(Intent(activity,DriverEditInfoActivity::class.java))
+                true
+            }else -> super.onOptionsItemSelected(item)
+        }
+    }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setupToolbar(R.id.toolbar,getString(R.string.myInformation))
@@ -66,7 +80,7 @@ class DriverShowInfoFragment : SuperClassFragment() {
         initView()
     }
     private fun initView(){
-        btnFrmDriver.setOnClickListener { callFormDriver() }
+       // btnFrmDriver.setOnClickListener { callFormDriver() }
         swtOnline.setOnClickListener { stopInitLocation() }
         checkNetwork()
 
@@ -143,7 +157,9 @@ class DriverShowInfoFragment : SuperClassFragment() {
 
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
-        outState?.putBoolean(VariablesUtil.ONLINE, swtOnline.isChecked)
+        if(outState != null && swtOnline != null) {
+            outState?.putBoolean(VariablesUtil.ONLINE, swtOnline.isChecked)
+        }
     }
     /*
     private fun initScreenFields(car: Car){

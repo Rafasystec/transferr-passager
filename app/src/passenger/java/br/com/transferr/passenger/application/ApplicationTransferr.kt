@@ -20,7 +20,8 @@ class ApplicationTransferr : MultiDexApplication() {
     companion object {
         //Singleton da classe application
         private var appInstance: br.com.transferr.passenger.application.ApplicationTransferr? = null
-        var DEVICE_LANGUAGE = Locale.getDefault().displayLanguage
+        var DEVICE_LANGUAGE = Locale.getDefault().language
+        val LANG_PT = "pt"
         fun getInstance(): br.com.transferr.passenger.application.ApplicationTransferr {
             if (br.com.transferr.passenger.application.ApplicationTransferr.Companion.appInstance == null) {
                 throw IllegalStateException("Configure the Application class on Manifest xml.")

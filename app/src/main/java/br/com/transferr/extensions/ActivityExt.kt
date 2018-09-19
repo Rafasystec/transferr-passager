@@ -48,3 +48,9 @@ fun AppCompatActivity.switchFragmentToMainContent(fragment: Fragment){
             ?.replace(R.id.mainFragment,fragment)
             ?.commit()
 }
+
+fun AppCompatActivity.switchFragment(@IdRes id: Int, fragment: Fragment){
+    supportFragmentManager.beginTransaction()
+            ?.replace(id,fragment)
+            ?.commit()
+}

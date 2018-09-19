@@ -19,8 +19,8 @@ open class BaseWebService {
     protected var urlBase = br.com.transferr.passenger.application.ApplicationTransferr.getInstance().URL_BASE
     protected var httpClient: OkHttpClient = OkHttpClient.Builder()
             .connectTimeout(5, TimeUnit.SECONDS)
-            .writeTimeout(5, TimeUnit.SECONDS)
-            .readTimeout(5, TimeUnit.SECONDS)
+            .writeTimeout(15, TimeUnit.SECONDS)
+            .readTimeout(15, TimeUnit.SECONDS)
             /*
             .addInterceptor({ chain ->
 

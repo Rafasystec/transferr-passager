@@ -8,12 +8,11 @@ import android.support.v4.view.MenuItemCompat
 import android.support.v7.widget.RecyclerView
 import android.support.v7.widget.SearchView
 import android.view.*
-import br.com.transferr.fragments.SuperClassFragment
 import br.com.transferr.R
-import br.com.transferr.passenger.adapter.LocationAdapter
-import br.com.transferr.passenger.extensions.defaultRecycleView
-import br.com.transferr.passenger.extensions.setupToolbar
-import br.com.transferr.passenger.extensions.switchFragmentToMainContent
+import br.com.transferr.extensions.defaultRecycleView
+import br.com.transferr.extensions.setupToolbar
+import br.com.transferr.extensions.switchFragmentToMainContent
+import br.com.transferr.fragments.SuperClassFragment
 import br.com.transferr.passenger.interfaces.OnResponseInterface
 import br.com.transferr.passenger.model.Location
 import br.com.transferr.passenger.webservices.WSLocation

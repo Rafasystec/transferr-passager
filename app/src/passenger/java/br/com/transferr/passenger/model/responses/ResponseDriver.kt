@@ -13,4 +13,5 @@ class ResponseDriver {
     var imgProfileUrl:String?=null
     var phone = ""
     var whatsapp=""
+    var nameOfCar=""
 }

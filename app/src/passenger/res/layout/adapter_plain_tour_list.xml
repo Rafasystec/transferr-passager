@@ -38,51 +38,94 @@
             android:id="@+id/tvPlainTourName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignEnd="@+id/tvNameDriver"
+
             android:layout_alignParentTop="true"
-            android:layout_alignRight="@+id/tvNameDriver"
+
             android:gravity="center"
             android:text="@string/local"
             android:textSize="18sp"
             android:textStyle="bold" />
-
-        <TextView
-            android:id="@+id/tvNameDriver"
-            android:layout_width="wrap_content"
+        <RelativeLayout
+            android:layout_marginTop="8dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignTop="@+id/ivProfile"
-            android:layout_marginStart="17dp"
             android:layout_toEndOf="@+id/ivProfile"
-            android:text="Driver Name"
-            android:textSize="16sp"
-            android:textStyle="normal"
-            android:layout_marginLeft="17dp"
-            android:layout_toRightOf="@+id/ivProfile" />
-        <TextView
-            android:id="@+id/tvDriverDetail"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Carro modelo"
-            android:layout_below="@+id/tvNameDriver"
-            android:layout_alignStart="@+id/tvNameDriver"
-            android:layout_alignLeft="@+id/tvNameDriver" />
-        <TextView
-            android:id="@+id/tvDriverCarPlate"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="XXX-0000"
-            android:layout_below="@+id/tvDriverDetail"
-            android:layout_alignStart="@+id/tvDriverDetail"
-            android:layout_alignLeft="@+id/tvDriverDetail" />
+            android:layout_below="@+id/tvPlainTourName"
+            android:paddingLeft="8dp"
+            android:layout_toRightOf="@+id/ivProfile">
+            <ImageView
+                android:id="@+id/ivDriverNameIcon"
+                android:layout_width="@dimen/icon_width"
+                android:layout_height="@dimen/icon_height"
+                android:src="@drawable/ic_steering_wheel"
+                android:layout_alignTop="@+id/tvNameDriver"
+                android:paddingRight="5dp"
+                />
 
-        <TextView
-            android:id="@+id/tvPlainDate"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignLeft="@+id/tvDriverCarPlate"
-            android:layout_alignStart="@+id/tvDriverCarPlate"
-            android:layout_below="@+id/tvDriverCarPlate"
-            android:text="-" />
+            <TextView
+                android:id="@+id/tvNameDriver"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_toEndOf="@+id/ivDriverNameIcon"
+                android:layout_toRightOf="@+id/ivDriverNameIcon"
+                android:text="Driver Name"
+                android:textStyle="bold" />
+            <ImageView
+                android:id="@+id/ivDriverDetailIcon"
+                android:layout_width="@dimen/icon_width"
+                android:layout_height="@dimen/icon_height"
+                android:src="@drawable/ic_jeep_wrangler"
+                android:layout_alignTop="@+id/tvDriverDetail"
+                android:paddingRight="5dp"
+                />
+            <TextView
+                android:id="@+id/tvDriverDetail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Área do Profissional"
+                android:layout_below="@+id/tvNameDriver"
+                android:layout_alignStart="@+id/tvNameDriver"
+                android:layout_alignLeft="@+id/tvNameDriver" />
+            <ImageView
+                android:id="@+id/ivCarPlateIcon"
+                android:layout_width="@dimen/icon_width"
+                android:layout_height="@dimen/icon_height"
+                android:src="@drawable/ic_licence_plate_filled"
+                android:layout_alignTop="@+id/tvDriverCarPlate"
+                android:paddingRight="5dp"
+                />
+            <TextView
+                android:id="@+id/tvDriverCarPlate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="plate"
+                android:layout_below="@+id/tvDriverDetail"
+                android:layout_alignStart="@+id/tvDriverDetail"
+                android:layout_alignLeft="@+id/tvDriverDetail" />
+            <ImageView
+                android:id="@+id/ivPlainDateTime"
+                android:layout_width="@dimen/icon_width"
+                android:layout_height="@dimen/icon_height"
+                android:src="@drawable/ic_clock"
+                android:layout_alignTop="@+id/tvPlainDate"
+                android:paddingRight="5dp"
+                />
+            <TextView
+                android:id="@+id/tvPlainDate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@+id/tvDriverCarPlate"
+                android:layout_alignStart="@+id/tvDriverCarPlate"
+                android:layout_below="@+id/tvDriverCarPlate"
+                android:text="-" />
+
+        </RelativeLayout>
+
+
+
+
+
 
         <TextView
             android:id="@+id/tvSeatsReminding"
@@ -93,19 +136,21 @@
             android:layout_alignParentRight="true"
             android:layout_marginRight="5dp"
             android:textColor="@color/colorPrimaryDark"
+            android:layout_marginBottom="8dp"
             android:text="@string/seatsRemaining" />
 
         <TextView
             android:id="@+id/tvSeatsRemindingNumber"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignBottom="@+id/ivProfile"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentRight="true"
+            android:layout_above="@+id/tvSeatsReminding"
+            android:layout_alignEnd="@+id/tvSeatsReminding"
+            android:layout_alignRight="@+id/tvSeatsReminding"
+            android:paddingBottom="0dp"
+            android:layout_marginRight="12dp"
             android:text="0"
-            android:textSize="40sp"
-            android:layout_marginRight="5dp"
             android:textColor="@color/colorPrimaryDark"
+            android:textSize="40sp"
             android:textStyle="bold" />
 
         <LinearLayout

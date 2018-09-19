@@ -46,14 +46,16 @@
     <string name="searchByDescription">Search by location</string>
     <string name="driverAppName">Driver</string>
     <string name="myInformation">Meu Dados</string>
-    <string name="seats">Seats</string>
-    <string name="capacity">Capacity</string>
-    <string name="btnSave">Save</string>
-    <string name="name">Name</string>
-    <string name="user">User</string>
+    <string name="seats">Acentos</string>
+    <string name="capacity">Capacidade</string>
+    <string name="btnSave">Salvar</string>
+    <string name="name">Nome</string>
+    <string name="user">Usuário</string>
     <string name="login">Login</string>
-    <string name="seeMap">See Map</string>
-    <string name="plainTour">Plan Tuor</string>
-    <string name="youAreOffLine">You\'re OFF-LINE</string>
+    <string name="seeMap">Ver mapa</string>
+    <string name="plainTour">Plano de Passeio</string>
+    <string name="youAreOffLine">Você está OFF-LINE</string>
+    <string name="edit">Editar</string>
+    <string name="changePassword">Alterar Senha</string>
 
 </resources>

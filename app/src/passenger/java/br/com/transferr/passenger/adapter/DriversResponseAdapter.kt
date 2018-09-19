@@ -39,8 +39,8 @@ class DriversResponseAdapter(val drivers : List<ResponseDriver>,val onClick: (Re
         this.context = holder!!.itemView.context
         val responseDrivers = drivers[position]
         holder.tvName.text = responseDrivers.name
-        holder.tvDriverDetail.text = "${responseDrivers.countryRegister}"
-
+        holder.tvDriverDetail.text = "${responseDrivers.nameOfCar}"
+        holder.tvCarPlate.text = "${responseDrivers.countryRegister}"
         if(responseDrivers.imgProfileUrl != null && responseDrivers.imgProfileUrl?.isEmpty()!!){
             responseDrivers.imgProfileUrl = null
         }
@@ -72,28 +72,17 @@ class DriversResponseAdapter(val drivers : List<ResponseDriver>,val onClick: (Re
 
     class DriversResponseViewHolder(view: View):RecyclerView.ViewHolder(view){
         var tvName    : TextView
-        var tvPrice   : TextView
         var img: ImageView
-        /*
-        var ivStarRate1: ImageView
-        var ivStarRate2: ImageView
-        var ivStarRate3: ImageView
-        var ivStarRate4: ImageView
-        var ivStarRate5: ImageView
-        */
         var tvDriverDetail : TextView
-        //var tvDriverEmail : TextView
         var cardView: CardView
-        //var tvDriverPhone: TextView
         var btnCallPhone : AppCompatButton
         var btnWhatsapp : AppCompatButton
+        var tvCarPlate:TextView = view.findViewById(R.id.tvCarPlate)
         init {
             tvName          = view.findViewById(R.id.tvNameDriver)
             img             = view.findViewById(R.id.ivProfile)
-            tvPrice         = view.findViewById(R.id.tvPrice)
             tvDriverDetail  = view.findViewById(R.id.tvDriverDetail)
             cardView        = view.findViewById(R.id.cvProfessional)
-            //tvDriverEmail   = view.findViewById(R.id.tvDriverEmail)
             btnCallPhone    = view.findViewById(R.id.btnCallPhone)
             btnWhatsapp     = view.findViewById(R.id.btnWhatsapp)
             /*

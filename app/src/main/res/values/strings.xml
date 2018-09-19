@@ -56,4 +56,6 @@
     <string name="seeMap">See Map</string>
     <string name="plainTour">Plan Tuor</string>
     <string name="youAreOffLine">You\'re OFF-LINE</string>
+    <string name="edit">Edit</string>
+    <string name="changePassword">Change Password</string>
 </resources>

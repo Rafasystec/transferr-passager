@@ -7,10 +7,9 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import br.com.transferr.fragments.SuperClassFragment
 import br.com.transferr.R
-import br.com.transferr.passenger.adapter.DriversResponseAdapter
-import br.com.transferr.passenger.extensions.defaultRecycleView
+import br.com.transferr.extensions.defaultRecycleView
+import br.com.transferr.fragments.SuperClassFragment
 import br.com.transferr.passenger.interfaces.OnResponseInterface
 import br.com.transferr.passenger.model.Location
 import br.com.transferr.passenger.model.TourOption

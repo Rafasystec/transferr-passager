@@ -13,6 +13,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import br.com.transferr.R
+import br.com.transferr.passenger.application.ApplicationTransferr
 import br.com.transferr.passenger.model.PlainTour
 import br.com.transferr.passenger.util.DateUtil
 import br.com.transferr.passenger.util.WhatsAppUtil
@@ -41,7 +42,13 @@ class PlainTourListAdapter(val plainsTour: List<PlainTour> ,val onClick: (PlainT
              plain.driver?.car?.photo
         }
         holder.tvDriverCarPlate.text = plain.driver?.car?.carIdentity
-        holder.tvPlainDate.text = DateUtil.format(plain.date!!,"dd/MM/yyyy HH:mm")
+        var lang = ApplicationTransferr.DEVICE_LANGUAGE
+        var formatOut = if(lang == ApplicationTransferr.LANG_PT){
+            "dd/MM HH:mm"
+        }else{
+            "MM-dd hh:mm a"
+        }
+        holder.tvPlainDate.text = DateUtil.format(plain.date!!,formatOut)
         holder.tvPliantourName.text = plain.tourOption?.name
 
         //Start progressBar
