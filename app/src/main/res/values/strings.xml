@@ -60,4 +60,9 @@
     <string name="changePassword">Change Password</string>
     <string name="place">Place</string>
     <string name="places">Places</string>
+    <string name="about">About</string>
+    <string name="contactUs">Contact us</string>
+    <string name="rateApp">Rate the App</string>
+    <string name="termsOfUse">Terms of use</string>
+    <string name="menu">Menu</string>
 </resources>

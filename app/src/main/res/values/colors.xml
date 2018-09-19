@@ -25,4 +25,5 @@
     <color name="selectedItemClient">#000</color>
     <color name="UnselectedItemClient">#c79100</color>
     <color name="activityBackground">#E5D4AD</color>
+    <color name="control">#FAF4C3</color>
 </resources>
