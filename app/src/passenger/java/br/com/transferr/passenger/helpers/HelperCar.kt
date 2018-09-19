@@ -1,13 +1,14 @@
 package br.com.transferr.passenger.helpers
 
 import br.com.transferr.R
+import br.com.transferr.passenger.extensions.toJson
 import br.com.transferr.passenger.model.responses.ResponseCarsOnline
 import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 
 /**
- * Created by idoctor on 15/02/2018.
+ * Created by Rafael Rocha on 15/02/2018.
  */
 object HelperCar {
 
@@ -15,15 +16,8 @@ object HelperCar {
         var markers:MutableList<MarkerOptions>?= mutableListOf()
         if(!list.isEmpty()){
             list.map {
-                        //MarkerOptions()
-                        //        .icon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_car_black_24dp))
-                        //        .title(it.placa)
-                        //        .snippet(it.model+ " - " + it.cor)
-                        //        .position(LatLng(it.latitude!!, it.longitude!!))
-                        addMarkCarOnTheMap(it)
-                    }
-                    .forEach { markers?.add(it!!) }
-
+                addMarkCarOnTheMap(it)
+            }.forEach { markers?.add(it!!) }
         }
         return markers!!
     }
@@ -35,8 +29,8 @@ object HelperCar {
         }
         var marck = MarkerOptions()
                 .icon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_car_black_24dp))
-                .title(car.placa)
-                .snippet(car.model+ " - " + car.cor)
+                .title(car.name)
+                .snippet(car.toJson())
                 .position(LatLng(car.latitude!!, car.longitude!!))
         return marck
     }

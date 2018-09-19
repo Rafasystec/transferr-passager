@@ -29,11 +29,12 @@ class MapInfoWindowsAdapter(context: Context) : GoogleMap.InfoWindowAdapter,Goog
         var active = this.context as Activity
         var mapView = active.layoutInflater.inflate(R.layout.inforwindows_map,null)
         mapView.name.text       = marker?.title
-        mapView.details.text    = marker?.snippet
+        //mapView.details.text    = marker?.snippet
+        var jsonCar = marker?.snippet
 
         var url = "http://planetcarsz.com/assets/uploads/images/VEICULOS/T/TOYOTA/2014_TOYOTA_HILUX//TOYOTA_HILUX_2014_01.jpg"
         loadImage(marker,mapView.photo,url)
-        mapView.txtDistance.text = "16km"
+
         return mapView
     }
 
