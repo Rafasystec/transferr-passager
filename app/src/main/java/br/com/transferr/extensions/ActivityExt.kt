@@ -1,6 +1,7 @@
 package br.com.transferr.passenger.extensions
 
 import android.app.Activity
+import android.app.ProgressDialog
 import android.support.annotation.IdRes
 import android.support.v4.app.Fragment
 import android.support.v7.app.ActionBar
@@ -10,6 +11,7 @@ import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.support.v7.widget.Toolbar
 import br.com.transferr.R
+import org.jetbrains.anko.indeterminateProgressDialog
 
 /**
  * Created by Rafael Rocha on 25/07/18.
@@ -53,4 +55,13 @@ fun AppCompatActivity.switchFragment(@IdRes id: Int, fragment: Fragment){
     supportFragmentManager.beginTransaction()
             ?.replace(id,fragment)
             ?.commit()
+}
+
+fun AppCompatActivity.showLoadingDialog(message: String = getString(R.string.loading), title: String=getString(R.string.wait)): ProgressDialog {
+    val dialog = indeterminateProgressDialog(message, title) {
+        setProgressStyle(ProgressDialog.STYLE_SPINNER)
+        setCancelable(false)
+        show()
+    }
+    return dialog!!
 }

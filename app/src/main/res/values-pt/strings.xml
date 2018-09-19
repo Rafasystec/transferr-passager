@@ -40,10 +40,10 @@
     <string name="local">Local</string>
     <string name="localAndTours"><![CDATA[Locais & Passeios]]></string>
     <!--Pages title -->
-    <string name="page_title_map">Map</string>
-    <string name="page_title_tour">Tour</string>
+    <string name="page_title_map">Mapa</string>
+    <string name="page_title_tour">Passeio</string>
     <string name="page_title_menu">Menu</string>
-    <string name="searchByDescription">Search by location</string>
+    <string name="searchByDescription">Procurar por Localização</string>
     <string name="driverAppName">Driver</string>
     <string name="myInformation">Meu Dados</string>
     <string name="seats">Acentos</string>
@@ -57,5 +57,7 @@
     <string name="youAreOffLine">Você está OFF-LINE</string>
     <string name="edit">Editar</string>
     <string name="changePassword">Alterar Senha</string>
+    <string name="place">Lugar</string>
+    <string name="places">Lugares</string>
 
 </resources>

@@ -157,12 +157,10 @@ GoogleApiClient.OnConnectionFailedListener,
 
     @SuppressLint("MissingPermission")
     override fun onConnected(p0: Bundle?) {
-        //if (checkSelfPermission(this!!.activity!!, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED &&
-        //        checkSelfPermission(this!!.activity!!, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-        //    return
-        //}
+        if(activity == null){
+            return
+        }
         startLocationUpdates()
-
         var fusedLocationProviderClient :
                 FusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this!!.activity!!)
         fusedLocationProviderClient .getLastLocation()

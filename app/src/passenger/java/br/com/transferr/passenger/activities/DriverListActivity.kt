@@ -10,6 +10,7 @@ import android.view.View
 import br.com.transferr.R
 import br.com.transferr.passenger.adapter.DriversResponseAdapter
 import br.com.transferr.passenger.extensions.defaultRecycleView
+import br.com.transferr.passenger.extensions.showLoadingDialog
 import br.com.transferr.passenger.interfaces.OnResponseInterface
 import br.com.transferr.passenger.model.responses.ResponseDriver
 import br.com.transferr.passenger.model.responses.ResponseDrivers
@@ -41,7 +42,7 @@ class DriverListActivity : br.com.transferr.passenger.activities.SuperClassActiv
     }
 
     private fun loadDriversByLocation() {
-        val dialog = progressDialog(message = R.string.loading, title = R.string.wait)
+        val dialog = showLoadingDialog()
         WSDriver.doGetByLocation(idLocation, object : OnResponseInterface<ResponseDrivers>{
             override fun onSuccess(body: ResponseDrivers?) {
                 recycleView?.adapter = br.com.transferr.passenger.adapter.DriversResponseAdapter(body?.drivers!!, onClick = { driver: ResponseDriver -> cardViewOnClick(drivers = driver) })

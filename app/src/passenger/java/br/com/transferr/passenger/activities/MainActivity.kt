@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity
 import br.com.transferr.R
 import br.com.transferr.passenger.extensions.setupToolbar
 import br.com.transferr.passenger.extensions.switchFragmentToMainContent
+import br.com.transferr.passenger.fragments.MainMenuFragment
 import br.com.transferr.passenger.fragments.MapsFragment
 import br.com.transferr.passenger.fragments.TourOptionLisFragment
 import kotlinx.android.synthetic.passenger.content_main.*
@@ -46,9 +47,7 @@ class MainActivity : AppCompatActivity() {
                     true
                 }
                 R.id.menuHistoryCli -> {
-                    //includeFragment(R.id.frameMainProfessionalAgenda, ProfessionalHistoryFragment())
-                    //switchFragment(ClientHistoryFragment())
-                    toast("Ainda em desenvolvimento.")
+                    switchFragmentToMainContent(MainMenuFragment())
                     true
                 }
                 else -> {

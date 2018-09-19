@@ -9,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import br.com.transferr.R
 import br.com.transferr.extensions.defaultRecycleView
+import br.com.transferr.extensions.showLoadingDialog
 import br.com.transferr.fragments.SuperClassFragment
 import br.com.transferr.passenger.interfaces.OnResponseInterface
 import br.com.transferr.passenger.model.Location
@@ -53,7 +54,7 @@ class DriverListFragment : SuperClassFragment() {
     private fun loadDriversByLocation() {
 
         if(location != null) {
-            val dialog = activity?.progressDialog(message = R.string.loading, title = R.string.wait)
+            val dialog = showLoadingDialog()
             WSDriver.doGetByLocation(location?.id!!, object : OnResponseInterface<ResponseDrivers> {
                 override fun onSuccess(body: ResponseDrivers?) {
                     dialog?.dismiss()

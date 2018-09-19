@@ -11,12 +11,15 @@ import android.view.*
 import br.com.transferr.R
 import br.com.transferr.extensions.defaultRecycleView
 import br.com.transferr.extensions.setupToolbar
+import br.com.transferr.extensions.showLoadingDialog
 import br.com.transferr.extensions.switchFragmentToMainContent
 import br.com.transferr.fragments.SuperClassFragment
 import br.com.transferr.passenger.interfaces.OnResponseInterface
 import br.com.transferr.passenger.model.Location
 import br.com.transferr.passenger.webservices.WSLocation
 import org.jetbrains.anko.progressDialog
+import android.widget.EditText
+import android.widget.ImageView
 
 
 /**
@@ -38,7 +41,7 @@ class LocationListFragment : SuperClassFragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setHasOptionsMenu(true)
-        setupToolbar(R.id.toolbar,context?.getString(R.string.localAndTours))
+        setupToolbar(R.id.toolbar,context?.getString(R.string.places))
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -79,12 +82,17 @@ class LocationListFragment : SuperClassFragment() {
 
                 }
         )
+        val searchEditText = searchView.findViewById<EditText>(android.support.v7.appcompat.R.id.search_src_text) as EditText
+        searchEditText.setTextColor(resources.getColor(android.R.color.black))
+        searchEditText.setHintTextColor(resources.getColor(android.R.color.black))
+        val searchClose = searchView.findViewById<ImageView>(android.support.v7.appcompat.R.id.search_close_btn)
+        searchClose.setImageResource(R.drawable.arrow_left)
 
 
     }
 
     fun requestAllLocations(){
-        var dialog = activity?.progressDialog(message = R.string.loading, title = R.string.wait)
+        var dialog = showLoadingDialog()
         WSLocation.getAll(object : OnResponseInterface<List<Location>>{
             override fun onSuccess(body: List<Location>?) {
                 dialog?.dismiss()
