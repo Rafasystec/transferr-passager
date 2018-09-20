@@ -60,8 +60,8 @@ GoogleApiClient.OnConnectionFailedListener,
     lateinit var locationManager: LocationManager
     private var mLocationManager: LocationManager? = null
     private var mLocationRequest: LocationRequest? = null
-    private val UPDATE_INTERVAL = (2 * 1000).toLong()  /* 10 secs */
-    private val FASTEST_INTERVAL: Long = 2000 /* 2 sec */
+    private val UPDATE_INTERVAL = (10000).toLong()  /* 10 secs */
+    private val FASTEST_INTERVAL: Long = 4000 /* 2 sec */
     private val ZOOM = 15f
     lateinit var mLocation: Location
     var numCarFound:Int = 0

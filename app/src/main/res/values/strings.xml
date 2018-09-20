@@ -65,4 +65,8 @@
     <string name="rateApp">Rate the App</string>
     <string name="termsOfUse">Terms of use</string>
     <string name="menu">Menu</string>
+    <string name="model">Model</string>
+    <string name="plate">Plate</string>
+    <string name="color">Color</string>
+    <string name="noInfor">No Information</string>
 </resources>
