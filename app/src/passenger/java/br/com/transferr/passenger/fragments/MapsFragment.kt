@@ -10,6 +10,7 @@ import android.content.pm.PackageManager
 import android.location.Location
 import android.location.LocationManager
 import android.os.Bundle
+import android.os.Handler
 import android.provider.Settings
 import android.support.design.widget.NavigationView
 import android.support.v4.app.ActivityCompat
@@ -39,6 +40,7 @@ import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
+import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.Marker
 import org.jetbrains.anko.*
 
@@ -46,39 +48,27 @@ import org.jetbrains.anko.*
 /**
  * A simple [Fragment] subclass.
  */
-class MapsFragment : SuperClassFragment(), OnMapReadyCallback,
-GoogleApiClient.ConnectionCallbacks,
-GoogleApiClient.OnConnectionFailedListener,
-        com.google.android.gms.location.LocationListener,
-        GoogleMap.OnMarkerClickListener{
+class MapsFragment : SuperClassFragment(), OnMapReadyCallback
 
+{
 
-
-    private val TAG = "LOCATION"
-    private lateinit var mGoogleApiClient: GoogleApiClient
     private lateinit var mMap: GoogleMap
     lateinit var locationManager: LocationManager
     private var mLocationManager: LocationManager? = null
-    private var mLocationRequest: LocationRequest? = null
-    private val UPDATE_INTERVAL = (10000).toLong()  /* 10 secs */
-    private val FASTEST_INTERVAL: Long = 4000 /* 2 sec */
     private val ZOOM = 15f
-    lateinit var mLocation: Location
-    var numCarFound:Int = 0
-    private lateinit var mDrawerLayout: DrawerLayout
-    private lateinit var navigationView: NavigationView
+    var marker:Marker?=null
 
     val PERMISSION_TO_ACCESS_LOCATION = 1
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        mHandler = Handler()
+        startRepeatingTask()
+    }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         locationManager = activity?.getSystemService(Context.LOCATION_SERVICE) as LocationManager
-        mGoogleApiClient = GoogleApiClient.Builder(this!!.context!!)
-                .addConnectionCallbacks(this)
-                .addOnConnectionFailedListener(this)
-                .addApi(LocationServices.API)
-                .build()
-        startApi()
         mLocationManager = activity?.getSystemService(Context.LOCATION_SERVICE) as LocationManager
         checkLocation()
         setMainTitle(R.string.page_title_map)
@@ -87,21 +77,6 @@ GoogleApiClient.OnConnectionFailedListener,
         val mapFragment = childFragmentManager.findFragmentById(R.id.mapFragment) as SupportMapFragment
         mapFragment.getMapAsync(this)
         return view
-    }
-
-    /*
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        val mapFragment = activity?.supportFragmentManager
-                ?.findFragmentById(R.id.map) as SupportMapFragment
-        mapFragment.getMapAsync(this)
-    }
-    */
-
-    fun startApi(){
-        if (mGoogleApiClient != null) {
-            mGoogleApiClient.connect()
-        }
     }
 
     private fun checkLocation(): Boolean {
@@ -144,7 +119,14 @@ GoogleApiClient.OnConnectionFailedListener,
         }
         mMap.animateCamera(CameraUpdateFactory.zoomTo(ZOOM))
         mMap.setMaxZoomPreference(15f)
-        mMap.setInfoWindowAdapter(br.com.transferr.passenger.adapter.MapInfoWindowsAdapter(this!!.context!!))
+        mMap.setInfoWindowAdapter(br.com.transferr.passenger.adapter.MapInfoWindowsAdapter(this))
+        //mMap.setOnMarkerClickListener({marker->
+        //    //updateCamera(marker.position!!)
+        //    marker.showInfoWindow()
+        //    //marker.hideInfoWindow()
+        //    true
+        //})
+
         mMap.mapType = GoogleMap.MAP_TYPE_NORMAL
         //drawerLeftMenu()
     }
@@ -155,35 +137,6 @@ GoogleApiClient.OnConnectionFailedListener,
                 Manifest.permission.ACCESS_COARSE_LOCATION)
     }
 
-    @SuppressLint("MissingPermission")
-    override fun onConnected(p0: Bundle?) {
-        if(activity == null){
-            return
-        }
-        startLocationUpdates()
-        var fusedLocationProviderClient :
-                FusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this!!.activity!!)
-        fusedLocationProviderClient .getLastLocation()
-                .addOnSuccessListener(this!!.activity!!, { location ->
-                    if (location != null) {
-                        mLocation = location
-                    }
-                })
-    }
-
-    override fun onConnectionSuspended(p0: Int) {
-        Log.d(TAG, "Connection Suspended")
-        mGoogleApiClient.connect()
-    }
-
-    override fun onConnectionFailed(p0: ConnectionResult) {
-        Log.d("DEBUG","Failed on connection")
-    }
-
-    override fun onLocationChanged(location: Location?) {
-        updateMapScreen(location)
-    }
-
     private fun updateMapScreen(location: Location?){
         try {
             callWebService()
@@ -192,6 +145,13 @@ GoogleApiClient.OnConnectionFailedListener,
         }
     }
 
+    private fun updateMapScreen(){
+        try {
+            callWebService()
+        }catch (e:Exception){
+            Log.e("FATAL_ERRO","try to call car to show on map",e)
+        }
+    }
     private fun callWebService() {
         if(mMap == null){
             return
@@ -214,17 +174,6 @@ GoogleApiClient.OnConnectionFailedListener,
                 uiThread {
                     if (carOnlineList != null) {
                         var markers = HelperCar.transformInMarkers(carOnlineList)
-                        if (numCarFound == 0) {
-                            numCarFound = markers.size
-                        } else {
-                            var size = markers.size
-                            if (size != numCarFound) {
-                                numCarFound = size
-                                //Snackbar.make(contex, "Replace with your own action", Snackbar.LENGTH_LONG)
-                                //.setAction("Action", null).show()
-                            }
-                        }
-
                         for (mark in markers) {
                             mMap.addMarker(mark)
                         }
@@ -232,28 +181,6 @@ GoogleApiClient.OnConnectionFailedListener,
                 }
             }
         }
-    }
-
-    override fun onMarkerClick(p0: Marker?): Boolean {
-        return true
-    }
-
-    private fun startLocationUpdates() {
-
-        // Create the location request
-        mLocationRequest = LocationRequest.create()
-                .setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY)
-                .setInterval(UPDATE_INTERVAL)
-                .setFastestInterval(FASTEST_INTERVAL)
-        // Request location updates
-        if(activity != null) {
-            if (checkSelfPermission(this?.activity!!, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && checkSelfPermission(this!!.activity!!, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-                return
-            }
-        }
-        LocationServices.FusedLocationApi.requestLocationUpdates(mGoogleApiClient,
-                mLocationRequest, this)
-
     }
 
     private fun checkPermissionToAccessLocation(){
@@ -290,6 +217,42 @@ GoogleApiClient.OnConnectionFailedListener,
                 }
             }
         }
+    }
+
+    private val mInterval = 10000L // 5 seconds by default, can be changed later
+    private var mHandler: Handler? = null
+
+    var mStatusChecker: Runnable = object : Runnable {
+        override fun run() {
+            try {
+                updateMapScreen()
+            } finally {
+                // 100% guarantee that this always happens, even if
+                // your update method throws an exception
+                mHandler?.postDelayed(this, mInterval)
+            }
+        }
+    }
+
+    fun startRepeatingTask() {
+        mStatusChecker.run()
+    }
+
+    fun stopRepeatingTask() {
+        mHandler?.removeCallbacks(mStatusChecker)
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        stopRepeatingTask()
+    }
+
+    internal fun updateCamera(latLng: LatLng?) {
+        if (latLng != null) {
+            mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 11f))
+        }
+
+
     }
 
 }

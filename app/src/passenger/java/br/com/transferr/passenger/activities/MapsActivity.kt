@@ -135,7 +135,7 @@ class MapsActivity : br.com.transferr.passenger.activities.SuperClassActivity(),
         }
         mMap.animateCamera(CameraUpdateFactory.zoomTo(ZOOM))
         mMap.setMaxZoomPreference(15f)
-        mMap.setInfoWindowAdapter(br.com.transferr.passenger.adapter.MapInfoWindowsAdapter(this))
+        //mMap.setInfoWindowAdapter(br.com.transferr.passenger.adapter.MapInfoWindowsAdapter(this))
         mMap.mapType = GoogleMap.MAP_TYPE_NORMAL
         //drawerLeftMenu()
 
