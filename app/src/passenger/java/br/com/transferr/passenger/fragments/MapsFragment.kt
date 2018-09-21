@@ -123,12 +123,10 @@ class MapsFragment : SuperClassFragment(), OnMapReadyCallback
         //mMap.setOnMarkerClickListener({marker->
         //    //updateCamera(marker.position!!)
         //    marker.showInfoWindow()
-        //    //marker.hideInfoWindow()
-        //    true
+        //    marker.hideInfoWindow()
+        //    false
         //})
-
         mMap.mapType = GoogleMap.MAP_TYPE_NORMAL
-        //drawerLeftMenu()
     }
 
     private fun isMapAllowed():Boolean{

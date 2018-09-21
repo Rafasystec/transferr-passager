@@ -4,6 +4,7 @@ import android.app.Activity
 import android.content.Context
 import android.os.Handler
 import android.support.v4.app.Fragment
+import android.util.Log
 import android.view.View
 import android.widget.ImageView
 import android.widget.Toast
@@ -32,17 +33,21 @@ class MapInfoWindowsAdapter(fragment: MapsFragment) : GoogleMap.InfoWindowAdapte
     }
     var context:MapsFragment = fragment
     var latestMarkerId:String = "0"
+    companion object {
+        var isFirstTime = true
+    }
 
     override fun getInfoContents(marker: Marker?): View?  = null
 
 
-    private fun buildMapInfoWindow(marker: Marker?): View? {
-        context.marker = marker
+    private fun buildMapInfoWindow(markerParam: Marker?): View? {
+       // context.marker = marker
+        var isShown = markerParam?.isInfoWindowShown
         var active = this.context.activity
         var mapView = active?.layoutInflater?.inflate(R.layout.inforwindows_map, null)
-        mapView?.name?.text = marker?.title
+        mapView?.name?.text = markerParam?.title
         //mapView.details.text    = marker?.snippet
-        var jsonCar = marker?.snippet
+        var jsonCar = markerParam?.snippet
         var car = fromJson<ResponseCarsOnline>(jsonCar!!)
         var model: String
         var plate: String
@@ -58,85 +63,41 @@ class MapInfoWindowsAdapter(fragment: MapsFragment) : GoogleMap.InfoWindowAdapte
             plate = "${active?.getString(R.string.plate)}: ${active?.getString(R.string.noInfor)}"
             color = "${active?.getString(R.string.color)}: ${active?.getString(R.string.noInfor)}"
         }
-        mapView?.tvMapCarModel?.text = model
-        mapView?.tvMapPlate?.text = plate
-        mapView?.tvMapCarColor?.text = color
-        mapView?.progressImg?.visibility = View.VISIBLE
-        Picasso.with(context.activity)
-                .load(url)
-                .priority(Picasso.Priority.HIGH)
-                .placeholder(R.drawable.progress_animation)
-                .memoryPolicy(MemoryPolicy.NO_CACHE, MemoryPolicy.NO_STORE).into(mapView?.photo,
-                object : com.squareup.picasso.Callback {
-                    //val markerInternal = marker
-                    override fun onSuccess() {
-                        Handler().postDelayed({
-                            if(marker?.isInfoWindowShown!!) {
-                                marker?.hideInfoWindow()
-                                marker?.showInfoWindow()
-                            }
-                        }, 500)
-                    }
+        mapView?.tvMapCarModel?.text    = model
+        mapView?.tvMapPlate?.text       = plate
+        mapView?.tvMapCarColor?.text    = color
+        //mapView?.progressImg?.visibility = View.VISIBLE
+        if (isFirstTime) {
+            setImageFromPicasso(url, mapView, markerParam)
+        }else{
+            isFirstTime = true
 
-                    override fun onError() {
-                        Handler().postDelayed({
-                            if(marker?.isInfoWindowShown!!) {
-                                marker?.hideInfoWindow()
-                                marker?.showInfoWindow()
-                            }
-                        }, 500)
-                    }
-                })
-        //var url = "http://planetcarsz.com/assets/uploads/images/VEICULOS/T/TOYOTA/2014_TOYOTA_HILUX//TOYOTA_HILUX_2014_01.jpg"
-        //loadImage(marker,mapView.photo,url!!,mapView)
-        //mapView.progressImg.visibility = View.VISIBLE
-        /*
-        Picasso.with(context).load(url)
-                .priority(Picasso.Priority.HIGH)
-                .placeholder(R.drawable.no_photo_64)
-                .memoryPolicy(MemoryPolicy.NO_CACHE, MemoryPolicy.NO_STORE)
-                .into(mapView.photo, object : Callback {
-                    override fun onSuccess() {
-                        //if (marker?.isInfoWindowShown!!) {
-                        //    marker.hideInfoWindow()
-                        //    marker.showInfoWindow()
-                        //}
-                        //mapView.progressImg.visibility = View.GONE
+            Picasso.with(context.context)
+                    .load(url)
+                    .priority(Picasso.Priority.HIGH)
+                    .into(mapView?.photo)
+        }
 
-                    }
-
-                    override fun onError() {
-                        //mapView.progressImg.visibility = View.GONE
-                    }
-                })
-        */
         return mapView
     }
-/*
-    private fun loadImage(marker: Marker?,image:ImageView,url:String,view: View){
-        view.progressImg.visibility = View.VISIBLE
 
-        Picasso.with(context).load(url)
+    private fun setImageFromPicasso(url: String?, mapView: View?, markerParam: Marker?) {
+        Picasso.with(context.context)
+                .load(url)
                 .priority(Picasso.Priority.HIGH)
                 .placeholder(R.drawable.no_photo_64)
-                .memoryPolicy(MemoryPolicy.NO_CACHE, MemoryPolicy.NO_STORE)
-                .into(image,object : Callback {
-                    override fun onSuccess() {
-                        if(marker?.isInfoWindowShown!!){
-                            marker.hideInfoWindow()
-                            marker.showInfoWindow()
-                        }
-                        view.progressImg.visibility = View.GONE
+                .into(mapView?.photo,
+                        object : Callback {
+                            override fun onSuccess() {
+                                markerParam?.showInfoWindow()
+                            }
 
-                    }
-                    override fun onError() {
-                        view.progressImg.visibility = View.GONE
-                    }
-                })
+                            override fun onError() {
 
-
+                            }
+                        })
     }
-*/
+
     override fun getInfoWindow(marker: Marker?): View? {
         return buildMapInfoWindow(marker)
     }

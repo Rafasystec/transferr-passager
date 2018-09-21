@@ -64,9 +64,9 @@
     <string name="rateApp">Avalie o Aplicativo</string>
     <string name="termsOfUse">Termo de uso</string>
     <string name="menu">Menu</string>
-    <string name="model">Model</string>
-    <string name="plate">Plate</string>
-    <string name="color">Color</string>
-    <string name="noInfor">No Information</string>
+    <string name="model">Modelo</string>
+    <string name="plate">Placa</string>
+    <string name="color">Cor</string>
+    <string name="noInfor">Não informado</string>
 
 </resources>
