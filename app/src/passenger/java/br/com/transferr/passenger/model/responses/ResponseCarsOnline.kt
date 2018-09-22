@@ -13,4 +13,7 @@ class ResponseCarsOnline {
     var name: String? = null
     var latitude: Double? = null
     var longitude: Double? = null
+    var phone: Long = 0L
+    var whatsapp: Long = 0L
+    var ddd: Int = 0
 }

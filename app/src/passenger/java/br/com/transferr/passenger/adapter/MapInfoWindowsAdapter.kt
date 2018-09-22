@@ -2,6 +2,8 @@ package br.com.transferr.passenger.adapter
 
 import android.app.Activity
 import android.content.Context
+import android.content.Intent
+import android.net.Uri
 import android.os.Handler
 import android.support.v4.app.Fragment
 import android.util.Log
@@ -12,6 +14,7 @@ import br.com.transferr.R
 import br.com.transferr.passenger.extensions.fromJson
 import br.com.transferr.passenger.fragments.MapsFragment
 import br.com.transferr.passenger.model.responses.ResponseCarsOnline
+import br.com.transferr.passenger.util.WhatsAppUtil
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.Marker
@@ -77,6 +80,13 @@ class MapInfoWindowsAdapter(fragment: MapsFragment) : GoogleMap.InfoWindowAdapte
                     .priority(Picasso.Priority.HIGH)
                     .into(mapView?.photo)
         }
+        mapView?.btnWhatsapp?.setOnClickListener {
+            WhatsAppUtil.callWhatsapp(""+car.whatsapp,context.context!!)
+        }
+
+        mapView?.btnCallPhone?.setOnClickListener {
+            context!!.startActivity(Intent(Intent.ACTION_CALL, Uri.parse("tel:${car.phone}")))
+        }
 
         return mapView
     }
@@ -85,11 +95,16 @@ class MapInfoWindowsAdapter(fragment: MapsFragment) : GoogleMap.InfoWindowAdapte
         Picasso.with(context.context)
                 .load(url)
                 .priority(Picasso.Priority.HIGH)
-                .placeholder(R.drawable.no_photo_64)
+                .placeholder(R.drawable.loadrealimg)
                 .into(mapView?.photo,
                         object : Callback {
                             override fun onSuccess() {
-                                markerParam?.showInfoWindow()
+                                if(isFirstTime) {
+                                    isFirstTime = false
+                                    markerParam?.showInfoWindow()
+                                }else{
+                                    isFirstTime = true
+                                }
                             }
 
                             override fun onError() {
