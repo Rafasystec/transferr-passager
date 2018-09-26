@@ -25,9 +25,12 @@ import android.view.View
 import android.view.ViewGroup
 import br.com.transferr.R
 import br.com.transferr.fragments.SuperClassFragment
+import br.com.transferr.passenger.activities.MapInfoWindowActivity
 import br.com.transferr.passenger.adapter.MapInfoWindowsAdapter
+import br.com.transferr.passenger.extensions.fromJson
 import br.com.transferr.passenger.helpers.HelperCar
 import br.com.transferr.passenger.model.Quadrant
+import br.com.transferr.passenger.model.responses.ResponseCarsOnline
 import br.com.transferr.passenger.util.MyLocationLister
 import br.com.transferr.passenger.webservices.CarService
 import br.com.transferr.util.PermissionUtil
@@ -119,13 +122,13 @@ class MapsFragment : SuperClassFragment(), OnMapReadyCallback
         }
         mMap.animateCamera(CameraUpdateFactory.zoomTo(ZOOM))
         mMap.setMaxZoomPreference(15f)
-        mMap.setInfoWindowAdapter(br.com.transferr.passenger.adapter.MapInfoWindowsAdapter(this))
-        //mMap.setOnMarkerClickListener({marker->
-        //    //updateCamera(marker.position!!)
-        //    marker.showInfoWindow()
-        //    marker.hideInfoWindow()
-        //    false
-        //})
+        //mMap.setInfoWindowAdapter(br.com.transferr.passenger.adapter.MapInfoWindowsAdapter(this))
+        mMap.setOnMarkerClickListener({marker->
+            //updateCamera(marker.position!!)
+            var car = fromJson<ResponseCarsOnline>(marker.snippet)
+            activity?.startActivity<MapInfoWindowActivity>(ResponseCarsOnline.PARAM_CAR_OBJECT to car)
+            true
+        })
         mMap.mapType = GoogleMap.MAP_TYPE_NORMAL
     }
 

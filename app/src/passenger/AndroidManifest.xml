@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    >
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
 
     <!--
          The ACCESS_COARSE/FINE_LOCATION permissions are not required to use
@@ -114,7 +113,11 @@
         </activity>
         <activity android:name=".activities.LocationDetailActivity" />
         <activity android:name=".activities.GalleryActivity" />
-
+        <activity
+            android:name="br.com.transferr.passenger.activities.MapInfoWindowActivity"
+            android:label="@string/title_activity_map_info_window"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.Transparent"></activity>
     </application>
 
 </manifest>
