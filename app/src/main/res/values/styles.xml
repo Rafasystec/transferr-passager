@@ -33,7 +33,7 @@
 
     <style name="AppTheme.ToolbarStyle" parent="Base.Widget.AppCompat.Toolbar">
         <!--<item name="actionOverflowButtonStyle">@style/AppTheme.OverflowButtonStyle</item>-->
-        <item name="android:textColor">@android:color/black</item> // doesn't work
+        <item name="android:textColor">@color/accent</item> // doesn't work
         <item name="titleTextAppearance">@style/AppTheme.ToolbarStyle.TextAppearance</item>
         <item name="android:titleTextAppearance" tools:targetApi="lollipop">@style/TextAppearance.AppCompat.Widget.ActionBar.Title.Inverse</item>
         <item name="subtitleTextAppearance">@style/TextAppearance.Widget.AppCompat.Toolbar.Subtitle</item>

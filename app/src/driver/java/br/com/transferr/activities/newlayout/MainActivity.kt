@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity
 import br.com.transferr.R
 import br.com.transferr.extensions.setupToolbar
 import br.com.transferr.fragments.DriverEditInfo
+import br.com.transferr.fragments.DriverListPlainTourFragment
 import br.com.transferr.fragments.DriverShowInfoFragment
 import br.com.transferr.fragments.MapsFragment
 import br.com.transferr.passenger.extensions.switchFragmentToMainContent
@@ -43,6 +44,10 @@ class MainActivity : AppCompatActivity() {
                 }
                 R.id.menuInfoDriver -> {
                     switchFragmentToMainContent(DriverShowInfoFragment())
+                    true
+                }
+                R.id.menuTourDriver ->{
+                    switchFragmentToMainContent(DriverListPlainTourFragment())
                     true
                 }
                 R.id.menuDriver -> {

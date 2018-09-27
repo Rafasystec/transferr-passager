@@ -79,6 +79,7 @@ class MapsFragment : SuperClassFragment(), OnMapReadyCallback,com.google.android
         setupToolbar(R.id.toolbar,getString(R.string.map))
         val mapFragment = childFragmentManager.findFragmentById(R.id.mapFragment) as SupportMapFragment
         mapFragment.getMapAsync(this)
+        setHasOptionsMenu(true)
         return view
     }
     /*

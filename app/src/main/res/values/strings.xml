@@ -69,4 +69,8 @@
     <string name="plate">Plate</string>
     <string name="color">Color</string>
     <string name="noInfor">No Information</string>
+    <string name="online">ON-LINE</string>
+    <string name="offline">OFF-LINE</string>
+    <string name="ON">ON</string>
+    <string name="OFF">OFF</string>
 </resources>

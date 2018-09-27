@@ -8,6 +8,12 @@
         android:id="@+id/swtOnlineOffline"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="" />
+        android:textOn="@string/ON"
+        android:textOff="@string/OFF"
+        android:showText="true"
+        android:splitTrack="true"
+        android:thumb="@drawable/custom_switch_selector"
+        android:track="@drawable/custom_switch_track"
+        android:text="ON-LINE/OFF-LINE" />
 
 </RelativeLayout>
