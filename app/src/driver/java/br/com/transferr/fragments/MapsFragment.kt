@@ -6,11 +6,10 @@ import android.annotation.SuppressLint
 import android.location.Location
 import android.os.Bundle
 import android.support.v4.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import br.com.transferr.R
 import br.com.transferr.extensions.log
+import br.com.transferr.extensions.setupToolbar
 import br.com.transferr.helpers.HelperPassengersOnline
 import br.com.transferr.model.Quadrant
 import br.com.transferr.util.MyLocationLister
@@ -77,7 +76,7 @@ class MapsFragment : SuperClassFragment(), OnMapReadyCallback,com.google.android
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view = inflater?.inflate(R.layout.fragment_maps, container, false)
-        //Inicia o map
+        setupToolbar(R.id.toolbar,getString(R.string.map))
         val mapFragment = childFragmentManager.findFragmentById(R.id.mapFragment) as SupportMapFragment
         mapFragment.getMapAsync(this)
         return view
@@ -130,6 +129,21 @@ class MapsFragment : SuperClassFragment(), OnMapReadyCallback,com.google.android
 
     private fun isConnected():Boolean{
         return NetworkUtil.isNetworkAvailable(this.context!!)
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
+        super.onCreateOptionsMenu(menu, inflater)
+        inflater?.inflate(R.menu.menu_switch,menu)
+        val item = menu?.findItem(R.id.menu_switch_online)
+        item?.setActionView(R.layout.switch_online_offline)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        return when(item?.itemId){
+            R.id.menu_switch_online ->{
+                true
+            }else->super.onOptionsItemSelected(item)
+        }
     }
 
 
