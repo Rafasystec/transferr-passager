@@ -9,6 +9,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import br.com.transferr.R
+import br.com.transferr.R.id.imgProfile
 import br.com.transferr.application.ApplicationTransferr
 import br.com.transferr.extensions.*
 import br.com.transferr.helpers.HelperCamera
@@ -72,11 +73,16 @@ class DriverEditInfo : SuperClassFragment() {
         btnCamera.setOnClickListener{btnCameraClick()}
         btnAlterPass.setOnClickListener{btnAlterPassClick()}
         getDriver()
-        loadPhoto(Prefes.ID_CAR)
+        //loadPhoto(Prefes.ID_CAR)
     }
-
+/*
     private fun loadPhoto(idCar:String){
         var url = ApplicationTransferr.getInstance().URL_BASE_IMG + "/car/$idCar"+"/$photoName"
+        Picasso.with(context).load(url).memoryPolicy(MemoryPolicy.NO_CACHE,MemoryPolicy.NO_STORE).placeholder(R.drawable.no_photo_64).into(imgProfile)
+    }
+*/
+    private fun loadPhoto(driver:Driver){
+        var url = driver.car?.photo
         Picasso.with(context).load(url).memoryPolicy(MemoryPolicy.NO_CACHE,MemoryPolicy.NO_STORE).placeholder(R.drawable.no_photo_64).into(imgProfile)
     }
 
@@ -88,6 +94,7 @@ class DriverEditInfo : SuperClassFragment() {
 
         lblCfpValue.text            = driver.countryRegister
         lblDtNascimentoValue.text   = driver.birthDate.toString()
+        loadPhoto(driver)
     }
 
 

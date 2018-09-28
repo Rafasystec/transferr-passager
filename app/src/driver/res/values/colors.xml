@@ -6,6 +6,7 @@
     <color name="colorAccent">#DF3A01</color>
     <color name="selectedItemClient">#c79100</color>
     <color name="UnselectedItemClient">#606060</color>
+    <color name="colorSecondary">#ffc107</color>
     <!-- Cores do Tema Material -->
     <color name="primary">#2BBBAD</color>
     <color name="primary_dark">#00695C</color>

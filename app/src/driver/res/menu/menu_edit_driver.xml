@@ -4,16 +4,15 @@
     <!-- "Mark Favorite", should appear as action button if possible -->
     <item
         android:id="@+id/action_edit_driver"
-        android:icon="@drawable/ic_exit_to_app_white_24dp"
+        android:icon="@drawable/pencil"
         android:title="@string/edit"
         android:tooltipText="@string/edit"
         android:contentDescription="@string/edit"
-        android:iconTint="@color/primary"
-        android:iconTintMode="multiply"
+        android:iconTint="@color/colorSecondary"
         app:showAsAction="always">
 
         <TextView
-            android:text="Sair"
+            android:text="Edit"
             android:textSize="15dp"
             >
 

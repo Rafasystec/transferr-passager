@@ -3,7 +3,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:id="@+id/mainActivity">
+    android:id="@+id/mainActivity"
+    android:background="@color/activityBackground"
+    >
 
 
     <ProgressBar
@@ -14,24 +16,7 @@
         android:padding="10dp"
         android:background="@color/black"
         android:visibility="gone"/>
-    <!--
-    <TextView
-        android:id="@+id/lblDadosDoVeiculo"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Dados do Veículo"
-        android:layout_gravity="center"
-        android:textAppearance="@style/TextAppearance.AppCompat"
-        android:textSize="25dp"
-        android:textStyle="bold"
-        android:textColor="@color/primary_dark"
-        android:textAlignment="center"
-        android:layout_marginBottom="@dimen/form_margin_bottom"/>
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@android:color/darker_gray"/>
-        -->
+
     <TextView
         android:id="@+id/lblIdentificacao"
         android:layout_width="match_parent"
@@ -39,7 +24,7 @@
         android:text="Placa"
         android:textSize="18dp"
         android:layout_marginLeft="@dimen/form_margin_left"
-        android:textColor="@color/primary_dark"
+        android:textColor="@color/colorPrimaryDark"
         android:layout_marginBottom="@dimen/form_margin_bottom"/>
     <TextView
         android:id="@+id/lblPlacaValue"
@@ -61,7 +46,7 @@
         android:text="Modelo"
         android:textSize="18dp"
         android:layout_marginLeft="@dimen/form_margin_left"
-        android:textColor="@color/primary_dark"
+        android:textColor="@color/colorPrimaryDark"
         android:layout_marginBottom="@dimen/form_margin_bottom"
         />
     <TextView
@@ -84,7 +69,7 @@
         android:text="Cor"
         android:textSize="18dp"
         android:layout_marginLeft="@dimen/form_margin_left"
-        android:textColor="@color/primary_dark"
+        android:textColor="@color/colorText"
         android:layout_marginBottom="@dimen/form_margin_bottom"
         />
     <TextView
@@ -94,7 +79,7 @@
         android:text="Cor"
         android:textSize="18dp"
         android:layout_marginLeft="@dimen/form_margin_left"
-        android:textColor="@color/black"
+        android:textColor="@color/colorText"
         android:paddingLeft="@dimen/text_padding_left"
         android:textStyle="bold"
         android:layout_marginBottom="@dimen/form_margin_bottom"/>
@@ -106,7 +91,7 @@
         android:text="Motorista"
         android:textSize="18dp"
         android:layout_marginLeft="@dimen/form_margin_left"
-        android:textColor="@color/primary_dark"
+        android:textColor="@color/colorText"
         android:layout_marginBottom="@dimen/form_margin_bottom"
         />
     <TextView
@@ -116,7 +101,7 @@
         android:text="Meu nome"
         android:textSize="18dp"
         android:layout_marginLeft="@dimen/form_margin_left"
-        android:textColor="@color/black"
+        android:textColor="@color/colorText"
         android:paddingLeft="@dimen/text_padding_left"
         android:textStyle="bold"
         android:layout_marginBottom="@dimen/form_margin_bottom"/>
@@ -127,40 +112,5 @@
         android:layout_marginBottom="10dp"
         />
 
-
-
-    <Switch
-        android:id="@+id/swtOnline"
-        android:textStyle="bold"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Procurando por passageiros"
-        android:textSize="@dimen/form_text_size"
-        android:textOff="NÃO"
-        android:textOn="SIM"
-        android:showText="false"
-        android:textColor="@color/black"
-        />
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@android:color/darker_gray"
-        android:layout_marginTop="10dp"/>
-    <!--
-    <Button
-        android:id="@+id/btnFrmDriver"
-        android:layout_width="220dp"
-        android:layout_height="wrap_content"
-        android:text="Meus Dados"
-        android:textColor="@color/white"
-        android:layout_gravity="center"
-        android:layout_marginTop="16dp"
-        android:background="@drawable/button_shape"
-        />
-        -->
-
-    <!--
-        <include layout="@layout/action_map" />
-    -->
 </LinearLayout>
 

@@ -18,7 +18,7 @@ class Car : Entity(){
     var driver:Driver?= null
     var type: EnumTypeCar?=null
     var status:EnumStatus=EnumStatus.OFFLINE
-
+    var photo: String? = null
 }
 
 
