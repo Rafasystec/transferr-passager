@@ -1,4 +1,4 @@
-package br.com.transferr.util
+package br.com.transferr.main.util
 
 import android.util.Log
 import com.google.firebase.iid.FirebaseInstanceId

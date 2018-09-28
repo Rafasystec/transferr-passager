@@ -32,11 +32,13 @@
         android:layout_height="wrap_content"
         android:text="XXX-0000"
         android:textSize="18dp"
-        android:layout_marginLeft="@dimen/form_margin_left"
         android:textColor="@color/black"
-        android:paddingLeft="@dimen/text_padding_left"
         android:textStyle="bold"
-        android:layout_marginBottom="@dimen/form_margin_bottom"/>
+        android:drawableLeft="@drawable/ic_licence_plate_filled"
+        android:drawablePadding="5dp"
+        android:padding="@dimen/text_padding_left"
+        android:background="@drawable/shape_text_layout"
+        />
 
 
     <TextView
@@ -55,11 +57,14 @@
         android:layout_height="wrap_content"
         android:text="Modelo"
         android:textSize="18dp"
-        android:layout_marginLeft="@dimen/form_margin_left"
         android:textColor="@color/black"
-        android:paddingLeft="@dimen/text_padding_left"
         android:textStyle="bold"
-        android:layout_marginBottom="@dimen/form_margin_bottom"/>
+        android:drawableLeft="@drawable/ic_jeep_wrangler"
+        android:drawablePadding="5dp"
+        android:padding="@dimen/text_padding_left"
+        android:background="@drawable/shape_text_layout"
+
+        />
 
 
     <TextView
@@ -78,11 +83,13 @@
         android:layout_height="wrap_content"
         android:text="Cor"
         android:textSize="18dp"
-        android:layout_marginLeft="@dimen/form_margin_left"
         android:textColor="@color/colorText"
-        android:paddingLeft="@dimen/text_padding_left"
         android:textStyle="bold"
-        android:layout_marginBottom="@dimen/form_margin_bottom"/>
+        android:padding="@dimen/text_padding_left"
+        android:drawableLeft="@drawable/format_color_fill"
+        android:drawablePadding="5dp"
+        android:background="@drawable/shape_text_layout"
+        />
 
     <TextView
         android:id="@+id/lblMotorista"
@@ -100,16 +107,12 @@
         android:layout_height="wrap_content"
         android:text="Meu nome"
         android:textSize="18dp"
-        android:layout_marginLeft="@dimen/form_margin_left"
         android:textColor="@color/colorText"
-        android:paddingLeft="@dimen/text_padding_left"
         android:textStyle="bold"
-        android:layout_marginBottom="@dimen/form_margin_bottom"/>
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@android:color/darker_gray"
-        android:layout_marginBottom="10dp"
+        android:drawableLeft="@drawable/ic_steering_wheel"
+        android:drawablePadding="5dp"
+        android:padding="@dimen/text_padding_left"
+        android:background="@drawable/shape_text_layout"
         />
 
 </LinearLayout>

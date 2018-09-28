@@ -7,16 +7,12 @@
     android:orientation="vertical"
     tools:context="br.com.transferr.fragments.DriverListPlainTourFragment">
 
-
-    <!-- including the toolbar -->
-    <include layout="@layout/toolbar"/>
-
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rcviewToursFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:layout_marginTop="60dp"/>
+        />
 
 
     <android.support.design.widget.FloatingActionButton
@@ -39,7 +35,7 @@
         android:src="@drawable/quantum_ic_refresh_white_24"
         android:layout_marginTop="60dp"
         android:layout_marginRight="15dp"
-        app:layout_anchor="@+id/rcviewTours"
+        app:layout_anchor="@+id/rcviewToursFragment"
         />
 
 

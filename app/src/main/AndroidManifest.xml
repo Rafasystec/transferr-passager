@@ -15,12 +15,12 @@
         >
 
         <!-- Configures the Firebase -->
-        <service android:name=".util.FirebaseMessagingServiceUtil">
+        <service android:name=".main.util.FirebaseMessagingServiceUtil">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </service>
-        <service android:name=".util.FirebaseIdServicesUtil">
+        <service android:name=".main.util.FirebaseIdServicesUtil">
             <intent-filter>
                 <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
             </intent-filter>

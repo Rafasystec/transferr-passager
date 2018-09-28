@@ -6,7 +6,7 @@
     <dimen  name="form_margin_bottom" >8dp</dimen>
     <dimen name="form_text_size">18sp</dimen>
     <dimen name="form_btn_size">220dp</dimen>
-    <dimen name="text_padding_left">10dp</dimen>
+    <dimen name="text_padding_left">5dp</dimen>
     <!-- Dimensions from MaterialDoc -->
     <dimen name="text_size_micro">12sp</dimen>
     <dimen name="text_size_small">14sp</dimen>

@@ -11,19 +11,16 @@ import android.location.LocationManager
 import android.os.Bundle
 import android.support.v4.app.ActivityCompat
 import android.util.Log
-import android.widget.Toast
 import br.com.transferr.extensions.log
 import br.com.transferr.extensions.toJson
 import br.com.transferr.model.responses.OnResponseInterface
 import br.com.transferr.model.responses.RequestCoordinatesUpdate
-import br.com.transferr.util.NetworkUtil
-import br.com.transferr.util.Prefes
+import br.com.transferr.main.util.Prefes
 import br.com.transferr.webservices.CoordinateService
 import com.google.android.gms.common.ConnectionResult
 import com.google.android.gms.common.api.GoogleApiClient
 import com.google.android.gms.location.LocationRequest
 import com.google.android.gms.location.LocationServices
-import org.jetbrains.anko.toast
 
 class LocationTrackingService : Service(),com.google.android.gms.location.LocationListener,GoogleApiClient.ConnectionCallbacks,GoogleApiClient.OnConnectionFailedListener {
     override fun onConnectionFailed(connectionResult: ConnectionResult) {

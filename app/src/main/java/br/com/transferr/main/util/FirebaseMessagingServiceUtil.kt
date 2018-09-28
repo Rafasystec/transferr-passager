@@ -1,8 +1,9 @@
-package br.com.transferr.util
+package br.com.transferr.main.util
 
 import android.content.Intent
 import android.support.v4.content.LocalBroadcastManager
 import android.util.Log
+import br.com.transferr.util.Config
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
 

@@ -14,13 +14,11 @@ import br.com.transferr.model.responses.OnResponseInterface
 import br.com.transferr.model.responses.ResponseOK
 import br.com.transferr.util.FileUtil
 import br.com.transferr.util.ImageUtil
-import br.com.transferr.util.Prefes
+import br.com.transferr.main.util.Prefes
 import br.com.transferr.webservices.DriverService
 import br.com.transferr.webservices.UserService
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.driver.activity_driver_infor.*
-import org.jetbrains.anko.doAsync
-import org.jetbrains.anko.uiThread
 import java.io.File
 
 class DriverInforActivity : SuperClassActivity() {

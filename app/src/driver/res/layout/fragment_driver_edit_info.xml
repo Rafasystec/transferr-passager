@@ -4,6 +4,7 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
+    android:background="@color/activityBackground"
     android:id="@+id/layoutMain">
 
     <ProgressBar
@@ -36,8 +37,9 @@
                 />
             <ImageButton
                 android:id="@+id/btnCamera"
-                android:layout_width="60dp"
+                android:layout_width="match_parent"
                 android:layout_height="60dp"
+                android:backgroundTint="@color/black"
                 android:src="@android:drawable/ic_menu_camera"
                 android:text="Tirar foto"
                 android:layout_gravity="center"
@@ -50,7 +52,7 @@
                 android:text="@string/name"
                 android:textSize="18dp"
                 android:layout_marginLeft="@dimen/form_margin_left"
-                android:textColor="@color/primary_dark"
+                android:textColor="@color/colorText"
                 android:layout_marginBottom="@dimen/form_margin_bottom"/>
             <TextView
                 android:id="@+id/lblDriverNameValue"
@@ -58,11 +60,12 @@
                 android:layout_height="wrap_content"
                 android:text="Seu Nome"
                 android:textSize="18dp"
-                android:layout_marginLeft="@dimen/form_margin_left"
                 android:textColor="@color/black"
                 android:textStyle="bold"
-                android:paddingLeft="@dimen/text_padding_left"
-                android:layout_marginBottom="@dimen/form_margin_bottom"/>
+                android:drawablePadding="5dp"
+                android:background="@drawable/shape_text_layout"
+                android:drawableLeft="@drawable/account_black"
+                />
 
 
             <TextView
@@ -72,7 +75,7 @@
                 android:text="CPF:"
                 android:textSize="18dp"
                 android:layout_marginLeft="@dimen/form_margin_left"
-                android:textColor="@color/primary_dark"
+                android:textColor="@color/colorText"
                 android:layout_marginBottom="@dimen/form_margin_bottom"
                 />
             <TextView
@@ -82,11 +85,11 @@
                 android:text="000.000.000-00"
                 android:textStyle="bold"
                 android:textSize="18dp"
-                android:layout_marginLeft="@dimen/form_margin_left"
                 android:textColor="@color/black"
-                android:paddingLeft="@dimen/text_padding_left"
-                android:layout_marginBottom="@dimen/form_margin_bottom"/>
-
+                android:drawablePadding="5dp"
+                android:background="@drawable/shape_text_layout"
+                android:drawableLeft="@drawable/information"
+                />
 
             <TextView
                 android:id="@+id/lblDtNascimento"
@@ -95,20 +98,22 @@
                 android:text="Nascimento:"
                 android:textSize="18dp"
                 android:layout_marginLeft="@dimen/form_margin_left"
-                android:textColor="@color/primary_dark"
+                android:textColor="@color/colorText"
                 android:layout_marginBottom="@dimen/form_margin_bottom"
                 />
             <TextView
                 android:id="@+id/lblDtNascimentoValue"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="05/03/1986"
+                android:text="dd/MM/yyyy"
                 android:textSize="18dp"
                 android:textStyle="bold"
-                android:layout_marginLeft="@dimen/form_margin_left"
                 android:textColor="@color/black"
-                android:paddingLeft="@dimen/text_padding_left"
-                android:layout_marginBottom="@dimen/form_margin_bottom"/>
+                android:drawablePadding="5dp"
+                android:background="@drawable/shape_text_layout"
+                android:drawableLeft="@drawable/calendar_range"
+
+                />
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
@@ -204,7 +209,7 @@
             android:clickable="false"
             android:text="@string/changePassword"
             android:drawableTint="@color/colorButtonText"
-            android:textColor="@color/colorButtonText" />
+            android:textColor="@color/colorButtonTextDriver" />
 
         </LinearLayout>
     </ScrollView>

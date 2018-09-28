@@ -1,6 +1,5 @@
 package br.com.transferr.activities
 
-import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import br.com.transferr.R
@@ -11,10 +10,9 @@ import br.com.transferr.model.Credentials
 import br.com.transferr.model.responses.OnResponseInterface
 import br.com.transferr.model.responses.ResponseLogin
 import br.com.transferr.model.responses.ResponseOK
-import br.com.transferr.util.Prefes
+import br.com.transferr.main.util.Prefes
 import br.com.transferr.webservices.UserService
 import kotlinx.android.synthetic.driver.activity_login.*
-import kotlin.system.exitProcess
 
 class LoginActivity : SuperClassActivity() {
 

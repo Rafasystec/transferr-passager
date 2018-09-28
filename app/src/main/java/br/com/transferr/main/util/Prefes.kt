@@ -1,4 +1,4 @@
-package br.com.transferr.util
+package br.com.transferr.main.util
 
 import android.content.SharedPreferences
 import br.com.transferr.application.ApplicationTransferr

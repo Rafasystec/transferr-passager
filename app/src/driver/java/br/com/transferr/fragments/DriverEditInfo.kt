@@ -9,8 +9,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import br.com.transferr.R
-import br.com.transferr.R.id.imgProfile
-import br.com.transferr.application.ApplicationTransferr
 import br.com.transferr.extensions.*
 import br.com.transferr.helpers.HelperCamera
 import br.com.transferr.model.AnexoPhoto
@@ -19,7 +17,8 @@ import br.com.transferr.model.responses.OnResponseInterface
 import br.com.transferr.model.responses.ResponseOK
 import br.com.transferr.util.FileUtil
 import br.com.transferr.util.ImageUtil
-import br.com.transferr.util.Prefes
+import br.com.transferr.main.util.Prefes
+import br.com.transferr.passenger.util.DateUtil
 import br.com.transferr.webservices.DriverService
 import br.com.transferr.webservices.UserService
 import com.squareup.picasso.MemoryPolicy
@@ -93,7 +92,7 @@ class DriverEditInfo : SuperClassFragment() {
         lblDriverNameValue
 
         lblCfpValue.text            = driver.countryRegister
-        lblDtNascimentoValue.text   = driver.birthDate.toString()
+        lblDtNascimentoValue.text   = DateUtil.format(driver.birthDate!!,"dd/MM/yyyy")
         loadPhoto(driver)
     }
 

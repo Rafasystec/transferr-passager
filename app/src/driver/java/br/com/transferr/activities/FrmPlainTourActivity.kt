@@ -18,13 +18,11 @@ import br.com.transferr.model.PlainTour
 import br.com.transferr.model.TourOption
 import br.com.transferr.model.responses.OnResponseInterface
 import br.com.transferr.model.responses.ResponsePlainTour
-import br.com.transferr.util.Prefes
+import br.com.transferr.main.util.Prefes
 import br.com.transferr.webservices.CarService
 import br.com.transferr.webservices.PlainTourService
 import br.com.transferr.webservices.TourOptionService
 import kotlinx.android.synthetic.driver.activity_frm_plain_tour.*
-import kotlinx.android.synthetic.driver.fragment_dialog_add_plain.*
-import org.jetbrains.anko.toast
 
 class FrmPlainTourActivity : AppCompatActivity() {
     private var car:Car?=null

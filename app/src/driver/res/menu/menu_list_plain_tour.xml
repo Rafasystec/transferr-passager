@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <!-- "Mark Favorite", should appear as action button if possible -->
+    <item
+        android:id="@+id/menuAddNewPlan"
+        android:icon="@drawable/plus_circle"
+        android:title="@string/edit"
+        android:tooltipText="@string/edit"
+        android:contentDescription="@string/edit"
+        android:iconTint="@color/colorSecondary"
+        app:showAsAction="always">
+
+    </item>
+    <item
+        android:id="@+id/menuRefreshPlanList"
+        android:icon="@drawable/quantum_ic_refresh_white_24"
+        android:title="@string/edit"
+        android:tooltipText="@string/edit"
+        android:contentDescription="@string/edit"
+        android:iconTint="@color/colorSecondary"
+        app:showAsAction="always">
+
+    </item>
+</menu>

@@ -9,7 +9,7 @@ class Driver : Entity(){
 
     var name: String = ""
     var countryRegister: String = ""
-    var birthDate: Int = 0
+    var birthDate: Date?=null
     var user:User?=null
     var whatsapp: Long? = null
     var group:Grouping?=null

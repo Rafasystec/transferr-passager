@@ -11,7 +11,7 @@ import android.view.Menu
 import android.view.MenuItem
 import br.com.transferr.R
 import br.com.transferr.broadcast.InternetBroadCast
-import br.com.transferr.util.Prefes
+import br.com.transferr.main.util.Prefes
 import kotlinx.android.synthetic.driver.toolbar.*
 
 /**

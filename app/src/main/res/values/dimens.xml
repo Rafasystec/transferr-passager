@@ -4,4 +4,5 @@
     <dimen name="locationPictureHeigth">85dp</dimen>
     <dimen name="icon_width">25dp</dimen>
     <dimen name="icon_height">25dp</dimen>
+    <dimen name="textBackground">35dp</dimen>
 </resources>

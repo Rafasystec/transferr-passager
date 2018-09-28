@@ -3,37 +3,30 @@ package br.com.transferr.fragments
 
 import android.Manifest
 import android.content.Context
-import android.content.DialogInterface
 import android.content.Intent
 import android.content.IntentFilter
 import android.content.pm.PackageManager
-import android.graphics.Color
 import android.location.LocationManager
 import android.net.ConnectivityManager
 import android.os.Bundle
-import android.provider.Settings
 import android.support.v4.app.ActivityCompat
 import android.support.v4.app.Fragment
 import android.support.v4.content.LocalBroadcastManager
-import android.support.v7.app.AlertDialog
 import android.util.Log
 import android.view.*
 import br.com.transferr.R
 import br.com.transferr.activities.DriverInforActivity
 import br.com.transferr.activities.LoginActivity
-import br.com.transferr.activities.newlayout.DriverEditInfoActivity
 import br.com.transferr.broadcast.InternetBroadCast
 import br.com.transferr.extensions.*
 import br.com.transferr.model.Car
 import br.com.transferr.model.Driver
-import br.com.transferr.model.enums.EnumStatus
 import br.com.transferr.model.responses.OnResponseInterface
 import br.com.transferr.model.responses.RequestCoordinatesUpdate
 import br.com.transferr.model.responses.ResponseOK
 import br.com.transferr.services.LocationTrackingService
 import br.com.transferr.util.NetworkUtil
-import br.com.transferr.util.Prefes
-import br.com.transferr.util.VariablesUtil
+import br.com.transferr.main.util.Prefes
 import br.com.transferr.webservices.CarService
 import br.com.transferr.webservices.DriverService
 import kotlinx.android.synthetic.driver.activity_main.*
@@ -75,13 +68,13 @@ class DriverShowInfoFragment : SuperClassFragment() {
         super.onViewCreated(view, savedInstanceState)
         setupToolbar(R.id.toolbar,getString(R.string.myInformation))
         registerInternetReceiver()
-        getBundleValues(savedInstanceState)
+        //getBundleValues(savedInstanceState)
         checkLogin()
         initView()
     }
     private fun initView(){
        // btnFrmDriver.setOnClickListener { callFormDriver() }
-        swtOnline.setOnClickListener { stopInitLocation() }
+        //swtOnline.setOnClickListener { stopInitLocation() }
         checkNetwork()
 
     }
@@ -90,7 +83,7 @@ class DriverShowInfoFragment : SuperClassFragment() {
         val intentInit = Intent(context, DriverInforActivity::class.java)
         startActivity(intentInit)
     }
-
+/*
     private fun stopInitLocation(){
         if(swtOnline.isChecked){
             startService()
@@ -102,7 +95,8 @@ class DriverShowInfoFragment : SuperClassFragment() {
             swtOnline.setTextColor(Color.BLACK)
         }
     }
-
+    */
+    /*
     private fun startService(){
         if(isLocationPermissionGranted()) {
             if(!isLocationEnabled()) {
@@ -114,6 +108,7 @@ class DriverShowInfoFragment : SuperClassFragment() {
         }
         activity?.startService(Intent(context, LocationTrackingService::class.java))
     }
+    */
 
     private fun stopServiceIntent(){
         activity?.stopService(Intent(context, LocationTrackingService::class.java))
@@ -127,7 +122,7 @@ class DriverShowInfoFragment : SuperClassFragment() {
         locationManager = activity?.getSystemService(Context.LOCATION_SERVICE) as LocationManager
         return locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER) || locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER)
     }
-
+/*
     private fun showAlert() {
         val dialog = AlertDialog.Builder(activity!!)
         dialog.setTitle("Habilitar Localização")
@@ -146,6 +141,7 @@ class DriverShowInfoFragment : SuperClassFragment() {
                 })
         dialog.show()
     }
+    */
 
     private fun isLocationPermissionGranted(): Boolean {
         if (ActivityCompat.checkSelfPermission(activity!!, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED &&
@@ -154,14 +150,14 @@ class DriverShowInfoFragment : SuperClassFragment() {
         }
         return true
     }
-
+/*
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
         if(outState != null && swtOnline != null) {
             outState?.putBoolean(VariablesUtil.ONLINE, swtOnline.isChecked)
         }
     }
-    /*
+
     private fun initScreenFields(car: Car){
         this.car = car
         Prefes.prefsCar = car.id!!
@@ -180,7 +176,7 @@ class DriverShowInfoFragment : SuperClassFragment() {
         lblDriverValue.text= driver?.name
         lblModelValue.text = car?.model
         lblPlacaValue.text = car?.carIdentity
-        swtOnline.isChecked = car?.status!= EnumStatus.OFFLINE
+        //swtOnline.isChecked = car?.status!= EnumStatus.OFFLINE
         Prefes.prefsDriver = driver?.id!!
     }
 
@@ -248,7 +244,7 @@ class DriverShowInfoFragment : SuperClassFragment() {
         if(isLoged) {
             if(isConnected()) {
                 getCarFromWebService()
-                stopInitLocation()
+                //stopInitLocation()
             }else{
                // showError("Sem conexão com a Internet.")
             }
@@ -310,11 +306,13 @@ class DriverShowInfoFragment : SuperClassFragment() {
         }
 
     }
+    /*
     private fun getBundleValues(savedInstanceState: Bundle?){
         if(savedInstanceState != null){
             swtOnline.isChecked = savedInstanceState.getBoolean(VariablesUtil.ONLINE)
         }
     }
+    */
 
     private fun registerInternetReceiver(){
        activity?.registerReceiver(internetBroadCast,

@@ -1,6 +1,5 @@
 package br.com.transferr.activities
 
-import android.app.AlertDialog
 import android.content.Intent
 import android.os.Bundle
 import android.support.v7.widget.GridLayoutManager
@@ -10,15 +9,11 @@ import br.com.transferr.adapters.TourAdapter
 import br.com.transferr.extensions.setupToolbar
 import br.com.transferr.extensions.showError
 import br.com.transferr.extensions.showValidation
-import br.com.transferr.extensions.toast
-import br.com.transferr.fragments.DialogAddPlainFragment
 import br.com.transferr.model.PlainTour
 import br.com.transferr.model.responses.OnResponseInterface
-import br.com.transferr.util.Prefes
+import br.com.transferr.main.util.Prefes
 import br.com.transferr.webservices.PlainTourService
 import kotlinx.android.synthetic.driver.activity_plain_tour.*
-import kotlinx.android.synthetic.driver.dialog_add_plaintour.view.*
-import kotlinx.android.synthetic.driver.rc_view_tours.*
 
 class PlainTourActivity : SuperClassActivity() {
 

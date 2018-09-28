@@ -31,7 +31,7 @@ import br.com.transferr.model.responses.RequestCoordinatesUpdate
 import br.com.transferr.model.responses.ResponseOK
 import br.com.transferr.services.LocationTrackingService
 import br.com.transferr.util.NetworkUtil
-import br.com.transferr.util.Prefes
+import br.com.transferr.main.util.Prefes
 import br.com.transferr.util.VariablesUtil
 import br.com.transferr.webservices.CarService
 import br.com.transferr.webservices.DriverService

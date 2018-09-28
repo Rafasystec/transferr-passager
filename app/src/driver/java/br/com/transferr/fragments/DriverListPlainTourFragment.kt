@@ -5,9 +5,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.GridLayoutManager
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import br.com.transferr.R
 import br.com.transferr.activities.FrmPlainTourActivity
 import br.com.transferr.adapters.TourAdapter
@@ -17,7 +15,7 @@ import br.com.transferr.extensions.showLoadingDialog
 import br.com.transferr.extensions.showValidation
 import br.com.transferr.model.PlainTour
 import br.com.transferr.model.responses.OnResponseInterface
-import br.com.transferr.util.Prefes
+import br.com.transferr.main.util.Prefes
 import br.com.transferr.webservices.PlainTourService
 import kotlinx.android.synthetic.driver.fragment_driver_list_plain_tour.*
 
@@ -30,7 +28,6 @@ class DriverListPlainTourFragment : SuperClassFragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
-        // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_driver_list_plain_tour, container, false)
     }
 
@@ -39,6 +36,7 @@ class DriverListPlainTourFragment : SuperClassFragment() {
         setupToolbar(R.id.toolbar,"Passeios",true)
         createListTour(emptyList())
         callWSToGetAllOpenDriverPlainTour()
+        setHasOptionsMenu(true)
         fabAddPlainTourFragment.setOnClickListener {
             startFrmPlainTourActivity()
         }
@@ -91,6 +89,23 @@ class DriverListPlainTourFragment : SuperClassFragment() {
 
     private fun startFrmPlainTourActivity(){
         startActivity(Intent(context, FrmPlainTourActivity::class.java))
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
+        super.onCreateOptionsMenu(menu, inflater)
+        inflater?.inflate(R.menu.menu_list_plain_tour,menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        return when(item?.itemId){
+            R.id.menuAddNewPlan -> {
+                true
+            }
+            R.id.menuRefreshPlanList ->{
+                true
+            }else->{super.onOptionsItemSelected(item)}
+        }
+
     }
 
 }// Required empty public constructor
