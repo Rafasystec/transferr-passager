@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@color/black"
     tools:context="br.com.transferr.fragments.DriverListPlainTourFragment">
 
     <android.support.v7.widget.RecyclerView
@@ -14,7 +15,7 @@
         android:orientation="vertical"
         />
 
-
+<!--
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fabAddPlainTourFragment"
         android:layout_width="68dp"
@@ -37,7 +38,7 @@
         android:layout_marginRight="15dp"
         app:layout_anchor="@+id/rcviewToursFragment"
         />
-
+-->
 
 </android.support.design.widget.CoordinatorLayout>
 

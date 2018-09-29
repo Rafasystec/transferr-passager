@@ -37,6 +37,7 @@ class DriverListPlainTourFragment : SuperClassFragment() {
         createListTour(emptyList())
         callWSToGetAllOpenDriverPlainTour()
         setHasOptionsMenu(true)
+        /*
         fabAddPlainTourFragment.setOnClickListener {
             startFrmPlainTourActivity()
         }
@@ -45,6 +46,7 @@ class DriverListPlainTourFragment : SuperClassFragment() {
             rcviewToursFragment.adapter.notifyDataSetChanged()
             rcviewToursFragment.refreshDrawableState()
         }
+        */
     }
 
 
@@ -99,9 +101,13 @@ class DriverListPlainTourFragment : SuperClassFragment() {
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         return when(item?.itemId){
             R.id.menuAddNewPlan -> {
+                startFrmPlainTourActivity()
                 true
             }
             R.id.menuRefreshPlanList ->{
+                callWSToGetAllOpenDriverPlainTour()
+                rcviewToursFragment.adapter.notifyDataSetChanged()
+                rcviewToursFragment.refreshDrawableState()
                 true
             }else->{super.onOptionsItemSelected(item)}
         }
