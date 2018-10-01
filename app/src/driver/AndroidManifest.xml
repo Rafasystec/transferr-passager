@@ -25,8 +25,8 @@
         <activity
             android:name="br.com.transferr.activities.newlayout.MainActivity"
             android:excludeFromRecents="false"
-            android:screenOrientation="portrait"
-            android:noHistory="false">
+            android:noHistory="false"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -93,7 +93,8 @@
             </intent-filter>
         </receiver>
 
-        <activity android:name="br.com.transferr.activities.newlayout.DriverEditInfoActivity"></activity>
+        <activity android:name="br.com.transferr.activities.newlayout.DriverEditInfoActivity" />
+        <activity android:name="br.com.transferr.activities.newlayout.DriverAddPlainTourActivity"></activity>
     </application>
 
 </manifest>

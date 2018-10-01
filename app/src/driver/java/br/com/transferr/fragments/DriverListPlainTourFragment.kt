@@ -8,6 +8,7 @@ import android.support.v7.widget.GridLayoutManager
 import android.view.*
 import br.com.transferr.R
 import br.com.transferr.activities.FrmPlainTourActivity
+import br.com.transferr.activities.newlayout.DriverAddPlainTourActivity
 import br.com.transferr.adapters.TourAdapter
 import br.com.transferr.extensions.setupToolbar
 import br.com.transferr.extensions.showError
@@ -90,7 +91,7 @@ class DriverListPlainTourFragment : SuperClassFragment() {
     }
 
     private fun startFrmPlainTourActivity(){
-        startActivity(Intent(context, FrmPlainTourActivity::class.java))
+        startActivity(Intent(context, DriverAddPlainTourActivity::class.java))
     }
 
     override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
