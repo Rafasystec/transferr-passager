@@ -68,9 +68,27 @@
     <string name="plate">Placa</string>
     <string name="color">Cor</string>
     <string name="noInfor">Não informado</string>
-    <string name="online">ON-LINE</string>
-    <string name="offline">OFF-LINE</string>
+    <string name="online">ONLINE</string>
+    <string name="offline">OFFLINE</string>
     <string name="ON">ON</string>
     <string name="OFF">OFF</string>
+    <string name="busySeats">Assentos Ocupados</string>
+    <string name="searchingPassenger">Procurar passageiro</string>
+    <string name="searchPassengerWorks">Uma breve descrição de como \' Procurar Passageiro \' funciona.</string>
+    <string name="passengerNotes">Observações do Passageiros</string>
+    <string name="passengerOne">Passageiro 1</string>
+    <string name="addPlanTour">Adicionar Plano</string>
+    <string name="passengerTwo">Passageiro 2</string>
+    <string name="passengerThree">Passageiro 3</string>
+    <string name="Notes">Observações</string>
+    <string name="Delete">Excluir</string>
+    <string name="selectADate">Selecione um data</string>
+    <string name="Tour">Passeio</string>
+    <string name="date">data</string>
+    <string name="hour">hora</string>
+    <string name="Phone">Phone</string>
+    <string name="noteDetail">Enter here information about this passenger. Write observations,place of embarkation or any kind of information you wish to keep on the passenger.</string>
+    <string name="dateTour">Tour Date</string>
+    <string name="timeTour">Tour Time</string>
 
 </resources>

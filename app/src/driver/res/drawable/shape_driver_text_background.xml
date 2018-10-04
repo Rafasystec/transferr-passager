@@ -2,8 +2,7 @@
     android:shape="rectangle">
 
     <corners
-        android:bottomRightRadius="40dp"
-        android:topRightRadius="40dp" />
+        android:radius="10dp" />
 
     <gradient
         android:angle="45"
@@ -11,7 +10,7 @@
         android:centerY="1.2"
         android:endColor="@color/activityBackground"
         android:gradientRadius="4"
-        android:startColor="#c79100"
+        android:startColor="#e3edc2"
         android:type="linear" />
 
     <!--If your shape requires only one solid color-->

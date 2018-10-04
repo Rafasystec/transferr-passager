@@ -1,7 +1,11 @@
 package br.com.transferr.extensions
 
 import android.annotation.SuppressLint
+import android.app.AlertDialog
+import android.app.DatePickerDialog
+import android.app.DatePickerDialog.OnDateSetListener
 import android.app.ProgressDialog
+import android.app.TimePickerDialog
 import android.support.annotation.IdRes
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentActivity
@@ -12,9 +16,13 @@ import android.support.v7.widget.DefaultItemAnimator
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.support.v7.widget.Toolbar
+import android.view.View
+import android.widget.TextView
 import android.widget.Toast
 import br.com.transferr.R
 import org.jetbrains.anko.indeterminateProgressDialog
+import java.util.*
+
 
 /**
  * Created by Rafael Rocha on 07/08/2018.
@@ -74,6 +82,50 @@ fun Fragment.backToFragment(fragment: Fragment){
         show()
     }
     return dialog!!
+}
+
+fun Fragment.showTimePicker(onResult: (resultTime:String) -> Unit,date:Date?=null){
+    var mcurrentTime: Calendar?
+    var hour         = 0
+    var minute       = 0
+    var mTimePicker: TimePickerDialog
+    if(date != null){
+        mcurrentTime = Calendar.getInstance()
+        mcurrentTime.time = date
+    }else{
+        mcurrentTime = Calendar.getInstance()
+    }
+    hour         = mcurrentTime.get(Calendar.HOUR_OF_DAY)
+    minute       = mcurrentTime.get(Calendar.MINUTE)
+    mTimePicker = TimePickerDialog(activity, android.R.style.Theme_Holo_Dialog, TimePickerDialog.OnTimeSetListener{
+        timePicker,
+        selectedHour,
+        selectedMinute -> onResult(selectedHour.toString() + ":" + selectedMinute) },
+            hour,
+            minute, true)//Yes 24 hour time
+    mTimePicker.setTitle(activity?.getString(R.string.selectADate))
+    mTimePicker.show()
+}
+
+
+fun Fragment.showDatePicker(onResult: (resultTime:String) -> Unit,date:Date?=null){
+    var mcurrentDate = Calendar.getInstance()
+    var mDatePicker: DatePickerDialog
+    if(date != null){
+        mcurrentDate = Calendar.getInstance()
+        mcurrentDate.time = date
+    }
+    var mYear = mcurrentDate.get(Calendar.YEAR)
+    var mMonth = mcurrentDate.get(Calendar.MONTH)
+    var mDay = mcurrentDate.get(Calendar.DAY_OF_MONTH)
+    mDatePicker = DatePickerDialog(activity, OnDateSetListener { datepicker, selectedyear, selectedmonth, selectedday ->
+        var selectedmonth = selectedmonth
+
+        selectedmonth += 1
+        onResult( "$selectedday/$selectedmonth/$selectedyear")
+    }, mYear, mMonth, mDay)
+    mDatePicker.setTitle(activity?.getString(R.string.selectADate))
+    mDatePicker.show()
 }
 
 

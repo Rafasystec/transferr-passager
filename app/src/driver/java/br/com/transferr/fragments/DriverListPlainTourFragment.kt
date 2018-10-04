@@ -38,24 +38,19 @@ class DriverListPlainTourFragment : SuperClassFragment() {
         createListTour(emptyList())
         callWSToGetAllOpenDriverPlainTour()
         setHasOptionsMenu(true)
-        /*
-        fabAddPlainTourFragment.setOnClickListener {
-            startFrmPlainTourActivity()
-        }
-        fabRefeshPlainTourFragment.setOnClickListener{
-            callWSToGetAllOpenDriverPlainTour()
-            rcviewToursFragment.adapter.notifyDataSetChanged()
-            rcviewToursFragment.refreshDrawableState()
-        }
-        */
     }
 
 
     private fun createListTour(plainTours:List<PlainTour>){
-        val recyclerView            = rcviewToursFragment
-        recyclerView.adapter        = TourAdapter(plainTours, context!!,activity!!)
-        val layoutManager           = GridLayoutManager(context, GridLayoutManager.VERTICAL)
-        recyclerView.layoutManager  = layoutManager
+        if(plainTours.isNotEmpty()) {
+            tvListTourNoResult.visibility = View.GONE
+            val recyclerView = rcviewToursFragment
+            recyclerView.adapter = TourAdapter(plainTours, context!!, activity!!)
+            val layoutManager = GridLayoutManager(context, GridLayoutManager.VERTICAL)
+            recyclerView.layoutManager = layoutManager
+        }else{
+            tvListTourNoResult.visibility = View.VISIBLE
+        }
     }
 
     private fun callWSToGetAllOpenDriverPlainTour(){

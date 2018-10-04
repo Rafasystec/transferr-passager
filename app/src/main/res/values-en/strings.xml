@@ -73,4 +73,22 @@
     <string name="offline">OFF-LINE</string>
     <string name="ON">ON</string>
     <string name="OFF">OFF</string>
+    <string name="busySeats">Busy seats</string>
+    <string name="searchingPassenger">Searching Passenger</string>
+    <string name="searchPassengerWorks">A litle descrption of how \'Searching for Passenger works\'.</string>
+    <string name="passengerNotes">Passengers Notes</string>
+    <string name="passengerOne">Passenger One</string>
+    <string name="addPlanTour">Add Plan Tour</string>
+    <string name="passengerTwo">Passenger Two</string>
+    <string name="passengerThree">Passenger Three</string>
+    <string name="Notes">Notes</string>
+    <string name="Delete">Delete</string>
+    <string name="selectADate">Select a date</string>
+    <string name="Tour">Tour</string>
+    <string name="date">Date</string>
+    <string name="hour">hour</string>
+    <string name="Phone">Phone</string>
+    <string name="noteDetail">Enter here information about this passenger. Write observations,place of embarkation or any kind of information you wish to keep on the passenger.</string>
+    <string name="dateTour">Tour Date</string>
+    <string name="timeTour">Tour Time</string>
 </resources>

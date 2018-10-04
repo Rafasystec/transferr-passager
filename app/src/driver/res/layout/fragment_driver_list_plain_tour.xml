@@ -14,6 +14,16 @@
         android:layout_height="match_parent"
         android:orientation="vertical"
         />
+    <TextView
+        android:id="@+id/tvListTourNoResult"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/noResultFound"
+        android:textColor="@color/colorPrimaryLight"
+        android:layout_gravity="center"
+        android:background="@drawable/shape_text_border"
+        android:visibility="gone"
+        />
 
 <!--
     <android.support.design.widget.FloatingActionButton
