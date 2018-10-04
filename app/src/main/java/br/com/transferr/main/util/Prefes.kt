@@ -5,6 +5,7 @@ import br.com.transferr.application.ApplicationTransferr
 import br.com.transferr.extensions.fromJson
 import br.com.transferr.extensions.toJson
 import br.com.transferr.model.Car
+import br.com.transferr.model.Driver
 
 /**
  * Created by root on 12/02/18.
@@ -15,6 +16,7 @@ object Prefes {
     val ID_USER          = "br.com.transferr.user.id"
     val ID_CAR           = "br.com.transferr.car.id"
     val ID_CAR_JSON      = "br.com.transferr.car.id.json"
+    val ID_DRIVER_JSON      = "br.com.transferr.car.id.json"
 
     private fun prefs() : SharedPreferences{
         val contex = ApplicationTransferr.getInstance().applicationContext
@@ -32,6 +34,9 @@ object Prefes {
     var prefsCarJSON: Car
         get() = fromJson(prefs().getString(ID_CAR_JSON,""))
         set(car) = prefs().edit().putString(ID_CAR_JSON,car.toJson()).apply()
+    var driver: Driver
+        get() = fromJson(prefs().getString(ID_DRIVER_JSON,""))
+        set(driver) = prefs().edit().putString(ID_DRIVER_JSON,driver.toJson()).apply()
 
     //Use to save other values
     fun setInt(flag:String,value:Int) = prefs().edit().putInt(flag,value).apply()

@@ -32,7 +32,7 @@ open class SuperClassActivity : AppCompatActivity(),InternetBroadCast.Connectivi
         InternetBroadCast.connectivityReceiverListener = this
     }
 
-
+/*
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         //return super.onCreateOptionsMenu(menu)
         menuInflater.inflate(R.menu.menu_toolbar,menu)
@@ -40,8 +40,8 @@ open class SuperClassActivity : AppCompatActivity(),InternetBroadCast.Connectivi
         return true
     }
 
-
-
+*/
+/*
     override fun onOptionsItemSelected(item: MenuItem) = when (item.itemId) {
         R.id.action_exit -> {
             // User chose the "Settings" item, show the app settings UI...
@@ -68,7 +68,8 @@ open class SuperClassActivity : AppCompatActivity(),InternetBroadCast.Connectivi
             super.onOptionsItemSelected(item)
         }
     }
-
+*/
+    /*
     private fun logout(){
         Prefes.prefsLogin = 0
     }
@@ -84,7 +85,7 @@ open class SuperClassActivity : AppCompatActivity(),InternetBroadCast.Connectivi
     private fun startPlainTour(){
         startActivity(Intent(context,PlainTourActivity::class.java))
     }
-
+*/
     protected fun showMessage(isConnected: Boolean) {
 
         if (!isConnected) {

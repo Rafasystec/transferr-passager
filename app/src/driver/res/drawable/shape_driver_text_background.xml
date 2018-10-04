@@ -8,7 +8,7 @@
         android:angle="45"
         android:centerX="1.2"
         android:centerY="1.2"
-        android:endColor="@color/activityBackground"
+        android:endColor="#e3edc2"
         android:gradientRadius="4"
         android:startColor="#e3edc2"
         android:type="linear" />
@@ -23,8 +23,8 @@
     <!--Use android:dashWidth="2dp" and android:dashGap="2dp"
     to add dashes to your stroke-->
     <stroke
-        android:width="2dp"
-        android:color="@color/activityBackground" />
+        android:width="0.1dp"
+        android:color="@color/grey_400" />
 
     <!--If you want to add padding-->
     <padding

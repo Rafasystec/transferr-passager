@@ -28,4 +28,5 @@
     <color name="activityBackground">#E5D4AD</color>
     <color name="control">#FAF4C3</color>
     <color name="colorTranslucent">#99000000</color>
+    <color name="redDelete">#ff333f</color>
 </resources>

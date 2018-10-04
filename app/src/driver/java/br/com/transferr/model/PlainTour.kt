@@ -11,5 +11,15 @@ class PlainTour: Entity(){
     var driver:Driver?=null
     var tourOption:TourOption?=null
     var open:Boolean?=null
+    var namePassenger1: String?  = ""
+    var telPassenger1: String?   = ""
+    var notesPassenger1: String? = ""
+    var namePassenger2: String?  = ""
+    var telPassenger2: String?   = ""
+    var notesPassenger2: String? = ""
+    var namePassenger3: String?  = ""
+    var telPassenger3: String?   = ""
+    var notesPassenger3: String? = ""
+    var notesOfPlain: String? = ""
 }
 

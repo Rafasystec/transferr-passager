@@ -1,8 +1,8 @@
 package br.com.transferr.passenger.util
 
+import java.text.ParseException
 import java.text.SimpleDateFormat
 import java.util.*
-import java.text.ParseException
 
 
 /**
@@ -96,6 +96,12 @@ object DateUtil {
         }else{
             ""
         }
+    }
+
+    @JvmStatic
+    fun toDate(stringDate:String,formatInput:String): Date{
+        val formatter = SimpleDateFormat(formatInput)
+        return formatter.parse(stringDate)
     }
 
 }

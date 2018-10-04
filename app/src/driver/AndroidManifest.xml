@@ -94,7 +94,9 @@
         </receiver>
 
         <activity android:name="br.com.transferr.activities.newlayout.DriverEditInfoActivity" />
-        <activity android:name="br.com.transferr.activities.newlayout.DriverAddPlainTourActivity"></activity>
+        <activity android:name="br.com.transferr.activities.newlayout.DriverAddPlainTourActivity"
+                android:screenOrientation="portrait"
+            />
     </application>
 
 </manifest>

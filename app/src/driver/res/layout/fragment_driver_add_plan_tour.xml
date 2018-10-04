@@ -10,14 +10,31 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:theme="@style/AppTheme.AppBarOverlay">
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/toolbarAddPlan"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:background="?attr/colorPrimary"
+                android:layout_marginLeft="50dp"
+                app:popupTheme="@style/AppTheme.PopupOverlay" >
 
-        <android.support.v7.widget.Toolbar
-            android:id="@+id/toolbarAddPlan"
-            android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:background="?attr/colorPrimary"
-            app:popupTheme="@style/AppTheme.PopupOverlay" />
+            </android.support.v7.widget.Toolbar>
 
+                <ImageButton
+                    android:id="@+id/btnAddPlanTourClose"
+                    style="@style/Widget.AppCompat.Button.Borderless"
+                    android:layout_width="45dp"
+                    android:layout_height="45dp"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_centerVertical="true"
+                    android:backgroundTint="@color/redDelete"
+                    android:tint="@color/colorSecondary"
+                    android:src="@drawable/close_circle_outline" />
+            </RelativeLayout>
     </android.support.design.widget.AppBarLayout>
 
     <ScrollView
@@ -29,14 +46,4 @@
 
     </ScrollView>
 
-<!--
-    <android.support.v7.widget.AppCompatButton
-        android:id="@+id/btnPlanTourDelete"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/changePassword"
-        android:textColor="@color/colorButtonTextDriver"
-        android:drawableLeft="@drawable/delete"
-        app:backgroundTint="@color/colorPrimary" />
--->
 </LinearLayout>

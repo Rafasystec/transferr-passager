@@ -90,5 +90,14 @@
     <string name="noteDetail">Enter here information about this passenger. Write observations,place of embarkation or any kind of information you wish to keep on the passenger.</string>
     <string name="dateTour">Tour Date</string>
     <string name="timeTour">Tour Time</string>
+    <string name="msgValidationTitle">Validation</string>
+    <string name="noPlanTourToSave">No Plan Tour to save or update!</string>
+    <string name="pleaseInformDate">Please inform the date</string>
+    <string name="pleaseInformTime">Please inform the time!</string>
+    <string name="pleaseSelectATour">Please select a tour.</string>
+    <string name="Advice">Advice!</string>
+    <string name="dataSavedSuccessfully">Saved Successfully!</string>
+    <string name="SystemFailure">So Sorry! System Failure.</string>
+    <string name="getTheDriver">Getting the Driver</string>
 
 </resources>

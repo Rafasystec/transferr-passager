@@ -42,6 +42,7 @@
             android:layout_toEndOf="@+id/ivPlanTourLocation"
             android:layout_toRightOf="@+id/ivPlanTourLocation"
             android:spinnerMode="dropdown"
+            android:focusable="true"
             style="@style/spinner_style"
             />
         <ImageView
@@ -61,6 +62,7 @@
             android:layout_alignStart="@+id/spNameLocation"
             android:layout_alignLeft="@+id/spNameLocation"
             android:textSize="18sp"
+            android:layout_marginBottom="3dp"
             android:text="@string/dateTour"
             android:background="@drawable/shape_driver_text_background"
             />
@@ -85,6 +87,7 @@
             android:layout_below="@+id/edtPlanTourDate"
             android:layout_alignStart="@+id/edtPlanTourDate"
             android:layout_alignLeft="@+id/edtPlanTourDate"
+            android:layout_marginBottom="3dp"
             android:background="@drawable/shape_driver_text_background"
             />
     </RelativeLayout>
@@ -124,7 +127,9 @@
             android:layout_alignParentTop="true"
             android:layout_marginEnd="14dp"
             android:layout_marginBottom="12dp"
-            android:layout_marginRight="14dp">
+            android:layout_marginRight="14dp"
+            style="@style/spinner_style"
+            >
 
         </Spinner>
 
@@ -186,6 +191,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingLeft="8dp"
+        android:layout_marginRight="4dp"
         android:layout_toRightOf="@+id/ivProfile">
         <ImageView
             android:id="@+id/ivPlanTourPassengerOne"
@@ -207,6 +213,7 @@
             android:hint="@string/name"
             android:maxLength="60"
             android:inputType="textPersonName"
+            android:layout_marginBottom="3dp"
             />
         <ImageView
             android:id="@+id/ivPlanTourPassengerOnePhone"
@@ -226,6 +233,7 @@
             android:background="@drawable/shape_driver_text_background"
             android:hint="@string/Phone"
             android:inputType="phone"
+            android:layout_marginBottom="3dp"
             />
 
 
@@ -239,6 +247,8 @@
             android:background="@drawable/shape_driver_text_background"
             android:hint="@string/noteDetail"
             android:maxLength="160"
+            android:layout_marginBottom="3dp"
+            android:textSize="14sp"
             />
     </RelativeLayout>
     <TextView
@@ -259,6 +269,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingLeft="8dp"
+        android:layout_marginRight="4dp"
         android:layout_toRightOf="@+id/ivProfile">
         <ImageView
             android:id="@+id/ivPlanTourPassengerTwo"
@@ -280,6 +291,7 @@
             android:hint="@string/name"
             android:maxLength="60"
             android:inputType="textPersonName"
+            android:layout_marginBottom="3dp"
             />
         <ImageView
             android:id="@+id/ivPlanTourPassengerTwoPhone"
@@ -300,6 +312,7 @@
             android:hint="@string/Phone"
             android:maxLength="12"
             android:inputType="phone"
+            android:layout_marginBottom="3dp"
             />
 
 
@@ -313,7 +326,8 @@
             android:background="@drawable/shape_driver_text_background"
             android:hint="@string/noteDetail"
             android:maxLength="160"
-
+            android:layout_marginBottom="3dp"
+            android:textSize="14sp"
             />
     </RelativeLayout>
     <TextView
@@ -334,6 +348,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingLeft="8dp"
+        android:layout_marginRight="4dp"
         android:layout_toRightOf="@+id/ivProfile">
         <ImageView
             android:id="@+id/ivPlanTourPassengerThree"
@@ -355,6 +370,7 @@
             android:hint="@string/name"
             android:maxLength="60"
             android:inputType="textPersonName"
+            android:layout_marginBottom="3dp"
             />
         <ImageView
             android:id="@+id/ivPlanTourPassengerThreePhone"
@@ -375,6 +391,7 @@
             android:hint="@string/Phone"
             android:maxLength="60"
             android:inputType="phone"
+            android:layout_marginBottom="3dp"
             />
 
 
@@ -388,7 +405,8 @@
             android:background="@drawable/shape_driver_text_background"
             android:hint="@string/noteDetail"
             android:maxLength="160"
-
+            android:layout_marginBottom="3dp"
+            android:textSize="14sp"
             />
     </RelativeLayout>
     <TextView
@@ -408,13 +426,17 @@
         android:id="@+id/edtPlanTourNotes"
         android:layout_width="match_parent"
         android:layout_height="65dp"
-        android:background="@drawable/shape_driver_text_background" />
+        android:background="@drawable/shape_driver_text_background"
+        android:layout_marginBottom="3dp"
+        android:layout_marginRight="4dp"
+        android:textSize="14sp"
+        />
     <android.support.v7.widget.AppCompatButton
         android:id="@+id/btnPlanTourDelete"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/Delete"
-        android:textColor="@color/colorButtonTextDriver"
+        android:textColor="@color/redDelete"
         android:drawableLeft="@drawable/delete"
         app:backgroundTint="@color/colorPrimary" />
 

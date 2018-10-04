@@ -7,13 +7,13 @@
                 android:angle="45"
                 android:centerX="1.2"
                 android:centerY="1.2"
-                android:endColor="@color/activityBackground"
+                android:endColor="#e3edc2"
                 android:gradientRadius="4"
                 android:startColor="#e3edc2"
                 android:type="linear" />
 
-            <stroke android:width="2dp"
-                android:color="@color/activityBackground" />
+            <stroke android:width="0.2dp"
+                android:color="@color/grey_400" />
 
             <corners android:radius="4dp" />
 

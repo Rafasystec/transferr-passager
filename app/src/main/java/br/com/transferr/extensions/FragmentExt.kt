@@ -7,6 +7,7 @@ import android.app.DatePickerDialog.OnDateSetListener
 import android.app.ProgressDialog
 import android.app.TimePickerDialog
 import android.support.annotation.IdRes
+import android.support.annotation.StringRes
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentActivity
 import android.support.v4.app.FragmentManager
@@ -20,7 +21,10 @@ import android.view.View
 import android.widget.TextView
 import android.widget.Toast
 import br.com.transferr.R
+import org.jetbrains.anko.alert
 import org.jetbrains.anko.indeterminateProgressDialog
+import org.jetbrains.anko.okButton
+import org.jetbrains.anko.yesButton
 import java.util.*
 
 
@@ -128,4 +132,42 @@ fun Fragment.showDatePicker(onResult: (resultTime:String) -> Unit,date:Date?=nul
     mDatePicker.show()
 }
 
+fun Fragment.showAlertValidation(message:String){
+    activity?.alert(message,activity?.getString(R.string.msgValidationTitle)!!){
+        okButton{ it.dismiss() }
+    }?.show()
+}
 
+fun Fragment.showAlertValidation(@StringRes idResource: Int){
+    showAlertValidation(activity?.getString(idResource)!!)
+}
+
+fun Fragment.showAlert(message:String){
+    activity?.alert(message,activity?.getString(R.string.Advice)!!){
+        okButton{ it.dismiss() }
+    }?.show()
+}
+
+fun Fragment.showAlert(@StringRes idResource: Int){
+    showAlert(activity?.getString(idResource)!!)
+}
+
+fun Fragment.showAlertError(message:String){
+    activity?.alert(message,activity?.getString(R.string.Advice)!!){
+        okButton{ it.dismiss() }
+    }?.show()
+}
+
+fun Fragment.showAlertError(@StringRes idResource: Int){
+    showAlertError(activity?.getString(idResource)!!)
+}
+
+fun Fragment.showAlertFailure(message:String){
+    activity?.alert(message,activity?.getString(R.string.Advice)!!){
+        okButton{ it.dismiss() }
+    }?.show()
+}
+
+fun Fragment.showAlertFailure(@StringRes idResource: Int){
+    showAlertFailure(activity?.getString(idResource)!!)
+}
