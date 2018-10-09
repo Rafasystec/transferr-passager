@@ -20,18 +20,16 @@ import android.view.View
 import br.com.transferr.R
 import br.com.transferr.broadcast.InternetBroadCast
 import br.com.transferr.extensions.log
-import br.com.transferr.extensions.setupToolbar
-import br.com.transferr.extensions.showError
-import br.com.transferr.extensions.showValidation
+import br.com.transferr.main.util.Prefes
 import br.com.transferr.model.Car
 import br.com.transferr.model.Driver
 import br.com.transferr.model.enums.EnumStatus
 import br.com.transferr.model.responses.OnResponseInterface
 import br.com.transferr.model.responses.RequestCoordinatesUpdate
 import br.com.transferr.model.responses.ResponseOK
+import br.com.transferr.passenger.extensions.setupToolbar
 import br.com.transferr.services.LocationTrackingService
 import br.com.transferr.util.NetworkUtil
-import br.com.transferr.main.util.Prefes
 import br.com.transferr.util.VariablesUtil
 import br.com.transferr.webservices.CarService
 import br.com.transferr.webservices.DriverService
@@ -223,7 +221,7 @@ class MainActivity : SuperClassActivity() {
                 getCarFromWebService()
                 stopInitLocation()
             }else{
-                showError("Sem conexão com a Internet.")
+                //showError("Sem conexão com a Internet.")
             }
 
         }else{
@@ -250,12 +248,12 @@ class MainActivity : SuperClassActivity() {
 
                         override fun onError(message: String) {
                             stopProgressBar()
-                            showValidation(message)
+                            //showValidation(message)
                         }
 
                         override fun onFailure(t: Throwable?) {
                             stopProgressBar()
-                            showError(t?.message!!)
+                            //showError(t?.message!!)
                         }
 
                     }
@@ -270,12 +268,12 @@ class MainActivity : SuperClassActivity() {
 
                         override fun onError(message: String) {
                             stopProgressBar()
-                            showValidation(message)
+                            //showValidation(message)
                         }
 
                         override fun onFailure(t: Throwable?) {
                             stopProgressBar()
-                            showError(t)
+                            //showError(t)
                         }
 
                     }

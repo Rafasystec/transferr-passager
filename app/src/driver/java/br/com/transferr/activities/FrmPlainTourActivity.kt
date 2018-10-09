@@ -19,10 +19,12 @@ import br.com.transferr.model.TourOption
 import br.com.transferr.model.responses.OnResponseInterface
 import br.com.transferr.model.responses.ResponsePlainTour
 import br.com.transferr.main.util.Prefes
+import br.com.transferr.passenger.extensions.setupToolbar
 import br.com.transferr.webservices.CarService
 import br.com.transferr.webservices.PlainTourService
 import br.com.transferr.webservices.TourOptionService
 import kotlinx.android.synthetic.driver.activity_frm_plain_tour.*
+import org.jetbrains.anko.toast
 
 class FrmPlainTourActivity : AppCompatActivity() {
     private var car:Car?=null
@@ -49,11 +51,11 @@ class FrmPlainTourActivity : AppCompatActivity() {
                     }
 
                     override fun onError(message: String) {
-                        showValidation(message)
+                        //showValidation(message)
                     }
 
                     override fun onFailure(t: Throwable?) {
-                        showError(t)
+                        //showError(t)
                     }
 
                 }
@@ -68,11 +70,11 @@ class FrmPlainTourActivity : AppCompatActivity() {
                 }
 
                 override fun onError(message: String) {
-                    showValidation(message)
+                    //showValidation(message)
                 }
 
                 override fun onFailure(t: Throwable?) {
-                    showError(t)
+                    //showError(t)
                 }
             }
         )

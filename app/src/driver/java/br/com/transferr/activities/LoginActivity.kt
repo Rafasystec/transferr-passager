@@ -12,10 +12,13 @@ import br.com.transferr.model.responses.ResponseLogin
 import br.com.transferr.model.responses.ResponseOK
 import br.com.transferr.main.util.Prefes
 import br.com.transferr.model.Driver
+import br.com.transferr.passenger.extensions.showAlert
+import br.com.transferr.passenger.extensions.showAlertError
 import br.com.transferr.passenger.extensions.showLoadingDialog
 import br.com.transferr.webservices.DriverService
 import br.com.transferr.webservices.UserService
 import kotlinx.android.synthetic.driver.activity_login.*
+import org.jetbrains.anko.toast
 
 class LoginActivity : SuperClassActivity() {
 
@@ -115,12 +118,14 @@ class LoginActivity : SuperClassActivity() {
 
                    override fun onError(message: String) {
                        stopProgressBar()
-                       showValidation(message)
+                       //showValidation(message)
+                       showAlert(message)
                    }
 
                    override fun onFailure(t: Throwable?) {
                        stopProgressBar()
-                       showError(t?.message!!)
+                       //showError(t?.message!!)
+                       showAlertError(t?.message!!)
                    }
 
                }

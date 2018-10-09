@@ -11,9 +11,12 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import br.com.transferr.R
+import br.com.transferr.extensions.showError
 import br.com.transferr.model.PlainTour
 import br.com.transferr.model.responses.OnResponseInterface
 import br.com.transferr.model.responses.ResponseOK
+import br.com.transferr.passenger.extensions.showAlert
+import br.com.transferr.passenger.extensions.showAlertError
 import br.com.transferr.passenger.util.DateUtil
 import br.com.transferr.util.AddPassengerDialog
 import br.com.transferr.webservices.PlainTourService
@@ -80,7 +83,12 @@ class TourAdapter(private val tours:List<PlainTour>,private val context: Context
             }
         }
 
-        private fun excluir(tour: PlainTour){
+
+        fun showMessage(message:String){
+            Toast.makeText(context,message,Toast.LENGTH_SHORT).show()
+        }
+
+        fun excluir(tour: PlainTour){
             PlainTourService.delete(tour.id!!,
                     object: OnResponseInterface<ResponseOK> {
                         override fun onSuccess(body: ResponseOK?) {
@@ -95,15 +103,13 @@ class TourAdapter(private val tours:List<PlainTour>,private val context: Context
                             showMessage("Falha grave: ${t!!.message}")
                         }
 
-
                     }
-                    )
+            )
 
-        }
-        fun showMessage(message:String){
-            Toast.makeText(context,message,Toast.LENGTH_SHORT).show()
         }
     }
+
+
 
 
 }

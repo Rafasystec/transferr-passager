@@ -1,10 +1,10 @@
 package br.com.transferr.activities
 
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.support.v7.app.AppCompatActivity
 import br.com.transferr.R
-import br.com.transferr.extensions.toast
 import kotlinx.android.synthetic.driver.activity_form_driver.*
+import org.jetbrains.anko.toast
 
 class FormDriverActivity : AppCompatActivity() {
 

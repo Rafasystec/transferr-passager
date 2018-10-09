@@ -3,6 +3,7 @@ package br.com.transferr.passenger.extensions
 import android.app.Activity
 import android.app.ProgressDialog
 import android.support.annotation.IdRes
+import android.support.annotation.StringRes
 import android.support.v4.app.Fragment
 import android.support.v7.app.ActionBar
 import android.support.v7.app.AppCompatActivity
@@ -11,7 +12,9 @@ import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.support.v7.widget.Toolbar
 import br.com.transferr.R
+import org.jetbrains.anko.alert
 import org.jetbrains.anko.indeterminateProgressDialog
+import org.jetbrains.anko.okButton
 
 /**
  * Created by Rafael Rocha on 25/07/18.
@@ -64,4 +67,24 @@ fun AppCompatActivity.showLoadingDialog(message: String = getString(R.string.loa
         show()
     }
     return dialog!!
+}
+
+fun Activity.showAlert(message:String){
+    alert(message,getString(R.string.Advice)!!){
+        okButton{ it.dismiss() }
+    }?.show()
+}
+
+fun Activity.showAlert(@StringRes idResource: Int){
+    showAlert(getString(idResource)!!)
+}
+
+fun Activity.showAlertError(message:String){
+    alert(message,getString(R.string.Advice)!!){
+        okButton{ it.dismiss() }
+    }?.show()
+}
+
+fun Activity.showAlertError(@StringRes idResource: Int){
+    showAlertError(getString(idResource)!!)
 }

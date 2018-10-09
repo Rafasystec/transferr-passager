@@ -9,8 +9,11 @@ import br.com.transferr.extensions.showValidation
 import br.com.transferr.extensions.toast
 import br.com.transferr.model.PlainTour
 import br.com.transferr.model.responses.OnResponseInterface
+import br.com.transferr.passenger.extensions.showAlert
+import br.com.transferr.passenger.extensions.showAlertError
 import br.com.transferr.webservices.PlainTourService
 import kotlinx.android.synthetic.driver.dialog_add_plaintour.view.*
+import org.jetbrains.anko.toast
 
 /**
  * Created by root on 04/04/18.
@@ -32,11 +35,11 @@ class AddPassengerDialog(val context: Context, val activity: Activity,val plainT
                         }
 
                         override fun onError(message: String) {
-                            activity.showValidation(message)
+                            activity.showAlert(message)
                         }
 
                         override fun onFailure(t: Throwable?) {
-                            activity.showError(t)
+                            activity.showAlertError(t?.message!!)
                         }
 
                     }

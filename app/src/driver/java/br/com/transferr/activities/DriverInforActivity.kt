@@ -15,10 +15,12 @@ import br.com.transferr.model.responses.ResponseOK
 import br.com.transferr.util.FileUtil
 import br.com.transferr.util.ImageUtil
 import br.com.transferr.main.util.Prefes
+import br.com.transferr.passenger.extensions.setupToolbar
 import br.com.transferr.webservices.DriverService
 import br.com.transferr.webservices.UserService
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.driver.activity_driver_infor.*
+import org.jetbrains.anko.toast
 import java.io.File
 
 class DriverInforActivity : SuperClassActivity() {
@@ -103,13 +105,13 @@ class DriverInforActivity : SuperClassActivity() {
         val newPassword = txtNewPassword.text.toString().trim()
         val confPassword= txtConfirmNewPassword.text.toString().trim()
         if(oldPassword.isEmpty()){
-            toast("Por favor informe a sua senha antiga!")
+            //toast("Por favor informe a sua senha antiga!")
             return false
         }else if(newPassword.isEmpty()){
-            toast("Por favor informe a nova senha!")
+           // toast("Por favor informe a nova senha!")
             return false
         }else if(confPassword.isEmpty()){
-            toast("Por favor confirme a senha!")
+            //toast("Por favor confirme a senha!")
             return false
         }else{
             if(oldPassword == newPassword){
@@ -136,12 +138,12 @@ class DriverInforActivity : SuperClassActivity() {
 
                     override fun onError(message: String) {
                         stopProgressBar()
-                        showValidation(message)
+                        //showValidation(message)
                     }
 
                     override fun onFailure(t: Throwable?) {
                         stopProgressBar()
-                        showError(t?.message!!)
+                        //showError(t?.message!!)
                     }
 
                 }
@@ -167,12 +169,12 @@ class DriverInforActivity : SuperClassActivity() {
 
                 override fun onError(message: String) {
                     stopProgressBar()
-                    showValidation(message)
+                    //showValidation(message)
                 }
 
                 override fun onFailure(t: Throwable?) {
                     stopProgressBar()
-                    showError(t?.message!!)
+                    //showError(t?.message!!)
                 }
 
             }
@@ -204,12 +206,12 @@ class DriverInforActivity : SuperClassActivity() {
 
                     override fun onError(message: String) {
                         stopProgressBar()
-                        showValidation(message)
+                        //showValidation(message)
                     }
 
                     override fun onFailure(t: Throwable?) {
                         stopProgressBar()
-                        showError(t?.message!!)
+                        //showError(t?.message!!)
                     }
 
                 })

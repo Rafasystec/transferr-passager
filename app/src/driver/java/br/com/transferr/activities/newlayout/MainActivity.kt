@@ -14,11 +14,13 @@ import br.com.transferr.fragments.MapsFragment
 import br.com.transferr.main.util.Prefes
 import br.com.transferr.model.Driver
 import br.com.transferr.model.responses.OnResponseInterface
+import br.com.transferr.passenger.extensions.setupToolbar
 import br.com.transferr.passenger.extensions.showLoadingDialog
 import br.com.transferr.passenger.extensions.switchFragmentToMainContent
 import br.com.transferr.util.NetworkUtil
 import br.com.transferr.webservices.DriverService
 import kotlinx.android.synthetic.driver.content_main.*
+import org.jetbrains.anko.toast
 
 class MainActivity : AppCompatActivity() {
 
