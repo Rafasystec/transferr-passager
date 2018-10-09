@@ -50,12 +50,40 @@ class DriverAddPlanTourFragment : SuperClassFragment() {
         setHasOptionsMenu(true)
         getAllTourOption()
         initSpinners()
-        plainTour = PlainTour()
-        plainTour!!.open = false
-        //TODO Check if the previous screen sent a tour by parameter
+        extractParameterIfExists()
         setOnClickOnTheButtons()
     }
 
+    private fun extractParameterIfExists() {
+        var plainFromIntent = activity?.intent?.getSerializableExtra(PlainTour.PARAMETER_PLAN_TUOR)
+        if (plainFromIntent != null) {
+            plainTour = plainFromIntent as PlainTour
+            bindFieldsFromPlanTour(plainTour!!)
+        }else{
+            plainTour = PlainTour()
+        }
+    }
+
+    private fun bindFieldsFromPlanTour(plainTour: PlainTour) {
+        stringDate = DateUtil.format(plainTour.date!!,"dd/MM/yyyy")
+        stringTime = DateUtil.format(plainTour.date!!,"HH:mm")
+        edtPlanTourDate.text = stringDate
+        edtPlanTourTime.text = stringTime
+        //For passenger 1
+        tvPlanTourPassengerOneName.setText(plainTour.namePassenger1)
+        edtPassengerOnePhone.setText(plainTour.telPassenger1)
+        edtPassengerOneNotes.setText(plainTour.notesPassenger1)
+        //For passenger 2
+        tvPlanTourPassengerTwoName.setText(plainTour.namePassenger2)
+        edtPassengerTwoPhone.setText(plainTour.telPassenger2)
+        edtPassengerTwoNotes.setText(plainTour.notesPassenger2)
+        //For passenger 3
+        tvPlanTourPassengerThreeName.setText(plainTour.namePassenger3)
+        edtPassengerThreePhone.setText(plainTour.telPassenger3)
+        edtPassengerThreeNotes.setText(plainTour.notesPassenger3)
+
+        edtPlanTourNotes.setText(plainTour.notesOfPlain)
+    }
     private fun setOnClickOnTheButtons() {
         edtPlanTourTime.setOnClickListener {
             //DialogTimePickerFragment().showNow(activity?.supportFragmentManager,"timePicker")

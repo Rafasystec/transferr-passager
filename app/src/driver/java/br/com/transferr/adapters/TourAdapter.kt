@@ -3,7 +3,10 @@ package br.com.transferr.adapters
 import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Context
+import android.content.Intent
 import android.graphics.Color
+import android.os.Bundle
+import android.support.v4.content.ContextCompat.startActivity
 import android.support.v7.widget.RecyclerView
 import android.support.v7.widget.RecyclerView.Adapter
 import android.view.LayoutInflater
@@ -11,6 +14,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import br.com.transferr.R
+import br.com.transferr.activities.newlayout.DriverAddPlainTourActivity
 import br.com.transferr.extensions.showError
 import br.com.transferr.model.PlainTour
 import br.com.transferr.model.responses.OnResponseInterface
@@ -41,13 +45,7 @@ class TourAdapter(private val tours:List<PlainTour>,private val context: Context
             var plainTour = tours[position]
             it.bindView(plainTour)
             it.itemView.setOnClickListener {
-                //Toast.makeText(context,"Ao clicar será modificado",Toast.LENGTH_SHORT).show()
-                val dialog = AddPassengerDialog(context,activity,plainTour)
-                var alertDialog = dialog.create()
-                alertDialog.setOnDismissListener{
-                    this.notifyDataSetChanged()
-                }
-                alertDialog.show()
+                startFrmPlainTourActivity(plainTour)
             }
         }
     }
@@ -61,20 +59,9 @@ class TourAdapter(private val tours:List<PlainTour>,private val context: Context
         fun bindView(tour: PlainTour) {
             val titleView       = itemView.note_item_title
             val description     = itemView.note_item_description
-            //val seats           = itemView.seats
             titleView.text      = DateUtil.getDateDescription(tour.date!!,true)
             description.text    = tour.tourOption?.name
-            /*
-            if( tour.seatsRemaining == 0){
-                seats.text = "Esgotado"
-                seats.setTextColor(Color.RED)
-            }else {
-                seats.setTextColor(R.color.primary)
-                seats.text = "Vagas: " + tour.seatsRemaining
-            }
-            */
             itemView.imgTrash.setOnClickListener {
-                //Toast.makeText(context,"Excluir item ${tour.id}",Toast.LENGTH_LONG).show()
                 context.alert("Confirme exclusão"){
                     title = "Exclusão"
                     yesButton { excluir(tour) }
@@ -109,6 +96,11 @@ class TourAdapter(private val tours:List<PlainTour>,private val context: Context
         }
     }
 
+    private fun startFrmPlainTourActivity(plainTour: PlainTour){
+        var intent = Intent(context, DriverAddPlainTourActivity::class.java)
+        intent.putExtra(PlainTour.PARAMETER_PLAN_TUOR,plainTour)
+        startActivity(activity, intent,null)
+    }
 
 
 

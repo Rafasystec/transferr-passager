@@ -10,10 +10,7 @@ import br.com.transferr.R
 import br.com.transferr.activities.FrmPlainTourActivity
 import br.com.transferr.activities.newlayout.DriverAddPlainTourActivity
 import br.com.transferr.adapters.TourAdapter
-import br.com.transferr.extensions.setupToolbar
-import br.com.transferr.extensions.showError
-import br.com.transferr.extensions.showLoadingDialog
-import br.com.transferr.extensions.showValidation
+import br.com.transferr.extensions.*
 import br.com.transferr.model.PlainTour
 import br.com.transferr.model.responses.OnResponseInterface
 import br.com.transferr.main.util.Prefes
@@ -35,8 +32,8 @@ class DriverListPlainTourFragment : SuperClassFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setupToolbar(R.id.toolbar,"Passeios",true)
-        createListTour(emptyList())
-        callWSToGetAllOpenDriverPlainTour()
+        //createListTour(emptyList())
+        //callWSToGetAllOpenDriverPlainTour()
         setHasOptionsMenu(true)
     }
 
@@ -108,6 +105,11 @@ class DriverListPlainTourFragment : SuperClassFragment() {
             }else->{super.onOptionsItemSelected(item)}
         }
 
+    }
+
+    override fun onResume() {
+        super.onResume()
+        callWSToGetAllOpenDriverPlainTour()
     }
 
 }// Required empty public constructor

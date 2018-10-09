@@ -7,6 +7,9 @@ import java.util.*
  */
 class PlainTour: Entity(){
 
+    companion object {
+        val PARAMETER_PLAN_TUOR = "br.com.transferr.model.PlainTour.AS_PARAMETER"
+    }
     var date:Date?=null
     var seatsRemaining:Int=0
     var driver:Driver?=null
