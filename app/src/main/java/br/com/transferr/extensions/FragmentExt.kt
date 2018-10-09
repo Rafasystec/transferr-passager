@@ -104,7 +104,9 @@ fun Fragment.showTimePicker(onResult: (resultTime:String) -> Unit,date:Date?=nul
     mTimePicker = TimePickerDialog(activity, android.R.style.Theme_Holo_Dialog, TimePickerDialog.OnTimeSetListener{
         timePicker,
         selectedHour,
-        selectedMinute -> onResult(selectedHour.toString() + ":" + selectedMinute) },
+        selectedMinute -> onResult(if(selectedHour < 10){"0$selectedHour"}else{selectedHour.toString()}
+            + ":" +
+            if(selectedMinute < 10){"0$selectedMinute"}else{selectedMinute.toString()}) },
             hour,
             minute, true)//Yes 24 hour time
     mTimePicker.setTitle(activity?.getString(R.string.selectADate))
@@ -170,4 +172,10 @@ fun Fragment.showAlertFailure(message:String){
 
 fun Fragment.showAlertFailure(@StringRes idResource: Int){
     showAlertFailure(activity?.getString(idResource)!!)
+}
+
+fun Fragment.showAlert(@StringRes idResource: Int,onOkClick : ()->Unit){
+    activity?.alert(activity?.getString(idResource)!!,activity?.getString(R.string.Advice)!!){
+        okButton{ onOkClick }
+    }?.show()
 }

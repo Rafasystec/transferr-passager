@@ -22,7 +22,7 @@ class RestUtil<T> {
                 var mapErro = fromJson<MapErroRetornoRest>(json!!)
                 return mapErro.message!!
             }catch (e:Exception){
-                return ("Erro deconhecido ${body.errorBody().toString()}")
+                return ("Erro desconhecido: ${body.errorBody().toString()}")
             }
         }
         return "Desculpe! Sem retorno."

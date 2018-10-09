@@ -1,9 +1,11 @@
 package br.com.transferr.activities.newlayout
 
 
+import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import br.com.transferr.R
+import br.com.transferr.activities.LoginActivity
 import br.com.transferr.extensions.setupToolbar
 import br.com.transferr.extensions.toast
 import br.com.transferr.fragments.DriverListPlainTourFragment
@@ -14,6 +16,7 @@ import br.com.transferr.model.Driver
 import br.com.transferr.model.responses.OnResponseInterface
 import br.com.transferr.passenger.extensions.showLoadingDialog
 import br.com.transferr.passenger.extensions.switchFragmentToMainContent
+import br.com.transferr.util.NetworkUtil
 import br.com.transferr.webservices.DriverService
 import kotlinx.android.synthetic.driver.content_main.*
 
@@ -25,12 +28,14 @@ class MainActivity : AppCompatActivity() {
         setupToolbar(R.id.toolbar,getString(R.string.home))
         includeFragment()
         initNavigationBottomMenu()
-        getAndSaveDriver()
+        //getAndSaveDriver()
+        checkLogin()
     }
-
+    /*
     fun setActionBarTitle(title: String) {
         supportActionBar!!.title = title
     }
+    */
 
     private fun includeFragment(){
         val fm = supportFragmentManager.beginTransaction()
@@ -65,13 +70,14 @@ class MainActivity : AppCompatActivity() {
 
         }
     }
-
+/*
     fun getAndSaveDriver(){
         var driver = Prefes.driver
         if(driver == null || driver.id == 0L){
             getDriverFromWebService()
         }
     }
+    */
     private fun getDriverFromWebService(){
         var progress = showLoadingDialog(message = getString(R.string.getTheDriver))
         DriverService.doGetByUserId(Prefes.prefsLogin,
@@ -95,4 +101,58 @@ class MainActivity : AppCompatActivity() {
         )
 
     }
+
+    private fun checkLogin(){
+        val isLoged = checkUserLogin()
+        if(isLoged) {
+            if(isConnected()) {
+                getDriverFromWebService()
+            }else{
+                // showError("Sem conexão com a Internet.")
+            }
+
+        }else{
+            callLoginActivity()
+        }
+    }
+
+    private fun callLoginActivity(){
+        startActivity(Intent(this, LoginActivity::class.java))
+
+    }
+
+    private fun isConnected():Boolean{
+        return NetworkUtil.isNetworkAvailable(this)
+    }
+
+    private fun checkUserLogin():Boolean{
+        val id = Prefes.prefsLogin
+        if(id == null || id <= 0){
+            return false
+        }
+        return true
+    }
+    /*
+    private fun getCarFromWebService(){
+        var progress = showLoadingDialog(message = getString(R.string.pleaseWaitWhileWeGetTheCar))
+        DriverService.doGetByUserId(Prefes.prefsLogin,
+                object: OnResponseInterface<Driver> {
+                    override fun onSuccess(body: Driver?) {
+                        Prefes.driver = body!!
+                        progress.dismiss()
+                    }
+
+                    override fun onError(message: String) {
+                        progress.dismiss()
+                    }
+
+                    override fun onFailure(t: Throwable?) {
+                        progress.dismiss()
+                    }
+
+                }
+        )
+
+    }
+    */
 }

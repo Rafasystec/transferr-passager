@@ -55,7 +55,7 @@ class DriverListPlainTourFragment : SuperClassFragment() {
 
     private fun callWSToGetAllOpenDriverPlainTour(){
         var dialog = showLoadingDialog()
-        PlainTourService.getDriverPlains(Prefes.prefsDriver,
+        PlainTourService.getDriverPlains(Prefes.driver.id!!,
                 object : OnResponseInterface<List<PlainTour>> {
                     override fun onSuccess(body: List<PlainTour>?) {
                         try {

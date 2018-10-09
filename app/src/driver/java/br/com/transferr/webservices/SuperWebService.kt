@@ -2,7 +2,9 @@ package br.com.transferr.webservices
 
 import android.content.Context
 import br.com.transferr.application.ApplicationTransferr
+import br.com.transferr.passenger.util.DateUtil
 import br.com.transferr.util.NetworkUtil
+import com.google.gson.GsonBuilder
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -21,7 +23,7 @@ open class SuperWebService {
 
     protected val retrofit = Retrofit.Builder()
             .baseUrl(urlBase)
-            .addConverterFactory(GsonConverterFactory.create())
+            .addConverterFactory(GsonConverterFactory.create(GsonBuilder().setDateFormat(DateUtil.DATE_TIME_FORMAT).create()))
             .client(httpClient)
             .build()
 

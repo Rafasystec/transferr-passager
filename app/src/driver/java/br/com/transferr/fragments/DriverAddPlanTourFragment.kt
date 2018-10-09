@@ -45,6 +45,7 @@ class DriverAddPlanTourFragment : SuperClassFragment() {
         getAllTourOption()
         initSpinners()
         plainTour = PlainTour()
+        plainTour!!.open = false
         //TODO Check if the previous screen sent a tour by parameter
         setOnClickOnTheButtons()
     }
@@ -90,7 +91,7 @@ class DriverAddPlanTourFragment : SuperClassFragment() {
     }
 
     fun initSpinners(){
-        spPlanTourBusySeats.adapter = ArrayAdapter<Int>(activity,R.layout.layout_spinner_item, listOf(1,2,3,4,5,6,7,8,9,10,11,12,13,14,15))
+        spPlanTourBusySeats.adapter = ArrayAdapter<Int>(activity,R.layout.layout_spinner_item, listOf(1,2,3,4,5,6,7,8,9,10))
     }
 
     private fun initializeSpinnerLocation(tourOptions:List<TourOption>){
@@ -152,7 +153,7 @@ class DriverAddPlanTourFragment : SuperClassFragment() {
             showAlertValidation(R.string.pleaseInformTime)
             return false
         }
-        if(plainTour.tourOption == null){
+        if(selectedTourOption == null){
             showAlertValidation(R.string.pleaseSelectATour)
             return false
         }
@@ -172,7 +173,7 @@ class DriverAddPlanTourFragment : SuperClassFragment() {
             override fun onSuccess(pPlanTour: PlainTour?) {
                 alert.dismiss()
                 plainTour = pPlanTour!!
-                showAlert(R.string.dataSavedSuccessfully)
+                showAlert(R.string.dataSavedSuccessfully,{activity?.finish()})
             }
 
             override fun onError(message: String) {

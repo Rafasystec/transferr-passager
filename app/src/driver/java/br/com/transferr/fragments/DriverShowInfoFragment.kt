@@ -68,21 +68,19 @@ class DriverShowInfoFragment : SuperClassFragment() {
         super.onViewCreated(view, savedInstanceState)
         setupToolbar(R.id.toolbar,getString(R.string.myInformation))
         registerInternetReceiver()
-        //getBundleValues(savedInstanceState)
-        checkLogin()
+
+        getCarFromWebService()
         initView()
     }
     private fun initView(){
-       // btnFrmDriver.setOnClickListener { callFormDriver() }
-        //swtOnline.setOnClickListener { stopInitLocation() }
         checkNetwork()
-
     }
-
+/*
     private fun callFormDriver(){
         val intentInit = Intent(context, DriverInforActivity::class.java)
         startActivity(intentInit)
     }
+    */
 /*
     private fun stopInitLocation(){
         if(swtOnline.isChecked){
@@ -109,7 +107,7 @@ class DriverShowInfoFragment : SuperClassFragment() {
         activity?.startService(Intent(context, LocationTrackingService::class.java))
     }
     */
-
+/*
     private fun stopServiceIntent(){
         activity?.stopService(Intent(context, LocationTrackingService::class.java))
     }
@@ -122,6 +120,7 @@ class DriverShowInfoFragment : SuperClassFragment() {
         locationManager = activity?.getSystemService(Context.LOCATION_SERVICE) as LocationManager
         return locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER) || locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER)
     }
+    */
 /*
     private fun showAlert() {
         val dialog = AlertDialog.Builder(activity!!)
@@ -142,7 +141,7 @@ class DriverShowInfoFragment : SuperClassFragment() {
         dialog.show()
     }
     */
-
+/*
     private fun isLocationPermissionGranted(): Boolean {
         if (ActivityCompat.checkSelfPermission(activity!!, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED &&
                 ActivityCompat.checkSelfPermission(activity!!, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
@@ -150,6 +149,7 @@ class DriverShowInfoFragment : SuperClassFragment() {
         }
         return true
     }
+    */
 /*
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
@@ -181,22 +181,21 @@ class DriverShowInfoFragment : SuperClassFragment() {
     }
 
     private fun getCarFromWebService(){
-        initProgressBar()
-        //CarService.getCarByUser(Prefes.prefsLogin,
+        var progress = showLoadingDialog()
         DriverService.doGetByUserId(Prefes.prefsLogin,
                 object: OnResponseInterface<Driver> {
                     override fun onSuccess(body: Driver?) {
                         initScreenFields(body!!)
-                        stopProgressBar()
+                        progress.dismiss()
                     }
 
                     override fun onError(message: String) {
-                        stopProgressBar()
+                        progress.dismiss()
                         toast(message)
                     }
 
                     override fun onFailure(t: Throwable?) {
-                        stopProgressBar()
+                        progress.dismiss()
                         toast("Erro ao logar ${t?.message}")
                     }
 
@@ -205,6 +204,7 @@ class DriverShowInfoFragment : SuperClassFragment() {
 
     }
 
+    /*
     private fun checkUserLogin():Boolean{
         val id = Prefes.prefsLogin
         if(id == null || id <= 0){
@@ -212,7 +212,7 @@ class DriverShowInfoFragment : SuperClassFragment() {
         }
         return true
     }
-
+    */
     private fun checkNetwork(){
         var isConnectedNow = isConnected()
         if(!isConnectedNow){
@@ -226,7 +226,7 @@ class DriverShowInfoFragment : SuperClassFragment() {
     }
 
 
-
+/*
     private fun initProgressBar(){
         activity?.runOnUiThread({
             progressBar.visibility = View.VISIBLE
@@ -238,7 +238,8 @@ class DriverShowInfoFragment : SuperClassFragment() {
             progressBar.visibility = View.GONE
         })
     }
-
+    */
+/*
     private fun checkLogin(){
         val isLoged = checkUserLogin()
         if(isLoged) {
@@ -253,12 +254,13 @@ class DriverShowInfoFragment : SuperClassFragment() {
             callLoginActivity()
         }
     }
+    */
 
     private fun callLoginActivity(){
         startActivity(Intent(context, LoginActivity::class.java))
 
     }
-
+/*
     private fun onlineOffline(online:Boolean){
         var request = RequestCoordinatesUpdate()
         request.idCar = Prefes.prefsCar
@@ -306,6 +308,7 @@ class DriverShowInfoFragment : SuperClassFragment() {
         }
 
     }
+    */
     /*
     private fun getBundleValues(savedInstanceState: Bundle?){
         if(savedInstanceState != null){

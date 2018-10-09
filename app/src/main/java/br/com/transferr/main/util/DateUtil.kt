@@ -10,6 +10,8 @@ import java.util.*
  */
 object DateUtil {
 
+    @JvmStatic
+    val DATE_TIME_FORMAT = "yyyy-MM-dd'T'HH:mm:ssZ"
 
     @JvmStatic
     fun format(date: Date,format:String) : String {
@@ -99,9 +101,11 @@ object DateUtil {
     }
 
     @JvmStatic
-    fun toDate(stringDate:String,formatInput:String): Date{
-        val formatter = SimpleDateFormat(formatInput)
-        return formatter.parse(stringDate)
+    fun toDate(stringDate:String,formatInput:String,formatOut: String = "yyyy-MM-dd'T'HH:mm:ssZ"): Date{
+        val formatter = SimpleDateFormat (formatInput)
+        var date    = formatter.parse(stringDate)
+        val strFormatedDate = SimpleDateFormat(formatOut).format(date)
+        return SimpleDateFormat(formatOut).parse(strFormatedDate)
     }
 
 }

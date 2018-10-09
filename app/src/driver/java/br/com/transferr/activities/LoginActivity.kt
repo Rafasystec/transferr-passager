@@ -11,10 +11,14 @@ import br.com.transferr.model.responses.OnResponseInterface
 import br.com.transferr.model.responses.ResponseLogin
 import br.com.transferr.model.responses.ResponseOK
 import br.com.transferr.main.util.Prefes
+import br.com.transferr.model.Driver
+import br.com.transferr.passenger.extensions.showLoadingDialog
+import br.com.transferr.webservices.DriverService
 import br.com.transferr.webservices.UserService
 import kotlinx.android.synthetic.driver.activity_login.*
 
 class LoginActivity : SuperClassActivity() {
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -48,7 +52,9 @@ class LoginActivity : SuperClassActivity() {
                 object : OnResponseInterface<ResponseLogin>{
                     override fun onSuccess(body: ResponseLogin?) {
                         stopProgressBar()
-                        executeLogin(body?.user?.id!!)
+                        Prefes.prefsLogin = body?.user?.id!!
+                        //executeLogin(body?.user?.id!!)
+                        getDriverFromWebService()
                     }
                     override fun onError(message: String) {
                         stopProgressBar()
@@ -76,7 +82,6 @@ class LoginActivity : SuperClassActivity() {
     }
 
     private fun callMainActivity(){
-        //startActivity(Intent(context,MainActivity::class.java))
         finish()
     }
 
@@ -84,18 +89,9 @@ class LoginActivity : SuperClassActivity() {
         return Credentials(txtLogin.text.toString(),txtPassword.text.toString())
     }
 
-    private fun executeLogin(idUser:Long){
-        Prefes.prefsLogin = idUser
+    private fun executeLogin(){
         callMainActivity()
     }
-/*
-    override fun onBackPressed() {
-        super.onBackPressed()
-        toast("onBackPressed login")
-        exitProcess(0)
-        finish()
-    }
-    */
 
     private fun validateRecoverPasswor():Boolean{
         var email = txtLogin.text.toString().trim()
@@ -143,6 +139,31 @@ class LoginActivity : SuperClassActivity() {
         this@LoginActivity.runOnUiThread({
             progressBar.visibility = View.GONE
         })
+    }
+
+    private fun getDriverFromWebService(){
+        var progress = showLoadingDialog(message = getString(R.string.getTheDriver))
+        DriverService.doGetByUserId(Prefes.prefsLogin,
+                object: OnResponseInterface<Driver> {
+                    override fun onSuccess(driver: Driver?) {
+                        progress.dismiss()
+                        Prefes.driver = driver!!
+                        executeLogin()
+                    }
+
+                    override fun onError(message: String) {
+                        progress.dismiss()
+
+                    }
+
+                    override fun onFailure(t: Throwable?) {
+                        progress.dismiss()
+
+                    }
+
+                }
+        )
+
     }
 }
 

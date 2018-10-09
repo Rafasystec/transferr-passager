@@ -10,11 +10,18 @@ import android.view.*
 import br.com.transferr.R
 import br.com.transferr.extensions.log
 import br.com.transferr.extensions.setupToolbar
+import br.com.transferr.extensions.showError
+import br.com.transferr.extensions.showLoadingDialog
 import br.com.transferr.helpers.HelperPassengersOnline
+import br.com.transferr.main.util.Prefes
 import br.com.transferr.model.Quadrant
+import br.com.transferr.model.responses.OnResponseInterface
+import br.com.transferr.model.responses.RequestCoordinatesUpdate
+import br.com.transferr.model.responses.ResponseOK
 import br.com.transferr.util.MyLocationLister
 import br.com.transferr.util.NetworkUtil
 import br.com.transferr.util.PermissionUtil
+import br.com.transferr.webservices.CarService
 import br.com.transferr.webservices.CoordinatePassService
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
@@ -147,5 +154,46 @@ class MapsFragment : SuperClassFragment(), OnMapReadyCallback,com.google.android
         }
     }
 
+    private fun onlineOffline(online:Boolean){
+        var request = RequestCoordinatesUpdate()
+        request.idCar = Prefes.prefsCar
+        var progress = showLoadingDialog()
+        if(online) {
+            CarService.online(request,
+                    object : OnResponseInterface<ResponseOK> {
+                        override fun onSuccess(body: ResponseOK?) {
+                            progress.dismiss()
+                        }
+
+                        override fun onError(message: String) {
+                            progress.dismiss()
+                        }
+
+                        override fun onFailure(t: Throwable?) {
+                            progress.dismiss()
+                        }
+
+                    }
+            )
+        }else{
+            CarService.offline(request,
+                    object : OnResponseInterface<ResponseOK> {
+                        override fun onSuccess(body: ResponseOK?) {
+                            progress.dismiss()
+                        }
+
+                        override fun onError(message: String) {
+                            progress.dismiss()
+                        }
+
+                        override fun onFailure(t: Throwable?) {
+                            progress.dismiss()
+                        }
+
+                    }
+            )
+        }
+
+    }
 
 }// Required empty public constructor

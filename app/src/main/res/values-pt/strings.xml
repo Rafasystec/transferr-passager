@@ -99,5 +99,6 @@
     <string name="dataSavedSuccessfully">Saved Successfully!</string>
     <string name="SystemFailure">So Sorry! System Failure.</string>
     <string name="getTheDriver">Getting the Driver</string>
+    <string name="pleaseWaitWhileWeGetTheCar">Please Wait! Retreiving the Driver.</string>
 
 </resources>
