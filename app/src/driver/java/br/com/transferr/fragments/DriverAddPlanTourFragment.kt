@@ -6,24 +6,23 @@ import android.support.v4.app.Fragment
 import android.view.*
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import android.widget.Spinner
 import br.com.transferr.R
 import br.com.transferr.adapters.SpTourOptionAdapter
 import br.com.transferr.extensions.*
 import br.com.transferr.main.util.Prefes
-import br.com.transferr.model.Driver
 import br.com.transferr.model.PlainTour
 import br.com.transferr.model.TourOption
 import br.com.transferr.model.responses.OnResponseInterface
 import br.com.transferr.model.responses.ResponseOK
-import br.com.transferr.passenger.extensions.showAlert
-import br.com.transferr.passenger.extensions.showAlertError
 import br.com.transferr.passenger.util.DateUtil
 import br.com.transferr.webservices.PlainTourService
-import br.com.transferr.webservices.TourOptionService
+import br.com.transferr.webservice.TourOptionService
 import kotlinx.android.synthetic.driver.fragment_driver_add_plan_tour.*
 import kotlinx.android.synthetic.driver.fragment_driver_add_plan_tour_content.*
 import org.jetbrains.anko.alert
 import org.jetbrains.anko.noButton
+import org.jetbrains.anko.okButton
 import org.jetbrains.anko.yesButton
 import java.util.*
 
@@ -83,10 +82,12 @@ class DriverAddPlanTourFragment : SuperClassFragment() {
         edtPassengerThreeNotes.setText(plainTour.notesPassenger3)
 
         edtPlanTourNotes.setText(plainTour.notesOfPlain)
+        spNameLocation.setSelection(getTourOptionById(spNameLocation, plainTour.tourOption?.id!!))
+        spPlanTourBusySeats.setSelection(getOccuppedSeats(spPlanTourBusySeats,plainTour.seatsRemaining))
+        swtPlanTourSearching.isChecked = plainTour.open!!
     }
     private fun setOnClickOnTheButtons() {
         edtPlanTourTime.setOnClickListener {
-            //DialogTimePickerFragment().showNow(activity?.supportFragmentManager,"timePicker")
             showTimePicker({ time ->
                 run {
                     edtPlanTourTime.text = time
@@ -129,7 +130,18 @@ class DriverAddPlanTourFragment : SuperClassFragment() {
     }
 
     fun initSpinners(){
-        spPlanTourBusySeats.adapter = ArrayAdapter<Int>(activity,R.layout.layout_spinner_item, listOf(1,2,3,4,5,6,7,8,9,10))
+        var list = listOf(1,2,3,4,5,6,7,8,9,10)
+        spPlanTourBusySeats.adapter = ArrayAdapter<Int>(activity,R.layout.layout_spinner_item, list)
+        spPlanTourBusySeats.onItemSelectedListener = object :AdapterView.OnItemSelectedListener{
+            override fun onNothingSelected(parent: AdapterView<*>?) {
+
+            }
+
+            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+                seatOccuped = list[position]
+            }
+
+        }
     }
 
     private fun initializeSpinnerLocation(tourOptions:List<TourOption>){
@@ -159,10 +171,13 @@ class DriverAddPlanTourFragment : SuperClassFragment() {
             }
 
         }
+        if(plainTour?.tourOption != null) {
+            spNameLocation.setSelection(getTourOptionById(spNameLocation, plainTour!!.tourOption?.id!!))
+        }
     }
 
-    fun getAllTourOption(){
-        TourOptionService.getAll(
+    private fun getAllTourOption(){
+        TourOptionService.getByDriver(Prefes.driver.id!!,
                 object : OnResponseInterface<List<TourOption>> {
                     override fun onSuccess(body: List<TourOption>?) {
                         initializeSpinnerLocation(body!!)
@@ -251,7 +266,7 @@ class DriverAddPlanTourFragment : SuperClassFragment() {
             //---------------------------------------------------------
             namePassenger2  = tvPlanTourPassengerTwoName.text.toString()
             notesPassenger2 = edtPassengerTwoNotes.text.toString()
-            telPassenger2   = edtPassengerTwoPhone . text . toString ()
+            telPassenger2   = edtPassengerTwoPhone.text.toString ()
             //---------------------------------------------------------
             //Passenger Three
             //---------------------------------------------------------
@@ -260,6 +275,8 @@ class DriverAddPlanTourFragment : SuperClassFragment() {
             telPassenger3   = edtPassengerThreePhone.text.toString()
             //---------------------------------------------------------
             notesOfPlain    = edtPlanTourNotes.text.toString()
+            seatsRemaining = seatOccuped
+            open = swtPlanTourSearching.isChecked
         }
 
     }
@@ -268,7 +285,13 @@ class DriverAddPlanTourFragment : SuperClassFragment() {
         PlainTourService.delete(tour.id!!,
                 object: OnResponseInterface<ResponseOK> {
                         override fun onSuccess(body: ResponseOK?) {
-                            showAlert(R.string.successDeleted)
+                            var alert = activity?.alert(activity?.getString(R.string.successDeleted)!!,activity?.getString(R.string.Advice)!!){
+                                okButton{ activity!!.finish() }
+
+                            }
+                            alert?.onCancelled { activity!!.finish() }
+                            alert?.show()
+
                         }
 
                         override fun onError(message: String) {
@@ -286,5 +309,27 @@ class DriverAddPlanTourFragment : SuperClassFragment() {
         )
 
     }
+
+    private fun getTourOptionById(spinner: Spinner, idTourOption:Long) : Int{
+        for (i in 0 until spinner.count) {
+            var tourOption = spinner.getItemAtPosition(i) as TourOption
+            if (tourOption.id == idTourOption) {
+                return i
+            }
+        }
+        return 0
+    }
+
+    private fun getOccuppedSeats(spinner: Spinner, seats:Int) : Int{
+        for (i in 0 until spinner.count) {
+            var value = spinner.getItemAtPosition(i) as Int
+            if (value == seats) {
+                return i
+            }
+        }
+        return 0
+    }
+
+
 
 }

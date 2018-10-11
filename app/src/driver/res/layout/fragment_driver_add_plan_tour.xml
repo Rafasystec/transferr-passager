@@ -33,7 +33,7 @@
                     android:layout_centerVertical="true"
                     android:backgroundTint="@color/redDelete"
                     android:tint="@color/colorSecondary"
-                    android:src="@drawable/close_circle_outline" />
+                    android:src="@drawable/close_circle_outline_24" />
             </RelativeLayout>
     </android.support.design.widget.AppBarLayout>
 

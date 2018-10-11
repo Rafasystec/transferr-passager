@@ -9,10 +9,6 @@ import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import br.com.transferr.R
 import br.com.transferr.adapters.SpTourOptionAdapter
-import br.com.transferr.extensions.setupToolbar
-import br.com.transferr.extensions.showError
-import br.com.transferr.extensions.showValidation
-import br.com.transferr.extensions.toast
 import br.com.transferr.model.Car
 import br.com.transferr.model.PlainTour
 import br.com.transferr.model.TourOption
@@ -22,7 +18,7 @@ import br.com.transferr.main.util.Prefes
 import br.com.transferr.passenger.extensions.setupToolbar
 import br.com.transferr.webservices.CarService
 import br.com.transferr.webservices.PlainTourService
-import br.com.transferr.webservices.TourOptionService
+import br.com.transferr.webservice.TourOptionService
 import kotlinx.android.synthetic.driver.activity_frm_plain_tour.*
 import org.jetbrains.anko.toast
 

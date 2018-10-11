@@ -7,13 +7,13 @@ import android.support.v4.app.Fragment
 import android.support.v7.widget.GridLayoutManager
 import android.view.*
 import br.com.transferr.R
-import br.com.transferr.activities.FrmPlainTourActivity
 import br.com.transferr.activities.newlayout.DriverAddPlainTourActivity
 import br.com.transferr.adapters.TourAdapter
 import br.com.transferr.extensions.*
+import br.com.transferr.main.util.Prefes
 import br.com.transferr.model.PlainTour
 import br.com.transferr.model.responses.OnResponseInterface
-import br.com.transferr.main.util.Prefes
+import br.com.transferr.model.responses.ResponseOK
 import br.com.transferr.webservices.PlainTourService
 import kotlinx.android.synthetic.driver.fragment_driver_list_plain_tour.*
 
@@ -41,13 +41,18 @@ class DriverListPlainTourFragment : SuperClassFragment() {
     private fun createListTour(plainTours:List<PlainTour>){
         if(plainTours.isNotEmpty()) {
             tvListTourNoResult.visibility = View.GONE
-            val recyclerView = rcviewToursFragment
-            recyclerView.adapter = TourAdapter(plainTours, context!!, activity!!)
-            val layoutManager = GridLayoutManager(context, GridLayoutManager.VERTICAL)
-            recyclerView.layoutManager = layoutManager
+            initRecyclerView(plainTours)
         }else{
+            initRecyclerView(listOf())
             tvListTourNoResult.visibility = View.VISIBLE
         }
+    }
+
+    private fun initRecyclerView(plainTours: List<PlainTour>) {
+        val recyclerView = rcviewToursFragment
+        recyclerView.adapter = TourAdapter(plainTours, context!!, activity!!, { planTour -> onDeletePlanTour(planTour) })
+        val layoutManager = GridLayoutManager(context, GridLayoutManager.VERTICAL)
+        recyclerView.layoutManager = layoutManager
     }
 
     private fun callWSToGetAllOpenDriverPlainTour(){
@@ -98,13 +103,17 @@ class DriverListPlainTourFragment : SuperClassFragment() {
                 true
             }
             R.id.menuRefreshPlanList ->{
-                callWSToGetAllOpenDriverPlainTour()
-                rcviewToursFragment.adapter.notifyDataSetChanged()
-                rcviewToursFragment.refreshDrawableState()
+                refreshListAdapter()
                 true
             }else->{super.onOptionsItemSelected(item)}
         }
 
+    }
+
+    private fun refreshListAdapter() {
+        callWSToGetAllOpenDriverPlainTour()
+        //rcviewToursFragment.adapter.notifyDataSetChanged()
+        //rcviewToursFragment.refreshDrawableState()
     }
 
     override fun onResume() {
@@ -112,4 +121,28 @@ class DriverListPlainTourFragment : SuperClassFragment() {
         callWSToGetAllOpenDriverPlainTour()
     }
 
+    private fun onDeletePlanTour(planTour: PlainTour){
+       excluir(planTour)
+    }
+
+    fun excluir(tour: PlainTour){
+        PlainTourService.delete(tour.id!!,
+                object: OnResponseInterface<ResponseOK> {
+                    override fun onSuccess(body: ResponseOK?) {
+                        showAlert(R.string.successDeleted)
+                        refreshListAdapter()
+                    }
+
+                    override fun onError(message: String) {
+                        showAlertValidation(message)
+                    }
+
+                    override fun onFailure(t: Throwable?) {
+                        showAlertFailure(t?.message!!)
+                    }
+
+                }
+        )
+
+    }
 }// Required empty public constructor

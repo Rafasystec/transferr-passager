@@ -4,7 +4,7 @@
     <!-- "Mark Favorite", should appear as action button if possible -->
     <item
         android:id="@+id/menuAddNewPlan"
-        android:icon="@drawable/plus_circle"
+        android:icon="@drawable/plus_white_24"
         android:title="@string/edit"
         android:tooltipText="@string/edit"
         android:contentDescription="@string/edit"

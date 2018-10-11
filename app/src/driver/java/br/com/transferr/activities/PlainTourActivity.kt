@@ -50,7 +50,7 @@ class PlainTourActivity : SuperClassActivity() {
 
     private fun createListTour(plainTours:List<PlainTour>){
         val recyclerView            = rcviewTours
-        recyclerView.adapter        = TourAdapter(plainTours, context,this)
+        recyclerView.adapter        = TourAdapter(plainTours, context,this,{})
         val layoutManager           = GridLayoutManager(this, GridLayoutManager.VERTICAL)
         recyclerView.layoutManager  = layoutManager
     }

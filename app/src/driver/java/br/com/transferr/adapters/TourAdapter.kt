@@ -32,7 +32,8 @@ import org.jetbrains.anko.yesButton
 /**
  * Created by root on 02/04/18.
  */
-class TourAdapter(private val tours:List<PlainTour>,private val context: Context, val activity: Activity) : Adapter<TourAdapter.ViewHolder>(){
+class TourAdapter(private val tours:List<PlainTour>,private val context: Context, val activity: Activity, val onDelete:(planTour:PlainTour)->Unit) : Adapter<TourAdapter.ViewHolder>(){
+
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(context).inflate(R.layout.rc_view_tours, parent, false)
@@ -46,6 +47,13 @@ class TourAdapter(private val tours:List<PlainTour>,private val context: Context
             it.bindView(plainTour)
             it.itemView.setOnClickListener {
                 startFrmPlainTourActivity(plainTour)
+            }
+            it.itemView.imgTrash.setOnClickListener {
+                context.alert("Confirme exclusão"){
+                    title = "Exclusão"
+                    yesButton { onDelete(plainTour) }
+                    noButton {  }
+                }.show()
             }
         }
     }
@@ -61,25 +69,30 @@ class TourAdapter(private val tours:List<PlainTour>,private val context: Context
             val description     = itemView.note_item_description
             titleView.text      = DateUtil.getDateDescription(tour.date!!,true)
             description.text    = tour.tourOption?.name
+            /*
             itemView.imgTrash.setOnClickListener {
+
                 context.alert("Confirme exclusão"){
                     title = "Exclusão"
                     yesButton { excluir(tour) }
                     noButton {  }
                 }.show()
             }
+            */
         }
 
-
+        /*
         fun showMessage(message:String){
             Toast.makeText(context,message,Toast.LENGTH_SHORT).show()
         }
-
+        */
+        /*
         fun excluir(tour: PlainTour){
             PlainTourService.delete(tour.id!!,
                     object: OnResponseInterface<ResponseOK> {
                         override fun onSuccess(body: ResponseOK?) {
                             showMessage("Excluido com sucesso!")
+
                         }
 
                         override fun onError(message: String) {
@@ -92,8 +105,8 @@ class TourAdapter(private val tours:List<PlainTour>,private val context: Context
 
                     }
             )
-
         }
+        */
     }
 
     private fun startFrmPlainTourActivity(plainTour: PlainTour){
