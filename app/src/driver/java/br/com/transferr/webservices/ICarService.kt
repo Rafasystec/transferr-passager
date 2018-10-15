@@ -18,4 +18,6 @@ interface ICarService {
     fun online(@Body resquestUpdate: RequestCoordinatesUpdate):Call<ResponseOK>
     @PUT("car/offline")
     fun offline(@Body resquestUpdate: RequestCoordinatesUpdate):Call<ResponseOK>
+    @PUT("car/always/on/map/{idCar}/{always}")
+    fun doPutAlwaysParameter(@Path("idCar") idCar:Long,@Path("always") always:Boolean):Call<ResponseOK>
 }

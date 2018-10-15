@@ -1,4 +1,4 @@
-package br.com.transferr.util
+package br.com.transferr.main.util
 
 import android.app.Activity
 import android.content.pm.PackageManager
@@ -24,6 +24,22 @@ object PermissionUtil{
         }
         val newPermissions = arrayOfNulls<String>(list.size)
         ActivityCompat.requestPermissions(activity,newPermissions,1)
+        return false
+    }
+
+    fun requestPermission(activity: Activity, code: Int,vararg permissions: String):Boolean{
+        val list = ArrayList<String>()
+        for (permission in permissions){
+            val allowed = ActivityCompat.checkSelfPermission(activity,permission) == PackageManager.PERMISSION_GRANTED
+            if(!allowed){
+                list.add(permission)
+            }
+        }
+        if(list.isEmpty()){
+            return true
+        }
+        val newPermissions = arrayOfNulls<String>(list.size)
+        ActivityCompat.requestPermissions(activity,newPermissions,code)
         return false
     }
 }

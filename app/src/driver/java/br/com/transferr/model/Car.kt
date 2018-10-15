@@ -5,7 +5,7 @@ import br.com.transferr.model.enums.EnumStatus
 import br.com.transferr.model.enums.EnumTypeCar
 
 /**
- * Created by idoctor on 08/02/2018.
+ * Created by Rafael Rocha on 08/02/2018.
  */
 class Car : Entity(){
 
@@ -19,6 +19,7 @@ class Car : Entity(){
     var type: EnumTypeCar?=null
     var status:EnumStatus=EnumStatus.OFFLINE
     var photo: String? = null
+    var alwaysOnMap:Boolean = true
 }
 
 

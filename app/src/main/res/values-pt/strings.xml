@@ -102,5 +102,7 @@
     <string name="pleaseWaitWhileWeGetTheCar">Please Wait! Retreiving the Driver.</string>
     <string name="successDeleted">Deleted Successfully</string>
     <string name="failure">Faileru</string>
+    <string name="Map">Map</string>
+    <string name="alwaysParameterDescription">Turne this parameter OFF</string>
 
 </resources>

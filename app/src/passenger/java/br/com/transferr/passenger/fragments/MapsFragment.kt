@@ -51,17 +51,15 @@ import org.jetbrains.anko.*
 /**
  * A simple [Fragment] subclass.
  */
-class MapsFragment : SuperClassFragment(), OnMapReadyCallback
+class MapsFragment : SuperMapFragment(), OnMapReadyCallback
 
 {
 
     private lateinit var mMap: GoogleMap
-    lateinit var locationManager: LocationManager
-    private var mLocationManager: LocationManager? = null
+
+    //private var mLocationManager: LocationManager? = null
     private val ZOOM = 15f
     var marker:Marker?=null
-
-    val PERMISSION_TO_ACCESS_LOCATION = 1
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -71,8 +69,8 @@ class MapsFragment : SuperClassFragment(), OnMapReadyCallback
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
-        locationManager = activity?.getSystemService(Context.LOCATION_SERVICE) as LocationManager
-        mLocationManager = activity?.getSystemService(Context.LOCATION_SERVICE) as LocationManager
+        //locationManager = activity?.getSystemService(Context.LOCATION_SERVICE) as LocationManager
+        //mLocationManager = activity?.getSystemService(Context.LOCATION_SERVICE) as LocationManager
         checkLocation()
         setMainTitle(R.string.page_title_map)
         val view = inflater.inflate(R.layout.fragment_maps, container, false)
@@ -82,28 +80,9 @@ class MapsFragment : SuperClassFragment(), OnMapReadyCallback
         return view
     }
 
-    private fun checkLocation(): Boolean {
-        if(!isLocationEnabled())
-            showAlert()
-        return isLocationEnabled()
-    }
 
-    private fun isLocationEnabled(): Boolean {
-        locationManager = activity?.getSystemService(Context.LOCATION_SERVICE) as LocationManager
-        return locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER) || locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER)
-    }
 
-    private fun showAlert() {
-        val dialog = AlertDialog.Builder(this!!.activity!!)
-        dialog.setTitle("Habilitar Localização")
-                .setMessage("Precisamos ativar o GPS.\nPor favor ative-o.")
-                .setPositiveButton("Ativar GPS", DialogInterface.OnClickListener { paramDialogInterface, paramInt ->
-                    val myIntent = Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS)
-                    startActivity(myIntent)
-                })
-                .setNegativeButton("Cancel", null)
-        dialog.show()
-    }
+
 
     @SuppressLint("MissingPermission")
     override fun onMapReady(googleMap: GoogleMap?) {
@@ -132,11 +111,7 @@ class MapsFragment : SuperClassFragment(), OnMapReadyCallback
         mMap.mapType = GoogleMap.MAP_TYPE_NORMAL
     }
 
-    private fun isMapAllowed():Boolean{
-        return PermissionUtil.requestPermission(this!!.activity!!,1,
-                Manifest.permission.ACCESS_FINE_LOCATION,
-                Manifest.permission.ACCESS_COARSE_LOCATION)
-    }
+
 
     private fun updateMapScreen(location: Location?){
         try {
@@ -184,41 +159,7 @@ class MapsFragment : SuperClassFragment(), OnMapReadyCallback
         }
     }
 
-    private fun checkPermissionToAccessLocation(){
-        if(ContextCompat.checkSelfPermission(activity!!,Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED){
-            //Should We show an explanation
-            if(ActivityCompat.shouldShowRequestPermissionRationale(activity!!,Manifest.permission.ACCESS_FINE_LOCATION)){
-                activity!!.alert(R.string.needPermission,R.string.permissionToAccessLocation){
-                    yesButton {
 
-                    }
-                    noButton {  }
-                }.show()
-            }else{
-                ActivityCompat.requestPermissions(activity!!, arrayOf(Manifest.permission.ACCESS_FINE_LOCATION),PERMISSION_TO_ACCESS_LOCATION)
-            }
-        }
-    }
-
-    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
-        when(requestCode){
-            PERMISSION_TO_ACCESS_LOCATION -> {
-                // If request is cancelled, the result arrays are empty.
-                if (grantResults.isNotEmpty()
-                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-
-                    // permission was granted, yay! Do the
-                    // contacts-related task you need to do.
-                    activity?.toast("Permissão concedida")
-                } else {
-
-                    // permission denied, boo! Disable the
-                    // functionality that depends on this permission.
-                    activity?.toast("Permissão negada")
-                }
-            }
-        }
-    }
 
     private val mInterval = 10000L // 5 seconds by default, can be changed later
     private var mHandler: Handler? = null

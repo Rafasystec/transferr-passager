@@ -1,14 +1,10 @@
 package br.com.transferr.webservices
 
-import br.com.transferr.application.ApplicationTransferr
 import br.com.transferr.helpers.HelperCallBackWebService
 import br.com.transferr.model.Car
 import br.com.transferr.model.responses.OnResponseInterface
 import br.com.transferr.model.responses.RequestCoordinatesUpdate
-import br.com.transferr.model.responses.ResponseLogin
 import br.com.transferr.model.responses.ResponseOK
-import br.com.transferr.util.CallRESTMethodsUtil
-import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
@@ -41,6 +37,10 @@ object CarService : SuperWebService(){
 
     fun offline(requestCoordinatesUpdate: RequestCoordinatesUpdate,responseInterface: OnResponseInterface<ResponseOK>){
         service.offline(requestCoordinatesUpdate).enqueue(HelperCallBackWebService(responseInterface))
+    }
+
+    fun changeAlwaysParameter(idCar:Long, always:Boolean,responseInterface: OnResponseInterface<ResponseOK>){
+        service.doPutAlwaysParameter(idCar,always)
     }
 
 

@@ -44,6 +44,7 @@ class MyLocationLister:LocationListener {
         //    return null
         //} else {
             locationManager = context.getSystemService(LOCATION_SERVICE) as LocationManager
+            locationManager!!.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0f, this)
             var providers: List<String>? = null
             if (locationManager != null) {
                 providers = locationManager?.getProviders(true)

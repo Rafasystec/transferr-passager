@@ -114,6 +114,22 @@
         android:padding="@dimen/text_padding_left"
         android:background="@drawable/shape_text_layout"
         />
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <Switch
+            android:id="@+id/swtOnOffAlwaysParam"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textOn="@string/ON"
+            android:textOff="@string/OFF"
+            android:showText="true"
+            android:splitTrack="true"
+            android:thumb="@drawable/custom_switch_selector"
+            android:track="@drawable/custom_switch_track"
+            android:text="@string/alwaysParameterDescription" />
+
+    </RelativeLayout>
 
 </LinearLayout>
 
