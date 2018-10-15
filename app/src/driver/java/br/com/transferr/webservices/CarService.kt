@@ -4,6 +4,7 @@ import br.com.transferr.helpers.HelperCallBackWebService
 import br.com.transferr.model.Car
 import br.com.transferr.model.responses.OnResponseInterface
 import br.com.transferr.model.responses.RequestCoordinatesUpdate
+import br.com.transferr.model.responses.ResponseCarOnline
 import br.com.transferr.model.responses.ResponseOK
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -40,7 +41,11 @@ object CarService : SuperWebService(){
     }
 
     fun changeAlwaysParameter(idCar:Long, always:Boolean,responseInterface: OnResponseInterface<ResponseOK>){
-        service.doPutAlwaysParameter(idCar,always)
+        service.doPutAlwaysParameter(idCar,always).enqueue(HelperCallBackWebService(responseInterface))
+    }
+
+    fun updateStatus(responseCarOnline: ResponseCarOnline,responseInterface: OnResponseInterface<ResponseOK>){
+        service.doPutCarStatus(responseCarOnline).enqueue(HelperCallBackWebService(responseInterface))
     }
 
 

@@ -11,9 +11,9 @@
         android:textOn="@string/ON"
         android:textOff="@string/OFF"
         android:showText="true"
-        android:splitTrack="true"
+        android:splitTrack="false"
         android:thumb="@drawable/custom_switch_selector"
         android:track="@drawable/custom_switch_track"
-        android:text="ON-LINE/OFF-LINE" />
+        android:text="ONLINE/OFFLINE" />
 
 </RelativeLayout>

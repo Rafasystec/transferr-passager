@@ -2,6 +2,7 @@ package br.com.transferr.webservices
 
 import br.com.transferr.model.Car
 import br.com.transferr.model.responses.RequestCoordinatesUpdate
+import br.com.transferr.model.responses.ResponseCarOnline
 import br.com.transferr.model.responses.ResponseOK
 import retrofit2.Call
 import retrofit2.http.*
@@ -20,4 +21,6 @@ interface ICarService {
     fun offline(@Body resquestUpdate: RequestCoordinatesUpdate):Call<ResponseOK>
     @PUT("car/always/on/map/{idCar}/{always}")
     fun doPutAlwaysParameter(@Path("idCar") idCar:Long,@Path("always") always:Boolean):Call<ResponseOK>
+    @PUT("car/update/status")
+    fun doPutCarStatus(@Body responseCarOnline: ResponseCarOnline):Call<ResponseOK>
 }

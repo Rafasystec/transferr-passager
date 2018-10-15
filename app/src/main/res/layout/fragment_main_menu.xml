@@ -5,7 +5,7 @@
     android:orientation="vertical"
     android:background="@color/activityBackground"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context="br.com.transferr.passenger.fragments.MainMenuFragment">
+    tools:context="br.com.transferr.fragments.MainMenuFragment">
 
     <android.support.v7.widget.AppCompatButton
         android:id="@+id/btnMainMenuAppName"

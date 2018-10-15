@@ -10,6 +10,7 @@ import br.com.transferr.extensions.setupToolbar
 import br.com.transferr.extensions.toast
 import br.com.transferr.fragments.DriverListPlainTourFragment
 import br.com.transferr.fragments.DriverShowInfoFragment
+import br.com.transferr.fragments.MainMenuFragment
 import br.com.transferr.fragments.MapsFragment
 import br.com.transferr.main.util.Prefes
 import br.com.transferr.model.Driver
@@ -62,7 +63,7 @@ class MainActivity : AppCompatActivity() {
                     true
                 }
                 R.id.menuDriver -> {
-                    toast("Ainda em desenvolvimento.")
+                   switchFragmentToMainContent(MainMenuFragment())
                     true
                 }
                 else -> {

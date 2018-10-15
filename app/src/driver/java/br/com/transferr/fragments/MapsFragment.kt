@@ -19,9 +19,12 @@ import br.com.transferr.extensions.showAlert
 import br.com.transferr.extensions.showLoadingDialog
 import br.com.transferr.helpers.HelperPassengersOnline
 import br.com.transferr.main.util.Prefes
+import br.com.transferr.model.Car
 import br.com.transferr.model.Quadrant
+import br.com.transferr.model.enums.EnumStatus
 import br.com.transferr.model.responses.OnResponseInterface
 import br.com.transferr.model.responses.RequestCoordinatesUpdate
+import br.com.transferr.model.responses.ResponseCarOnline
 import br.com.transferr.model.responses.ResponseOK
 import br.com.transferr.services.LocationTrackingService
 import br.com.transferr.util.MyLocationLister
@@ -49,30 +52,22 @@ import org.jetbrains.anko.uiThread
 class MapsFragment : SuperMapFragment(), OnMapReadyCallback,com.google.android.gms.location.LocationListener, LocationListener {
     override fun onStatusChanged(provider: String?, status: Int, extras: Bundle?) {
        //Do nothing yet
+        log("onStatusChanged - Provider: $provider")
     }
 
     override fun onProviderEnabled(provider: String?) {
         //Do nothing yet
+        log("onProviderEnabled - Provider: $provider")
     }
 
     override fun onProviderDisabled(provider: String?) {
-        //Do nothing yet
+        log("onProviderDisabled - Provider: $provider")
     }
 
     private lateinit var fusedLocationClient: FusedLocationProviderClient
     var swtOnOff:Switch?=null
     override fun onLocationChanged(location: Location?) {
-        if (location != null) {
-            map?.animateCamera(CameraUpdateFactory.newLatLngZoom(LatLng(location.latitude, location.longitude), 13f))
-
-            val cameraPosition = CameraPosition.Builder()
-                    .target(LatLng(location.latitude, location.longitude))      // Sets the center of the map to location user
-                    .zoom(13f)                   // Sets the zoom
-                    .bearing(90f)                // Sets the orientation of the camera to east
-                    .tilt(40f)                   // Sets the tilt of the camera to 30 degrees
-                    .build()                   // Creates a CameraPosition from the builder
-            map?.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition))
-        }
+        log("onLocationChanged")
     }
 
     private var map : GoogleMap? = null
@@ -88,10 +83,7 @@ class MapsFragment : SuperMapFragment(), OnMapReadyCallback,com.google.android.g
         }
         map.setMaxZoomPreference(16f)
         map.setMinZoomPreference(12f)
-        map.setOnCameraMoveListener {
-            log("Vc moveu o mapa")
-            callWebService()
-        }
+
         this.map = map
         fusedLocationClient.lastLocation
                 .addOnSuccessListener { location : Location? ->
@@ -100,9 +92,6 @@ class MapsFragment : SuperMapFragment(), OnMapReadyCallback,com.google.android.g
                         updateCameraOnLocationChange(latlon)
                     }
                 }
-        //var mylocationListener = MyLocationLister()
-        //var myLocationLatLng = mylocationListener.getLocation(this.context!!)
-
         map.mapType = GoogleMap.MAP_TYPE_NORMAL
         callWebService()
     }
@@ -118,21 +107,9 @@ class MapsFragment : SuperMapFragment(), OnMapReadyCallback,com.google.android.g
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(activity!!)
         return view
     }
-    /*
-    override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?,
-                              savedInstanceState: Bundle?): View? {
-
-        val view = inflater?.inflate(R.layout.fragment_maps, container, false)
-        //Inicia o map
-        val mapFragment = childFragmentManager.findFragmentById(R.id.mapFragment) as SupportMapFragment
-        mapFragment.getMapAsync(this)
-        return view
-    }
-    */
 
     private fun callWebService(){
         var visibleRegion = map!!.projection.visibleRegion
-
         if(visibleRegion != null && isConnected()){
             doAsync {
 
@@ -175,7 +152,8 @@ class MapsFragment : SuperMapFragment(), OnMapReadyCallback,com.google.android.g
         item?.setActionView(R.layout.switch_online_offline)
         swtOnOff = item?.actionView?.findViewById<Switch>(R.id.swtOnlineOffline) as Switch
         if(swtOnOff != null){
-            swtOnOff!!.setOnCheckedChangeListener{buttonView, isChecked ->   onOff(isChecked)}
+            //swtOnOff!!.setOnCheckedChangeListener{buttonView, isChecked ->   onOff(isChecked)}
+            swtOnOff!!.setOnClickListener { onOff() }
         }
         val checked = swtOnOff!!.isChecked
         changeSwitch(checked)
@@ -194,7 +172,7 @@ class MapsFragment : SuperMapFragment(), OnMapReadyCallback,com.google.android.g
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         return when(item?.itemId){
             R.id.menu_switch_online ->{
-                onOff(item.isChecked)
+                onOff()
                 true
             }else->super.onOptionsItemSelected(item)
         }
@@ -242,7 +220,8 @@ class MapsFragment : SuperMapFragment(), OnMapReadyCallback,com.google.android.g
 
     }
 
-    private fun onOff(isChecked: Boolean){
+    private fun onOff(){
+        var isChecked: Boolean = swtOnOff?.isChecked!!
         changeSwitch(isChecked)
         stopInitLocation(isChecked)
     }
@@ -254,6 +233,7 @@ class MapsFragment : SuperMapFragment(), OnMapReadyCallback,com.google.android.g
             stopServiceIntent()
         }
         onlineOffline(isChecked)
+        updateStatus(isChecked,Prefes.prefsCar)
     }
 
     private fun startService(){
@@ -276,6 +256,62 @@ class MapsFragment : SuperMapFragment(), OnMapReadyCallback,com.google.android.g
             val update = CameraUpdateFactory.newLatLngZoom(location, 16f)
             map?.moveCamera(update)
         }
+    }
+
+    fun updateStatus(isChecked: Boolean, idCar:Long){
+        var response = ResponseCarOnline()
+        if(isChecked){
+            response.status = EnumStatus.WAITING_CLIENT_TRANSFER
+        }else{
+            response.status = EnumStatus.OFFLINE
+        }
+        response.idCar = idCar
+
+        CarService.updateStatus(response, object : OnResponseInterface<ResponseOK>{
+            var dialog = showLoadingDialog()
+            override fun onSuccess(body: ResponseOK?) {
+                dialog.dismiss()
+            }
+
+            override fun onError(message: String) {
+                dialog.dismiss()
+            }
+
+            override fun onFailure(t: Throwable?) {
+                dialog.dismiss()
+            }
+
+        })
+    }
+
+    fun updateSwitch(car:Car){
+        //var car = Prefes.prefsCarJSON
+        swtOnOff?.isChecked = car.status != EnumStatus.OFFLINE
+        onOff()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        getCurrentCar()
+    }
+
+    private fun getCurrentCar(){
+        CarService.getCar(Prefes.prefsCar, object :OnResponseInterface<Car>{
+            var dialog = showLoadingDialog()
+            override fun onSuccess(car: Car?) {
+                updateSwitch(car!!)
+                dialog.dismiss()
+            }
+
+            override fun onError(message: String) {
+                dialog.dismiss()
+            }
+
+            override fun onFailure(t: Throwable?) {
+                dialog.dismiss()
+            }
+
+        })
     }
 
 }// Required empty public constructor

@@ -10,6 +10,7 @@ import android.content.pm.PackageManager
 import android.location.LocationManager
 import android.os.Bundle
 import android.provider.Settings
+import android.support.annotation.StringRes
 import android.support.v4.app.ActivityCompat
 import android.support.v4.app.Fragment
 import android.support.v4.content.ContextCompat
@@ -105,5 +106,6 @@ open class SuperMapFragment : SuperClassFragment() {
                 .setNegativeButton("Cancel", null)
         dialog.show()
     }
+
 
 }// Required empty public constructor
