@@ -29,7 +29,6 @@ import kotlinx.android.synthetic.driver.fragment_driver_show_info.*
  */
 class DriverShowInfoFragment : SuperClassFragment() {
 
-    //lateinit var locationManager: LocationManager
     var car:Car?=null
     var isFirstTime:Boolean = true
     var internetBroadCast = InternetBroadCast()
@@ -63,7 +62,8 @@ class DriverShowInfoFragment : SuperClassFragment() {
         initView()
     }
     private fun initView(){
-        swtOnOffAlwaysParam.setOnCheckedChangeListener{buttonView, isChecked ->  updateAlwaysParameter(isChecked)}
+        //swtOnOffAlwaysParam.setOnCheckedChangeListener{buttonView, isChecked ->  updateAlwaysParameter(isChecked)}
+        swtOnOffAlwaysParam.setOnClickListener { updateAlwaysParameter() }
         checkNetwork()
     }
 
@@ -75,7 +75,7 @@ class DriverShowInfoFragment : SuperClassFragment() {
         lblModelValue.text = car?.model
         lblPlacaValue.text = car?.carIdentity
         Prefes.prefsDriver = driver?.id!!
-        swtOnOffAlwaysParam.isChecked = this.car!!.alwaysOnMap;
+        swtOnOffAlwaysParam.isChecked = this.car!!.alwaysOnMap
     }
 
     private fun getCarFromWebService(){
@@ -118,12 +118,9 @@ class DriverShowInfoFragment : SuperClassFragment() {
         startActivity(Intent(context, LoginActivity::class.java))
     }
 
-    private fun updateAlwaysParameter(isChecked:Boolean){
-        if(isFirstTime){
-            isFirstTime = false
-            return
-        }
-        var alert = showLoadingDialog()
+    private fun updateAlwaysParameter(){
+        var isChecked   = swtOnOffAlwaysParam.isChecked
+        var alert       = showLoadingDialog()
         CarService.changeAlwaysParameter(car?.id!!,isChecked,object : OnResponseInterface<ResponseOK> {
             override fun onSuccess(body: ResponseOK?) {
                 alert.dismiss()
