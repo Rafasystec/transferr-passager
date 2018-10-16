@@ -161,11 +161,11 @@ class MapsFragment : SuperMapFragment(), OnMapReadyCallback,com.google.android.g
 
     private fun changeSwitch(checked: Boolean) {
         if (checked) {
-            swtOnOff!!.setText(R.string.online)
+            swtOnOff!!.text = getString(R.string.online)+"      "
             swtOnOff!!.setTextColor(resources.getColor(R.color.green))
         } else {
             swtOnOff!!.setTextColor(resources.getColor(R.color.red))
-            swtOnOff!!.setText(R.string.offline)
+            swtOnOff!!.text = getString(R.string.offline) +"      "
         }
     }
 
@@ -240,7 +240,7 @@ class MapsFragment : SuperMapFragment(), OnMapReadyCallback,com.google.android.g
         if(checkLocation()) {
             startServiceIntent()
         }
-        activity?.startService(Intent(activity, LocationTrackingService::class.java))
+        //activity?.startService(Intent(activity, LocationTrackingService::class.java))
     }
 
     private fun stopServiceIntent(){

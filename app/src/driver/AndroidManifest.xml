@@ -52,7 +52,7 @@
             android:name=".services.SuperIntentService"
             android:exported="false" />
         <service
-            android:name=".services.LocationTrackingService"
+            android:name="br.com.transferr.services.LocationTrackingService"
             android:exported="false" />
 
         <activity android:name=".activities.InitialActivity" />
