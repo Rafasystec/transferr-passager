@@ -117,17 +117,32 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_alignBaseline="@+id/swtOnOffAlwaysParam"
+            android:layout_alignBottom="@+id/swtOnOffAlwaysParam"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:text="@string/alwaysParameterDescription" />
+
         <Switch
             android:id="@+id/swtOnOffAlwaysParam"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textOn="@string/ON"
-            android:textOff="@string/OFF"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginEnd="13dp"
+            android:layout_marginRight="13dp"
             android:showText="true"
             android:splitTrack="false"
+            android:textOff="@string/OFF"
+            android:textOn="@string/ON"
             android:thumb="@drawable/custom_switch_selector"
-            android:track="@drawable/custom_switch_track"
-            android:text="@string/alwaysParameterDescription" />
+            android:track="@drawable/custom_switch_track" />
 
     </RelativeLayout>
 

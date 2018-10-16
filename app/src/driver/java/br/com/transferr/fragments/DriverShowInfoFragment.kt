@@ -22,6 +22,9 @@ import br.com.transferr.util.NetworkUtil
 import br.com.transferr.webservices.CarService
 import br.com.transferr.webservices.DriverService
 import kotlinx.android.synthetic.driver.fragment_driver_show_info.*
+import org.jetbrains.anko.alert
+import org.jetbrains.anko.cancelButton
+import org.jetbrains.anko.okButton
 
 
 /**
@@ -30,7 +33,7 @@ import kotlinx.android.synthetic.driver.fragment_driver_show_info.*
 class DriverShowInfoFragment : SuperClassFragment() {
 
     var car:Car?=null
-    var isFirstTime:Boolean = true
+    //var isFirstTime:Boolean = true
     var internetBroadCast = InternetBroadCast()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -114,17 +117,31 @@ class DriverShowInfoFragment : SuperClassFragment() {
         return NetworkUtil.isNetworkAvailable(activity!!)
     }
 
-    private fun callLoginActivity(){
-        startActivity(Intent(context, LoginActivity::class.java))
+    private fun updateAlwaysParameter(){
+        if(!swtOnOffAlwaysParam.isChecked) {
+            activity?.alert(getString(R.string.turnAlwaysParamOff), activity?.getString(R.string.Advice)!!) {
+                okButton {
+                    confirmUpdateAlwaysParameter()
+                    it.dismiss()
+                }
+                cancelButton {
+                    swtOnOffAlwaysParam.isChecked = !swtOnOffAlwaysParam.isChecked
+                    it.dismiss()
+                }
+            }?.show()
+        }else{
+            confirmUpdateAlwaysParameter()
+        }
+
     }
 
-    private fun updateAlwaysParameter(){
-        var isChecked   = swtOnOffAlwaysParam.isChecked
-        var alert       = showLoadingDialog()
-        CarService.changeAlwaysParameter(car?.id!!,isChecked,object : OnResponseInterface<ResponseOK> {
+    private fun confirmUpdateAlwaysParameter() {
+        var isChecked = swtOnOffAlwaysParam.isChecked
+        var alert = showLoadingDialog()
+        CarService.changeAlwaysParameter(car?.id!!, isChecked, object : OnResponseInterface<ResponseOK> {
             override fun onSuccess(body: ResponseOK?) {
                 alert.dismiss()
-                showAlert(R.string.dataSavedSuccessfully)
+                //showAlert(R.string.dataSavedSuccessfully)
             }
 
             override fun onError(message: String) {

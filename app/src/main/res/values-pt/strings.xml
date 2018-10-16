@@ -104,5 +104,6 @@
     <string name="failure">Faileru</string>
     <string name="Map">Map</string>
     <string name="alwaysParameterDescription">Turne this parameter OFF</string>
+    <string name="turnAlwaysParamOff">Turning this parameter off you\'ll don\'t apear automatically on the map.</string>
 
 </resources>
