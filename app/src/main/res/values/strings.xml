@@ -26,7 +26,7 @@
     <string name="drivers">Drivers</string>
     <string name="plans">plans</string>
     <string name="empty">empty</string>
-    <string name="seatsRemaining">seats remaining</string>
+    <string name="seatsRemaining">Seats remaining</string>
     <string name="seeMorePlainTourOption">More tour options</string>
     <string name="callPhone">Call</string>
     <string name="talk">Talk</string>
@@ -106,4 +106,5 @@
     <string name="Map">Map</string>
     <string name="alwaysParameterDescription">Turne this parameter OFF</string>
     <string name="turnAlwaysParamOff">Turning this parameter off you\'ll don\'t apear automatically on the map.</string>
+    <string name="noTourOptionYet">You don\'t have any plan registered yet.</string>
 </resources>

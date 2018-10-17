@@ -3,6 +3,8 @@ package br.com.transferr.fragments
 
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.*
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
@@ -11,6 +13,7 @@ import br.com.transferr.R
 import br.com.transferr.adapters.SpTourOptionAdapter
 import br.com.transferr.extensions.*
 import br.com.transferr.main.util.Prefes
+import br.com.transferr.model.Car
 import br.com.transferr.model.PlainTour
 import br.com.transferr.model.TourOption
 import br.com.transferr.model.responses.OnResponseInterface
@@ -18,6 +21,7 @@ import br.com.transferr.model.responses.ResponseOK
 import br.com.transferr.passenger.util.DateUtil
 import br.com.transferr.webservices.PlainTourService
 import br.com.transferr.webservice.TourOptionService
+import br.com.transferr.webservices.CarService
 import kotlinx.android.synthetic.driver.fragment_driver_add_plan_tour.*
 import kotlinx.android.synthetic.driver.fragment_driver_add_plan_tour_content.*
 import org.jetbrains.anko.alert
@@ -35,8 +39,9 @@ class DriverAddPlanTourFragment : SuperClassFragment() {
     var plainTour:PlainTour?=null
     var stringDate = ""
     var stringTime = ""
-    var seatOccuped:Int = 0
+    var remainingSeats:Int = 0
     var selectedTourOption:TourOption?=null
+    var car:Car?=null
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
@@ -48,7 +53,6 @@ class DriverAddPlanTourFragment : SuperClassFragment() {
         setupToolbar(R.id.toolbarAddPlan,getString(R.string.addPlanTour),true)
         setHasOptionsMenu(true)
         getAllTourOption()
-        initSpinners()
         extractParameterIfExists()
         setOnClickOnTheButtons()
     }
@@ -83,8 +87,14 @@ class DriverAddPlanTourFragment : SuperClassFragment() {
 
         edtPlanTourNotes.setText(plainTour.notesOfPlain)
         spNameLocation.setSelection(getTourOptionById(spNameLocation, plainTour.tourOption?.id!!))
-        spPlanTourBusySeats.setSelection(getOccuppedSeats(spPlanTourBusySeats,plainTour.seatsRemaining))
         swtPlanTourSearching.isChecked = plainTour.open!!
+        edtPlanTourBusySeats.setText( getOccupedSeats(plainTour.driver?.car?.nrSeats?.toInt()!!,plainTour.seatsRemaining).toString())//plainTour.seatsRemaining.toString())
+        tvPlanTourRemindSeatsNumber.text = plainTour.seatsRemaining.toString()
+
+    }
+
+    private fun getOccupedSeats(totalSeats:Int, remainingSeats:Int) : Int{
+        return totalSeats.minus(remainingSeats)
     }
     private fun setOnClickOnTheButtons() {
         edtPlanTourTime.setOnClickListener {
@@ -113,6 +123,21 @@ class DriverAddPlanTourFragment : SuperClassFragment() {
         btnAddPlanTourClose.setOnClickListener {
             activity?.finish()
         }
+        edtPlanTourBusySeats.addTextChangedListener(object : TextWatcher {
+            override fun afterTextChanged(s: Editable?) {
+                updateLabelSeatsRemaining(car!!)
+            }
+
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+
+            }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+
+            }
+
+        })
+
     }
 
     override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
@@ -129,6 +154,7 @@ class DriverAddPlanTourFragment : SuperClassFragment() {
         }
     }
 
+    /*
     fun initSpinners(){
         var list = listOf(1,2,3,4,5,6,7,8,9,10)
         spPlanTourBusySeats.adapter = ArrayAdapter<Int>(activity,R.layout.layout_spinner_item, list)
@@ -143,6 +169,7 @@ class DriverAddPlanTourFragment : SuperClassFragment() {
 
         }
     }
+    */
 
     private fun initializeSpinnerLocation(tourOptions:List<TourOption>){
         spNameLocation.adapter = SpTourOptionAdapter(activity!!,tourOptions)
@@ -275,8 +302,9 @@ class DriverAddPlanTourFragment : SuperClassFragment() {
             telPassenger3   = edtPassengerThreePhone.text.toString()
             //---------------------------------------------------------
             notesOfPlain    = edtPlanTourNotes.text.toString()
-            seatsRemaining = seatOccuped
-            open = swtPlanTourSearching.isChecked
+            seatsRemaining  =  remainingSeats//calculateRemaindSeats(this)
+            open            = swtPlanTourSearching.isChecked
+
         }
 
     }
@@ -319,7 +347,7 @@ class DriverAddPlanTourFragment : SuperClassFragment() {
         }
         return 0
     }
-
+/*
     private fun getOccuppedSeats(spinner: Spinner, seats:Int) : Int{
         for (i in 0 until spinner.count) {
             var value = spinner.getItemAtPosition(i) as Int
@@ -329,7 +357,61 @@ class DriverAddPlanTourFragment : SuperClassFragment() {
         }
         return 0
     }
+    */
+/*
+    fun getSeatsOccuped() : Int{
+        return try {
+            seatOccuped =  edtPlanTourBusySeats.text as Int
+            seatOccuped
+        }catch (e:Exception){
+            0
+        }
+    }
+*/
+    private fun getCurrentCar(){
+        CarService.getCar(Prefes.prefsCar, object :OnResponseInterface<Car>{
+            //var dialog = showLoadingDialog()
+            override fun onSuccess(parameterCar: Car?) {
+                car = parameterCar
+                tvCarSeatsNumber.text = "/ ${car?.nrSeats}"
+            }
 
+            override fun onError(message: String) {
+                //dialog.dismiss()
+            }
+
+            override fun onFailure(t: Throwable?) {
+                //dialog.dismiss()
+            }
+
+        })
+    }
+    /*
+    fun calculateRemaindSeats(plainTour: PlainTour): Int{
+        var nrSeats         = plainTour.driver?.car?.nrSeats?.toInt()
+        var nrSeatsOccuped  = edtPlanTourBusySeats.text.toString().toInt()
+        return nrSeats?.minus(nrSeatsOccuped)!!
+    }
+    */
+
+    fun updateLabelSeatsRemaining(car:Car){
+        var busySeats = if(edtPlanTourBusySeats.text.isEmpty()){
+            0
+        }else{
+            edtPlanTourBusySeats.text.toString().toInt()
+        }
+        var total       = car.nrSeats?.toInt()?.minus(busySeats)
+        remainingSeats  = total!!
+        if(remainingSeats < 0){
+            remainingSeats = 0
+        }
+        tvPlanTourRemindSeatsNumber.text = remainingSeats.toString()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        getCurrentCar()
+    }
 
 
 }

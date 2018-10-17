@@ -32,8 +32,6 @@ class DriverListPlainTourFragment : SuperClassFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setupToolbar(R.id.toolbar,"Passeios",true)
-        //createListTour(emptyList())
-        //callWSToGetAllOpenDriverPlainTour()
         setHasOptionsMenu(true)
     }
 

@@ -221,9 +221,11 @@ class MapsFragment : SuperMapFragment(), OnMapReadyCallback,com.google.android.g
     }
 
     private fun onOff(){
-        var isChecked: Boolean = swtOnOff?.isChecked!!
-        changeSwitch(isChecked)
-        stopInitLocation(isChecked)
+        if(swtOnOff != null) {
+            var isChecked: Boolean = swtOnOff?.isChecked!!
+            changeSwitch(isChecked)
+            stopInitLocation(isChecked)
+        }
     }
 
     private fun stopInitLocation(isChecked:Boolean){

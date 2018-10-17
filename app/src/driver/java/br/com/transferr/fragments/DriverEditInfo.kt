@@ -31,33 +31,14 @@ import java.io.File
  * A simple [Fragment] subclass.
  */
 class DriverEditInfo : SuperClassFragment() {
-    /*
-    override fun onBackStackChanged() {
-        shouldDisplayHomeUp()
-    }
-*/
+
     private val camera      = HelperCamera()
     private val photoName   = "photoProfile.jpg"
     private var driver: Driver?=null
     var file: File? = null
-    /*
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        activity?.supportFragmentManager?.addOnBackStackChangedListener(this)
-    }
-*/
 
-/*
-    private fun shouldDisplayHomeUp() {
-        val canBack:Boolean = activity?.supportFragmentManager?.backStackEntryCount!! >0
-        activity?.actionBar?.setDisplayHomeAsUpEnabled(canBack)
-    }
-*/
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
-
-
-
         return inflater.inflate(R.layout.fragment_driver_edit_info, container, false)
     }
 
@@ -69,17 +50,12 @@ class DriverEditInfo : SuperClassFragment() {
     }
 
     private fun initViews(){
-        btnCamera.setOnClickListener{btnCameraClick()}
+        //btnCamera.setOnClickListener{btnCameraClick()}
+        imgProfile.setOnClickListener{btnCameraClick()}
         btnAlterPass.setOnClickListener{btnAlterPassClick()}
         getDriver()
-        //loadPhoto(Prefes.ID_CAR)
     }
-/*
-    private fun loadPhoto(idCar:String){
-        var url = ApplicationTransferr.getInstance().URL_BASE_IMG + "/car/$idCar"+"/$photoName"
-        Picasso.with(context).load(url).memoryPolicy(MemoryPolicy.NO_CACHE,MemoryPolicy.NO_STORE).placeholder(R.drawable.no_photo_64).into(imgProfile)
-    }
-*/
+
     private fun loadPhoto(driver:Driver){
         var url = driver.car?.photo
         Picasso.with(context).load(url).memoryPolicy(MemoryPolicy.NO_CACHE,MemoryPolicy.NO_STORE).placeholder(R.drawable.no_photo_64).into(imgProfile)
@@ -87,15 +63,12 @@ class DriverEditInfo : SuperClassFragment() {
 
     private fun initScreenFields(driver:Driver){
         this.driver                 = driver
-
         lblDriverNameValue.text     = driver.name
         lblDriverNameValue
-
         lblCfpValue.text            = driver.countryRegister
         lblDtNascimentoValue.text   = DateUtil.format(driver.birthDate!!,"dd/MM/yyyy")
         loadPhoto(driver)
     }
-
 
     private fun getDriver(){
         initProgressBar()

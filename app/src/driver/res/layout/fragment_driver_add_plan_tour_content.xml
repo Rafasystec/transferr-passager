@@ -108,7 +108,7 @@
     <RelativeLayout
         android:layout_marginTop="8dp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="90dp"
         android:paddingLeft="8dp"
         android:layout_toRightOf="@+id/ivProfile">
         <TextView
@@ -118,6 +118,33 @@
             android:text="@string/busySeats"
             />
 
+        <EditText
+            android:id="@+id/edtPlanTourBusySeats"
+            android:layout_width="60dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginEnd="53dp"
+            android:layout_marginRight="53dp"
+            android:paddingLeft="8dp"
+            android:maxLength="2"
+            android:background="@drawable/shape_driver_text_background"
+            android:inputType="number" />
+
+        <TextView
+            android:id="@+id/tvCarSeatsNumber"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/edtPlanTourBusySeats"
+            android:layout_alignBottom="@+id/edtPlanTourBusySeats"
+            android:layout_alignEnd="@+id/swtPlanTourSearching"
+            android:layout_alignRight="@+id/swtPlanTourSearching"
+            android:text="/ 0"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            />
+        <!--
         <Spinner
             android:id="@+id/spPlanTourBusySeats"
             android:layout_width="80dp"
@@ -132,14 +159,37 @@
             >
 
         </Spinner>
+        -->
+        <TextView
+            android:id="@+id/tvPlanTourRemindSeatsNumber"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/swtPlanTourSearching"
+            android:layout_alignEnd="@+id/swtPlanTourSearching"
+            android:layout_alignRight="@+id/swtPlanTourSearching"
+            android:layout_marginEnd="31dp"
+            android:layout_marginRight="31dp"
+            android:text="0"
+            android:textColor="@color/colorPrimary"
+            android:textSize="14sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tvPlanTourRemindSeats"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
+            android:text="@string/seatsRemaining" />
 
         <TextView
             android:id="@+id/tvPlanTourSearching"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
-            android:layout_below="@+id/spPlanTourBusySeats"
             android:text="@string/searchingPassenger" />
 
         <Switch
@@ -148,8 +198,8 @@
             android:layout_height="wrap_content"
             android:layout_alignBaseline="@+id/tvPlanTourSearching"
             android:layout_alignBottom="@+id/tvPlanTourSearching"
-            android:layout_alignLeft="@+id/spPlanTourBusySeats"
-            android:layout_alignStart="@+id/spPlanTourBusySeats" />
+            android:layout_alignLeft="@+id/edtPlanTourBusySeats"
+            android:layout_alignStart="@+id/edtPlanTourBusySeats" />
 
     </RelativeLayout>
     <TextView

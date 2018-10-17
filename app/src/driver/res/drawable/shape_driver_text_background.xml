@@ -29,7 +29,7 @@
     <!--If you want to add padding-->
     <padding
         android:left="10dp"
-        android:right="40dp"
+        android:right="25dp"
         />
 
 </shape>
