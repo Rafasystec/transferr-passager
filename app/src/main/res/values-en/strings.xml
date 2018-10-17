@@ -107,4 +107,8 @@
     <string name="alwaysParameterDescription">Turne this parameter OFF</string>
     <string name="turnAlwaysParamOff">Turning this parameter off you\'ll don\'t apear automatically on the map.</string>
     <string name="noTourOptionYet">You don\'t have any plan registered yet.</string>
+    <string name="emailSubject">Contact-us</string>
+    <string name="emailBody">Hello everybody!</string>
+    <string name="emailTitle">Contact-us</string>
+    <string name="termsOfUseTitle">Terms of Use</string>
 </resources>

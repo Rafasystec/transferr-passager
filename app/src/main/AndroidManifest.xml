@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="br.com.transferr">
-<!--
+
+    <!--
     <permission
         android:name="br.com.transferr.permission.C2D_MESSAGE"
         android:protectionLevel="signature" />
--->
+    -->
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
-        android:supportsRtl="true"
-        >
+        android:supportsRtl="true">
 
         <!-- Configures the Firebase -->
         <service android:name=".main.util.FirebaseMessagingServiceUtil">
@@ -25,6 +25,11 @@
                 <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
             </intent-filter>
         </service>
+
+        <activity
+            android:name=".activities.TermsOfUseActivity"
+            android:label="@string/title_activity_terms_of_use"
+            android:theme="@style/AppThemeDriver"></activity>
     </application>
 
 </manifest>
