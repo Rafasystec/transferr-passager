@@ -113,11 +113,7 @@
         </activity>
         <activity android:name=".activities.LocationDetailActivity" />
         <activity android:name=".activities.GalleryActivity" />
-        <activity
-            android:name="br.com.transferr.passenger.activities.MapInfoWindowActivity"
-            android:label="@string/title_activity_map_info_window"
-            android:screenOrientation="portrait"
-            android:theme="@style/Theme.Transparent"></activity>
+
     </application>
 
 </manifest>

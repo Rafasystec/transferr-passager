@@ -110,5 +110,6 @@
     <string name="emailBody">Hello everybody!</string>
     <string name="emailTitle">Contact-us</string>
     <string name="termsOfUseTitle">Terms of Use</string>
+    <string name="title_activity_map_info_window">MapInfoWindowActivity</string>
 
 </resources>

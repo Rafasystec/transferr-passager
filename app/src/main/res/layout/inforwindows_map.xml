@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/relativeMapInfoWindow"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@color/colorTranslucent"
+    android:clickable="true"
+    tools:context="br.com.transferr.passenger.activities.MapInfoWindowActivity">
+
+    <Button
+        android:id="@+id/btnCloseInfoWindow"
+        android:layout_alignParentEnd="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@android:color/transparent"
+        android:layout_marginRight="20dp"
+        android:drawableRight="@drawable/close_circle_outline"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="90dp"
+        />
+
+    <include layout="@layout/infowindow_map_content" android:layout_gravity="center"
+        android:layout_below="@+id/btnCloseInfoWindow"
+        android:gravity="center"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content" />
+</RelativeLayout>

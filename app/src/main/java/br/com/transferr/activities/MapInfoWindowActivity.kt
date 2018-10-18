@@ -7,13 +7,15 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import br.com.transferr.R
+import br.com.transferr.activities.SuperClassActivity
 import br.com.transferr.passenger.model.responses.ResponseCarsOnline
 import br.com.transferr.passenger.util.WhatsAppUtil
 import com.squareup.picasso.Callback
 import com.squareup.picasso.MemoryPolicy
 import com.squareup.picasso.Picasso
+import kotlinx.android.synthetic.main.inforwindows_map.*
 import kotlinx.android.synthetic.main.infowindow_map_content.*
-import kotlinx.android.synthetic.passenger.inforwindows_map.*
+
 
 class MapInfoWindowActivity : SuperClassActivity() {
 

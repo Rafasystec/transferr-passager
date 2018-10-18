@@ -4,18 +4,19 @@ package br.com.transferr.fragments
 import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
-import android.graphics.Color
 import android.location.Location
 import android.location.LocationListener
 import android.location.LocationManager
 import android.os.Bundle
+import android.os.Handler
 import android.support.v4.app.Fragment
+import android.util.Log
 import android.view.*
 import android.widget.Switch
 import br.com.transferr.R
+import br.com.transferr.extensions.fromJson
 import br.com.transferr.extensions.log
 import br.com.transferr.extensions.setupToolbar
-import br.com.transferr.extensions.showAlert
 import br.com.transferr.extensions.showLoadingDialog
 import br.com.transferr.helpers.HelperPassengersOnline
 import br.com.transferr.main.util.Prefes
@@ -26,8 +27,11 @@ import br.com.transferr.model.responses.OnResponseInterface
 import br.com.transferr.model.responses.RequestCoordinatesUpdate
 import br.com.transferr.model.responses.ResponseCarOnline
 import br.com.transferr.model.responses.ResponseOK
+import br.com.transferr.passenger.activities.MapInfoWindowActivity
+import br.com.transferr.passenger.helpers.HelperCar
+import br.com.transferr.passenger.model.responses.ResponseCarsOnline
+import br.com.transferr.passenger.webservices.CarServiceMain
 import br.com.transferr.services.LocationTrackingService
-import br.com.transferr.util.MyLocationLister
 import br.com.transferr.util.NetworkUtil
 import br.com.transferr.webservices.CarService
 import br.com.transferr.webservices.CoordinatePassService
@@ -37,11 +41,10 @@ import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
-import com.google.android.gms.maps.model.CameraPosition
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.VisibleRegion
-import kotlinx.android.synthetic.driver.activity_main.*
 import org.jetbrains.anko.doAsync
+import org.jetbrains.anko.startActivity
 import org.jetbrains.anko.toast
 import org.jetbrains.anko.uiThread
 
@@ -92,7 +95,14 @@ class MapsFragment : SuperMapFragment(), OnMapReadyCallback,com.google.android.g
                         updateCameraOnLocationChange(latlon)
                     }
                 }
-        map.mapType = GoogleMap.MAP_TYPE_NORMAL
+        this.map!!.mapType = GoogleMap.MAP_TYPE_NORMAL
+        this.map!!.setOnMarkerClickListener({marker->
+            //updateCamera(marker.position!!)
+            var car = fromJson<ResponseCarsOnline>(marker.snippet)
+            activity?.startActivity<MapInfoWindowActivity>(ResponseCarsOnline.PARAM_CAR_OBJECT to car)
+            true
+        })
+        startRepeatingTask()
         callWebService()
     }
 
@@ -225,6 +235,7 @@ class MapsFragment : SuperMapFragment(), OnMapReadyCallback,com.google.android.g
             var isChecked: Boolean = swtOnOff?.isChecked!!
             changeSwitch(isChecked)
             stopInitLocation(isChecked)
+            callWebServiceToMarck()
         }
     }
 
@@ -315,5 +326,70 @@ class MapsFragment : SuperMapFragment(), OnMapReadyCallback,com.google.android.g
 
         })
     }
+
+    private val mInterval = 10000L // 5 seconds by default, can be changed later
+    private var mHandler: Handler? = Handler()
+   private var mStatusChecker: Runnable = object : Runnable {
+        override fun run() {
+            try {
+                updateMapScreen()
+            } finally {
+                // 100% guarantee that this always happens, even if
+                // your update method throws an exception
+                mHandler?.postDelayed(this, mInterval)
+            }
+        }
+    }
+
+    private fun startRepeatingTask() {
+        mStatusChecker.run()
+    }
+
+    private fun stopRepeatingTask() {
+        mHandler?.removeCallbacks(mStatusChecker)
+    }
+
+    private fun updateMapScreen(){
+        try {
+            callWebServiceToMarck()
+        }catch (e:Exception){
+            Log.e("FATAL_ERRO","try to call car to show on map",e)
+        }
+    }
+    private fun callWebServiceToMarck() {
+        if(map == null){
+            return
+        }
+        var visibleRegion = map!!.projection.visibleRegion
+        var quadrant = Quadrant()
+        if (visibleRegion != null) {
+            quadrant.farLeftLat     = visibleRegion.farLeft.latitude
+            quadrant.farLeftLng     = visibleRegion.farLeft.longitude
+            quadrant.farRightLat    = visibleRegion.farRight.latitude
+            quadrant.farRightLng    = visibleRegion.farRight.longitude
+            quadrant.nearLeftLat    = visibleRegion.nearLeft.latitude
+            quadrant.nearLeftLng    = visibleRegion.nearLeft.longitude
+            quadrant.nearRightLat   = visibleRegion.nearRight.latitude
+            quadrant.nearRightLng   = visibleRegion.nearRight.longitude
+            doAsync {
+                var carOnlineList = CarServiceMain().getCarOnline(quadrant)
+                uiThread {
+                    map!!.clear()
+                    if (carOnlineList != null) {
+                        var markers = HelperCar.transformInMarkers(carOnlineList)
+                        for (mark in markers) {
+                            map!!.addMarker(mark)
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        stopRepeatingTask()
+    }
+
 
 }// Required empty public constructor
