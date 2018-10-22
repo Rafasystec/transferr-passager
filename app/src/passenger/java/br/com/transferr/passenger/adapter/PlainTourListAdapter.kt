@@ -13,7 +13,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import br.com.transferr.R
-import br.com.transferr.passenger.application.ApplicationTransferr
+import br.com.transferr.application.ApplicationTransferr
 import br.com.transferr.passenger.model.PlainTour
 import br.com.transferr.passenger.util.DateUtil
 import br.com.transferr.passenger.util.WhatsAppUtil

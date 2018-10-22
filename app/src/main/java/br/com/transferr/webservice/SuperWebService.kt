@@ -1,6 +1,5 @@
 package br.com.transferr.webservices
 
-import android.content.Context
 import br.com.transferr.application.ApplicationTransferr
 import br.com.transferr.passenger.util.DateUtil
 import br.com.transferr.util.NetworkUtil

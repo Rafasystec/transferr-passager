@@ -2,8 +2,6 @@ package br.com.transferr.passenger.webservices
 
 import android.content.Context
 import android.location.Location
-import br.com.transferr.model.Car
-import br.com.transferr.passenger.application.ApplicationTransferr
 import br.com.transferr.passenger.extensions.toJson
 import br.com.transferr.passenger.model.CoordinatesPass
 import br.com.transferr.passenger.util.CallRESTMethodsUtil
@@ -14,7 +12,7 @@ import br.com.transferr.util.Prefes
  */
 class CoordinatePassService(var context:Context) {
 
-    private var urlBase = br.com.transferr.passenger.application.ApplicationTransferr.getInstance().URL_BASE
+    private var urlBase = br.com.transferr.application.ApplicationTransferr.getInstance().URL_BASE
     var callREST = CallRESTMethodsUtil<CoordinatesPass>()
 
     fun update(location:Location){

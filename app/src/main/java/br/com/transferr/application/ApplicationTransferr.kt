@@ -1,4 +1,4 @@
-package br.com.transferr.passenger.application
+package br.com.transferr.application
 
 import android.support.multidex.MultiDexApplication
 import java.util.*
@@ -14,19 +14,19 @@ class ApplicationTransferr : MultiDexApplication() {
     override fun onCreate() {
         super.onCreate()
         //Salva a intancia para termos acesso como Sigleton
-        br.com.transferr.passenger.application.ApplicationTransferr.Companion.appInstance = this
+        br.com.transferr.application.ApplicationTransferr.Companion.appInstance = this
     }
 
     companion object {
         //Singleton da classe application
-        private var appInstance: br.com.transferr.passenger.application.ApplicationTransferr? = null
+        private var appInstance: br.com.transferr.application.ApplicationTransferr? = null
         var DEVICE_LANGUAGE = Locale.getDefault().language
         val LANG_PT = "pt"
-        fun getInstance(): br.com.transferr.passenger.application.ApplicationTransferr {
-            if (br.com.transferr.passenger.application.ApplicationTransferr.Companion.appInstance == null) {
+        fun getInstance(): br.com.transferr.application.ApplicationTransferr {
+            if (br.com.transferr.application.ApplicationTransferr.Companion.appInstance == null) {
                 throw IllegalStateException("Configure the Application class on Manifest xml.")
             }
-            return br.com.transferr.passenger.application.ApplicationTransferr.Companion.appInstance!!
+            return br.com.transferr.application.ApplicationTransferr.Companion.appInstance!!
         }
     }
 }

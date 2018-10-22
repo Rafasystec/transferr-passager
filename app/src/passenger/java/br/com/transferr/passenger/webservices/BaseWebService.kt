@@ -1,13 +1,8 @@
 package br.com.transferr.passenger.webservices
 
-import android.widget.Toast
-import br.com.transferr.passenger.application.ApplicationTransferr
-import okhttp3.Interceptor
 import okhttp3.OkHttpClient
-import okhttp3.Request
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import java.net.SocketTimeoutException
 import java.util.concurrent.TimeUnit
 
 /**
@@ -16,7 +11,7 @@ import java.util.concurrent.TimeUnit
 open class BaseWebService {
 
 
-    protected var urlBase = br.com.transferr.passenger.application.ApplicationTransferr.getInstance().URL_BASE
+    protected var urlBase = br.com.transferr.application.ApplicationTransferr.getInstance().URL_BASE
     protected var httpClient: OkHttpClient = OkHttpClient.Builder()
             .connectTimeout(5, TimeUnit.SECONDS)
             .writeTimeout(15, TimeUnit.SECONDS)

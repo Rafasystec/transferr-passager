@@ -1,9 +1,8 @@
 package br.com.transferr.util
 
-import br.com.transferr.extensions.fromJson
-import br.com.transferr.extensions.toast
+
 import br.com.transferr.model.MapErroRetornoRest
-import okhttp3.ResponseBody
+import br.com.transferr.passenger.extensions.fromJson
 import retrofit2.Response
 import java.net.HttpURLConnection
 

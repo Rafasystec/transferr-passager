@@ -2,10 +2,10 @@ package br.com.transferr.main.util
 
 import android.content.SharedPreferences
 import br.com.transferr.application.ApplicationTransferr
-import br.com.transferr.extensions.fromJson
-import br.com.transferr.extensions.toJson
 import br.com.transferr.model.Car
 import br.com.transferr.model.Driver
+import br.com.transferr.passenger.extensions.fromJson
+import br.com.transferr.passenger.extensions.toJson
 
 /**
  * Created by root on 12/02/18.

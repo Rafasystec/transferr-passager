@@ -16,8 +16,8 @@ import android.support.v4.widget.DrawerLayout
 import android.support.v7.app.AlertDialog
 import android.util.Log
 import br.com.transferr.R
+import br.com.transferr.model.Quadrant
 import br.com.transferr.passenger.helpers.HelperCar
-import br.com.transferr.passenger.model.Quadrant
 import br.com.transferr.passenger.util.MyLocationLister
 import br.com.transferr.passenger.webservices.CarService
 import br.com.transferr.util.PermissionUtil

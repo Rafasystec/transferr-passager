@@ -1,51 +1,34 @@
 package br.com.transferr.passenger.fragments
 
 
-import android.Manifest
 import android.annotation.SuppressLint
-import android.content.Context
-import android.content.DialogInterface
-import android.content.Intent
-import android.content.pm.PackageManager
 import android.location.Location
-import android.location.LocationManager
 import android.os.Bundle
 import android.os.Handler
-import android.provider.Settings
-import android.support.design.widget.NavigationView
-import android.support.v4.app.ActivityCompat
-import android.support.v4.app.ActivityCompat.checkSelfPermission
 import android.support.v4.app.Fragment
-import android.support.v4.content.ContextCompat
-import android.support.v4.widget.DrawerLayout
-import android.support.v7.app.AlertDialog
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import br.com.transferr.R
-import br.com.transferr.fragments.SuperClassFragment
+import br.com.transferr.fragments.SuperMapFragment
+import br.com.transferr.model.Quadrant
 import br.com.transferr.passenger.activities.MapInfoWindowActivity
-import br.com.transferr.passenger.adapter.MapInfoWindowsAdapter
 import br.com.transferr.passenger.extensions.fromJson
 import br.com.transferr.passenger.helpers.HelperCar
-import br.com.transferr.passenger.model.Quadrant
 import br.com.transferr.passenger.model.responses.ResponseCarsOnline
 import br.com.transferr.passenger.util.MyLocationLister
 import br.com.transferr.passenger.webservices.CarService
-import br.com.transferr.util.PermissionUtil
-import com.google.android.gms.common.ConnectionResult
-import com.google.android.gms.common.api.GoogleApiClient
-import com.google.android.gms.location.FusedLocationProviderClient
-import com.google.android.gms.location.LocationRequest
-import com.google.android.gms.location.LocationServices
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.Marker
-import org.jetbrains.anko.*
+import org.jetbrains.anko.doAsync
+import org.jetbrains.anko.startActivity
+import org.jetbrains.anko.toast
+import org.jetbrains.anko.uiThread
 
 
 /**

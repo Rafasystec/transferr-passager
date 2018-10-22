@@ -5,19 +5,16 @@ package br.com.transferr.passenger.webservices
  */
 
 import br.com.transferr.model.Car
-import br.com.transferr.passenger.application.ApplicationTransferr
-import br.com.transferr.passenger.model.Quadrant
+import br.com.transferr.model.Quadrant
 import br.com.transferr.passenger.model.responses.ResponseCarsOnline
 import br.com.transferr.passenger.util.CallRESTMethodsUtil
-import com.google.android.gms.maps.model.LatLng
-import com.google.android.gms.maps.model.MarkerOptions
 
 
 /**
  * Created by Rafael Rocha 12/02/18.
  */
 class CarService {
-    private var urlBase = br.com.transferr.passenger.application.ApplicationTransferr.getInstance().URL_BASE
+    private var urlBase = br.com.transferr.application.ApplicationTransferr.getInstance().URL_BASE
     var callREST = CallRESTMethodsUtil<Car>()
     fun getCar(id:Int): Car {
         var json = callREST.get(urlBase+"car/$id")
@@ -26,7 +23,7 @@ class CarService {
         return car
     }
     var callRESTCarOnline = CallRESTMethodsUtil<MutableList<ResponseCarsOnline>>()
-    fun getCarOnline(quadrant:Quadrant):List<ResponseCarsOnline>{
+    fun getCarOnline(quadrant: Quadrant):List<ResponseCarsOnline>{
         var stringBuilder = StringBuilder("car/online/")
         //Far points location
         stringBuilder.append(quadrant.farLeftLng).append("/")

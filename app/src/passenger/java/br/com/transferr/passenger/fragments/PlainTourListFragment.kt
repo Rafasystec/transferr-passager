@@ -12,9 +12,6 @@ import br.com.transferr.R
 import br.com.transferr.extensions.defaultRecycleView
 import br.com.transferr.extensions.showLoadingDialog
 import br.com.transferr.fragments.SuperClassFragment
-import br.com.transferr.passenger.adapter.PlainTourListAdapter
-import br.com.transferr.passenger.application.ApplicationTransferr
-import br.com.transferr.passenger.extensions.defaultRecycleView
 import br.com.transferr.passenger.interfaces.OnResponseInterface
 import br.com.transferr.passenger.model.PlainTour
 import br.com.transferr.passenger.model.TourOption
@@ -22,7 +19,6 @@ import br.com.transferr.passenger.model.responses.ResponsePlainsByTourAndLocatio
 import br.com.transferr.passenger.webservices.WSPlainTour
 import kotlinx.android.synthetic.passenger.layout_empty_list.*
 import kotlinx.android.synthetic.passenger.layout_empty_list.view.*
-import org.jetbrains.anko.progressDialog
 
 
 /**
@@ -47,7 +43,7 @@ class PlainTourListFragment : SuperClassFragment() {
         recycleViewFromTour     = defaultRecycleView(activity!!,R.id.rcPlainTourFromTour)
         recycleViewFromLocation = defaultRecycleView(activity!!,R.id.rcPlainTourFromLocation)
         loadPlainsByTourAndLocation()
-        Log.i("INFO","Language device ${br.com.transferr.passenger.application.ApplicationTransferr.DEVICE_LANGUAGE}")
+        Log.i("INFO","Language device ${br.com.transferr.application.ApplicationTransferr.DEVICE_LANGUAGE}")
         if(llEmptyList != null) {
             llEmptyList.tvTextToAdd.text = "Sem Passeios no momento."
         }

@@ -120,7 +120,7 @@ class MapsFragment : SuperMapFragment(), OnMapReadyCallback,com.google.android.g
 
     private fun callWebService(){
         var visibleRegion = map!!.projection.visibleRegion
-        if(visibleRegion != null && isConnected()){
+        if(!visibleRegion.equals(null) && isConnected()){
             doAsync {
 
                 var carOnlineList   = CoordinatePassService
@@ -362,7 +362,7 @@ class MapsFragment : SuperMapFragment(), OnMapReadyCallback,com.google.android.g
         }
         var visibleRegion = map!!.projection.visibleRegion
         var quadrant = Quadrant()
-        if (visibleRegion != null) {
+        if (!visibleRegion.equals(null)) {
             quadrant.farLeftLat     = visibleRegion.farLeft.latitude
             quadrant.farLeftLng     = visibleRegion.farLeft.longitude
             quadrant.farRightLat    = visibleRegion.farRight.latitude

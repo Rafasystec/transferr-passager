@@ -29,4 +29,6 @@
     <color name="control">#FAF4C3</color>
     <color name="colorTranslucent">#99000000</color>
     <color name="redDelete">#ff333f</color>
+    <color name="grey_400">#606060</color>
+    <color name="black">#000</color>
 </resources>
