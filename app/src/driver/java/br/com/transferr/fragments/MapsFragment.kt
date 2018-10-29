@@ -86,7 +86,6 @@ class MapsFragment : SuperMapFragment(), OnMapReadyCallback,com.google.android.g
         }
         map.setMaxZoomPreference(16f)
         map.setMinZoomPreference(12f)
-
         this.map = map
         fusedLocationClient.lastLocation
                 .addOnSuccessListener { location : Location? ->
@@ -122,9 +121,8 @@ class MapsFragment : SuperMapFragment(), OnMapReadyCallback,com.google.android.g
         var visibleRegion = map!!.projection.visibleRegion
         if(!visibleRegion.equals(null) && isConnected()){
             doAsync {
-
                 var carOnlineList   = CoordinatePassService
-                                            .getOnlinePassengers(getQuadrantByVisibleRegioan(visibleRegion))
+                        .getOnlinePassengers(getQuadrantByVisibleRegioan(visibleRegion))
                 uiThread {
                     if(carOnlineList != null) {
                         var markers = HelperPassengersOnline.transformInMarkers(carOnlineList)
@@ -227,7 +225,6 @@ class MapsFragment : SuperMapFragment(), OnMapReadyCallback,com.google.android.g
                     }
             )
         }
-
     }
 
     private fun onOff(){
@@ -389,6 +386,11 @@ class MapsFragment : SuperMapFragment(), OnMapReadyCallback,com.google.android.g
     override fun onDestroy() {
         super.onDestroy()
         stopRepeatingTask()
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        getCurrentCar()
     }
 
 

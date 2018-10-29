@@ -57,10 +57,24 @@
         android:text="@string/termsOfUse"
         android:textColor="@color/colorButtonText"
         android:drawableLeft="@drawable/ic_term_use"
+        android:layout_marginBottom="2dp"
         android:drawableRight="@drawable/chevron_right"
         android:background="@color/control"
         />
 
+    <android.support.v7.widget.AppCompatButton
+        android:id="@+id/btnLogout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:text="@string/logout"
+        android:textColor="@color/colorButtonText"
+        android:drawableLeft="@drawable/logout"
+        android:drawableRight="@drawable/chevron_right"
+        android:background="@color/control"
+        android:drawableTint="@color/colorPrimary"
+        android:visibility="visible"
+        />
 
 
 </LinearLayout>

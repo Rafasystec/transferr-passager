@@ -42,5 +42,8 @@ object Prefes {
     fun setInt(flag:String,value:Int) = prefs().edit().putInt(flag,value).apply()
     fun getInt(flag: String)= prefs().getInt(flag,0)
     fun setString(flag: String,value:String) = prefs().edit().putString(flag,value).apply()
+    fun clear(){
+       prefs().edit().clear().commit()
+    }
 
 }

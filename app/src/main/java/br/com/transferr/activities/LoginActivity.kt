@@ -1,23 +1,22 @@
 package br.com.transferr.activities
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import br.com.transferr.R
-import br.com.transferr.extensions.showError
-import br.com.transferr.extensions.showValidation
-import br.com.transferr.extensions.toast
+import br.com.transferr.main.util.Prefes
 import br.com.transferr.model.Credentials
+import br.com.transferr.model.Driver
 import br.com.transferr.model.responses.OnResponseInterface
 import br.com.transferr.model.responses.ResponseLogin
 import br.com.transferr.model.responses.ResponseOK
-import br.com.transferr.main.util.Prefes
-import br.com.transferr.model.Driver
+import br.com.transferr.passenger.activities.MainActivity
 import br.com.transferr.passenger.extensions.showAlert
 import br.com.transferr.passenger.extensions.showAlertError
 import br.com.transferr.passenger.extensions.showLoadingDialog
 import br.com.transferr.webservices.DriverService
 import br.com.transferr.webservices.UserService
-import kotlinx.android.synthetic.driver.activity_login.*
+import kotlinx.android.synthetic.main.activity_login.*
 import org.jetbrains.anko.toast
 
 class LoginActivity : SuperClassActivity() {
@@ -56,7 +55,6 @@ class LoginActivity : SuperClassActivity() {
                     override fun onSuccess(body: ResponseLogin?) {
                         stopProgressBar()
                         Prefes.prefsLogin = body?.user?.id!!
-                        //executeLogin(body?.user?.id!!)
                         getDriverFromWebService()
                     }
                     override fun onError(message: String) {
@@ -85,6 +83,7 @@ class LoginActivity : SuperClassActivity() {
     }
 
     private fun callMainActivity(){
+        startActivity(Intent(this, MainActivity::class.java))
         finish()
     }
 
@@ -169,6 +168,11 @@ class LoginActivity : SuperClassActivity() {
                 }
         )
 
+    }
+
+    override fun onBackPressed() {
+        super.onBackPressed()
+        this.finishAffinity()
     }
 }
 

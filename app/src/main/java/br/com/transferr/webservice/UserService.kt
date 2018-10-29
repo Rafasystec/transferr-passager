@@ -1,21 +1,16 @@
 package br.com.transferr.webservices
 
 
-import android.content.Context
 import br.com.transferr.helpers.HelperCallBackWebService
 import br.com.transferr.model.Credentials
 import br.com.transferr.model.responses.OnResponseInterface
 import br.com.transferr.model.responses.ResponseLogin
 import br.com.transferr.model.responses.ResponseOK
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import retrofit2.http.Path
 
 /**
- * Created by root on 20/02/18.
+ * Created by Rafael Rocha on 20/02/18.
  */
 object UserService :SuperWebService(){
 

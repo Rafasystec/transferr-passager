@@ -112,4 +112,6 @@
     <string name="title_activity_terms_of_use">TermsOfUseActivity</string>
     <string name="termsOfUseTitle">Terms of Use</string>
     <string name="title_activity_map_info_window">MapInfoWindowActivity</string>
+    <string name="logout">Logout</string>
+    <string name="areYouSureLogout">Are you sure to Logout?</string>
 </resources>

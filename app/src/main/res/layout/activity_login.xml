@@ -16,7 +16,7 @@
         android:textSize="30dp"
         android:textStyle="bold"
         android:layout_gravity="center"
-        android:textColor="@color/primary_dark"
+        android:textColor="@color/black"
         android:text="Login"/>
 
     <ProgressBar
@@ -64,7 +64,7 @@
         android:text="@string/login"
         android:layout_marginTop="40dp"
         android:textColor="#ffffff"
-        android:background="@color/primary_dark"/>
+        android:background="@color/colorSecondary"/>
 
     <Button
         android:id="@+id/btnRecoverPass"
@@ -72,7 +72,7 @@
         android:layout_width="200dp"
         android:layout_height="wrap_content"
         style="?android:attr/borderlessButtonStyle"
-        android:textColor="@color/blue"
+        android:textColor="@color/colorButtonText"
         android:layout_gravity="center"
         android:shadowRadius="6"
         android:text="Esqueceu a senha?" />

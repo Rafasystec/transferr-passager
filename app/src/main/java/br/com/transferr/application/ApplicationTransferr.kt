@@ -8,7 +8,7 @@ import java.util.*
  */
 class ApplicationTransferr : MultiDexApplication() {
     private val TAG = "APPLICATION"
-    val URL_BASE = "http://192.168.1.3:8080/transferr-rest/rest/" //Windows
+    val URL_BASE = "http://192.168.1.30:8080/transferr-rest/rest/" //Windows
     //val URL_BASE = "http://192.168.15.9:8080/transferr-rest/rest/" //Linux
     //val URL_BASE = "http://petmooby.com.br/transferr-rest/rest/"
     override fun onCreate() {
