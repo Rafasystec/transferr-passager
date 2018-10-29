@@ -85,8 +85,8 @@ class DriverInforActivity : SuperClassActivity() {
     }
 
     private fun loadPhoto(idCar:String){
-        var url = ApplicationTransferr.getInstance().URL_BASE_IMG + "/car/$idCar"+"/$photoName"
-        Picasso.with(this).load(url).into(imgProfile)
+        //var url = ApplicationTransferr.getInstance().URL_BASE_IMG + "/car/$idCar"+"/$photoName"
+        //Picasso.with(this).load(url).into(imgProfile)
     }
 
     private fun btnCameraClick(){

@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import br.com.transferr.R
+import br.com.transferr.activities.SuperClassActivity
 import br.com.transferr.passenger.model.responses.ResponseCarsOnline
 import br.com.transferr.passenger.util.WhatsAppUtil
 import com.squareup.picasso.Callback

@@ -12,19 +12,19 @@ import android.view.MenuItem
 import br.com.transferr.R
 import br.com.transferr.broadcast.InternetBroadCast
 import br.com.transferr.main.util.Prefes
-import kotlinx.android.synthetic.driver.toolbar.*
+
 
 /**
  * Created by root on 06/02/18.
  */
 @SuppressLint("Registered")
-open class SuperClassActivity : AppCompatActivity(),InternetBroadCast.ConnectivityReceiverListener {
+open class SuperClassActivity : AppCompatActivity(), InternetBroadCast.ConnectivityReceiverListener {
     protected val context: Context get() = this
     private var mSnackBar: Snackbar? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         Log.d("DEBUG","setSupportActionBar")
-        setSupportActionBar(toolbar)
+        //setSupportActionBar(toolbar)
     }
 
     override fun onResume() {
@@ -87,7 +87,7 @@ open class SuperClassActivity : AppCompatActivity(),InternetBroadCast.Connectivi
     }
 */
     protected fun showMessage(isConnected: Boolean) {
-
+    /*
         if (!isConnected) {
             val messageToUser = "Você está off-line." //TODO
             mSnackBar = Snackbar.make( findViewById(R.id.mainActivity), messageToUser, Snackbar.LENGTH_LONG) //Assume "rootLayout" as the root layout of every activity.
@@ -97,6 +97,7 @@ open class SuperClassActivity : AppCompatActivity(),InternetBroadCast.Connectivi
         } else {
             mSnackBar?.dismiss()
         }
+        */
     }
 
     /**
