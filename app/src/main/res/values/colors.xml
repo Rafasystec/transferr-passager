@@ -17,7 +17,7 @@
     <!--
     <color name="colorSecondary">#ffffff</color>
     -->
-    <color name="colorSecondary">#DF3A01</color>
+    <color name="colorSecondary">#000</color>
     <color name="colorButtonText">#000</color>
     <color name="colorButtonTextDriver">#FFF</color>
     <color name="bootstrapBtnDanger">#dc3545</color>

@@ -10,7 +10,6 @@ import br.com.transferr.model.Driver
 import br.com.transferr.model.responses.OnResponseInterface
 import br.com.transferr.model.responses.ResponseLogin
 import br.com.transferr.model.responses.ResponseOK
-import br.com.transferr.passenger.activities.MainActivity
 import br.com.transferr.passenger.extensions.showAlert
 import br.com.transferr.passenger.extensions.showAlertError
 import br.com.transferr.passenger.extensions.showLoadingDialog

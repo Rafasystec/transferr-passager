@@ -14,7 +14,8 @@ import java.util.concurrent.TimeUnit
  */
 open class SuperWebService {
     protected var urlBase = ApplicationTransferr.getInstance().URL_BASE
-    protected var httpClient:OkHttpClient = OkHttpClient.Builder()
+
+    var httpClient:OkHttpClient = OkHttpClient.Builder()
             .connectTimeout(5,TimeUnit.SECONDS)
             .writeTimeout(5,TimeUnit.SECONDS)
             .readTimeout(15,TimeUnit.SECONDS)

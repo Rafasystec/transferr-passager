@@ -10,6 +10,8 @@ import android.widget.ImageView
 import android.widget.ProgressBar
 import android.widget.TextView
 import br.com.transferr.R
+import br.com.transferr.application.ApplicationTransferr
+import br.com.transferr.main.util.LanguageDeviceUtil
 import br.com.transferr.passenger.model.TourOption
 import com.squareup.picasso.MemoryPolicy
 import com.squareup.picasso.Picasso
@@ -32,34 +34,32 @@ class TourOptionAdapter(val options : List<TourOption>, val onClick: (TourOption
     override fun onBindViewHolder(holder: br.com.transferr.passenger.adapter.TourOptionAdapter.TourOptionViewHolder, position: Int) {
         this.context = holder!!.itemView.context
         val tour = options[position]
-
-        holder.tvName.text = tour.name
+        holder.tvName.text          = tour.name
         var urlPhoto: String?
-        urlPhoto = tour.profileUrl
-        holder.progress.visibility = View.VISIBLE
-        Picasso.with(context).load(urlPhoto).fit().memoryPolicy(MemoryPolicy.NO_CACHE, MemoryPolicy.NO_STORE).into(holder.ivMainLocation,
+        urlPhoto                    = tour.profileUrl
+        holder.progress.visibility  = View.VISIBLE
+        Picasso.with(context)
+                .load(urlPhoto).memoryPolicy(MemoryPolicy.NO_CACHE, MemoryPolicy.NO_STORE).into(holder.ivMainLocation,
                 object : com.squareup.picasso.Callback {
                     override fun onSuccess() {
                         holder.progress.visibility = View.GONE
-                        //holder.ivMainLocation.visibility = View.VISIBLE
+                        holder.ivMainLocation.visibility = View.VISIBLE
                     }
 
                     override fun onError() {
                         holder.progress.visibility = View.GONE
-                        //holder.ivMainLocation.visibility = View.VISIBLE
                     }
                 })
         holder.cardView.setOnClickListener { onClick(tour) }
         holder.tvLocation.text = tour.location?.name!!
-        var descriptionMax = 70
-        var description = tour.description
-        if(description != null){
-            var size = description.length
-            if(size > descriptionMax){
-                description = description.substring(0,descriptionMax-5)+" ..."
-            }
-        }
-        //holder.tvTourDescription.text = tour.description
+        //var descriptionMax = 70
+        var description = LanguageDeviceUtil.transform(tour.shortDescriptionLanguage!!)
+        //if(description != null){
+        //    var size = description.length
+        //    if(size > descriptionMax){
+        //        description = description.substring(0,descriptionMax-5)+" ..."
+        //    }
+        //}
         holder.tvTourDescription.text = description
     }
 

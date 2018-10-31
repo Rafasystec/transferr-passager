@@ -22,6 +22,7 @@ class ApplicationTransferr : MultiDexApplication() {
         private var appInstance: br.com.transferr.application.ApplicationTransferr? = null
         var DEVICE_LANGUAGE = Locale.getDefault().language
         val LANG_PT = "pt"
+        val LANG_EN = "en"
         fun getInstance(): br.com.transferr.application.ApplicationTransferr {
             if (br.com.transferr.application.ApplicationTransferr.Companion.appInstance == null) {
                 throw IllegalStateException("Configure the Application class on Manifest xml.")

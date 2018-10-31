@@ -23,7 +23,7 @@
         android:id="@+id/menuHistoryCli"
         android:enabled="true"
         android:icon="@drawable/icons8_menu_filled_30"
-        android:title="@string/historic"
+        android:title="@string/menu"
         app:showAsAction="ifRoom" />
 
 

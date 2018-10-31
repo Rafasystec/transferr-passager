@@ -102,7 +102,8 @@ class MapsFragment : SuperMapFragment(), OnMapReadyCallback,com.google.android.g
             true
         })
         startRepeatingTask()
-        callWebService()
+        //callWebService()
+        callWebServiceToMarck()
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -116,7 +117,7 @@ class MapsFragment : SuperMapFragment(), OnMapReadyCallback,com.google.android.g
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(activity!!)
         return view
     }
-
+    /*
     private fun callWebService(){
         var visibleRegion = map!!.projection.visibleRegion
         if(!visibleRegion.equals(null) && isConnected()){
@@ -134,6 +135,7 @@ class MapsFragment : SuperMapFragment(), OnMapReadyCallback,com.google.android.g
             }
         }
     }
+    */
 
     private fun getQuadrantByVisibleRegioan(visibleRegion: VisibleRegion):Quadrant{
         var quadrant      = Quadrant()
@@ -299,11 +301,12 @@ class MapsFragment : SuperMapFragment(), OnMapReadyCallback,com.google.android.g
         swtOnOff?.isChecked = car.status != EnumStatus.OFFLINE
         onOff()
     }
-
+/*
     override fun onResume() {
         super.onResume()
-        getCurrentCar()
+        //getCurrentCar()
     }
+    */
 
     private fun getCurrentCar(){
         CarService.getCar(Prefes.prefsCar, object :OnResponseInterface<Car>{

@@ -7,7 +7,7 @@ import java.util.*
  */
 class Driver (var name: String,
                    var countryRegister: String,
-                   var birthDate: Int): Entity(){
+                   var birthDate: Date): Entity(){
 
 
     var phone: Long? = null

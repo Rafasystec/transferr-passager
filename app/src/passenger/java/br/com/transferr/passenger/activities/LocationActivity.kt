@@ -7,6 +7,7 @@ import android.support.v7.widget.GridLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.view.View
 import br.com.transferr.R
+import br.com.transferr.main.util.LanguageDeviceUtil
 import br.com.transferr.passenger.extensions.setupToolbar
 import br.com.transferr.passenger.model.TourOption
 import com.squareup.picasso.MemoryPolicy
@@ -57,7 +58,7 @@ class LocationActivity : br.com.transferr.passenger.activities.SuperClassActivit
                 .centerCrop()
                 .into(ivMainPicture)
         //tvLocationTitle.text = tourOption?.name
-        tvLocationDescription.text = tourOption?.description
+        tvLocationDescription.text = LanguageDeviceUtil.transform(tourOption!!.descriptionLanguage!!) //tourOption?.description
         /*
         var i = 0
         tourOption?.images?.forEach {

@@ -4,7 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:card_view="http://schemas.android.com/tools"
     android:id="@+id/cvLocation"
-    android:layout_height="80dp"
+    android:layout_height="110dp"
     android:layout_width="match_parent"
     android:clickable="true"
     android:padding="5dp"
@@ -36,8 +36,8 @@
             <ProgressBar
                 xmlns:android="http://schemas.android.com/apk/res/android"
                 android:id="@+id/progress"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
                 style="@style/Widget.AppCompat.ProgressBar"
                 android:layout_gravity="center|center_vertical"
                 android:gravity="center"
@@ -45,15 +45,16 @@
                 />
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/ivMainLocation"
-                android:layout_width="70dp"
-                android:layout_height="70dp"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
                 android:layout_alignParentStart="true"
                 android:layout_centerVertical="true"
                 android:src="@drawable/no_photo_64"
                 android:layout_alignParentLeft="true"
                 android:layout_margin="4dp"
                 android:layout_gravity="center"
-                android:visibility="visible"
+                android:visibility="gone"
+
                 />
         </LinearLayout>
 
