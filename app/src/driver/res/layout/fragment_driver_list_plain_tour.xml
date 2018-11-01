@@ -22,7 +22,7 @@
         android:textColor="@color/colorPrimary"
         android:layout_gravity="center"
         android:background="@drawable/shape_text_border"
-        android:visibility="visible"
+        android:visibility="gone"
         />
 
 <!--

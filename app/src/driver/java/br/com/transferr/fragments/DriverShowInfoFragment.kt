@@ -1,7 +1,6 @@
 package br.com.transferr.fragments
 
 
-import android.content.Intent
 import android.content.IntentFilter
 import android.net.ConnectivityManager
 import android.os.Bundle
@@ -10,7 +9,6 @@ import android.support.v4.content.LocalBroadcastManager
 import android.util.Log
 import android.view.*
 import br.com.transferr.R
-import br.com.transferr.activities.LoginActivity
 import br.com.transferr.broadcast.InternetBroadCast
 import br.com.transferr.extensions.*
 import br.com.transferr.main.util.Prefes
@@ -65,7 +63,6 @@ class DriverShowInfoFragment : SuperClassFragment() {
         initView()
     }
     private fun initView(){
-        //swtOnOffAlwaysParam.setOnCheckedChangeListener{buttonView, isChecked ->  updateAlwaysParameter(isChecked)}
         swtOnOffAlwaysParam.setOnClickListener { updateAlwaysParameter() }
         checkNetwork()
     }
@@ -82,7 +79,7 @@ class DriverShowInfoFragment : SuperClassFragment() {
     }
 
     private fun getCarFromWebService(){
-        var progress = showLoadingDialog()
+        var progress = showLoadingDialogWithDelay()
         DriverService.doGetByUserId(Prefes.prefsLogin,
                 object: OnResponseInterface<Driver> {
                     override fun onSuccess(body: Driver?) {
@@ -137,7 +134,7 @@ class DriverShowInfoFragment : SuperClassFragment() {
 
     private fun confirmUpdateAlwaysParameter() {
         var isChecked = swtOnOffAlwaysParam.isChecked
-        var alert = showLoadingDialog()
+        var alert = showLoadingDialogWithDelay()
         CarService.changeAlwaysParameter(car?.id!!, isChecked, object : OnResponseInterface<ResponseOK> {
             override fun onSuccess(body: ResponseOK?) {
                 alert.dismiss()

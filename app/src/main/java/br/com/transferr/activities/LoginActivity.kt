@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import br.com.transferr.R
+import br.com.transferr.activities.newlayout.MainActivity
 import br.com.transferr.main.util.Prefes
 import br.com.transferr.model.Credentials
 import br.com.transferr.model.Driver
@@ -48,20 +49,20 @@ class LoginActivity : SuperClassActivity() {
 
     private fun requestLogin(){
         if(validate()){
-            initProgressBar()
+            var alert = showLoadingDialog(message = "Efetuando o Login. Aguarde!")
             UserService.doLogin(getCredentialsFromForm(),
                 object : OnResponseInterface<ResponseLogin>{
                     override fun onSuccess(body: ResponseLogin?) {
-                        stopProgressBar()
+                        alert.dismiss()
                         Prefes.prefsLogin = body?.user?.id!!
                         getDriverFromWebService()
                     }
                     override fun onError(message: String) {
-                        stopProgressBar()
+                        alert.dismiss()
                         toast(message)
                     }
                     override fun onFailure(t: Throwable?) {
-                        stopProgressBar()
+                        alert.dismiss()
                         toast(t?.message!!)
                     }
 
@@ -105,24 +106,22 @@ class LoginActivity : SuperClassActivity() {
 
     private fun callServiceToRecoverPassword(){
        if(validateRecoverPasswor()){
-           initProgressBar()
+           var dialog = showLoadingDialog(message = "Recuperando a senha. Aguarde")
            var email = txtLogin.text.toString().trim()
            UserService.recoverPassword(email,
                object : OnResponseInterface<ResponseOK>{
                    override fun onSuccess(body: ResponseOK?) {
-                       stopProgressBar()
-                       toast("Um e-mail foi enviado para $email")
+                       dialog.dismiss()
+                       showAlert("Um e-mail foi enviado para $email")
                    }
 
                    override fun onError(message: String) {
-                       stopProgressBar()
-                       //showValidation(message)
+                       dialog.dismiss()
                        showAlert(message)
                    }
 
                    override fun onFailure(t: Throwable?) {
-                       stopProgressBar()
-                       //showError(t?.message!!)
+                       dialog.dismiss()
                        showAlertError(t?.message!!)
                    }
 
@@ -131,7 +130,7 @@ class LoginActivity : SuperClassActivity() {
        }
 
     }
-
+    /*
     private fun initProgressBar(){
         this@LoginActivity.runOnUiThread({
             progressBar.visibility = View.VISIBLE
@@ -143,7 +142,7 @@ class LoginActivity : SuperClassActivity() {
             progressBar.visibility = View.GONE
         })
     }
-
+    */
     private fun getDriverFromWebService(){
         var progress = showLoadingDialog(message = getString(R.string.getTheDriver))
         DriverService.doGetByUserId(Prefes.prefsLogin,

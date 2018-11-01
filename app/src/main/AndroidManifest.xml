@@ -15,6 +15,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true">
 
+
         <!-- Configures the Firebase -->
         <service android:name=".main.util.FirebaseMessagingServiceUtil">
             <intent-filter>
@@ -36,6 +37,13 @@
             android:label="@string/title_activity_map_info_window"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.Transparent"></activity>
+        <receiver
+            android:name=".broadcast.InternetBroadCast"
+            android:enabled="true">
+            <intent-filter>
+                <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
+            </intent-filter>
+        </receiver>
     </application>
 
 </manifest>

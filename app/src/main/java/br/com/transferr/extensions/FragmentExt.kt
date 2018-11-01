@@ -7,6 +7,7 @@ import android.app.DatePickerDialog.OnDateSetListener
 import android.app.ProgressDialog
 import android.app.TimePickerDialog
 import android.content.Intent
+import android.os.Handler
 import android.support.annotation.IdRes
 import android.support.annotation.StringRes
 import android.support.v4.app.Fragment
@@ -23,6 +24,9 @@ import android.view.View
 import android.widget.TextView
 import android.widget.Toast
 import br.com.transferr.R
+import br.com.transferr.dialogs.ProgressLoadDialog
+import br.com.transferr.dialogs.indeterminateLoadingProgressDialog
+import kotlinx.android.synthetic.driver.activity_main.*
 import org.jetbrains.anko.alert
 import org.jetbrains.anko.indeterminateProgressDialog
 import org.jetbrains.anko.okButton
@@ -82,9 +86,30 @@ fun Fragment.backToFragment(fragment: Fragment){
 
  @SuppressLint("NewApi")
  fun Fragment.showLoadingDialog(message: String = getString(R.string.loading), title: String=getString(R.string.wait)): ProgressDialog {
-    val dialog = activity?.indeterminateProgressDialog(message, title) {
+
+     /*
+     val dialog = activity?.indeterminateProgressDialog(message, title) {
         setProgressStyle(ProgressDialog.STYLE_SPINNER)
         setCancelable(false)
+        ProgressLoadDialog(activity)
+        setOnDismissListener({
+             Handler().postDelayed({
+                 dismiss()
+             },3000)
+        })
+        show()
+    }
+    return dialog!!
+    */
+     return showLoadingDialogWithDelay(message,title)
+}
+
+@SuppressLint("NewApi")
+fun Fragment.showLoadingDialogWithDelay(message: String = getString(R.string.loading), title: String=getString(R.string.wait)): ProgressDialog {
+    val dialog = activity?.indeterminateLoadingProgressDialog(message, title) {
+        setProgressStyle(ProgressDialog.STYLE_SPINNER)
+        setCancelable(false)
+        ProgressLoadDialog(activity)
         show()
     }
     return dialog!!

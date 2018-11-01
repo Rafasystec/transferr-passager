@@ -112,5 +112,6 @@
     <string name="title_activity_map_info_window">MapInfoWindowActivity</string>
     <string name="logout">Logout</string>
     <string name="areYouSureLogout">Are you sure to Logout?</string>
+    <string name="alwaysParamIsTrueMessage">The parameter that make the car always on map is True, so your car will still on map.</string>
 
 </resources>

@@ -54,7 +54,6 @@ class MainActivity : SuperClassActivity() {
         btnFrmDriver.setOnClickListener { callFormDriver() }
         swtOnline.setOnClickListener { stopInitLocation() }
         checkNetwork()
-
     }
 
     private fun callFormDriver(){

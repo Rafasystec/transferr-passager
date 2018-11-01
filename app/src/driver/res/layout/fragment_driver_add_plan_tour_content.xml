@@ -28,7 +28,7 @@
             android:id="@+id/ivPlanTourLocation"
             android:layout_width="@dimen/icon_width"
             android:layout_height="@dimen/icon_height"
-            android:src="@drawable/map_marker"
+            android:src="@drawable/icons8_place_marker_30"
             android:layout_alignTop="@+id/spNameLocation"
             android:paddingRight="5dp"
             />
@@ -49,7 +49,7 @@
             android:id="@+id/ivPlanTourDate"
             android:layout_width="@dimen/icon_width"
             android:layout_height="@dimen/icon_height"
-            android:src="@drawable/calendar_range"
+            android:src="@drawable/icons8_clock_30"
             android:layout_alignTop="@+id/edtPlanTourDate"
             android:paddingRight="5dp"
             />
@@ -72,7 +72,7 @@
             android:clickable="true"
             android:layout_width="@dimen/icon_width"
             android:layout_height="@dimen/icon_height"
-            android:src="@drawable/ic_clock"
+            android:src="@drawable/icons8_calendar_30"
             android:layout_alignTop="@+id/edtPlanTourTime"
             android:paddingRight="5dp"
             />
@@ -144,22 +144,6 @@
             android:textSize="14sp"
             android:textStyle="bold"
             />
-        <!--
-        <Spinner
-            android:id="@+id/spPlanTourBusySeats"
-            android:layout_width="80dp"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentTop="true"
-            android:layout_marginEnd="14dp"
-            android:layout_marginBottom="12dp"
-            android:layout_marginRight="14dp"
-            style="@style/spinner_style"
-            >
-
-        </Spinner>
-        -->
         <TextView
             android:id="@+id/tvPlanTourRemindSeatsNumber"
             android:layout_width="wrap_content"
@@ -247,7 +231,7 @@
             android:id="@+id/ivPlanTourPassengerOne"
             android:layout_width="@dimen/icon_width"
             android:layout_height="@dimen/icon_height"
-            android:src="@drawable/account_black"
+            android:src="@drawable/icons8_user_30"
             android:layout_alignTop="@+id/tvPlanTourPassengerOneName"
             android:paddingRight="5dp"
             />
@@ -269,7 +253,7 @@
             android:id="@+id/ivPlanTourPassengerOnePhone"
             android:layout_width="@dimen/icon_width"
             android:layout_height="@dimen/icon_height"
-            android:src="@drawable/phone_plus"
+            android:src="@drawable/phone_outgoing"
             android:layout_alignTop="@+id/edtPassengerOnePhone"
             android:paddingRight="5dp"
             />
@@ -283,6 +267,7 @@
             android:background="@drawable/shape_driver_text_background"
             android:hint="@string/Phone"
             android:inputType="phone"
+            android:maxLength="15"
             android:layout_marginBottom="3dp"
             />
 
@@ -325,7 +310,7 @@
             android:id="@+id/ivPlanTourPassengerTwo"
             android:layout_width="@dimen/icon_width"
             android:layout_height="@dimen/icon_height"
-            android:src="@drawable/account_black"
+            android:src="@drawable/icons8_user_30"
             android:layout_alignTop="@+id/tvPlanTourPassengerTwoName"
             android:paddingRight="5dp"
             />
@@ -347,7 +332,7 @@
             android:id="@+id/ivPlanTourPassengerTwoPhone"
             android:layout_width="@dimen/icon_width"
             android:layout_height="@dimen/icon_height"
-            android:src="@drawable/phone_plus"
+            android:src="@drawable/phone_outgoing"
             android:layout_alignTop="@+id/edtPassengerTwoPhone"
             android:paddingRight="5dp"
             />
@@ -360,7 +345,7 @@
             android:layout_alignLeft="@+id/tvPlanTourPassengerTwoName"
             android:background="@drawable/shape_driver_text_background"
             android:hint="@string/Phone"
-            android:maxLength="12"
+            android:maxLength="15"
             android:inputType="phone"
             android:layout_marginBottom="3dp"
             />
@@ -404,7 +389,7 @@
             android:id="@+id/ivPlanTourPassengerThree"
             android:layout_width="@dimen/icon_width"
             android:layout_height="@dimen/icon_height"
-            android:src="@drawable/account_black"
+            android:src="@drawable/icons8_user_30"
             android:layout_alignTop="@+id/tvPlanTourPassengerThreeName"
             android:paddingRight="5dp"
             />
@@ -426,7 +411,7 @@
             android:id="@+id/ivPlanTourPassengerThreePhone"
             android:layout_width="@dimen/icon_width"
             android:layout_height="@dimen/icon_height"
-            android:src="@drawable/phone_plus"
+            android:src="@drawable/phone_outgoing"
             android:layout_alignTop="@+id/edtPassengerThreePhone"
             android:paddingRight="5dp"
             />
@@ -439,7 +424,7 @@
             android:layout_alignLeft="@+id/tvPlanTourPassengerThreeName"
             android:background="@drawable/shape_driver_text_background"
             android:hint="@string/Phone"
-            android:maxLength="60"
+            android:maxLength="15"
             android:inputType="phone"
             android:layout_marginBottom="3dp"
             />

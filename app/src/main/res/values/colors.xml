@@ -31,4 +31,5 @@
     <color name="redDelete">#ff333f</color>
     <color name="grey_400">#606060</color>
     <color name="black">#000</color>
+    <color name="colorButton">#99000000</color>
 </resources>

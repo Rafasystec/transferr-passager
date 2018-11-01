@@ -43,10 +43,7 @@ import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.VisibleRegion
-import org.jetbrains.anko.doAsync
-import org.jetbrains.anko.startActivity
-import org.jetbrains.anko.toast
-import org.jetbrains.anko.uiThread
+import org.jetbrains.anko.*
 
 
 /**
@@ -74,7 +71,7 @@ class MapsFragment : SuperMapFragment(), OnMapReadyCallback,com.google.android.g
     }
 
     private var map : GoogleMap? = null
-
+    private var car :Car?=null
     @SuppressLint("MissingPermission")
     override fun onMapReady(map: GoogleMap) {
         checkPermissionToAccessLocation()
@@ -102,7 +99,6 @@ class MapsFragment : SuperMapFragment(), OnMapReadyCallback,com.google.android.g
             true
         })
         startRepeatingTask()
-        //callWebService()
         callWebServiceToMarck()
     }
 
@@ -115,44 +111,8 @@ class MapsFragment : SuperMapFragment(), OnMapReadyCallback,com.google.android.g
         setHasOptionsMenu(true)
         locationManager = context?.getSystemService(Context.LOCATION_SERVICE) as LocationManager
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(activity!!)
+        //getCurrentCar()
         return view
-    }
-    /*
-    private fun callWebService(){
-        var visibleRegion = map!!.projection.visibleRegion
-        if(!visibleRegion.equals(null) && isConnected()){
-            doAsync {
-                var carOnlineList   = CoordinatePassService
-                        .getOnlinePassengers(getQuadrantByVisibleRegioan(visibleRegion))
-                uiThread {
-                    if(carOnlineList != null) {
-                        var markers = HelperPassengersOnline.transformInMarkers(carOnlineList)
-                        for (mark in markers) {
-                            map!!.addMarker(mark)
-                        }
-                    }
-                }
-            }
-        }
-    }
-    */
-
-    private fun getQuadrantByVisibleRegioan(visibleRegion: VisibleRegion):Quadrant{
-        var quadrant      = Quadrant()
-        quadrant.farLeftLat   = visibleRegion.farLeft.latitude
-        quadrant.farLeftLng   = visibleRegion.farLeft.longitude
-        quadrant.farRightLat  = visibleRegion.farRight.latitude
-        quadrant.farRightLng  = visibleRegion.farRight.longitude
-
-        quadrant.nearLeftLat  = visibleRegion.nearLeft.latitude
-        quadrant.nearLeftLng  = visibleRegion.nearLeft.longitude
-        quadrant.nearRightLat = visibleRegion.nearRight.latitude
-        quadrant.nearRightLng = visibleRegion.nearRight.longitude
-        return quadrant
-    }
-
-    private fun isConnected():Boolean{
-        return NetworkUtil.isNetworkAvailable(this.context!!)
     }
 
     override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
@@ -232,10 +192,21 @@ class MapsFragment : SuperMapFragment(), OnMapReadyCallback,com.google.android.g
     private fun onOff(){
         if(swtOnOff != null) {
             var isChecked: Boolean = swtOnOff?.isChecked!!
-            changeSwitch(isChecked)
-            stopInitLocation(isChecked)
-            callWebServiceToMarck()
+            if(!isChecked && this.car?.alwaysOnMap!!){
+                activity?.alert (message = getString(R.string.alwaysParamIsTrueMessage)){
+                    okButton { putCarOnMap(isChecked) }
+                    onCancelled { putCarOnMap(isChecked) }
+                }?.show()
+            }else{
+                putCarOnMap(isChecked)
+            }
         }
+    }
+
+    fun putCarOnMap(isChecked:Boolean){
+        changeSwitch(isChecked)
+        stopInitLocation(isChecked)
+        callWebServiceToMarck()
     }
 
     private fun stopInitLocation(isChecked:Boolean){
@@ -297,22 +268,16 @@ class MapsFragment : SuperMapFragment(), OnMapReadyCallback,com.google.android.g
     }
 
     fun updateSwitch(car:Car){
-        //var car = Prefes.prefsCarJSON
         swtOnOff?.isChecked = car.status != EnumStatus.OFFLINE
         onOff()
     }
-/*
-    override fun onResume() {
-        super.onResume()
-        //getCurrentCar()
-    }
-    */
 
     private fun getCurrentCar(){
         CarService.getCar(Prefes.prefsCar, object :OnResponseInterface<Car>{
             var dialog = showLoadingDialog()
-            override fun onSuccess(car: Car?) {
-                updateSwitch(car!!)
+            override fun onSuccess(carParam: Car?) {
+                car = carParam
+                updateSwitch(carParam!!)
                 dialog.dismiss()
             }
 
@@ -334,8 +299,6 @@ class MapsFragment : SuperMapFragment(), OnMapReadyCallback,com.google.android.g
             try {
                 updateMapScreen()
             } finally {
-                // 100% guarantee that this always happens, even if
-                // your update method throws an exception
                 mHandler?.postDelayed(this, mInterval)
             }
         }

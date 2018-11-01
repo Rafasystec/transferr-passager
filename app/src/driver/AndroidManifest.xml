@@ -55,18 +55,22 @@
             android:name="br.com.transferr.services.LocationTrackingService"
             android:exported="false" />
 
+        <!--
         <activity android:name=".activities.InitialActivity" />
         <activity android:name=".activities.FormDriverActivity" />
         <activity android:name=".activities.DriverPersonalInforActivity" />
+        -->
+        <!--
         <activity
             android:name=".activities.DriverInforActivity"
             android:parentActivityName=".activities.MainActivity">
 
-            <!-- Parent activity meta-data to support 4.0 and lower -->
+
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".activities.MainActivity" />
         </activity>
+        -->
         <!-- For the camera -->
         <provider
             android:name="android.support.v4.content.FileProvider"
@@ -77,14 +81,17 @@
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/provider_paths" />
         </provider>
-
+        <!--
         <activity
             android:name=".activities.PlainTourActivity"
             android:parentActivityName=".activities.MainActivity" />
+         -->
+        <!--
         <activity
             android:name=".activities.FrmPlainTourActivity"
             android:parentActivityName=".activities.PlainTourActivity" />
-
+         -->
+        <!--
         <receiver
             android:name=".broadcast.InternetBroadCast"
             android:enabled="true">
@@ -92,7 +99,7 @@
                 <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
             </intent-filter>
         </receiver>
-
+        -->
         <activity android:name="br.com.transferr.activities.newlayout.DriverEditInfoActivity" />
         <activity android:name="br.com.transferr.activities.newlayout.DriverAddPlainTourActivity"
                 android:screenOrientation="portrait"
