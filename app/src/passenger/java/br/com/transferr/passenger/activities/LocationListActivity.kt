@@ -1,52 +1,38 @@
-package br.com.transferr.passenger.fragments
+package br.com.transferr.passenger.activities
 
-
-//import br.com.transferr.passager.R.id.searchView
 import android.os.Bundle
-import android.support.v4.app.Fragment
 import android.support.v4.view.MenuItemCompat
+import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.RecyclerView
 import android.support.v7.widget.SearchView
-import android.view.*
+import android.view.Menu
+import android.widget.EditText
+import android.widget.ImageView
 import br.com.transferr.R
-import br.com.transferr.extensions.defaultRecycleView
-import br.com.transferr.extensions.setupToolbar
-import br.com.transferr.extensions.showLoadingDialog
-import br.com.transferr.extensions.switchFragmentToMainContent
-import br.com.transferr.fragments.SuperClassFragment
+import br.com.transferr.passenger.extensions.defaultRecycleView
+import br.com.transferr.passenger.extensions.setupToolbar
+import br.com.transferr.passenger.extensions.showLoadingDialog
 import br.com.transferr.passenger.interfaces.OnResponseInterface
 import br.com.transferr.passenger.model.Location
 import br.com.transferr.passenger.webservices.WSLocation
-import org.jetbrains.anko.progressDialog
-import android.widget.EditText
-import android.widget.ImageView
+import org.jetbrains.anko.startActivity
 
+class LocationListActivity : AppCompatActivity() {
 
-/**
- * A simple [Fragment] subclass.
- * @author Rafael Rocha on 08/08/2018
- */
-class LocationListFragment : SuperClassFragment() {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_location_list)
+        //setHasOptionsMenu(true)
+        recycleView = defaultRecycleView(this!!,R.id.rcLocationList)
+        requestAllLocations()
+        setupToolbar(R.id.toolbarLocationList,getString(R.string.places),true)
+
+    }
 
     private var recycleView : RecyclerView?=null
     private var locationList:List<Location>?=null
     private var locationAdapter: br.com.transferr.passenger.adapter.LocationAdapter?=null
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-                              savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.fragment_location_list, container, false)
-    }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setHasOptionsMenu(true)
-        setupToolbar(R.id.toolbarLocationList,context?.getString(R.string.places))
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        recycleView = defaultRecycleView(activity!!,R.id.rcLocationList)
-        requestAllLocations()
-    }
 
     override fun onResume() {
         super.onResume()
@@ -60,8 +46,9 @@ class LocationListFragment : SuperClassFragment() {
         }
     }
 
-    override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
-        inflater?.inflate(R.menu.menu_seacher,menu)
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+
+        menuInflater.inflate(R.menu.menu_seacher,menu)
         var searchItem = menu?.findItem(R.id.menuSearch)
         var searchView = MenuItemCompat.getActionView(searchItem) as SearchView
         searchView.setOnQueryTextListener(
@@ -84,13 +71,13 @@ class LocationListFragment : SuperClassFragment() {
         searchEditText.setHintTextColor(resources.getColor(android.R.color.black))
         val searchClose = searchView.findViewById<ImageView>(android.support.v7.appcompat.R.id.search_close_btn)
         searchClose.setImageResource(R.drawable.arrow_left)
-
-
+        return super.onCreateOptionsMenu(menu)
     }
+
 
     fun requestAllLocations(){
         var dialog = showLoadingDialog()
-        WSLocation.getAll(object : OnResponseInterface<List<Location>>{
+        WSLocation.getAll(object : OnResponseInterface<List<Location>> {
             override fun onSuccess(body: List<Location>?) {
                 dialog?.dismiss()
                 locationList = body
@@ -112,10 +99,12 @@ class LocationListFragment : SuperClassFragment() {
         //var intent = Intent(context,LocationDetailActivity::class.java)
         //intent.putExtra(Location.LOCATION,location)
         //startActivity(intent)
-        var fragment = TourOptionLisFragment()
-        fragment.arguments = Bundle()
-        fragment.arguments!!.putSerializable(Location.LOCATION,location)
-        switchFragmentToMainContent(fragment)
+        //var fragment = TourOptionLisFragment()
+        //fragment.arguments = Bundle()
+        //fragment.arguments!!.putSerializable(Location.LOCATION,location)
+        //switchFragmentToMainContent(fragment)
+        startActivity<MainActivity>(Location.LOCATION to location)
+        finish()
     }
 /*
     fun initSearchView(){
@@ -139,5 +128,4 @@ class LocationListFragment : SuperClassFragment() {
 
     }
     */
-
 }

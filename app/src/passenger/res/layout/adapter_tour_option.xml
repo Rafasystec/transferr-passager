@@ -43,6 +43,7 @@
                 android:gravity="center"
                 android:visibility="gone"
                 />
+            <!--
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/ivMainLocation"
                 android:layout_width="80dp"
@@ -53,8 +54,24 @@
                 android:layout_alignParentLeft="true"
                 android:layout_margin="4dp"
                 android:layout_gravity="center"
+                android:visibility="visible"
+                />
+                -->
+            <com.makeramen.roundedimageview.RoundedImageView
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:id="@+id/ivMainLocation"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:src="@drawable/no_photo_64"
+                android:scaleType="fitCenter"
+                android:paddingLeft="5dp"
+                android:paddingRight="5dp"
+                app:riv_corner_radius="5dip"
+                app:riv_border_width="0dip"
+                app:riv_border_color="#333333"
+                app:riv_mutate_background="true"
                 android:visibility="gone"
-
+                app:riv_oval="false"
                 />
         </LinearLayout>
 
@@ -90,6 +107,7 @@
             android:layout_marginEnd="20dp"
             android:layout_marginRight="20dp"
             android:textColor="@android:color/black"
+            android:textStyle="bold"
             android:text="Detalhe" />
 
         <!--

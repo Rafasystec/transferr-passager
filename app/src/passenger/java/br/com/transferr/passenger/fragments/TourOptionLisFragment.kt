@@ -14,6 +14,7 @@ import br.com.transferr.extensions.showLoadingDialog
 import br.com.transferr.extensions.switchFragmentToMainContent
 import br.com.transferr.fragments.SuperClassFragment
 import br.com.transferr.passenger.activities.LocationActivity
+import br.com.transferr.passenger.activities.LocationListActivity
 import br.com.transferr.passenger.adapter.TourOptionAdapter
 import br.com.transferr.passenger.extensions.defaultRecycleView
 import br.com.transferr.passenger.extensions.switchFragmentToMainContent
@@ -52,7 +53,8 @@ class TourOptionLisFragment : SuperClassFragment() {
         }
         btnWhereToGo.setOnClickListener{
             //includeFragmentOnMainActivity(LocationListFragment())
-            switchFragmentToMainContent(LocationListFragment())
+            //switchFragmentToMainContent(LocationListFragment())
+            startActivity(Intent(activity,LocationListActivity::class.java))
         }
         setMainTitle(R.string.page_title_tour)
     }

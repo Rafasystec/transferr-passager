@@ -7,21 +7,20 @@
     android:layout_height="100dp"
     android:layout_width="match_parent"
     android:clickable="true"
-    android:background="@android:color/white"
+    android:background="@color/activityBackground"
     android:layout_marginBottom="2dp"
     app:cardElevation="3dp"
     app:cardPreventCornerOverlap="false"
     app:cardUseCompatPadding="false"
     card_view:cardConerRadius="2dp"
     card_view:cardElevation="6dp"
-    android:foreground="?attr/selectableItemBackground"
     android:layout_margin="2dp"
-
     >
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="horizontal"
+        android:background="@color/activityBackground"
         >
 
         <de.hdodenhof.circleimageview.CircleImageView
@@ -144,8 +143,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:drawableLeft="@drawable/whatsapp"
-
+                android:drawableLeft="@drawable/icons8whatsapp40"
                 android:background="@android:color/transparent"
                 />
         </LinearLayout>

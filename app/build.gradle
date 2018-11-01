@@ -96,6 +96,8 @@ dependencies {
     //-------------------------------------------------------------------------------
     //For the gallery
     implementation 'com.github.bumptech.glide:glide:3.7.0'
+    //For Rounded Image View
+    implementation 'com.makeramen:roundedimageview:2.3.0'
 
 
 }

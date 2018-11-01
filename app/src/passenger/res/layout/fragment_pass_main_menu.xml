@@ -1,0 +1,80 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/activityBackground"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context="br.com.transferr.fragments.MainMenuFragment">
+
+    <android.support.v7.widget.AppCompatButton
+        android:id="@+id/btnMainMenuAppName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:text="@string/app_name"
+        android:clickable="false"
+        android:textColor="@color/colorButtonText"
+        android:layout_marginBottom="2dp"
+        android:layout_gravity="top"
+        android:drawableLeft="@drawable/boora_pass_logo_small"
+        app:backgroundTint="@color/control"
+
+        />
+
+    <android.support.v7.widget.AppCompatButton
+        android:id="@+id/btnMainMenuContact"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:text="@string/contactUs"
+        android:layout_marginTop="60dp"
+        android:textColor="@color/colorButtonText"
+        android:layout_marginBottom="2dp"
+        android:layout_gravity="top"
+        android:drawableLeft="@drawable/ic_nova_mensagem"
+        android:drawableRight="@drawable/chevron_right"
+        android:background="@color/control"
+        />
+    <android.support.v7.widget.AppCompatButton
+        android:id="@+id/btnMainMenuRateApp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:text="@string/rateApp"
+        android:textColor="@color/colorButtonText"
+        android:layout_marginBottom="2dp"
+        android:layout_gravity="top"
+        android:drawableLeft="@drawable/ic_solid_star"
+        android:drawableRight="@drawable/chevron_right"
+        android:background="@color/control"
+        />
+
+    <android.support.v7.widget.AppCompatButton
+        android:id="@+id/btnMainMenuTerms"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:text="@string/termsOfUse"
+        android:textColor="@color/colorButtonText"
+        android:drawableLeft="@drawable/ic_term_use"
+        android:layout_marginBottom="2dp"
+        android:drawableRight="@drawable/chevron_right"
+        android:background="@color/control"
+        />
+<!--
+    <android.support.v7.widget.AppCompatButton
+        android:id="@+id/btnLogout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:text="@string/logout"
+        android:textColor="@color/colorButtonText"
+        android:drawableLeft="@drawable/icons8_shutdown_30"
+        android:drawableRight="@drawable/chevron_right"
+        android:background="@color/control"
+        android:visibility="visible"
+        />
+-->
+
+</LinearLayout>

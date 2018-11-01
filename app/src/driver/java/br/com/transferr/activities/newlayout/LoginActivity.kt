@@ -2,7 +2,6 @@ package br.com.transferr.activities
 
 import android.content.Intent
 import android.os.Bundle
-import android.view.View
 import br.com.transferr.R
 import br.com.transferr.activities.newlayout.MainActivity
 import br.com.transferr.main.util.Prefes

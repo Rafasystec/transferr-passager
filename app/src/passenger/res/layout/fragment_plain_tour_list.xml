@@ -4,6 +4,7 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
+    android:background="@color/activityBackground"
     tools:context="br.com.transferr.passager.fragments.PlainTourListFragment">
     <ScrollView
         android:layout_width="match_parent"
