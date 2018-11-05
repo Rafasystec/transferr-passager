@@ -17,6 +17,7 @@ import br.com.transferr.passenger.model.PlainTour
 import br.com.transferr.passenger.model.TourOption
 import br.com.transferr.passenger.model.responses.ResponsePlainsByTourAndLocation
 import br.com.transferr.passenger.webservices.WSPlainTour
+import kotlinx.android.synthetic.passenger.fragment_plain_tour_list.*
 import kotlinx.android.synthetic.passenger.layout_empty_list.*
 import kotlinx.android.synthetic.passenger.layout_empty_list.view.*
 
@@ -86,6 +87,13 @@ class PlainTourListFragment : SuperClassFragment() {
         if(responsePlainsByTourAndLocation != null) {
             recycleViewFromTour?.adapter    = br.com.transferr.passenger.adapter.PlainTourListAdapter(responsePlainsByTourAndLocation.plainsFromTour!!, { plainTour: PlainTour -> onClickPlain(plainTour) })
             recycleViewFromLocation?.adapter = br.com.transferr.passenger.adapter.PlainTourListAdapter(responsePlainsByTourAndLocation.plainsFromLocation!!, { plainTour: PlainTour -> onClickPlain(plainTour) })
+            if(responsePlainsByTourAndLocation.plainsFromLocation != null){
+                if(responsePlainsByTourAndLocation.plainsFromLocation!!.isEmpty()){
+                    btnSeeMorePlainsTour.visibility = View.GONE
+                }else{
+                    btnSeeMorePlainsTour.visibility = View.VISIBLE
+                }
+            }
         }
     }
 
