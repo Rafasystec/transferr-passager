@@ -87,7 +87,8 @@ class MainActivity : AppCompatActivity() {
                 object: OnResponseInterface<Driver> {
                     override fun onSuccess(driver: Driver?) {
                         progress.dismiss()
-                        Prefes.driver = driver!!
+                        Prefes.driver   = driver!!
+                        Prefes.prefsCar = driver!!.car?.id!!
                     }
 
                     override fun onError(message: String) {

@@ -370,18 +370,19 @@ class DriverAddPlanTourFragment : SuperClassFragment() {
 */
     private fun getCurrentCar(){
         CarService.getCar(Prefes.prefsCar, object :OnResponseInterface<Car>{
-            //var dialog = showLoadingDialog()
+            var dialog = showLoadingDialog()
             override fun onSuccess(parameterCar: Car?) {
+                dialog.dismiss()
                 car = parameterCar
                 tvCarSeatsNumber.text = "/ ${car?.nrSeats}"
             }
 
             override fun onError(message: String) {
-                //dialog.dismiss()
+                dialog.dismiss()
             }
 
             override fun onFailure(t: Throwable?) {
-                //dialog.dismiss()
+                dialog.dismiss()
             }
 
         })
