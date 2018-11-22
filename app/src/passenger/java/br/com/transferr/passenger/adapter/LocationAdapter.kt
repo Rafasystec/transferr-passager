@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 import br.com.transferr.R
+import br.com.transferr.main.util.LanguageDeviceUtil
 import br.com.transferr.passenger.model.Location
 import com.squareup.picasso.Picasso
 
@@ -38,7 +39,8 @@ class LocationAdapter(val locations: List<Location>, val onClick:(Location)->Uni
 
         //NOTE: This create a scroll effect on TextView
         //holder.tvLocationDescription.movementMethod = ScrollingMovementMethod()
-        holder.tvLocationDescription.text = location.description
+        //holder.tvLocationDescription.text = location.description
+        holder.tvLocationDescription.text = LanguageDeviceUtil.transform(location.descriptionLanguage!!)
         holder.progress.visibility = View.VISIBLE
         Picasso.with(holder.itemView.context).load(urlPhoto).fit()
                 //.memoryPolicy(MemoryPolicy.NO_CACHE, MemoryPolicy.NO_STORE)
