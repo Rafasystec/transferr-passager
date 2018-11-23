@@ -1,6 +1,7 @@
 package br.com.transferr.passenger.model.responses
 
 import android.provider.ContactsContract
+import br.com.transferr.model.enums.EnumTypeCar
 import java.io.Serializable
 
 /**
@@ -17,6 +18,7 @@ class ResponseCarsOnline : Serializable{
     var phone: Long = 0L
     var whatsapp: Long = 0L
     var ddd: Int = 0
+    var type_car: EnumTypeCar = EnumTypeCar.BUGGY
 
     companion object {
         val PARAM_CAR_OBJECT = "carParameter"

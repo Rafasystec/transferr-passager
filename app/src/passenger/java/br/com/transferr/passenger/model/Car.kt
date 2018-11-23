@@ -2,6 +2,9 @@ package br.com.transferr.model
 
 import br.com.transferr.model.enums.EnumStatus
 import java.util.*
+import br.com.transferr.model.enums.EnumTypeCar
+
+
 
 /**
  * Created by Rafael Rocha on 08/02/2018.
@@ -14,7 +17,7 @@ class Car : Entity(){
     var driver:Driver=Driver("","",Date())
     var status:EnumStatus=EnumStatus.OFFLINE
     var photo: String? = null
-
+    var type: EnumTypeCar? = null
 }
 
 

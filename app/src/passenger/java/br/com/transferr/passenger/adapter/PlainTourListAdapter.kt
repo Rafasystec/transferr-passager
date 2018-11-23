@@ -15,6 +15,7 @@ import android.widget.TextView
 import br.com.transferr.R
 import br.com.transferr.application.ApplicationTransferr
 import br.com.transferr.passenger.model.PlainTour
+import br.com.transferr.passenger.model.enums.EnumTypeOfDriver
 import br.com.transferr.passenger.util.DateUtil
 import br.com.transferr.passenger.util.WhatsAppUtil
 import com.squareup.picasso.Picasso
@@ -41,7 +42,18 @@ class PlainTourListAdapter(val plainsTour: List<PlainTour> ,val onClick: (PlainT
         }else{
              plain.driver?.car?.photo
         }
-        holder.tvDriverCarPlate.text = plain.driver?.car?.carIdentity
+        var driver = plain.driver
+
+        if(driver?.typeOfDriver == EnumTypeOfDriver.DRIVER) {
+            holder.ivCarPlateIcon.visibility    = View.VISIBLE
+            holder.ivDriverNameIcon.setImageDrawable(context!!.resources.getDrawable(R.drawable.icons8_driver_30))
+            holder.tvDriverCarPlate.text = plain.driver?.car?.carIdentity
+            holder.tvDriverCarPlate.visibility = View.VISIBLE
+        }else{
+            holder.ivCarPlateIcon.visibility    = View.GONE
+            holder.ivDriverNameIcon.setImageDrawable(context!!.resources.getDrawable(R.drawable.shopping_house_30))
+            holder.tvDriverCarPlate.visibility = View.GONE
+        }
         var lang = ApplicationTransferr.DEVICE_LANGUAGE
         var formatOut = if(lang == ApplicationTransferr.LANG_PT){
             "dd/MM HH:mm"
@@ -92,5 +104,7 @@ class PlainTourListAdapter(val plainsTour: List<PlainTour> ,val onClick: (PlainT
         var btnWhatsapp     : AppCompatButton = view.findViewById(R.id.btnWhatsapp)
         var tvSeatsRemindingNumber : TextView = view.findViewById(R.id.tvSeatsRemindingNumber)
         var tvPlainDate : TextView = view.findViewById(R.id.tvPlainDate)
+        var ivCarPlateIcon:ImageView = view.findViewById(R.id.ivCarPlateIcon)
+        var ivDriverNameIcon:ImageView = view.findViewById(R.id.ivDriverNameIcon)
     }
 }

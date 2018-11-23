@@ -1,5 +1,7 @@
 package br.com.transferr.passenger.model.responses
 
+import br.com.transferr.passenger.model.enums.EnumTypeOfDriver
+
 /**
  * Created by Rafael Rocha on 31/07/2018.
  */
@@ -14,4 +16,6 @@ class ResponseDriver {
     var phone = ""
     var whatsapp=""
     var nameOfCar=""
+   var type: EnumTypeOfDriver? = null
+
 }

@@ -1,5 +1,6 @@
 package br.com.transferr.model
 
+import br.com.transferr.passenger.model.enums.EnumTypeOfDriver
 import java.util.*
 
 /**
@@ -14,4 +15,5 @@ class Driver (var name: String,
     var ddd: Int? = null
     var car: Car? = null
     var whatsapp = 0L
+    var typeOfDriver: EnumTypeOfDriver?=null
 }

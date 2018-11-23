@@ -13,6 +13,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import br.com.transferr.R
+import br.com.transferr.passenger.model.enums.EnumTypeOfDriver
 import br.com.transferr.passenger.model.responses.ResponseDriver
 import br.com.transferr.passenger.util.WhatsAppUtil
 import com.squareup.picasso.Picasso
@@ -37,17 +38,24 @@ class DriversResponseAdapter(val drivers : List<ResponseDriver>,val onClick: (Re
     @SuppressLint("MissingPermission")
     override fun onBindViewHolder(holder: br.com.transferr.passenger.adapter.DriversResponseAdapter.DriversResponseViewHolder, position: Int) {
         this.context = holder!!.itemView.context
-        val responseDrivers = drivers[position]
-        holder.tvName.text = responseDrivers.name
-        holder.tvDriverDetail.text = "${responseDrivers.nameOfCar}"
-        holder.tvCarPlate.text = "${responseDrivers.countryRegister}"
+        val responseDrivers         = drivers[position]
+        holder.tvName.text          = responseDrivers.name
+        if(responseDrivers.type == EnumTypeOfDriver.DRIVER) {
+            //holder.tvDriverDetail.visibility    = View.VISIBLE
+            holder.ivCarPlateIcon.visibility    = View.VISIBLE
+            holder.tvCarPlate.visibility        = View.VISIBLE
+            holder.ivDriverNameIcon.setImageDrawable(context!!.resources.getDrawable(R.drawable.icons8_driver_30))
+            holder.tvCarPlate.text              = "${responseDrivers.countryRegister}"
+        }else{
+            //holder.tvDriverDetail.visibility    = View.GONE
+            holder.tvCarPlate.visibility        = View.GONE
+            holder.ivCarPlateIcon.visibility    = View.GONE
+            holder.ivDriverNameIcon.setImageDrawable(context!!.resources.getDrawable(R.drawable.shopping_house_30))
+        }
         if(responseDrivers.imgProfileUrl != null && responseDrivers.imgProfileUrl?.isEmpty()!!){
             responseDrivers.imgProfileUrl = null
         }
-        //holder.tvDriverPhone.text = responseDrivers.phone
-        //holder.tvDriverEmail.text = responseDrivers.email
-        //Start progressBar
-        //holder.progress.visibility = View.Visible
+        holder.tvDriverDetail.text          = "${responseDrivers.nameOfCar}"
         Picasso.with(context).load(responseDrivers.imgProfileUrl).placeholder(R.drawable.no_photo_64).fit().into(holder.img,
             object : com.squareup.picasso.Callback{
                 override fun onSuccess() {
@@ -59,9 +67,7 @@ class DriversResponseAdapter(val drivers : List<ResponseDriver>,val onClick: (Re
                 }
 
             })
-        //holder.cardView.setOnClickListener { onClick(responseDrivers) }
         holder.btnWhatsapp.setOnClickListener {
-           //callWhatsapp(responseDrivers.whatsapp)
             WhatsAppUtil.callWhatsapp(responseDrivers.whatsapp,context!!)
         }
 
@@ -71,47 +77,24 @@ class DriversResponseAdapter(val drivers : List<ResponseDriver>,val onClick: (Re
     }
 
     class DriversResponseViewHolder(view: View):RecyclerView.ViewHolder(view){
-        var tvName    : TextView
+        var tvName    : TextView = view.findViewById(R.id.tvNameDriver)
         var img: ImageView
+        var ivCarPlateIcon: ImageView
+        var ivDriverNameIcon:ImageView = view.findViewById(R.id.ivDriverNameIcon)
         var tvDriverDetail : TextView
         var cardView: CardView
         var btnCallPhone : AppCompatButton
         var btnWhatsapp : AppCompatButton
         var tvCarPlate:TextView = view.findViewById(R.id.tvCarPlate)
         init {
-            tvName          = view.findViewById(R.id.tvNameDriver)
             img             = view.findViewById(R.id.ivProfile)
             tvDriverDetail  = view.findViewById(R.id.tvDriverDetail)
             cardView        = view.findViewById(R.id.cvProfessional)
             btnCallPhone    = view.findViewById(R.id.btnCallPhone)
             btnWhatsapp     = view.findViewById(R.id.btnWhatsapp)
-            /*
-            //If sometime it has rate
-            ivStarRate1    = view.findViewById(R.id.ivStarRate1)
-            ivStarRate2    = view.findViewById(R.id.ivStarRate2)
-            ivStarRate3    = view.findViewById(R.id.ivStarRate3)
-            ivStarRate4    = view.findViewById(R.id.ivStarRate4)
-            ivStarRate5    = view.findViewById(R.id.ivStarRate5)
-            */
-            //tvDriverPhone  = view.findViewById(R.id.tvDriverPhone)
+            ivCarPlateIcon  = view.findViewById(R.id.ivCarPlateIcon)
+
         }
     }
-/*
-    fun callWhatsapp(phone:String){
-        val packageManager = context?.getPackageManager()
-        val i = Intent(Intent.ACTION_VIEW)
 
-        try {
-            val url = "https://api.whatsapp.com/send?phone=" + phone + "&text=" + URLEncoder.encode("Olá", "UTF-8")
-            i.`package` = "com.whatsapp"
-            i.data = Uri.parse(url)
-            if (i.resolveActivity(packageManager) != null) {
-                context?.startActivity(i)
-            }
-        } catch (e: Exception) {
-            e.printStackTrace()
-        }
-
-    }
-    */
 }

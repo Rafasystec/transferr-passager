@@ -90,7 +90,7 @@
                 android:id="@+id/ivCarPlateIcon"
                 android:layout_width="@dimen/icon_width"
                 android:layout_height="@dimen/icon_height"
-                android:src="@drawable/ic_licence_plate_filled"
+                android:src="@drawable/icons8_licence_plate_filled_30"
                 android:layout_alignTop="@+id/tvDriverCarPlate"
                 android:paddingRight="5dp"
                 />
@@ -106,7 +106,7 @@
                 android:id="@+id/ivPlainDateTime"
                 android:layout_width="@dimen/icon_width"
                 android:layout_height="@dimen/icon_height"
-                android:src="@drawable/ic_clock"
+                android:src="@drawable/icons8_calendar_30"
                 android:layout_alignTop="@+id/tvPlainDate"
                 android:paddingRight="5dp"
                 />

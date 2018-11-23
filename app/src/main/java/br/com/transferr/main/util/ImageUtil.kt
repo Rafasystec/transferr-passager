@@ -1,7 +1,10 @@
 package br.com.transferr.util
 
+import android.app.Activity
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
+import android.support.v7.app.AppCompatActivity
+import br.com.transferr.application.ApplicationTransferr
 import java.io.File
 
 /**
@@ -33,4 +36,8 @@ object ImageUtil {
         return inSampleSize
     }
 
+    fun resizeMapIcons(iconName: String, width: Int, height: Int): Bitmap {
+        val imageBitmap = BitmapFactory.decodeResource(ApplicationTransferr.getInstance().resources,  ApplicationTransferr.getInstance().resources.getIdentifier(iconName, "drawable",ApplicationTransferr.getInstance().packageName))
+        return Bitmap.createScaledBitmap(imageBitmap, width, height, false)
+    }
 }

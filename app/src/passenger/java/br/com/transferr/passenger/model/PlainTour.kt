@@ -1,6 +1,7 @@
 package br.com.transferr.passenger.model
 
 import br.com.transferr.model.Driver
+import br.com.transferr.passenger.model.enums.EnumTypeOfDriver
 import java.util.*
 
 /**
@@ -13,4 +14,5 @@ class PlainTour {
     var driver: Driver? = null
     var tourOption: TourOption? = null
     var open = java.lang.Boolean.TRUE
+
 }
