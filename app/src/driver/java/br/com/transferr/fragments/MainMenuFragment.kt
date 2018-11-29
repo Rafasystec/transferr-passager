@@ -36,7 +36,7 @@ class MainMenuFragment : SuperClassFragment() {
         setupToolbar(R.id.toolbar,getString(R.string.menu))
 
         btnMainMenuContact.setOnClickListener {
-            callEmailHost("transferr.app@gmail.com",getString(R.string.emailSubject),getString(R.string.emailBody),getString(R.string.emailTitle))
+            callEmailHost("contact.boora@gmail.com",getString(R.string.emailSubject),getString(R.string.emailBody),getString(R.string.emailTitle))
         }
 
         btnMainMenuTerms.setOnClickListener {

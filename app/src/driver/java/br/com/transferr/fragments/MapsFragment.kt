@@ -81,7 +81,7 @@ class MapsFragment : SuperMapFragment(), OnMapReadyCallback,com.google.android.g
         }else{
             activity?.toast("Acesso ao GPS negado. O aplicativo pode não funcionar corretamente.")
         }
-        map.setMaxZoomPreference(16f)
+        map.setMaxZoomPreference(18f)
         map.setMinZoomPreference(12f)
         this.map = map
         fusedLocationClient.lastLocation
@@ -292,7 +292,7 @@ class MapsFragment : SuperMapFragment(), OnMapReadyCallback,com.google.android.g
         })
     }
 
-    private val mInterval = 10000L // 5 seconds by default, can be changed later
+    private val mInterval = 20000L // 5 seconds by default, can be changed later
     private var mHandler: Handler? = Handler()
    private var mStatusChecker: Runnable = object : Runnable {
         override fun run() {

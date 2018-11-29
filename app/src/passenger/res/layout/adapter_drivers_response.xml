@@ -67,7 +67,7 @@
                 android:layout_alignParentStart="true"
                 android:layout_alignTop="@+id/tvDriverDetail"
                 android:paddingRight="5dp"
-                android:src="@drawable/ic_jeep_wrangler" />
+                android:src="@drawable/icons8_suv_30" />
             <TextView
                 android:id="@+id/tvDriverDetail"
                 android:layout_width="wrap_content"

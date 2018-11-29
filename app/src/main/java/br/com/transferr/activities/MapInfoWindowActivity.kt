@@ -6,8 +6,10 @@ import android.net.Uri
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
 import br.com.transferr.R
 import br.com.transferr.activities.SuperClassActivity
+import br.com.transferr.extensions.log
 import br.com.transferr.passenger.model.responses.ResponseCarsOnline
 import br.com.transferr.passenger.util.WhatsAppUtil
 import com.squareup.picasso.Callback
@@ -64,6 +66,7 @@ class MapInfoWindowActivity : SuperClassActivity() {
     }
 
     private fun setImageFromPicasso(url: String?) {
+        progressDriverPhoto.visibility = View.VISIBLE
         Picasso.with(this)
                 .load(url)
                 .priority(Picasso.Priority.HIGH)
@@ -72,11 +75,15 @@ class MapInfoWindowActivity : SuperClassActivity() {
                 .into(photo,
                         object : Callback {
                             override fun onSuccess() {
-
+                                log("On Success!")
+                                progressDriverPhoto.visibility = View.GONE
+                                photo.visibility = View.VISIBLE
                             }
 
                             override fun onError() {
-
+                                log("On Error photo driver")
+                                progressDriverPhoto.visibility = View.GONE
+                                photo.visibility = View.VISIBLE
                             }
                         })
     }

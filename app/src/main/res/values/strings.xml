@@ -103,7 +103,7 @@
     <string name="successDeleted">Deleted Successfully</string>
     <string name="failure">Faileru</string>
     <string name="Map">Map</string>
-    <string name="alwaysParameterDescription">Turne this parameter OFF</string>
+    <string name="alwaysParameterDescription">*When this option is checked, you will appear on the map between 7:00 am and 5:00 pm even though you are offline.</string>
     <string name="turnAlwaysParamOff">Turning this parameter off you\'ll don\'t apear automatically on the map.</string>
     <string name="noTourOptionYet">You don\'t have any plan registered yet.</string>
     <string name="emailSubject">Contact-us</string>

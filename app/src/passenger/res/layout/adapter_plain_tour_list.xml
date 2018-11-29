@@ -74,7 +74,7 @@
                 android:id="@+id/ivDriverDetailIcon"
                 android:layout_width="@dimen/icon_width"
                 android:layout_height="@dimen/icon_height"
-                android:src="@drawable/ic_jeep_wrangler"
+                android:src="@drawable/icons8_suv_30"
                 android:layout_alignTop="@+id/tvDriverDetail"
                 android:paddingRight="5dp"
                 />

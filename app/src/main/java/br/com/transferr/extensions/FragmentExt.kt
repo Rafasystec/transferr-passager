@@ -7,6 +7,7 @@ import android.app.DatePickerDialog.OnDateSetListener
 import android.app.ProgressDialog
 import android.app.TimePickerDialog
 import android.content.Intent
+import android.net.Uri
 import android.os.Handler
 import android.support.annotation.IdRes
 import android.support.annotation.StringRes
@@ -208,8 +209,9 @@ fun Fragment.showAlert(@StringRes idResource: Int,onOkClick : ()->Unit){
 }
 
 fun Fragment.callEmailHost(emailTo:String, subject:String, mailBody:String, title: String){
-    val intent = Intent(Intent.ACTION_SEND)
+    val intent = Intent(Intent.ACTION_SENDTO)
     intent.type = "plain/text"
+    intent.data = Uri.parse("mailto:")
     intent.putExtra(Intent.EXTRA_EMAIL, arrayOf(emailTo))
     intent.putExtra(Intent.EXTRA_SUBJECT, subject)
     intent.putExtra(Intent.EXTRA_TEXT, mailBody)
