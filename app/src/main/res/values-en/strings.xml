@@ -74,7 +74,7 @@
     <string name="OFF">OFF</string>
     <string name="busySeats">Busy seats</string>
     <string name="searchingPassenger">Searching Passenger</string>
-    <string name="searchPassengerWorks">A litle descrption of how \'Searching for Passenger works\'.</string>
+    <string name="searchPassengerWorks">With this option selected, passengers will find that there are scheduled tours with the remaining seats and will contact you..</string>
     <string name="passengerNotes">Passengers Notes</string>
     <string name="passengerOne">Passenger One</string>
     <string name="addPlanTour">Add Plan Tour</string>
@@ -114,4 +114,5 @@
     <string name="logout">Logout</string>
     <string name="areYouSureLogout">Are you sure to Logout?</string>
     <string name="alwaysParamIsTrueMessage">The parameter that make the car always on map is True, so your car will still on map.</string>
+    <string name="selectATime">Select a Time</string>
 </resources>

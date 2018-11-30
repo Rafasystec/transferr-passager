@@ -73,7 +73,7 @@
     <string name="OFF">OFF</string>
     <string name="busySeats">Assentos Ocupados</string>
     <string name="searchingPassenger">Procurar passageiro</string>
-    <string name="searchPassengerWorks">Uma breve descrição de como \' Procurar Passageiro \' funciona.</string>
+    <string name="searchPassengerWorks">Com essa opção selecionada os passageiros irão ver que tem passeios agendados com vagas sobrando e entrar em contato com você.</string>
     <string name="passengerNotes">Observações do Passageiros</string>
     <string name="passengerOne">Passageiro 1</string>
     <string name="addPlanTour">Adicionar Plano</string>
@@ -113,5 +113,6 @@
     <string name="logout">Logout</string>
     <string name="areYouSureLogout">Are you sure to Logout?</string>
     <string name="alwaysParamIsTrueMessage">The parameter that make the car always on map is True, so your car will still on map.</string>
+    <string name="selectATime">Selecione a hora</string>
 
 </resources>

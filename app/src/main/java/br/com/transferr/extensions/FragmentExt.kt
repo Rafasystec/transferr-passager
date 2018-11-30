@@ -137,7 +137,7 @@ fun Fragment.showTimePicker(onResult: (resultTime:String) -> Unit,date:Date?=nul
             if(selectedMinute < 10){"0$selectedMinute"}else{selectedMinute.toString()}) },
             hour,
             minute, true)//Yes 24 hour time
-    mTimePicker.setTitle(activity?.getString(R.string.selectADate))
+    mTimePicker.setTitle(activity?.getString(R.string.selectATime))
     mTimePicker.show()
 }
 

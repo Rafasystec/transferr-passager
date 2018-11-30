@@ -49,7 +49,7 @@
             android:id="@+id/ivPlanTourDate"
             android:layout_width="@dimen/icon_width"
             android:layout_height="@dimen/icon_height"
-            android:src="@drawable/icons8_clock_30"
+            android:src="@drawable/icons8_calendar_30"
             android:layout_alignTop="@+id/edtPlanTourDate"
             android:paddingRight="5dp"
             />
@@ -72,7 +72,7 @@
             android:clickable="true"
             android:layout_width="@dimen/icon_width"
             android:layout_height="@dimen/icon_height"
-            android:src="@drawable/icons8_calendar_30"
+            android:src="@drawable/icons8_clock_30"
             android:layout_alignTop="@+id/edtPlanTourTime"
             android:paddingRight="5dp"
             />
