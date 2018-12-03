@@ -76,7 +76,7 @@ class MapInfoWindowActivity : SuperClassActivity() {
                         object : Callback {
                             override fun onSuccess() {
                                 log("On Success!")
-                                progressDriverPhoto.visibility = View.GONE
+                                progressDriverPhoto.visibility = View.INVISIBLE
                                 photo.visibility = View.VISIBLE
                             }
 

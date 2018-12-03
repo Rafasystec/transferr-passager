@@ -1,10 +1,14 @@
 package br.com.transferr.fragments
 
 
+import android.Manifest
 import android.app.Activity
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.os.Bundle
+import android.support.v4.app.ActivityCompat
 import android.support.v4.app.Fragment
+import android.support.v4.content.ContextCompat
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -24,6 +28,9 @@ import br.com.transferr.webservices.UserService
 import com.squareup.picasso.MemoryPolicy
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.driver.fragment_driver_edit_info.*
+import org.jetbrains.anko.alert
+import org.jetbrains.anko.cancelButton
+import org.jetbrains.anko.okButton
 import java.io.File
 
 
@@ -46,6 +53,7 @@ class DriverEditInfo : SuperClassFragment() {
         setupToolbar(R.id.toolbar,getString(R.string.myInformation),true)
         initViews()
         camera.init(savedInstanceState)
+        checkCameraPermission()
         super.onViewCreated(view, savedInstanceState)
     }
 
@@ -223,6 +231,30 @@ class DriverEditInfo : SuperClassFragment() {
             val h = imgProfile.height
             val bitmap = ImageUtil.resize(file,w,h)
             imgProfile.setImageBitmap(bitmap)
+        }
+    }
+
+    val PERMISSIONS_FOR_THIS_ACTIVITY = 3
+    fun checkCameraPermission(){
+        var permissionCheck = ContextCompat.checkSelfPermission(context!!, Manifest.permission.CAMERA)
+        if(permissionCheck == PackageManager.PERMISSION_DENIED){
+            //Ask for permission
+            if(ActivityCompat.shouldShowRequestPermissionRationale(activity!!, Manifest.permission.CAMERA)){
+                //Should explain
+                activity!!.alert(message = "Sem as permissões necessário o aplicativo não poderá continuar funcionando. Deseja conceder as permissões?",title = "Permissões Necessárias") {
+                    onCancelled { activity!!.finish() }
+                    okButton {
+                        ActivityCompat.requestPermissions(activity!!,
+                                arrayOf(Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE),
+                                PERMISSIONS_FOR_THIS_ACTIVITY)
+                    }
+                    cancelButton { activity!!.finish() }
+                }.show()
+            }else{
+                ActivityCompat.requestPermissions(activity!!,
+                        arrayOf(Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE),
+                        PERMISSIONS_FOR_THIS_ACTIVITY)
+            }
         }
     }
 
