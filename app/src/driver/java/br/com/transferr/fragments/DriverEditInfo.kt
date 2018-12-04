@@ -5,6 +5,9 @@ import android.Manifest
 import android.app.Activity
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.graphics.Bitmap
+import android.graphics.Matrix
+import android.media.ExifInterface
 import android.os.Bundle
 import android.support.v4.app.ActivityCompat
 import android.support.v4.app.Fragment
@@ -13,25 +16,32 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import br.com.transferr.R
-import br.com.transferr.extensions.*
+import br.com.transferr.extensions.setupToolbar
+import br.com.transferr.extensions.showError
+import br.com.transferr.extensions.showValidation
+import br.com.transferr.extensions.toast
 import br.com.transferr.helpers.HelperCamera
+import br.com.transferr.main.util.HelperBase64
+import br.com.transferr.main.util.Prefes
 import br.com.transferr.model.AnexoPhoto
 import br.com.transferr.model.Driver
 import br.com.transferr.model.responses.OnResponseInterface
 import br.com.transferr.model.responses.ResponseOK
-import br.com.transferr.util.FileUtil
-import br.com.transferr.util.ImageUtil
-import br.com.transferr.main.util.Prefes
 import br.com.transferr.passenger.util.DateUtil
+import br.com.transferr.util.ImageUtil
 import br.com.transferr.webservices.DriverService
 import br.com.transferr.webservices.UserService
+import com.mvc.imagepicker.ImagePicker
+import com.squareup.picasso.Callback
 import com.squareup.picasso.MemoryPolicy
+import com.squareup.picasso.NetworkPolicy
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.driver.fragment_driver_edit_info.*
 import org.jetbrains.anko.alert
 import org.jetbrains.anko.cancelButton
 import org.jetbrains.anko.okButton
 import java.io.File
+import java.io.IOException
 
 
 /**
@@ -54,6 +64,7 @@ class DriverEditInfo : SuperClassFragment() {
         initViews()
         camera.init(savedInstanceState)
         checkCameraPermission()
+        ImagePicker.setMinQuality(600, 600);
         super.onViewCreated(view, savedInstanceState)
     }
 
@@ -66,7 +77,26 @@ class DriverEditInfo : SuperClassFragment() {
 
     private fun loadPhoto(driver:Driver){
         var url = driver.car?.photo
-        Picasso.with(context).load(url).memoryPolicy(MemoryPolicy.NO_CACHE,MemoryPolicy.NO_STORE).placeholder(R.drawable.no_photo_64).into(imgProfile)
+        progressProfile.visibility  = View.VISIBLE
+        imgProfile.visibility       = View.GONE
+        Picasso.with(activity).load(url)
+                .fit()
+                .centerInside()
+                .memoryPolicy(MemoryPolicy.NO_CACHE,MemoryPolicy.NO_STORE)
+                .networkPolicy(NetworkPolicy.NO_CACHE)
+                .placeholder(R.drawable.no_photo_64)
+                .into(imgProfile,object : Callback {
+                    override fun onSuccess() {
+                        progressProfile.visibility  = View.GONE
+                        imgProfile.visibility       = View.VISIBLE
+                    }
+
+                    override fun onError() {
+                        progressProfile.visibility  = View.GONE
+                        imgProfile.visibility       = View.VISIBLE
+                    }
+
+                })
     }
 
     private fun initScreenFields(driver:Driver){
@@ -112,7 +142,7 @@ class DriverEditInfo : SuperClassFragment() {
         })
     }
 
-    private fun postImageProfile(){
+    private fun postImageProfile(bitmap: Bitmap){
         var anexo = AnexoPhoto()
         if(this.driver == null){
             stopProgressBar()
@@ -120,7 +150,7 @@ class DriverEditInfo : SuperClassFragment() {
             return
         }
         anexo.identity      = this.driver!!.id.toString()
-        anexo.anexoBase64   = FileUtil.toBase64(camera.file!!)
+        anexo.anexoBase64   = HelperBase64.getPhotoString(bitmap)//FileUtil.toBase64(camera.file!!)
         DriverService.savePhoto(anexo!!,
                 object : OnResponseInterface<ResponseOK>{
                     override fun onSuccess(body: ResponseOK?) {
@@ -144,7 +174,8 @@ class DriverEditInfo : SuperClassFragment() {
     }
 
     private fun btnCameraClick(){
-        startActivityForResult(camera.open(activity!!,photoName),0)
+        ImagePicker.pickImage(this, "Selecione a Imagem:")
+        //startActivityForResult(camera.open(activity!!,photoName),0)
     }
 
     private fun btnAlterPassClick(){
@@ -186,6 +217,7 @@ class DriverEditInfo : SuperClassFragment() {
         UserService.changePassword(Prefes.prefsLogin,oldPassword,newPassword,
                 object : OnResponseInterface<ResponseOK>{
                     override fun onSuccess(body: ResponseOK?) {
+                        cleraPasswprd()
                         stopProgressBar()
                         toast("Senha alterada com sucesso!")
                     }
@@ -204,6 +236,11 @@ class DriverEditInfo : SuperClassFragment() {
         )
     }
 
+    private fun cleraPasswprd(){
+        txtOldPassword.setText("")
+        txtConfirmNewPassword.setText("")
+        txtNewPassword.setText("")
+    }
 
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
@@ -213,14 +250,33 @@ class DriverEditInfo : SuperClassFragment() {
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        log("result code: $resultCode")
+
+        //log("result code: $resultCode")
         if(resultCode == Activity.RESULT_OK){
+            var bitmap = ImagePicker.getImageFromResult(getActivity(), requestCode, resultCode, data)
+            val imagePathFromResult = ImagePicker.getImagePathFromResult(activity, requestCode, resultCode, data)
+            var matrix: Matrix? = null
+            try {
+                val exif = ExifInterface(imagePathFromResult)
+                val rotation = exif.getAttributeInt(ExifInterface.TAG_ORIENTATION, ExifInterface.ORIENTATION_NORMAL)
+                val rotationInDegrees = ImageUtil.exifToDegrees(rotation)
+                matrix = Matrix()
+                if (rotation.toFloat() != 0f) {
+                    matrix.preRotate(rotationInDegrees.toFloat())
+                }
+
+            } catch (e: IOException) {
+                e.printStackTrace()
+            }
+
             //Se a camera retornou vamos mostar o arquivo da foto
-            val bitmap = camera.getBitmap(600,600)
+            //val bitmap = camera.getBitmap(600,600)
             if(bitmap != null) {
+                bitmap = ImageUtil.rotate(bitmap,matrix)
+                imgProfile.setImageBitmap(bitmap)
                 camera.save(bitmap)
-                showImage(camera.file)
-                postImageProfile()
+                //showImage(camera.file)
+                postImageProfile(bitmap)
             }
         }
     }

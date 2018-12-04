@@ -30,7 +30,7 @@ android {
             versionNameSuffix "-passenger"
             versionCode 1
             versionName "1.0"
-            resValue "string", "app_name", "Boora-pass"
+            resValue "string", "app_name", "Boora"
         }
         driver {
             dimension "app"
@@ -38,7 +38,7 @@ android {
             versionNameSuffix "-driver"
             versionCode 1
             versionName "1.0"
-            resValue "string", "app_name", "Boora-Driver"
+            resValue "string", "app_name", "Boora Driver"
         }
     }
     compileOptions {
@@ -98,6 +98,7 @@ dependencies {
     implementation 'com.github.bumptech.glide:glide:3.7.0'
     //For Rounded Image View
     implementation 'com.makeramen:roundedimageview:2.3.0'
+    compile 'com.github.Mariovc:ImagePicker:1.2.2'
 
 
 }

@@ -36,6 +36,15 @@
                 android:clickable="true"
                 android:src="@drawable/no_photo_64"
                 />
+            <ProgressBar
+
+                android:id="@+id/progressProfile"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:padding="10dp"
+                android:visibility="gone"
+                android:layout_gravity="center"
+                />
             <!--
             <ImageButton
                 android:id="@+id/btnCamera"

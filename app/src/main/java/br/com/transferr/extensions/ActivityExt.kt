@@ -62,7 +62,7 @@ fun AppCompatActivity.switchFragment(@IdRes id: Int, fragment: Fragment){
 
 
 fun AppCompatActivity.showLoadingDialog(message: String = getString(R.string.loading), title: String=getString(R.string.wait)): ProgressDialog {
-    val dialog = indeterminateProgressDialog(message, title) {
+    val dialog = indeterminateProgressDialog(message) {
         setProgressStyle(ProgressDialog.STYLE_SPINNER)
         setCancelable(false)
         show()

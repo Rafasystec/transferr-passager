@@ -83,10 +83,10 @@ class TourOptionLisFragment : SuperClassFragment() {
         })
     }
 
-    override fun onResume() {
-        super.onResume()
-        setTourOptionListAdapter()
-    }
+    //override fun onResume() {
+    //    super.onResume()
+        //setTourOptionListAdapter()
+    //}
 
     fun setTourOptionListAdapter(){
         if(tourOptionList != null && !tourOptionList!!.isEmpty()) {

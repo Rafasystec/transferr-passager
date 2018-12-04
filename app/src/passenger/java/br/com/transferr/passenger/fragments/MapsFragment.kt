@@ -83,7 +83,8 @@ class MapsFragment : SuperMapFragment(), OnMapReadyCallback
             activity?.toast("Acesso ao GPS negado. O aplicativo pode não funcionar corretamente.")
         }
         mMap.animateCamera(CameraUpdateFactory.zoomTo(ZOOM))
-        mMap.setMaxZoomPreference(15f)
+        mMap.setMaxZoomPreference(18f)
+        mMap.setMinZoomPreference(15f)
         //mMap.setInfoWindowAdapter(br.com.transferr.passenger.adapter.MapInfoWindowsAdapter(this))
         mMap.setOnMarkerClickListener({marker->
             //updateCamera(marker.position!!)

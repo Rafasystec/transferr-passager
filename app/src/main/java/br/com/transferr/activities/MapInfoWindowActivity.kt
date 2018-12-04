@@ -9,11 +9,12 @@ import android.view.MenuItem
 import android.view.View
 import br.com.transferr.R
 import br.com.transferr.activities.SuperClassActivity
-import br.com.transferr.extensions.log
+//import br.com.transferr.extensions.log
 import br.com.transferr.passenger.model.responses.ResponseCarsOnline
 import br.com.transferr.passenger.util.WhatsAppUtil
 import com.squareup.picasso.Callback
 import com.squareup.picasso.MemoryPolicy
+import com.squareup.picasso.NetworkPolicy
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.inforwindows_map.*
 import kotlinx.android.synthetic.main.infowindow_map_content.*
@@ -69,19 +70,22 @@ class MapInfoWindowActivity : SuperClassActivity() {
         progressDriverPhoto.visibility = View.VISIBLE
         Picasso.with(this)
                 .load(url)
+                .fit()
+                .centerInside()
                 .priority(Picasso.Priority.HIGH)
                 .placeholder(R.drawable.loadrealimg)
                 .memoryPolicy(MemoryPolicy.NO_STORE,MemoryPolicy.NO_CACHE)
+                .networkPolicy(NetworkPolicy.NO_CACHE)
                 .into(photo,
                         object : Callback {
                             override fun onSuccess() {
-                                log("On Success!")
+                                //log("On Success!")
                                 progressDriverPhoto.visibility = View.INVISIBLE
                                 photo.visibility = View.VISIBLE
                             }
 
                             override fun onError() {
-                                log("On Error photo driver")
+                                //log("On Error photo driver")
                                 progressDriverPhoto.visibility = View.GONE
                                 photo.visibility = View.VISIBLE
                             }
