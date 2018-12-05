@@ -6,6 +6,7 @@
     android:orientation="vertical"
     android:background="@color/activityBackground"
     tools:context="br.com.transferr.passager.fragments.PlainTourListFragment">
+    <include layout="@layout/layout_empty_list" />
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">

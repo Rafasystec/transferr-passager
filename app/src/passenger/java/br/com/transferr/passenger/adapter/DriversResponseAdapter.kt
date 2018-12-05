@@ -11,6 +11,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.ProgressBar
 import android.widget.TextView
 import br.com.transferr.R
 import br.com.transferr.passenger.model.enums.EnumTypeOfDriver
@@ -56,14 +57,17 @@ class DriversResponseAdapter(val drivers : List<ResponseDriver>,val onClick: (Re
             responseDrivers.imgProfileUrl = null
         }
         holder.tvDriverDetail.text          = "${responseDrivers.nameOfCar}"
+        holder.progress.visibility = View.VISIBLE
         Picasso.with(context).load(responseDrivers.imgProfileUrl).placeholder(R.drawable.no_photo_64).fit().into(holder.img,
             object : com.squareup.picasso.Callback{
                 override fun onSuccess() {
-                    //Stop progress bar
+                    holder.img.visibility = View.VISIBLE
+                    holder.progress.visibility = View.GONE
                 }
 
                 override fun onError() {
-                    //Stop progress bar
+                    holder.img.visibility = View.VISIBLE
+                    holder.progress.visibility = View.GONE
                 }
 
             })
@@ -86,6 +90,7 @@ class DriversResponseAdapter(val drivers : List<ResponseDriver>,val onClick: (Re
         var btnCallPhone : AppCompatButton
         var btnWhatsapp : AppCompatButton
         var tvCarPlate:TextView = view.findViewById(R.id.tvCarPlate)
+        var progress : ProgressBar = view.findViewById(R.id.progressDriverPhotoProfile)
         init {
             img             = view.findViewById(R.id.ivProfile)
             tvDriverDetail  = view.findViewById(R.id.tvDriverDetail)

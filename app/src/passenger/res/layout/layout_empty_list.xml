@@ -13,16 +13,18 @@
         android:layout_height="110dp"
         android:layout_gravity="center"
         android:layout_marginTop="45dp"
-        android:src="@drawable/safebox_empty"
+        android:src="@drawable/sad128"
         />
     <TextView
         android:id="@+id/tvTextToAdd"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Text to ADD"
+        android:textSize="20sp"
         android:textStyle="bold"
         android:layout_gravity="center"
         android:gravity="center"
+        android:layout_marginTop="12dp"
         android:textColor="@color/colorPrimaryDark"
         />
 

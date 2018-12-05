@@ -116,4 +116,6 @@
     <string name="areYouSureLogout">Are you sure to Logout?</string>
     <string name="alwaysParamIsTrueMessage">The parameter that make the car always on map is True, so your car will still on map.</string>
     <string name="selectATime">Select a Time</string>
+    <string name="noPlainTourAtThisMoment">No Plans Tour at this moment.</string>
+    <string name="noDriverAtThisMoment">No Driver at this moment</string>
 </resources>

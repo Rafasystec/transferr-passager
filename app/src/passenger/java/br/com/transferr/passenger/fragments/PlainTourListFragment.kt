@@ -46,7 +46,7 @@ class PlainTourListFragment : SuperClassFragment() {
         loadPlainsByTourAndLocation()
         Log.i("INFO","Language device ${br.com.transferr.application.ApplicationTransferr.DEVICE_LANGUAGE}")
         if(llEmptyList != null) {
-            llEmptyList.tvTextToAdd.text = "Sem Passeios no momento."
+            llEmptyList.tvTextToAdd.text = getString(R.string.noPlainTourAtThisMoment)
         }
     }
 
@@ -93,20 +93,22 @@ class PlainTourListFragment : SuperClassFragment() {
                 }else{
                     btnSeeMorePlainsTour.visibility = View.VISIBLE
                 }
+                checkIfIsEmpty(responsePlainsByTourAndLocation)
             }
         }
     }
 
-    /*fun checkIfIsEmpty(responseDrivers: ResponseDrivers){
-        if(responseDrivers != null){
-            val drivers = responseDrivers.drivers
-            if(drivers?.isEmpty()!!){
+    fun checkIfIsEmpty(plans: ResponsePlainsByTourAndLocation){
+        if(plans != null){
+            val listFromTour      = plans.plainsFromTour
+            val listFromLocation  = plans.plainsFromLocation
+            if(listFromLocation?.isEmpty()!! && listFromTour?.isEmpty()!!){
                 llEmptyList.visibility = View.VISIBLE
             }else{
                 llEmptyList.visibility = View.GONE
             }
         }
-    }*/
+    }
 
     fun onClickPlain(plainTour: PlainTour){
 

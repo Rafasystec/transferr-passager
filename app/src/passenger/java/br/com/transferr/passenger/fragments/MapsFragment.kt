@@ -84,7 +84,7 @@ class MapsFragment : SuperMapFragment(), OnMapReadyCallback
         }
         mMap.animateCamera(CameraUpdateFactory.zoomTo(ZOOM))
         mMap.setMaxZoomPreference(18f)
-        mMap.setMinZoomPreference(15f)
+        mMap.setMinZoomPreference(10f)
         //mMap.setInfoWindowAdapter(br.com.transferr.passenger.adapter.MapInfoWindowsAdapter(this))
         mMap.setOnMarkerClickListener({marker->
             //updateCamera(marker.position!!)
@@ -133,6 +133,7 @@ class MapsFragment : SuperMapFragment(), OnMapReadyCallback
                 var carOnlineList = CarService().getCarOnline(quadrant)
                 uiThread {
                     if (carOnlineList != null) {
+                        mMap.clear()
                         var markers = HelperCar.transformInMarkers(carOnlineList)
                         for (mark in markers) {
                             mMap.addMarker(mark)

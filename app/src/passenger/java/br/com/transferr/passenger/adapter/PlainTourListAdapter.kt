@@ -11,6 +11,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.ProgressBar
 import android.widget.TextView
 import br.com.transferr.R
 import br.com.transferr.application.ApplicationTransferr
@@ -63,16 +64,17 @@ class PlainTourListAdapter(val plainsTour: List<PlainTour> ,val onClick: (PlainT
         holder.tvPlainDate.text = DateUtil.format(plain.date!!,formatOut)
         holder.tvPliantourName.text = plain.tourOption?.name
 
-        //Start progressBar
-        //holder.progress.visibility = View.Visible
+        holder.progress.visibility = View.VISIBLE
         Picasso.with(context).load(photoUrl).placeholder(R.drawable.no_photo_64).fit().into(holder.img,
                 object : com.squareup.picasso.Callback{
                     override fun onSuccess() {
-                        //Stop progress bar
+                        holder.img.visibility = View.VISIBLE
+                        holder.progress.visibility = View.GONE
                     }
 
                     override fun onError() {
-                        //Stop progress bar
+                        holder.img.visibility = View.VISIBLE
+                        holder.progress.visibility = View.GONE
                     }
 
                 })
@@ -106,5 +108,6 @@ class PlainTourListAdapter(val plainsTour: List<PlainTour> ,val onClick: (PlainT
         var tvPlainDate : TextView = view.findViewById(R.id.tvPlainDate)
         var ivCarPlateIcon:ImageView = view.findViewById(R.id.ivCarPlateIcon)
         var ivDriverNameIcon:ImageView = view.findViewById(R.id.ivDriverNameIcon)
+        var progress : ProgressBar = view.findViewById(R.id.progressDriverPhotoProfile)
     }
 }

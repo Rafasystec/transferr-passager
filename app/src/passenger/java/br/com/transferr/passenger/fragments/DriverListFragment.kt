@@ -42,7 +42,7 @@ class DriverListFragment : SuperClassFragment() {
         location = (arguments?.getSerializable(TourOption.TOUR_PARAMETER_KEY) as TourOption).location
         recycleView = defaultRecycleView(activity!!,R.id.rcDriversFromLocation)
         if(llEmptyList != null) {
-            llEmptyList.tvTextToAdd.text = "Sem Motoristas no momento."
+            llEmptyList.tvTextToAdd.text = getString(R.string.noDriverAtThisMoment)
         }
     }
 
