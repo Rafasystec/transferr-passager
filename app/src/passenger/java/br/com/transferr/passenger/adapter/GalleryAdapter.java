@@ -1,6 +1,7 @@
 package br.com.transferr.passenger.adapter;
 
 import android.content.Context;
+import android.support.v4.widget.CircularProgressDrawable;
 import android.support.v7.widget.RecyclerView;
 import android.view.GestureDetector;
 import android.view.LayoutInflater;
@@ -53,9 +54,15 @@ public class GalleryAdapter extends RecyclerView.Adapter<GalleryAdapter.MyViewHo
     public void onBindViewHolder(MyViewHolder holder, int position) {
         //Image image = images.get(position);
         String image = images.get(position);
+        CircularProgressDrawable circularProgressDrawable = new CircularProgressDrawable(mContext);
+        circularProgressDrawable.setStrokeWidth(5f); //strokeWidth = 5f
+        circularProgressDrawable.setCenterRadius(30f); //centerRadius = 30f
+        circularProgressDrawable.setColorSchemeColors(R.color.colorPrimaryDark, R.color.colorPrimary, R.color.colorAccent);
+        circularProgressDrawable.start();
         Glide.with(mContext).load(image)
                 .thumbnail(0.5f)
                 .crossFade()
+                .placeholder(circularProgressDrawable)
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .into(holder.thumbnail);
     }
