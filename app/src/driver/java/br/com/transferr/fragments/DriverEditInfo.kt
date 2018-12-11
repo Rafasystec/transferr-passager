@@ -49,7 +49,7 @@ import java.io.IOException
  */
 class DriverEditInfo : SuperClassFragment() {
 
-    private val camera      = HelperCamera()
+    //private val camera      = HelperCamera()
     private val photoName   = "photoProfile.jpg"
     private var driver: Driver?=null
     var file: File? = null
@@ -62,9 +62,9 @@ class DriverEditInfo : SuperClassFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         setupToolbar(R.id.toolbar,getString(R.string.myInformation),true)
         initViews()
-        camera.init(savedInstanceState)
+        //camera.init(savedInstanceState)
         checkCameraPermission()
-        ImagePicker.setMinQuality(600, 600);
+        //ImagePicker.setMinQuality(600, 600);
         super.onViewCreated(view, savedInstanceState)
     }
 
@@ -245,7 +245,7 @@ class DriverEditInfo : SuperClassFragment() {
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
         //outState.putSerializable("file",file)
-        camera.onSaveInstanceState(outState)
+        //camera.onSaveInstanceState(outState)
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -274,7 +274,7 @@ class DriverEditInfo : SuperClassFragment() {
             if(bitmap != null) {
                 bitmap = ImageUtil.rotate(bitmap,matrix)
                 imgProfile.setImageBitmap(bitmap)
-                camera.save(bitmap)
+                //camera.save(bitmap)
                 //showImage(camera.file)
                 postImageProfile(bitmap)
             }

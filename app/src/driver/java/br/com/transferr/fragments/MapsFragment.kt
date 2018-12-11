@@ -1,15 +1,19 @@
 package br.com.transferr.fragments
 
 
+import android.Manifest
 import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.location.Location
 import android.location.LocationListener
 import android.location.LocationManager
 import android.os.Bundle
 import android.os.Handler
 import android.support.v4.app.Fragment
+import android.support.v4.content.ContextCompat
+import android.support.v7.app.AppCompatActivity
 import android.util.Log
 import android.view.*
 import android.widget.Switch
@@ -72,36 +76,72 @@ class MapsFragment : SuperMapFragment(), OnMapReadyCallback,com.google.android.g
 
     private var map : GoogleMap? = null
     private var car :Car?=null
-    @SuppressLint("MissingPermission")
+
     override fun onMapReady(map: GoogleMap) {
-        checkPermissionToAccessLocation()
+        this.map = map
+        if(!checkFineLocationPermission()) {
+            checkPermissionToAccessLocation()
+        }else {
+            initMapWhenItReady()
+        }
+    }
+
+    private fun checkFineLocationPermission() =
+            ContextCompat.checkSelfPermission(activity!!, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED
+
+    @SuppressLint("MissingPermission")
+    private fun initMapWhenItReady() {
         locationManager!!.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0f, this)
-        if(isMapAllowed()) {
-            map.isMyLocationEnabled = true
-        }else{
+        if (isMapAllowed()) {
+            this.map?.isMyLocationEnabled = true
+        } else {
             activity?.toast("Acesso ao GPS negado. O aplicativo pode não funcionar corretamente.")
         }
-        map.setMaxZoomPreference(18f)
-        map.setMinZoomPreference(12f)
-        this.map = map
+        map?.setMaxZoomPreference(18f)
+        map?.setMinZoomPreference(12f)
+        //this.map = map
         fusedLocationClient.lastLocation
-                .addOnSuccessListener { location : Location? ->
-                    if(location != null) {
+                .addOnSuccessListener { location: Location? ->
+                    if (location != null) {
                         var latlon = LatLng(location?.latitude!!, location.longitude)
                         updateCameraOnLocationChange(latlon)
                     }
                 }
         this.map!!.mapType = GoogleMap.MAP_TYPE_NORMAL
-        this.map!!.setOnMarkerClickListener({marker->
+        this.map!!.setOnMarkerClickListener({ marker ->
             //updateCamera(marker.position!!)
             var car = fromJson<ResponseCarsOnline>(marker.snippet)
             activity?.startActivity<MapInfoWindowActivity>(ResponseCarsOnline.PARAM_CAR_OBJECT to car)
             true
         })
         startRepeatingTask()
+        startService()
         callWebServiceToMarck()
     }
 
+    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+
+            when(requestCode){
+                PERMISSION_TO_ACCESS_LOCATION -> {
+                    // If request is cancelled, the result arrays are empty.
+                    if (grantResults.isNotEmpty()
+                            && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+
+                        // permission was granted, yay! Do the
+                        // contacts-related task you need to do.
+                        activity?.toast(getString(R.string.permissionGranted))
+                        initMapWhenItReady()
+                    } else {
+
+                        // permission denied, boo! Disable the
+                        // functionality that depends on this permission.
+                        activity?.toast(getString(R.string.permissionDied))
+                    }
+                }
+            }
+
+    }
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view = inflater?.inflate(R.layout.fragment_maps, container, false)
         setupToolbar(R.id.toolbar,getString(R.string.Map))
@@ -220,10 +260,11 @@ class MapsFragment : SuperMapFragment(), OnMapReadyCallback,com.google.android.g
     }
 
     private fun startService(){
-        if(checkLocation()) {
-            startServiceIntent()
+        if(checkFineLocationPermission()) {
+            if (checkLocation()) {
+                startServiceIntent()
+            }
         }
-        //activity?.startService(Intent(activity, LocationTrackingService::class.java))
     }
 
     private fun stopServiceIntent(){

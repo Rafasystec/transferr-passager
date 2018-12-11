@@ -118,4 +118,6 @@
     <string name="selectATime">Select a Time</string>
     <string name="noPlainTourAtThisMoment">No Plans Tour at this moment.</string>
     <string name="noDriverAtThisMoment">No Driver at this moment</string>
+    <string name="permissionGranted">Permission Granted</string>
+    <string name="permissionDied">Permission Died</string>
 </resources>

@@ -79,7 +79,7 @@ class DriverShowInfoFragment : SuperClassFragment() {
     }
 
     private fun getCarFromWebService(){
-        var progress = showLoadingDialogWithDelay()
+        var progress = showLoadingDialogWithDelay(title = "")
         DriverService.doGetByUserId(Prefes.prefsLogin,
                 object: OnResponseInterface<Driver> {
                     override fun onSuccess(body: Driver?) {
@@ -134,7 +134,7 @@ class DriverShowInfoFragment : SuperClassFragment() {
 
     private fun confirmUpdateAlwaysParameter() {
         var isChecked = swtOnOffAlwaysParam.isChecked
-        var alert = showLoadingDialogWithDelay()
+        var alert = showLoadingDialogWithDelay(title = "")
         CarService.changeAlwaysParameter(car?.id!!, isChecked, object : OnResponseInterface<ResponseOK> {
             override fun onSuccess(body: ResponseOK?) {
                 alert.dismiss()

@@ -116,5 +116,7 @@
     <string name="selectATime">Selecione a hora</string>
     <string name="noPlainTourAtThisMoment">Sem passeios no momento.</string>
     <string name="noDriverAtThisMoment">Sem motoristas no momento.</string>
+    <string name="permissionGranted">Permissão concedida!</string>
+    <string name="permissionDied">Permissão negada!</string>
 
 </resources>
