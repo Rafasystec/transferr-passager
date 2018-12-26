@@ -4,7 +4,9 @@ import android.annotation.SuppressLint
 import android.app.Service
 import android.content.Context
 import android.content.Intent
+import android.location.Criteria
 import android.location.Location
+import android.location.LocationListener
 import android.location.LocationManager
 import android.util.Log
 import br.com.transferr.extensions.log
@@ -15,6 +17,9 @@ import br.com.transferr.model.responses.RequestCoordinatesUpdate
 import br.com.transferr.webservices.CoordinateService
 import java.util.concurrent.Executors
 import java.util.concurrent.TimeUnit
+import android.os.Bundle
+
+
 
 class LocationTrackingService : Service(){
 
@@ -73,13 +78,35 @@ class LocationTrackingService : Service(){
     @SuppressLint("MissingPermission")
     private fun buildLocationAPI(){
         mLocationManager = this.getSystemService(Context.LOCATION_SERVICE) as LocationManager
-        var location = mLocationManager?.getLastKnownLocation(LocationManager.GPS_PROVIDER)
-        if(location != null) {
-            Log.d(TAG, "My Location on  buildLocationAPI method ${location?.latitude} - ${location?.longitude}")
-            callWebService(location)
-        }else{
-            Log.d(TAG, "Cannot get the location o build API, it was null.")
+        var criteria = Criteria()
+        with(criteria){
+            accuracy = Criteria.ACCURACY_FINE
+            isAltitudeRequired  = false
+            isBearingRequired   = false
+            isCostAllowed       = true
+            powerRequirement    = Criteria.POWER_LOW
         }
+        var provider = mLocationManager?.getBestProvider(criteria,true)
+        var location = mLocationManager?.getLastKnownLocation(provider)
+        mLocationManager?.requestLocationUpdates(provider,10000,10f,locationListener)
+        //if(location != null) {
+        //    Log.d(TAG, "My Location on  buildLocationAPI method ${location?.latitude} - ${location?.longitude}")
+        //    callWebService(location)
+        //}else{
+        //    Log.d(TAG, "Cannot get the location o build API, it was null.")
+        //}
+    }
+
+    private val locationListener = object : LocationListener {
+        override fun onLocationChanged(location: Location) {
+            callWebService(location)
+        }
+        override fun onProviderDisabled(provider: String) {
+            Log.d(TAG, "onProviderDisabled at LocationTrackingService.kt")
+        }
+        override fun onProviderEnabled(provider: String) {}
+        override fun onStatusChanged(provider: String, status: Int, extras: Bundle) {}
+
     }
 
 }

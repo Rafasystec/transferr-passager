@@ -43,6 +43,7 @@ object HelperCar {
         var marck = MarkerOptions()
                 //.icon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_car_black_24dp))
                 .icon(icon)
+                .anchor(0.5f,0.5f)
                 .title(car.name)
                 .snippet(car.toJson())
                 .position(LatLng(car.latitude!!, car.longitude!!))

@@ -280,7 +280,7 @@ class DriverEditInfo : SuperClassFragment() {
             }
         }
     }
-
+/*
     private fun showImage(file: File?){
         if(file != null && file.exists()){
             val w = imgProfile.width
@@ -289,7 +289,7 @@ class DriverEditInfo : SuperClassFragment() {
             imgProfile.setImageBitmap(bitmap)
         }
     }
-
+*/
     val PERMISSIONS_FOR_THIS_ACTIVITY = 3
     fun checkCameraPermission(){
         var permissionCheck = ContextCompat.checkSelfPermission(context!!, Manifest.permission.CAMERA)
