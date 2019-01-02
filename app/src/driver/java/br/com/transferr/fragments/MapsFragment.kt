@@ -92,11 +92,13 @@ class MapsFragment : SuperMapFragment(), OnMapReadyCallback,com.google.android.g
     @SuppressLint("MissingPermission")
     private fun initMapWhenItReady() {
         locationManager!!.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0f, this)
+
         if (isMapAllowed()) {
             this.map?.isMyLocationEnabled = true
         } else {
             activity?.toast("Acesso ao GPS negado. O aplicativo pode não funcionar corretamente.")
         }
+
         map?.setMaxZoomPreference(18f)
         map?.setMinZoomPreference(12f)
         //this.map = map
