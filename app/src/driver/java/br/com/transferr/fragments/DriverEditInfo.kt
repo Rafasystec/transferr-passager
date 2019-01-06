@@ -6,15 +6,19 @@ import android.app.Activity
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.graphics.Matrix
 import android.media.ExifInterface
 import android.os.Bundle
+import android.os.Environment
 import android.support.v4.app.ActivityCompat
 import android.support.v4.app.Fragment
 import android.support.v4.content.ContextCompat
+import android.support.v7.widget.PopupMenu
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import br.com.transferr.R
 import br.com.transferr.extensions.setupToolbar
 import br.com.transferr.extensions.showError
@@ -51,6 +55,9 @@ class DriverEditInfo : SuperClassFragment() {
 
     //private val camera      = HelperCamera()
     private val photoName   = "photoProfile.jpg"
+    private val camera      = HelperCamera()
+    val PICK_IMAGE          = 125
+    val TAKE_PICTURE       = 130
     private var driver: Driver?=null
     var file: File? = null
 
@@ -174,8 +181,10 @@ class DriverEditInfo : SuperClassFragment() {
     }
 
     private fun btnCameraClick(){
-        ImagePicker.pickImage(this, "Selecione a Imagem:")
+        openChoosenMenuPopup(imgProfile)
+        //ImagePicker.pickImage(this, "Selecione a Imagem:",PICK_IMAGE,true)
         //startActivityForResult(camera.open(activity!!,photoName),0)
+        //chooseImage()
     }
 
     private fun btnAlterPassClick(){
@@ -250,8 +259,66 @@ class DriverEditInfo : SuperClassFragment() {
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
+        if(requestCode == PICK_IMAGE) {
+            onResultActivityForGallery(requestCode, resultCode, data)
+        }else if(requestCode == TAKE_PICTURE){
+            onResultActivityForCamera(requestCode,resultCode,data)
+        }
 
-        //log("result code: $resultCode")
+    }
+/*
+    private fun showImage(file: File?){
+        if(file != null && file.exists()){
+            val w = imgProfile.width
+            val h = imgProfile.height
+            val bitmap = ImageUtil.resize(file,w,h)
+            imgProfile.setImageBitmap(bitmap)
+        }
+    }
+*/
+    private val PERMISSIONS_FOR_THIS_ACTIVITY = 3
+    fun checkCameraPermission(){
+        var permissionCheck = ContextCompat.checkSelfPermission(context!!, Manifest.permission.CAMERA)
+        if(permissionCheck == PackageManager.PERMISSION_DENIED){
+            //Ask for permission
+            if(ActivityCompat.shouldShowRequestPermissionRationale(activity!!, Manifest.permission.CAMERA)){
+                //Should explain
+                activity!!.alert(message = "Sem as permissões necessário o aplicativo não poderá continuar funcionando. Deseja conceder as permissões?",title = "Permissões Necessárias") {
+                    onCancelled { activity!!.finish() }
+                    okButton {
+                        ActivityCompat.requestPermissions(activity!!,
+                                arrayOf(Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE),
+                                PERMISSIONS_FOR_THIS_ACTIVITY)
+                    }
+                    cancelButton { activity!!.finish() }
+                }.show()
+            }else{
+                ActivityCompat.requestPermissions(activity!!,
+                        arrayOf(Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE),
+                        PERMISSIONS_FOR_THIS_ACTIVITY)
+            }
+        }
+    }
+
+    fun openChoosenMenuPopup(view:View){
+        var popup  = PopupMenu(activity!!,view)
+        popup.menuInflater.inflate(R.menu.popup, popup.menu)
+        popup.setOnMenuItemClickListener { item ->
+            when(item.itemId){
+                R.id.nav_gallery_popup->{
+                    ImagePicker.pickImage(this, "Selecione a Imagem:",PICK_IMAGE,true)
+                }
+                R.id.nav_camera_popup->{
+                    startActivityForResult(camera.open(activity!!,photoName),TAKE_PICTURE)
+                }
+            }
+            //Toast.makeText(activity, "Some Text" + item.title + item.itemId, Toast.LENGTH_SHORT).show()
+            true
+        }
+        popup.show()
+    }
+
+    fun onResultActivityForGallery(requestCode: Int, resultCode: Int, data: Intent?){
         if(resultCode == Activity.RESULT_OK){
             var bitmap = ImagePicker.getImageFromResult(getActivity(), requestCode, resultCode, data)
             val imagePathFromResult = ImagePicker.getImagePathFromResult(activity, requestCode, resultCode, data)
@@ -280,41 +347,49 @@ class DriverEditInfo : SuperClassFragment() {
             }
         }
     }
-/*
-    private fun showImage(file: File?){
-        if(file != null && file.exists()){
-            val w = imgProfile.width
-            val h = imgProfile.height
-            val bitmap = ImageUtil.resize(file,w,h)
-            imgProfile.setImageBitmap(bitmap)
+
+    fun onResultActivityForCamera(requestCode: Int, resultCode: Int, data: Intent?){
+        if(resultCode != Activity.RESULT_OK){
+            return
         }
-    }
-*/
-    val PERMISSIONS_FOR_THIS_ACTIVITY = 3
-    fun checkCameraPermission(){
-        var permissionCheck = ContextCompat.checkSelfPermission(context!!, Manifest.permission.CAMERA)
-        if(permissionCheck == PackageManager.PERMISSION_DENIED){
-            //Ask for permission
-            if(ActivityCompat.shouldShowRequestPermissionRationale(activity!!, Manifest.permission.CAMERA)){
-                //Should explain
-                activity!!.alert(message = "Sem as permissões necessário o aplicativo não poderá continuar funcionando. Deseja conceder as permissões?",title = "Permissões Necessárias") {
-                    onCancelled { activity!!.finish() }
-                    okButton {
-                        ActivityCompat.requestPermissions(activity!!,
-                                arrayOf(Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE),
-                                PERMISSIONS_FOR_THIS_ACTIVITY)
-                    }
-                    cancelButton { activity!!.finish() }
-                }.show()
-            }else{
-                ActivityCompat.requestPermissions(activity!!,
-                        arrayOf(Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE),
-                        PERMISSIONS_FOR_THIS_ACTIVITY)
+        var f = File(context?.getExternalFilesDir(Environment.DIRECTORY_PICTURES)
+                .toString())
+        for (temp : File in f.listFiles()) {
+            if (temp.name == photoName) {
+                f = temp
+                break
             }
         }
+        if (!f.exists()) {
+            Toast.makeText(context,
+                    "Error while capturing image", Toast.LENGTH_LONG)
+                    .show()
+            return
+
+        }
+
+            var bitmap = BitmapFactory.decodeFile(f.absolutePath)
+            bitmap = Bitmap.createScaledBitmap(bitmap, 400, 400, true)
+            var matrix: Matrix? = null
+            var rotation = 0
+            try {
+                var exif = ExifInterface(f.absolutePath)
+                val rotation = exif.getAttributeInt(ExifInterface.TAG_ORIENTATION, ExifInterface.ORIENTATION_NORMAL)
+                val rotationInDegrees = ImageUtil.exifToDegrees(rotation)
+                matrix = Matrix()
+                if (rotation.toFloat() != 0f) {
+                    matrix.preRotate(rotationInDegrees.toFloat())
+                }
+
+                if(bitmap != null) {
+                    bitmap = ImageUtil.rotate(bitmap,matrix)
+                    imgProfile.setImageBitmap(bitmap)
+                    postImageProfile(bitmap)
+                }
+
+            } catch (e:Exception ) {
+                e.printStackTrace()
+            }
     }
-
-
-
 
 }// Required empty public constructor

@@ -118,7 +118,8 @@ class MapsFragment : SuperMapFragment(), OnMapReadyCallback,com.google.android.g
         })
         startRepeatingTask()
         startService()
-        callWebServiceToMarck()
+        setOnCameraIdleListener(map!!)
+        callWebServiceToMark(map!!,true)
     }
 
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
@@ -248,7 +249,7 @@ class MapsFragment : SuperMapFragment(), OnMapReadyCallback,com.google.android.g
     fun putCarOnMap(isChecked:Boolean){
         changeSwitch(isChecked)
         stopInitLocation(isChecked)
-        callWebServiceToMarck()
+        //callWebServiceToMarck()
     }
 
     private fun stopInitLocation(isChecked:Boolean){
@@ -357,11 +358,12 @@ class MapsFragment : SuperMapFragment(), OnMapReadyCallback,com.google.android.g
 
     private fun updateMapScreen(){
         try {
-            callWebServiceToMarck()
+            callWebServiceToMark(map!!,true)
         }catch (e:Exception){
             Log.e("FATAL_ERRO","try to call car to show on map",e)
         }
     }
+    /*
     private fun callWebServiceToMarck() {
         if(map == null){
             return
@@ -391,7 +393,7 @@ class MapsFragment : SuperMapFragment(), OnMapReadyCallback,com.google.android.g
             }
         }
     }
-
+*/
     override fun onDestroy() {
         super.onDestroy()
         stopRepeatingTask()

@@ -21,10 +21,11 @@ import android.view.ViewGroup
 import android.widget.TextView
 import br.com.transferr.R
 import br.com.transferr.main.util.PermissionUtil
-import org.jetbrains.anko.alert
-import org.jetbrains.anko.noButton
-import org.jetbrains.anko.toast
-import org.jetbrains.anko.yesButton
+import br.com.transferr.model.Quadrant
+import br.com.transferr.passenger.helpers.HelperCar
+import br.com.transferr.passenger.webservices.CarServiceMain
+import com.google.android.gms.maps.GoogleMap
+import org.jetbrains.anko.*
 
 
 /**
@@ -34,6 +35,7 @@ import org.jetbrains.anko.yesButton
 open class SuperMapFragment : SuperClassFragment() {
 
     val PERMISSION_TO_ACCESS_LOCATION = 1
+    var isWaitingResponse = false
     lateinit var locationManager: LocationManager
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
@@ -93,6 +95,53 @@ open class SuperMapFragment : SuperClassFragment() {
                 })
                 .setNegativeButton("Cancel", null)
         dialog.show()
+    }
+
+    protected fun setOnCameraIdleListener(map: GoogleMap){
+        map.setOnCameraIdleListener {
+            callWebServiceToMark(map,false)
+        }
+    }
+
+    protected fun callWebServiceToMark(map: GoogleMap, clearMap:Boolean) {
+        if(map == null){
+            return
+        }
+        if(isWaitingResponse){
+            return
+        }
+        var visibleRegion = map!!.projection.visibleRegion
+        var quadrant = Quadrant()
+        if (visibleRegion != null) {
+            quadrant.farLeftLat     = visibleRegion.farLeft.latitude
+            quadrant.farLeftLng     = visibleRegion.farLeft.longitude
+            quadrant.farRightLat    = visibleRegion.farRight.latitude
+            quadrant.farRightLng    = visibleRegion.farRight.longitude
+            quadrant.nearLeftLat    = visibleRegion.nearLeft.latitude
+            quadrant.nearLeftLng    = visibleRegion.nearLeft.longitude
+            quadrant.nearRightLat   = visibleRegion.nearRight.latitude
+            quadrant.nearRightLng   = visibleRegion.nearRight.longitude
+            doAsync {
+                try {
+                    isWaitingResponse = true
+                    var carOnlineList = CarServiceMain().getCarOnline(quadrant)
+                    uiThread {
+                        isWaitingResponse = false
+                        //if (clearMap) {
+                            map!!.clear()
+                        //}
+                        if (carOnlineList != null) {
+                            var markers = HelperCar.transformInMarkers(carOnlineList)
+                            for (mark in markers) {
+                                map!!.addMarker(mark)
+                            }
+                        }
+                    }
+                }catch (exception : Exception){
+                    isWaitingResponse = false
+                }
+            }
+        }
     }
 
 
