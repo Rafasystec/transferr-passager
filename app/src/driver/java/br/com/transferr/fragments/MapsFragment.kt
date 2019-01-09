@@ -18,11 +18,14 @@ import android.util.Log
 import android.view.*
 import android.widget.Switch
 import br.com.transferr.R
+import br.com.transferr.application.ApplicationTransferr
 import br.com.transferr.extensions.fromJson
 import br.com.transferr.extensions.log
 import br.com.transferr.extensions.setupToolbar
 import br.com.transferr.extensions.showLoadingDialog
 import br.com.transferr.helpers.HelperPassengersOnline
+import br.com.transferr.main.util.GPSUtil
+import br.com.transferr.main.util.PermissionUtil
 import br.com.transferr.main.util.Prefes
 import br.com.transferr.model.Car
 import br.com.transferr.model.Quadrant
@@ -47,6 +50,7 @@ import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.VisibleRegion
+import kotlinx.android.synthetic.driver.fragment_maps.*
 import org.jetbrains.anko.*
 
 
@@ -76,7 +80,8 @@ class MapsFragment : SuperMapFragment(), OnMapReadyCallback,com.google.android.g
 
     private var map : GoogleMap? = null
     private var car :Car?=null
-
+    private val gpsUtil = GPSUtil(ApplicationTransferr.getInstance().applicationContext)
+    private var latLng: LatLng? = null
     override fun onMapReady(map: GoogleMap) {
         this.map = map
         if(!checkFineLocationPermission()) {
@@ -94,7 +99,8 @@ class MapsFragment : SuperMapFragment(), OnMapReadyCallback,com.google.android.g
         locationManager!!.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0f, this)
 
         if (isMapAllowed()) {
-            this.map?.isMyLocationEnabled = true
+            this.map?.isMyLocationEnabled = false
+            this.map?.uiSettings?.isMyLocationButtonEnabled = true
         } else {
             activity?.toast("Acesso ao GPS negado. O aplicativo pode não funcionar corretamente.")
         }
@@ -120,6 +126,12 @@ class MapsFragment : SuperMapFragment(), OnMapReadyCallback,com.google.android.g
         startService()
         setOnCameraIdleListener(map!!)
         callWebServiceToMark(map!!,true)
+        myLocationFab.setOnClickListener {
+            if (PermissionUtil.hasPermission(activity!!, Manifest.permission.ACCESS_FINE_LOCATION)) run {
+                latLng = gpsUtil.location
+                updateCamera(this.map!!, latLng)
+            }
+        }
     }
 
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
@@ -154,6 +166,7 @@ class MapsFragment : SuperMapFragment(), OnMapReadyCallback,com.google.android.g
         setHasOptionsMenu(true)
         locationManager = context?.getSystemService(Context.LOCATION_SERVICE) as LocationManager
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(activity!!)
+
         //getCurrentCar()
         return view
     }
@@ -249,7 +262,6 @@ class MapsFragment : SuperMapFragment(), OnMapReadyCallback,com.google.android.g
     fun putCarOnMap(isChecked:Boolean){
         changeSwitch(isChecked)
         stopInitLocation(isChecked)
-        //callWebServiceToMarck()
     }
 
     private fun stopInitLocation(isChecked:Boolean){
@@ -363,37 +375,7 @@ class MapsFragment : SuperMapFragment(), OnMapReadyCallback,com.google.android.g
             Log.e("FATAL_ERRO","try to call car to show on map",e)
         }
     }
-    /*
-    private fun callWebServiceToMarck() {
-        if(map == null){
-            return
-        }
-        var visibleRegion = map!!.projection.visibleRegion
-        var quadrant = Quadrant()
-        if (!visibleRegion.equals(null)) {
-            quadrant.farLeftLat     = visibleRegion.farLeft.latitude
-            quadrant.farLeftLng     = visibleRegion.farLeft.longitude
-            quadrant.farRightLat    = visibleRegion.farRight.latitude
-            quadrant.farRightLng    = visibleRegion.farRight.longitude
-            quadrant.nearLeftLat    = visibleRegion.nearLeft.latitude
-            quadrant.nearLeftLng    = visibleRegion.nearLeft.longitude
-            quadrant.nearRightLat   = visibleRegion.nearRight.latitude
-            quadrant.nearRightLng   = visibleRegion.nearRight.longitude
-            doAsync {
-                var carOnlineList = CarServiceMain().getCarOnline(quadrant)
-                uiThread {
-                    map!!.clear()
-                    if (carOnlineList != null) {
-                        var markers = HelperCar.transformInMarkers(carOnlineList)
-                        for (mark in markers) {
-                            map!!.addMarker(mark)
-                        }
-                    }
-                }
-            }
-        }
-    }
-*/
+
     override fun onDestroy() {
         super.onDestroy()
         stopRepeatingTask()

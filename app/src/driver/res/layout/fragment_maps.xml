@@ -2,7 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-  >
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
    <fragment
        android:id="@+id/mapFragment"
@@ -11,5 +11,19 @@
        class="com.google.android.gms.maps.SupportMapFragment" >
 
    </fragment>
+   <android.support.design.widget.FloatingActionButton
+       android:id="@+id/myLocationFab"
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:layout_alignParentEnd="true"
+       android:layout_alignParentRight="true"
+       android:layout_alignParentTop="true"
+       android:layout_gravity="top|right"
+       android:layout_marginEnd="14dp"
+       android:layout_marginRight="14dp"
+       android:layout_marginTop="40dp"
+       android:src="@drawable/boora_logo"
+       app:backgroundTint="@color/colorButtonTextDriver"
+       app:fabSize="normal" />
 
 </FrameLayout>

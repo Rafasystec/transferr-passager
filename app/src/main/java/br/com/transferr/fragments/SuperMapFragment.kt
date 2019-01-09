@@ -23,8 +23,11 @@ import br.com.transferr.R
 import br.com.transferr.main.util.PermissionUtil
 import br.com.transferr.model.Quadrant
 import br.com.transferr.passenger.helpers.HelperCar
+import br.com.transferr.passenger.model.responses.ResponseCarsOnline
 import br.com.transferr.passenger.webservices.CarServiceMain
+import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
+import com.google.android.gms.maps.model.LatLng
 import org.jetbrains.anko.*
 
 
@@ -37,6 +40,7 @@ open class SuperMapFragment : SuperClassFragment() {
     val PERMISSION_TO_ACCESS_LOCATION = 1
     var isWaitingResponse = false
     lateinit var locationManager: LocationManager
+    var tempListOfOnlineCars: MutableList<ResponseCarsOnline> = mutableListOf()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -127,14 +131,29 @@ open class SuperMapFragment : SuperClassFragment() {
                     var carOnlineList = CarServiceMain().getCarOnline(quadrant)
                     uiThread {
                         isWaitingResponse = false
-                        //if (clearMap) {
+                        if (clearMap) {
                             map!!.clear()
-                        //}
+                        }
                         if (carOnlineList != null) {
-                            var markers = HelperCar.transformInMarkers(carOnlineList)
-                            for (mark in markers) {
-                                map!!.addMarker(mark)
+
+                            if(clearMap){
+                                var markers = HelperCar.transformInMarkers(carOnlineList)
+                                for (mark in markers) {
+                                    map!!.addMarker(mark)
+                                }
+                                tempListOfOnlineCars = carOnlineList as MutableList<ResponseCarsOnline>
+                            }else{
+                                if(tempListOfOnlineCars != null){
+                                    carOnlineList
+                                            .filter { tempListOfOnlineCars.contains(it) }
+                                            .forEach { carOnlineList.remove(it) }
+                                    var markers = HelperCar.transformInMarkers(carOnlineList)
+                                    for (mark in markers) {
+                                        map!!.addMarker(mark)
+                                    }
+                                }
                             }
+
                         }
                     }
                 }catch (exception : Exception){
@@ -142,6 +161,12 @@ open class SuperMapFragment : SuperClassFragment() {
                 }
             }
         }
+    }
+
+    internal fun updateCamera(map: GoogleMap,latLng: LatLng?) {
+        if (latLng != null)
+            map.animateCamera(CameraUpdateFactory.newLatLng(latLng))
+
     }
 
 
