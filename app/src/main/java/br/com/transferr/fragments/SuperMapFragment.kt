@@ -84,7 +84,7 @@ open class SuperMapFragment : SuperClassFragment() {
         return isLocationEnabled()
     }
 
-    private fun isLocationEnabled(): Boolean {
+    protected fun isLocationEnabled(): Boolean {
         locationManager = activity?.getSystemService(Context.LOCATION_SERVICE) as LocationManager
         return locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER) || locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER)
     }

@@ -166,8 +166,6 @@ class MapsFragment : SuperMapFragment(), OnMapReadyCallback,com.google.android.g
         setHasOptionsMenu(true)
         locationManager = context?.getSystemService(Context.LOCATION_SERVICE) as LocationManager
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(activity!!)
-
-        //getCurrentCar()
         return view
     }
 
@@ -276,7 +274,7 @@ class MapsFragment : SuperMapFragment(), OnMapReadyCallback,com.google.android.g
 
     private fun startService(){
         if(checkFineLocationPermission()) {
-            if (checkLocation()) {
+            if (isLocationEnabled()) {
                 startServiceIntent()
             }
         }

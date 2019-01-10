@@ -22,7 +22,7 @@
        android:layout_marginEnd="14dp"
        android:layout_marginRight="14dp"
        android:layout_marginTop="40dp"
-       android:src="@drawable/boora_logo"
+       android:src="@drawable/ic_my_location"
        app:backgroundTint="@color/colorButtonTextDriver"
        app:fabSize="normal" />
 
