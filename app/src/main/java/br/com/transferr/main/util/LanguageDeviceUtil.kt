@@ -9,12 +9,20 @@ import br.com.transferr.model.enums.EnumLanguage
 object LanguageDeviceUtil {
     fun transform(map: Map<EnumLanguage, String>): String{
         var description:String?=""
-        if(ApplicationTransferr.DEVICE_LANGUAGE == ApplicationTransferr.LANG_PT){
-            map.forEach{
-                mapItem ->
+        if(ApplicationTransferr.DEVICE_LANGUAGE == ApplicationTransferr.LANG_PT) {
+            map.forEach { mapItem ->
                 run {
                     var key = mapItem.key
                     if (key == EnumLanguage.PT_BR) {
+                        description = mapItem.value
+                    }
+                }
+            }
+        }else if(ApplicationTransferr.DEVICE_LANGUAGE == ApplicationTransferr.LANG_ES){
+            map.forEach { mapItem ->
+                run {
+                    var key = mapItem.key
+                    if (key == EnumLanguage.ES_ES) {
                         description = mapItem.value
                     }
                 }

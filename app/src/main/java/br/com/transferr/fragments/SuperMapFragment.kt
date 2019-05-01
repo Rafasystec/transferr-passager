@@ -91,13 +91,13 @@ open class SuperMapFragment : SuperClassFragment() {
 
     private fun showAlert() {
         val dialog = AlertDialog.Builder(this!!.activity!!)
-        dialog.setTitle("Habilitar Localização")
-                .setMessage("Precisamos ativar o GPS.\nPor favor ative-o.")
-                .setPositiveButton("Ativar GPS", DialogInterface.OnClickListener { paramDialogInterface, paramInt ->
+        dialog.setTitle(R.string.enableLocation)
+                .setMessage(R.string.needEnableLocation)
+                .setPositiveButton(R.string.enableGPS, DialogInterface.OnClickListener { paramDialogInterface, paramInt ->
                     val myIntent = Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS)
                     startActivity(myIntent)
                 })
-                .setNegativeButton("Cancel", null)
+                .setNegativeButton(R.string.cancel, null)
         dialog.show()
     }
 

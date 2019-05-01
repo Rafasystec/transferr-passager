@@ -6,5 +6,6 @@ package br.com.transferr.model.enums
 enum class EnumLanguage {
 
     PT_BR,
-    EN_USA
+    EN_USA,
+    ES_ES
 }

@@ -30,7 +30,7 @@
         <activity
             android:name=".activities.TermsOfUseActivity"
             android:label="@string/title_activity_terms_of_use"
-            android:theme="@style/AppThemeDriver" />
+            android:theme="@style/TermsOfUseTheme" />
         <activity
             android:name=".passenger.activities.MapInfoWindowActivity"
             android:label="@string/title_activity_map_info_window"

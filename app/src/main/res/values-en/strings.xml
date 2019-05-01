@@ -119,4 +119,8 @@
     <string name="noDriverAtThisMoment">No Drivers at this moment</string>
     <string name="permissionGranted">Permission Granted</string>
     <string name="permissionDied">Permission Died</string>
+    <string name="enableLocation">Enable Location</string>
+    <string name="needEnableLocation">We need to turn on GPS. Please activate it.</string>
+    <string name="enableGPS">Enable GPS</string>
+    <string name="cancel">Cancel</string>
 </resources>

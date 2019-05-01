@@ -159,13 +159,13 @@ class InitialActivity : br.com.transferr.passenger.activities.SuperClassActivity
 
     private fun showAlert() {
         val dialog = AlertDialog.Builder(this)
-        dialog.setTitle("Habilitar Localização")
-                .setMessage("Precisamos ativar o GPS.\nPor favor ative-o.")
-                .setPositiveButton("Ativar GPS", DialogInterface.OnClickListener { paramDialogInterface, paramInt ->
+        dialog.setTitle(this.getString(R.string.enableLocation))
+                .setMessage(R.string.needEnableLocation)//"Precisamos ativar o GPS.\nPor favor ative-o."
+                .setPositiveButton(R.string.enableGPS, DialogInterface.OnClickListener { paramDialogInterface, paramInt ->
                     val myIntent = Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS)
                     startActivity(myIntent)
                 })
-                .setNegativeButton("Cancel", DialogInterface.OnClickListener { paramDialogInterface, paramInt -> })
+                .setNegativeButton(R.string.cancel, DialogInterface.OnClickListener { paramDialogInterface, paramInt -> })
         dialog.show()
     }
 

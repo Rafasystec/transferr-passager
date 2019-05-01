@@ -118,5 +118,9 @@
     <string name="noDriverAtThisMoment">Sem motoristas no momento.</string>
     <string name="permissionGranted">Permissão concedida!</string>
     <string name="permissionDied">Permissão negada!</string>
+    <string name="enableLocation">Habilitar Localização</string>
+    <string name="needEnableLocation">Precisamos ativar o GPS. Por favor ative-o.</string>
+    <string name="enableGPS">Ativar GPS</string>
+    <string name="cancel">Cancelar</string>
 
 </resources>
