@@ -1,3 +1,180 @@
 <resources>
-    <string name="terms">transferr-passager</string>
+    <string name="terms">
+
+        <h3>\t\t\t\t<b>TERMS OF USE</b></h3> \n\n
+        <h5>ACCEPTANCE OF "TERMS OF USE"</h5>
+        \n\n
+        <p>
+            Please read these Terms of Use carefully, which is an "electronic agreement") and establishes the terms and conditions for the legal relationship between BOORA and the Users of this Platform. Any and all use of the BOORA Platform is conditioned upon the acceptance of these Terms of Use, regardless of the User's classification or nature.
+        </p>
+        \n
+        <p>
+            The mere act of a User to register and/or, in any way and under any pretext, use the website and/or BOORA application, is equivalent to the express agreement on the content of this document. Therefore, if you do not agree with its content, do not make any use of the respective platform.
+        </p>
+        \n
+        <h5><b>1. TERMS OF USE</b></h5>
+        \n\n
+        <p> \t\t <b>1.1 OBJECT</b> -
+             Through these Terms of Use, BOORA offers Users the right to use ("license") their Platform, according to the rules and conditions defined below.
+        </p>
+        \n
+        <p>\t\t\t\t <b>1.1.2 BOORA PLATFORM</b> -
+            The Boora Platform aims to offer functionalities, resources and technologies with the purpose of facilitate the relationship, communication and information among its Users, aiming the possibility to schedule tours according to the will of the parties.
+        </p>
+        \n
+        <p>\t\t\t\t <b>1.1.3 USERS</b> -
+            Users of this Platform are, on the one hand, PROFESSIONAL suppliers of driver services and tour guide and, on the other hand, potential CLIENTS contracting these services, according to rules below; the term "User" or "Users" in this instrument refers to both Professionals and Customers.
+        </p>
+        \n
+        <p>\t\t <b>1.2 LEGAL NATURE OF THE PLATFORM AND ITS RESPONSIBILITIES </b> -
+            The BOORA Platform acts merely in the provision of technological mechanisms that facilitate the relationship between professionals and potential contractors ("Customers") of the services offered by the respective companies, only being responsible for the correct supply and operation of these technologies - expressly established that:
+        </p>
+        \n
+        <p> \t\t\t\t <b>1.2.1 SERVICE AGREEMENTS</b> -
+            BOORA does not provide the final services that may be contracted with the aid of this platform, not integrating the supply chain of these services, which is why BOORA does not have any co-responsibility with the Professionals regarding their duties, obligations and criteria of quality, quantity, speed, legality, etc. of their services.
+        </p>
+        \n
+        <p> \t\t\t\t <b>1.2.2 SERVICE CONTRACTS</b> -
+            BOORA is also not a contractor of the final services that may be contracted with the aid of this platform, which is why BOORA does not have any co-responsibility with the Customers.
+        </p>
+        \n
+        <p> \t\t\t\t <b>1.2.3 AUDITING</b> -
+            Due to technical, factual and legal impossibilities, BOORA is not responsible or obliged to supervise the daily activities of the Professionals, nor to guarantee that the performance of these Professionals, as well as the offer and the provision of the services offered by them, respects the minimum criteria required by legislation and competent bodies, among others.
+        </p>
+        \n
+        \t\t\t\t <b>1.2.4 OBJECTIVES OF THE USERS </b> -
+            The BOORA Platform is not obliged to close the contracting of services between Users, nor to guarantee the provision of services contracted; BOORA does not guarantee that Professionals will have their services contracted, nor will Customers be able to schedule services and be served.
+        \n
+        <p>\t\t\t\t<b>1.2.5 RULES OF THE PROFESSIONAL CLASS</b> -
+             BOORA does not guarantee to the Professionals that, when using the Platform, they will be free of risks related to the rules established by the legislation, codes of ethics and/or their class councils; when using the Platform, the Professional assumes all risks and possible damages related to their acts and decisions, being responsible for knowing and respecting the rules imposed on their activity, without the co-responsibility of BOORA.
+        </p>
+        \n
+        \n
+        <p><b>PROFESSIONALS AND OFFERED SERVICES</b></p>
+        \n\n
+        <p>\t\t <b>2.1 PROFESSIONALS</b> -
+            Only those who are formally and legally authorized to exercise their respective professions, under the laws and competent bodies, are authorized to register on the Platform and to offer services through them.
+        </p>
+        \n
+        <p>\t\t <b>2.2 SERVICES TO BE PROVIDED </b>-
+             Professionals are only authorized to offer tours services in the places presented within our platform, any other type of services besides tours must be agreed with the Professional.
+        </p>
+        \n
+        <p>\t\t<b>2.3 PROFESSIONAL RESPONSIBILITY</b> -
+             The Professional is the only responsible for his decisions and professional acts, being obliged to act with the utmost diligence, competence and prudence, being also absolutely prohibited, among other things:
+        </p>
+        \n
+        <p>\t\t\t\t 2.3.1
+            To cause damage to the Client, by action or omission, characterized as malpractice, recklessness or negligence, as well as practicing or indicating unnecessary acts;
+        </p>
+        \n
+        <p>\t\t\t\t 2.3.2 Delegate to other professionals;</p>
+        \n
+        <p>\t\t\t\t 2.3.3
+            Fail to fullfil with the established rules by the competent legislation or their respective councils or class organs, including judgments, resolutions, codes of ethics, etc .;
+        </p>
+        \n
+        <p>\t\t<b>2.4 PROFESSIONAL SECRECY</b>-
+            It is the obligation of the Professionals to maintain confidentiality regarding the information to which they have knowledge or access through the Platform;
+        </p>
+        \n\n
+        <b>\t\t\t\t 3.PLATFORMS UTILIZATION</b>
+        \n\n
+        \t\t\t <b>3.1 PLATFORMS UTILIZATION</b> -
+            The BOORA Platform offers users technological resources aimed to facilitate the relationship between Professionals and Customers, with the specific objectives of:
+        \n
+        <b>\t\t\t 3.1.1 TOURS</b> - Allows the scheduling of tours with the professional;
+        \n
+        <b>\t\t 3.2 PLATFORM OPERATION</b> -
+            The proper functioning of the Platform is conditioned to its correct use by Users (Professional and / or Customers), according to the rules of these Terms of Use, the mechanisms of operation of the Platform and any complementary rules or clarifications established in the Platform itself; BOORA is not responsible for the damages or consequences of the misuse of the Platform by Users (Professional and / or Customers).
+        \n
+        <b>\t\t\t 3.2.1 PROFESSIONAL</b> -
+            For the services offered through the Platform, the Professional must provide personal data and their vehicle data for the correct operation of the platform.
+        \n
+        <b>\t\t\t 3.2.2 CLIENT</b> -
+            When accessing the Platform, the Client will be able to perform: searches related to the services that they want to contract, through criteria and information filters; request scheduling of tours; among others.
+        \n
+        <b>\t\t 3.3 RESPONSIBILITY FOR SERVICES</b> -
+            The responsibility for the provision, quality and all issues related to the execution of the scheduled services is entirely of the respective Professionals - however, BOORA is free to offer facilitated means of access to parts of these services, in a complementary way, which will not qualify it as the provider of these services, nor will it become responsible for the obligations of the Professional or for any damages suffered by the Client.
+        \n
+        <b>\t\t 3.4 PAYMENTS </b> -
+            The payments made by the scheduled services will be destined and received by the respective Professional, the BOORA platform does not specify value for the tours and does not interfere in the negotiation between the professional and the client, being both responsible to settle the tour value.
+        \n\n
+        <b>4. GENERAL RIGHTS AND OBLIGATIONS</b>
+        \n\n
+        <b>\t\t 4.1 USER'S OBLIGATIONS</b> -
+            The User, in the use of the Platform, under penalty of termination of these Terms of Use and of taking the appropriate legal measures, integrally obligated to:
+        \n
+        <b>\t\t\t 4.1.1 ACCEPTANCE OF THE TERMS OF USE</b> -
+            Any and all use of this Platform is conditional on the broad and complete agreement, on the part of the User, with respect to the rules of this Terms of Use and the content of the Platform.
+        \n
+        <b>\t\t\t 4.1.2 COMMUNICATIONS</b> -
+            Adopt all necessary measures (such as: anti-spam and e-mail filter configuration) to ensure that the communications sent by BOORA will be delivered.
+        \n
+        <b>\t\t\t 4.1.3 RULES OF USE AND LEGISLATION</b> -
+            Respect these Terms of Use or the rules expressed in the Platform environment; to act ethically and morally; comply with all federal, state and municipal laws, regardless of their nature; deprive themselves of acting in a disrespectful, fraudulent, abusive, illegal manner and of violating the general principles and rules of law.
+        \n
+        <b>\t\t\t 4.1.4 PROHIBITED USES, HACKING AND DISHONESTY</b> -
+            Depriving yourself of: using the Platform in a manner that could damage, disable, overburden or damage any BOORA network or server; attempt to gain unauthorized access to any part of the Platform, other accounts, infrastructure, e-mails, communications or networks connected to any BOORA server; use hacking or data mining techniques to harm or have access to information regarding BOORA, its Platform or its Users; to get advantage that in any way damages BOORA, other Users or third parties.
+        \n
+        <b>\t\t 4.2 PLATFORM SECURITY </b>-
+            The BOORA is obliged to protect, through storage in high security servers, the confidentiality of all the information and registers related to the Users.
+        \n
+        <b>\t\t\t 4.2.1 LIMITATION OF LIABILITY</b> -
+            BOORA does not take responsability for any damages resulted from the fraudulent action of third parties, nor from the seizure and cooptation of data by third parties that, breaking the security systems, can access this information.
+        \n
+        <b>\t\t 4.3 PLATFORM FUNCTIONING</b> -
+            Due to the natural technical limitations to the technologies and to any unforeseen events (such as a fortuitous event and force majeure), BOORA does not guarantee that the services will operate 24 hours a day, without interruptions, nor will the services be provided free of charge. errors and completely safe.
+        \n
+        <b>\t\t 4.4 CHANGES TO THE TERMS OF USE AND THE PLATFORM</b> -
+            As a "licensor" of the Platform, BOORA reserves the broad and unconditional right at any time to implement any kind of change in its Terms of Use and/or Platform (to add, delete or change any element), including fees for your remuneration.
+        \n
+        <b>\t\t 4.4.1 COMPLEMENTARY RULES</b> -
+            BOORA is totally free to establish rules, conditions, charges, rights and/or duties to its Users, directly through the Platform (website and / or mobile application) and/or email, although no changes are implemented in the Terms of Use.
+        \n
+        <b>\t\t\t 4.4.2 CHANGES AND TERMINATION </b>-
+            The User undertakes to submit to the updates made in these Terms of Use or in the Platform (which, according to the severity, will be informed in advance to the User) and, if it disagrees with the content of any of the changes should immediately cease the use of the Platform and proceed with the n of its registration.
+        \n
+        <b>\t\t\t 4.4.3 TRANSPARENCY </b>-
+            The User shall be informed as to the possible updating in the Platform Terms of Use, through BOORA's preferred communication (such as, for example, email, notification, banner, etc.).
+        \n\n
+        <b>5. REGISTRATION, ACCOUNT AND ACCESS</b>
+        \n\n
+        <b>\t\t 5.1 REGISTRATION AND INFORMATION </b> -
+            Anyone who wishes to become a Platform User must have legal capacity for civil acts, providing the information required in the register.
+        \n
+        <b>\t\t\t 5.1.1 INFORMATION AND VERIFICATION</b> -
+             Users are fully responsible for the accuracy, veracity and timeliness of the information they provide, and they also undertake to provide any information requested by BOORA for the purpose of verifying information - under penalty of suspension and/or exclusion of Registration, and BOORA is not responsible for the inspection and/or control of the veracity and/or updating of these.
+        \n
+        <b>\t\t 5.2 ACCESS ACCOUNT SECURITY</b> -
+             Once the Registration has been made, the User can access the Platform by means of a login and password (which are personal and non-transferable), and the User is responsible for the security of his access data, the security measures necessary to prevent third parties from using the users account without the users authorization and being responsible for authorizations to use for the third party, as well as for the supervision of these uses.
+        \n
+        <b>\t\t\t\t 5.2.1 PREJUDICE</b> -
+             BOORA can only be responsible for damages caused to Users as a result of unauthorized access and/or use of the Platform through its Registry if it is objectively and unquestionably identified in its fault in the security of access data of User.
+        \n
+        <b>\t\t\t\t 5.2.2 UNAUTHORIZED USES</b> -
+            If the User becomes aware that third parties have seized and/or are using their access data without their authorization, they must immediately change their password and then inform BOORA.
+        \n\n
+        <b>\t\t\t\t 6. GENERAL CLAUSES</b>
+        \n\n
+        <b>\t\t 6.1 CONTACT</b> -
+            For the contact between BOORA and the User, the electronic address contact.boora@gmail.com is made available - the User is obliged to keep in his/her register current electronic address, through which the communications will be made, from the outset lending legal validity to this means of communication.
+        \n\n
+        <b>\t\t 6.2 DATA AND COMMUNICATIONS</b> -
+             During or after the use of the Platform, BOORA may collect data and personal information and/or user's use, which may be processed for purposes of service or improvement of internal processes, as well as used for purposes communication with the User by telephone, email, etc., among others.
+        \n
+        <b>\t\t 6.3 INTELLECTUAL PROPERTY</b> -
+            This Platform and all its elements (including: websites, mobile applications, programming lines, documents and files, communications carried out by any means, blogs, social networks, etc.) are owned and exclusive control of BOORA.
+        \n
+        <b>\t\t 6.4 ASSIGNMENT AND TRANSFER OF RIGHTS AND DUTIES</b> -
+            BOORA is authorized to transfer or assign, in whole or in part, its rights and obligations arising from this Term of Use.
+        \n
+        <b>\t\t 6.5 FORUM</b> -
+            These Terms of Use shall be understood and construed in accordance with the laws of the Federative Republic of Brazil and, in case of any disputes which are not resolved amicably between the Parties, the Forum of the District of Fortaleza - Ce is hereby established as competent to settle the doubts or conflicts arising from this document.
+
+
+
+        \n\n\n\n
+
+    </string>
 </resources>
