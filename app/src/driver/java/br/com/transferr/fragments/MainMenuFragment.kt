@@ -14,6 +14,7 @@ import br.com.transferr.activities.TermsOfUseActivity
 import br.com.transferr.extensions.callEmailHost
 import br.com.transferr.extensions.setupToolbar
 import br.com.transferr.main.util.Prefes
+import hotchemi.android.rate.AppRate
 import kotlinx.android.synthetic.main.fragment_main_menu.*
 import org.jetbrains.anko.alert
 import org.jetbrains.anko.noButton
@@ -43,6 +44,8 @@ class MainMenuFragment : SuperClassFragment() {
             activity?.startActivity(Intent(activity,TermsOfUseActivity::class.java))
         }
 
+        btnMainMenuRateApp.setOnClickListener { AppRate.with(activity).showRateDialog(activity) }
+
         if(BuildConfig.FLAVOR == "driver"){
             btnLogout.visibility = View.VISIBLE
             btnLogout.setOnClickListener { logout() }
@@ -52,7 +55,7 @@ class MainMenuFragment : SuperClassFragment() {
     }
 
     private fun logout(){
-        activity?.alert(getString(R.string.logout),getString(R.string.areYouSureLogout)){
+        activity?.alert(getString(R.string.areYouSureLogout),getString(R.string.logout)){
             yesButton {
                 Prefes.clear()
                 startActivity(Intent(activity,LoginActivity::class.java))
