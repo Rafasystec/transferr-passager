@@ -122,5 +122,7 @@
     <string name="needEnableLocation">Precisamos ativar o GPS. Por favor ative-o.</string>
     <string name="enableGPS">Ativar GPS</string>
     <string name="cancel">Cancelar</string>
+    <string name="unableToFindApp">Unable to find market app</string>
+    <string name="appRateText">Please help us improve our app by sending your rate.</string>
 
 </resources>

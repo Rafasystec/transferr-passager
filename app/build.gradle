@@ -99,6 +99,8 @@ dependencies {
     //For Rounded Image View
     implementation 'com.makeramen:roundedimageview:2.3.0'
     compile 'com.github.Mariovc:ImagePicker:1.2.2'
+    //For the rate app
+    implementation 'com.github.hotchemi:android-rate:1.0.1'
 
 
 }

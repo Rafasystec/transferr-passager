@@ -136,8 +136,8 @@
 
     <style name="TermsOfUseTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="actionBarTheme">@style/MyApp.ActionBarTheme</item>
-        <item name="colorPrimary">@android:color/holo_blue_dark</item>
-        <item name="colorPrimaryDark">@android:color/background_light</item>
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorPrimaryDark</item>
         <item name="android:toolbarStyle" tools:targetApi="lollipop">@style/AppTheme.ToolbarStyle
         </item>
