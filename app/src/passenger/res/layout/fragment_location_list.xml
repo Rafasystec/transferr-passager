@@ -11,6 +11,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
         >
         <!--
         <android.support.v7.widget.AppCompatButton
@@ -46,6 +48,8 @@
         android:id="@+id/rcLocationList"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:isScrollContainer="true"
+        android:layout_marginTop="20dp"
         android:background="@android:color/white"
         app:layoutManager="android.support.v7.widget.LinearLayoutManager" />
 

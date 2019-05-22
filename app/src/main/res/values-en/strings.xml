@@ -23,7 +23,7 @@
     <string name="search">Search</string>
     <string name="search_hint">Search</string>
     <string name="drivers">Drivers</string>
-    <string name="plans">plans</string>
+    <string name="plans">Tour schedule</string>
     <string name="empty">empty</string>
     <string name="seatsRemaining">seats remaining</string>
     <string name="seeMorePlainTourOption">More tour options</string>
@@ -35,7 +35,7 @@
     <string name="tour">tour</string>
     <string name="clickOnSearchBeside">Click on the search icon bellow to filter.</string>
     <string name="noResultFound">No result found!</string>
-    <string name="seeTours">See Tours</string>
+    <string name="seeTours">Let\'s go?</string>
     <string name="local">Local</string>
     <string name="localAndTours"><![CDATA[Places & Tours]]></string>
     <!--Pages title -->
@@ -115,8 +115,8 @@
     <string name="areYouSureLogout">Are you sure to Logout?</string>
     <string name="alwaysParamIsTrueMessage">The parameter that make the car always on map is True, so your car will still on map.</string>
     <string name="selectATime">Select a Time</string>
-    <string name="noPlainTourAtThisMoment">No Plans Tour at this moment.</string>
-    <string name="noDriverAtThisMoment">No Drivers at this moment</string>
+    <string name="noPlainTourAtThisMoment">Unfortunately, we don’t have any schedules for the chosen tour!</string>
+    <string name="noDriverAtThisMoment">Unfortunately, we don’t have any driver for the chosen tour!</string>
     <string name="permissionGranted">Permission Granted</string>
     <string name="permissionDied">Permission Died</string>
     <string name="enableLocation">Enable Location</string>
@@ -125,4 +125,7 @@
     <string name="cancel">Cancel</string>
     <string name="unableToFindApp">Unable to find market app</string>
     <string name="appRateText">If you enjoy playing this app, would you mind taking a moment to rate it? It won\'t take more than a minute.\nThanks for your support!</string>
+    <string name="driver">Driver</string>
+    <string name="noDriverAtThisMomentDetail">Speak directly with a driver to make your ride!</string>
+    <string name="noPlainTourAtThisMomentDetail">Speak directly with a driver to make your ride!</string>
 </resources>

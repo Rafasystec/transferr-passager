@@ -23,7 +23,7 @@
     <string name="search">Pesquisar</string>
     <string name="search_hint">Procurar</string>
     <string name="drivers">Motoristas</string>
-    <string name="plans">Planos</string>
+    <string name="plans">Agenda de passeios</string>
     <string name="empty">Vazio</string>
     <string name="seatsRemaining">Vagas</string>
     <string name="seeMorePlainTourOption">Mais Opções de Passeio</string>
@@ -115,7 +115,7 @@
     <string name="alwaysParamIsTrueMessage">The parameter that make the car always on map is True, so your car will still on map.</string>
     <string name="selectATime">Selecione a hora</string>
     <string name="noPlainTourAtThisMoment">Sem passeios no momento.</string>
-    <string name="noDriverAtThisMoment">Sem motoristas no momento.</string>
+    <string name="noDriverAtThisMoment">Infelizmente não temos nenhum agendamento para o passeio escolhido!</string>
     <string name="permissionGranted">Permissão concedida!</string>
     <string name="permissionDied">Permissão negada!</string>
     <string name="enableLocation">Habilitar Localização</string>
@@ -124,5 +124,8 @@
     <string name="cancel">Cancelar</string>
     <string name="unableToFindApp">Unable to find market app</string>
     <string name="appRateText">Please help us improve our app by sending your rate.</string>
+    <string name="driver">Motorista</string>
+    <string name="noDriverAtThisMomentDetail">Fale diretamente com um motorista para fazer o seu passeio!</string>
+    <string name="noPlainTourAtThisMomentDetail">Speak directly with a driver to make your ride!</string>
 
 </resources>

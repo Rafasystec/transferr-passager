@@ -53,32 +53,18 @@ class TourOptionAdapter(val options : List<TourOption>, val onClick: (TourOption
                     }
                 })
         holder.cardView.setOnClickListener { onClick(tour) }
-        holder.tvLocation.text = tour.location?.name!!
-        //var descriptionMax = 70
+        holder.tvLocation.text = "${tour.location?.name} - ${tour.location?.subCountry}"
         var description = LanguageDeviceUtil.transform(tour.shortDescriptionLanguage!!)
-        //if(description != null){
-        //    var size = description.length
-        //    if(size > descriptionMax){
-        //        description = description.substring(0,descriptionMax-5)+" ..."
-        //    }
-        //}
         holder.tvTourDescription.text = description
     }
 
     class TourOptionViewHolder(view: View): RecyclerView.ViewHolder(view){
-        var tvName              : TextView
-        var cardView            : CardView
-        var ivMainLocation      : ImageView
-        var progress            : ProgressBar
-        var tvTourDescription   : TextView
-        var tvLocation          : TextView
-        init {
-            tvName              = view.findViewById(R.id.tvLocationName)
-            cardView            = view.findViewById(R.id.cvLocation)
-            ivMainLocation      = view.findViewById(R.id.ivMainLocation)
-            tvTourDescription   = view.findViewById(R.id.tvTourDescription)
-            tvLocation          = view.findViewById(R.id.tvLocation)
-            progress            = view.findViewById(R.id. progress)
-        }
+        var tvName              : TextView      = view.findViewById(R.id.tvLocationName)
+        var cardView            : CardView      = view.findViewById(R.id.cvLocation)
+        var ivMainLocation      : ImageView     = view.findViewById(R.id.ivMainLocation)
+        var progress            : ProgressBar   = view.findViewById(R.id. progress)
+        var tvTourDescription   : TextView      = view.findViewById(R.id.tvTourDescription)
+        var tvLocation          : TextView      = view.findViewById(R.id.tvLocation)
+
     }
 }

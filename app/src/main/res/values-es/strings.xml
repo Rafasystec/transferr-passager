@@ -19,11 +19,11 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="whereToGo">¿Para donde?</string>
+    <string name="whereToGo">¿A donde?</string>
     <string name="search">Buscar</string>
     <string name="search_hint">Buscar</string>
     <string name="drivers">Conductores</string>
-    <string name="plans">planes</string>
+    <string name="plans">Paseos programado</string>
     <string name="empty">vacía</string>
     <string name="seatsRemaining">Aún hay lugar</string>
     <string name="seeMorePlainTourOption">Más opciones de paseo</string>
@@ -41,7 +41,7 @@
     <!--Pages title -->
     <string name="page_title_map">Mapa</string>
     <string name="page_title_tour">Tour</string>
-    <string name="page_title_menu">Menu</string>
+    <string name="page_title_menu">Menú</string>
     <string name="searchByDescription">Buscar por ubicación</string>
     <string name="driverAppName">Driver</string>
     <string name="myInformation">Mi informacion</string>
@@ -63,7 +63,7 @@
     <string name="contactUs">Contáctenos</string>
     <string name="rateApp">Califica la aplicación</string>
     <string name="termsOfUse">Condiciones de uso</string>
-    <string name="menu">Menu</string>
+    <string name="menu">Menú</string>
     <string name="model">Modelo</string>
     <string name="plate">Placa</string>
     <string name="color">Color</string>
@@ -115,8 +115,8 @@
     <string name="areYouSureLogout">¿Estás seguro de cerrar sesión?</string>
     <string name="alwaysParamIsTrueMessage">El parámetro que hace que el automóvil esté siempre en el mapa es Verdadero, por lo que su automóvil aún estará en el mapa.</string>
     <string name="selectATime">Seleccione una hora</string>
-    <string name="noPlainTourAtThisMoment">No hay paseos en este momento.</string>
-    <string name="noDriverAtThisMoment">No hay conductores en este momento.</string>
+    <string name="noPlainTourAtThisMoment">¡Desafortunadamente no tenemos ninguna programación para el tour elegido!</string>
+    <string name="noDriverAtThisMoment">¡Desafortunadamente no tenemos ninguna programación para el tour elegido!</string>
     <string name="permissionGranted">¡Permiso concedido!</string>
     <string name="permissionDied">¡Permiso denegado!</string>
     <string name="enableLocation">Habilitar ubicación</string>
@@ -125,4 +125,7 @@
     <string name="cancel">Cancelar</string>
     <string name="unableToFindApp">Unable to find market app</string>
     <string name="appRateText">Please help us improve our app by sending your rate.</string>
+    <string name="driver">Conductore</string>
+    <string name="noDriverAtThisMomentDetail">Speak directly with a driver to make your ride!</string>
+    <string name="noPlainTourAtThisMomentDetail">Hable directamente con un conductor para su tour.</string>
 </resources>

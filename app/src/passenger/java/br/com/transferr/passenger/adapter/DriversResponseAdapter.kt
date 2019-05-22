@@ -58,7 +58,7 @@ class DriversResponseAdapter(val drivers : List<ResponseDriver>,val onClick: (Re
         }
         holder.tvDriverDetail.text          = "${responseDrivers.nameOfCar}"
         holder.progress.visibility = View.VISIBLE
-        Picasso.with(context).load(responseDrivers.imgProfileUrl).placeholder(R.drawable.no_photo_64).fit().into(holder.img,
+        Picasso.with(context).load(responseDrivers.imgProfileUrl).placeholder(R.drawable.no_photo_64).into(holder.img,
             object : com.squareup.picasso.Callback{
                 override fun onSuccess() {
                     holder.img.visibility = View.VISIBLE

@@ -43,6 +43,7 @@ class DriverListFragment : SuperClassFragment() {
         recycleView = defaultRecycleView(activity!!,R.id.rcDriversFromLocation)
         if(llEmptyList != null) {
             llEmptyList.tvTextToAdd.text = getString(R.string.noDriverAtThisMoment)
+            llEmptyList.tvTextDetail.text = ""
         }
     }
 

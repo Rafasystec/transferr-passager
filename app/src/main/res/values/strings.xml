@@ -126,4 +126,7 @@
     <string name="cancel">Cancel</string>
     <string name="unableToFindApp">Unable to find market app</string>
     <string name="appRateText">Please help us improve our app by sending your rate.</string>
+    <string name="driver">Driver</string>
+    <string name="noDriverAtThisMomentDetail">Speak directly with a driver to make your ride!</string>
+    <string name="noPlainTourAtThisMomentDetail">Speak directly with a driver to make your ride!</string>
 </resources>

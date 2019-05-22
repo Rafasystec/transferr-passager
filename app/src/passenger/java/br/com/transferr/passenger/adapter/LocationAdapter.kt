@@ -29,7 +29,7 @@ class LocationAdapter(val locations: List<Location>, val onClick:(Location)->Uni
 
     override fun onBindViewHolder(holder: br.com.transferr.passenger.adapter.LocationAdapter.LocationViewHolder, position: Int) {
         val location = locationListFiltered!![position]
-        holder.tvName.text = location.name
+        holder.tvName.text = "${location.name} - ${location.subCountry}"
         var urlPhoto: String?
         urlPhoto = if(location.photoProfile != null && !location.photoProfile!!.isEmpty()) {
             location.photoProfile

@@ -47,6 +47,7 @@ class PlainTourListFragment : SuperClassFragment() {
         Log.i("INFO","Language device ${br.com.transferr.application.ApplicationTransferr.DEVICE_LANGUAGE}")
         if(llEmptyList != null) {
             llEmptyList.tvTextToAdd.text = getString(R.string.noPlainTourAtThisMoment)
+            llEmptyList.tvTextDetail.text = getString(R.string.noPlainTourAtThisMomentDetail)
         }
     }
 

@@ -27,6 +27,18 @@
         android:layout_marginTop="12dp"
         android:textColor="@color/colorPrimaryDark"
         />
+    <TextView
+        android:id="@+id/tvTextDetail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Text to ADD"
+        android:textSize="14sp"
+        android:textStyle="normal"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:layout_marginTop="12dp"
+        android:textColor="@color/colorText"
+        />
 
 
 </LinearLayout>
