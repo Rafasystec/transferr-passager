@@ -61,7 +61,7 @@
     <string name="places">Lugares</string>
     <string name="about">Sobre</string>
     <string name="contactUs">Contáctenos</string>
-    <string name="rateApp">Califica la aplicación</string>
+    <string name="rateApp">Evalue a BOORA</string>
     <string name="termsOfUse">Condiciones de uso</string>
     <string name="menu">Menú</string>
     <string name="model">Modelo</string>
@@ -128,4 +128,5 @@
     <string name="driver">Conductore</string>
     <string name="noDriverAtThisMomentDetail">Speak directly with a driver to make your ride!</string>
     <string name="noPlainTourAtThisMomentDetail">Hable directamente con un conductor para su tour.</string>
+    <string name="car">Coche</string>
 </resources>

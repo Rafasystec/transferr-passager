@@ -129,4 +129,5 @@
     <string name="driver">Driver</string>
     <string name="noDriverAtThisMomentDetail">Speak directly with a driver to make your ride!</string>
     <string name="noPlainTourAtThisMomentDetail">Speak directly with a driver to make your ride!</string>
+    <string name="car">Car</string>
 </resources>

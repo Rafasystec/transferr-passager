@@ -44,12 +44,12 @@ class MapInfoWindowActivity : SuperClassActivity() {
         var color: String
         var url: String? = null
         if (car != null) {
-            model = "${this?.getString(R.string.model)}: ${car.model!!}"
+            model = "${this?.getString(R.string.car)}: ${car.model!!}"
             plate = "${this?.getString(R.string.plate)}: ${car.placa!!}"
             color = "${this?.getString(R.string.color)}: ${car.cor!!}"
             url = car.photo!!
         } else {
-            model = "${this.getString(R.string.model)}: ${this.getString(R.string.noInfor)}"
+            model = "${this.getString(R.string.car)}: ${this.getString(R.string.noInfor)}"
             plate = "${this.getString(R.string.plate)}: ${this.getString(R.string.noInfor)}"
             color = "${this.getString(R.string.color)}: ${this.getString(R.string.noInfor)}"
         }

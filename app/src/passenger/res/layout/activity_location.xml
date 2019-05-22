@@ -42,7 +42,7 @@
         android:layout_alignParentBottom="true"
         android:text="@string/seeTours"
         android:textColor="@color/colorButtonText"
-        android:layout_marginBottom="2dp"
+
         android:layout_gravity="bottom"
         app:backgroundTint="@color/colorPrimary"
         android:drawableRight="@drawable/ic_chevron_right"

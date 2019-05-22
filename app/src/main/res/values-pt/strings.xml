@@ -127,5 +127,6 @@
     <string name="driver">Motorista</string>
     <string name="noDriverAtThisMomentDetail">Fale diretamente com um motorista para fazer o seu passeio!</string>
     <string name="noPlainTourAtThisMomentDetail">Speak directly with a driver to make your ride!</string>
+    <string name="car">Carro</string>
 
 </resources>

@@ -4,39 +4,92 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@color/activityBackground"
+
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context="br.com.transferr.fragments.MainMenuFragment">
 
-    <android.support.v7.widget.AppCompatButton
-        android:id="@+id/btnMainMenuAppName"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:text="@string/app_name"
-        android:clickable="false"
-        android:textColor="@color/colorButtonText"
-        android:layout_marginBottom="2dp"
-        android:layout_gravity="top"
-        android:drawableLeft="@drawable/boora_pass_logo_small"
-        app:backgroundTint="@color/control"
 
-        />
 
-    <android.support.v7.widget.AppCompatButton
-        android:id="@+id/btnMainMenuContact"
+
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:text="@string/contactUs"
-        android:layout_marginTop="60dp"
-        android:textColor="@color/colorButtonText"
-        android:layout_marginBottom="2dp"
-        android:layout_gravity="top"
-        android:drawableLeft="@drawable/ic_nova_mensagem"
-        android:drawableRight="@drawable/chevron_right"
+        android:layout_height="50dp"
         android:background="@color/control"
+        >
+
+        <com.makeramen.roundedimageview.RoundedImageView
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/logo256"
+            android:layout_gravity="center"
+            android:layout_marginLeft="8dp"
+            app:riv_corner_radius="50dp"
+            />
+        <android.support.v7.widget.AppCompatButton
+            style="?android:borderlessButtonStyle"
+            android:id="@+id/btnMainMenuAppName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:text="@string/app_name"
+            android:clickable="false"
+            android:textAlignment="center"
+            android:textColor="@color/colorButtonText"
+
+            android:background ="@color/control"
+            android:gravity="center" />
+    </LinearLayout>
+
+
+
+
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="@color/control"
+    android:layout_marginTop="60dp"
+    >
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+
+        android:orientation="vertical"
+        android:background="@color/control"
+        >
+        <android.support.v7.widget.AppCompatButton
+            style="?android:borderlessButtonStyle"
+            android:id="@+id/btnMainMenuContact"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:text="@string/contactUs"
+
+            android:textColor="@color/colorButtonText"
+            android:layout_marginBottom="2dp"
+            android:layout_gravity="top"
+            android:drawableLeft="@drawable/ic_nova_mensagem"
+            android:drawableRight="@drawable/chevron_right"
+            android:background="@color/control"
+            android:drawablePadding="10dp"
+            android:layout_marginLeft="8dp"
+            />
+
+    </LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginLeft="40dp"
+        android:background="@color/activityBackground"
         />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@color/control"
+        >
     <android.support.v7.widget.AppCompatButton
+        style="?android:borderlessButtonStyle"
         android:id="@+id/btnMainMenuRateApp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -48,9 +101,23 @@
         android:drawableLeft="@drawable/ic_solid_star"
         android:drawableRight="@drawable/chevron_right"
         android:background="@color/control"
+        android:layout_marginLeft="8dp"
         />
 
+    </LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/activityBackground"
+        android:layout_marginLeft="40dp"
+        />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@color/control"
+        >
     <android.support.v7.widget.AppCompatButton
+        style="?android:borderlessButtonStyle"
         android:id="@+id/btnMainMenuTerms"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -61,20 +128,10 @@
         android:layout_marginBottom="2dp"
         android:drawableRight="@drawable/chevron_right"
         android:background="@color/control"
+        android:layout_marginLeft="8dp"
         />
-<!--
-    <android.support.v7.widget.AppCompatButton
-        android:id="@+id/btnLogout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:text="@string/logout"
-        android:textColor="@color/colorButtonText"
-        android:drawableLeft="@drawable/icons8_shutdown_30"
-        android:drawableRight="@drawable/chevron_right"
-        android:background="@color/control"
-        android:visibility="visible"
-        />
--->
+    </LinearLayout>
+</LinearLayout>
+
 
 </LinearLayout>
