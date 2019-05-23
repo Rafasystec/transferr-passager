@@ -128,5 +128,7 @@
     <string name="noDriverAtThisMomentDetail">Fale diretamente com um motorista para fazer o seu passeio!</string>
     <string name="noPlainTourAtThisMomentDetail">Speak directly with a driver to make your ride!</string>
     <string name="car">Carro</string>
+    <string name="stayOnline">Ficar online no horário util:</string>
+    <string name="howToSavePhoto">Para trocar de a foto basta clicar-la e escolher uma das opções apresentadas. A foto será salva automaticamente.</string>
 
 </resources>

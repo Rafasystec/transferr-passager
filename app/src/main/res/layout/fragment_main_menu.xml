@@ -18,9 +18,18 @@
         android:layout_marginBottom="2dp"
         android:layout_gravity="top"
         android:drawableLeft="@drawable/boora_logo_small"
-        app:backgroundTint="@color/control"
+        android:background="@color/control"
 
         />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginTop="60dp"
+        android:background="@color/control"
+        >
+
 
     <android.support.v7.widget.AppCompatButton
         android:id="@+id/btnMainMenuContact"
@@ -28,14 +37,23 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:text="@string/contactUs"
-        android:layout_marginTop="60dp"
         android:textColor="@color/colorButtonText"
         android:layout_marginBottom="2dp"
         android:layout_gravity="top"
         android:drawableLeft="@drawable/ic_nova_mensagem"
         android:drawableRight="@drawable/chevron_right"
         android:background="@color/control"
+        style="?attr/borderlessButtonStyle"
+        android:layout_marginLeft="8dp"
+
         />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/activityBackground"
+            android:layout_marginLeft="40dp"
+            />
     <android.support.v7.widget.AppCompatButton
         android:id="@+id/btnMainMenuRateApp"
         android:layout_width="match_parent"
@@ -48,7 +66,15 @@
         android:drawableLeft="@drawable/ic_solid_star"
         android:drawableRight="@drawable/chevron_right"
         android:background="@color/control"
+        style="?attr/borderlessButtonStyle"
+        android:layout_marginLeft="8dp"
         />
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/activityBackground"
+            android:layout_marginLeft="40dp"
+            />
 
     <android.support.v7.widget.AppCompatButton
         android:id="@+id/btnMainMenuTerms"
@@ -61,7 +87,16 @@
         android:layout_marginBottom="2dp"
         android:drawableRight="@drawable/chevron_right"
         android:background="@color/control"
+        style="?attr/borderlessButtonStyle"
+        android:layout_marginLeft="8dp"
         />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/activityBackground"
+            android:layout_marginLeft="40dp"
+            />
 
     <android.support.v7.widget.AppCompatButton
         android:id="@+id/btnLogout"
@@ -74,7 +109,11 @@
         android:drawableRight="@drawable/chevron_right"
         android:background="@color/control"
         android:visibility="visible"
+        style="?attr/borderlessButtonStyle"
+        android:layout_marginLeft="8dp"
         />
+
+    </LinearLayout>
 
 
 </LinearLayout>

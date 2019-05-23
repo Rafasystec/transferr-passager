@@ -26,6 +26,7 @@ import br.com.transferr.extensions.showValidation
 import br.com.transferr.extensions.toast
 import br.com.transferr.helpers.HelperCamera
 import br.com.transferr.main.util.HelperBase64
+import br.com.transferr.main.util.PermissionUtil
 import br.com.transferr.main.util.Prefes
 import br.com.transferr.model.AnexoPhoto
 import br.com.transferr.model.Driver
@@ -79,6 +80,8 @@ class DriverEditInfo : SuperClassFragment() {
         //btnCamera.setOnClickListener{btnCameraClick()}
         imgProfile.setOnClickListener{btnCameraClick()}
         btnAlterPass.setOnClickListener{btnAlterPassClick()}
+        btnTakeCamera.setOnClickListener { startsCameraActivityForResult() }
+        btnTakeGallery.setOnClickListener { pickUpImageFromGallery() }
         getDriver()
     }
 
@@ -87,8 +90,6 @@ class DriverEditInfo : SuperClassFragment() {
         progressProfile.visibility  = View.VISIBLE
         imgProfile.visibility       = View.GONE
         Picasso.with(activity).load(url)
-                .fit()
-                .centerInside()
                 .memoryPolicy(MemoryPolicy.NO_CACHE,MemoryPolicy.NO_STORE)
                 .networkPolicy(NetworkPolicy.NO_CACHE)
                 .placeholder(R.drawable.no_photo_64)
@@ -181,10 +182,18 @@ class DriverEditInfo : SuperClassFragment() {
     }
 
     private fun btnCameraClick(){
-        openChoosenMenuPopup(imgProfile)
-        //ImagePicker.pickImage(this, "Selecione a Imagem:",PICK_IMAGE,true)
-        //startActivityForResult(camera.open(activity!!,photoName),0)
-        //chooseImage()
+        //openChoosenMenuPopup(imgProfile)
+        //callCameraByFrameWork()
+        //callImage()
+    }
+
+    private fun callCameraByFrameWork() {
+        if (PermissionUtil.hasAllPermissions(activity!!, Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.CAMERA)) {
+            ImagePicker.pickImage(activity, "Selecione a Imagem:", PICK_IMAGE,false)
+
+        } else {
+            toast("No permissions granted.")
+        }
     }
 
     private fun btnAlterPassClick(){
@@ -257,7 +266,7 @@ class DriverEditInfo : SuperClassFragment() {
         //camera.onSaveInstanceState(outState)
     }
 
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if(requestCode == PICK_IMAGE) {
             onResultActivityForGallery(requestCode, resultCode, data)
@@ -306,16 +315,24 @@ class DriverEditInfo : SuperClassFragment() {
         popup.setOnMenuItemClickListener { item ->
             when(item.itemId){
                 R.id.nav_gallery_popup->{
-                    ImagePicker.pickImage(this, "Selecione a Imagem:",PICK_IMAGE,true)
+                    pickUpImageFromGallery()
                 }
                 R.id.nav_camera_popup->{
-                    startActivityForResult(camera.open(activity!!,photoName),TAKE_PICTURE)
+                    startsCameraActivityForResult()
                 }
             }
             //Toast.makeText(activity, "Some Text" + item.title + item.itemId, Toast.LENGTH_SHORT).show()
             true
         }
         popup.show()
+    }
+
+    private fun startsCameraActivityForResult() {
+        startActivityForResult(camera.open(activity!!, photoName), TAKE_PICTURE)
+    }
+
+    private fun pickUpImageFromGallery() {
+        ImagePicker.pickImage(this, "Selecione a Imagem:", PICK_IMAGE, true)
     }
 
     fun onResultActivityForGallery(requestCode: Int, resultCode: Int, data: Intent?){
@@ -369,7 +386,7 @@ class DriverEditInfo : SuperClassFragment() {
         }
 
             var bitmap = BitmapFactory.decodeFile(f.absolutePath)
-            bitmap = Bitmap.createScaledBitmap(bitmap, 400, 400, true)
+            bitmap = Bitmap.createScaledBitmap(bitmap, 400, 300, true)
             var matrix: Matrix? = null
             var rotation = 0
             try {
@@ -391,5 +408,14 @@ class DriverEditInfo : SuperClassFragment() {
                 e.printStackTrace()
             }
     }
+
+    fun callImage(){
+        val intent = Intent()
+        intent.type = "image/*"
+        intent.action = Intent.ACTION_GET_CONTENT
+        startActivityForResult(Intent.createChooser(intent, "Select Picture"), 0)
+    }
+
+
 
 }// Required empty public constructor

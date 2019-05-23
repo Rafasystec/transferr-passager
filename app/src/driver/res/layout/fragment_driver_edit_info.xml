@@ -19,22 +19,25 @@
     <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:fillViewport="true">
+        android:fillViewport="true"
+        android:layout_marginLeft="5dp"
+        >
 
         <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginTop="10dp"
             android:orientation="vertical">
-            <de.hdodenhof.circleimageview.CircleImageView
+            <com.makeramen.roundedimageview.RoundedImageView
                 android:id="@+id/imgProfile"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:layout_gravity="center"
                 android:visibility="visible"
                 android:clickable="true"
                 android:src="@drawable/no_photo_64"
+                app:riv_corner_radius="5dip"
                 />
             <ProgressBar
 
@@ -45,6 +48,37 @@
                 android:visibility="gone"
                 android:layout_gravity="center"
                 />
+           <LinearLayout
+               android:orientation="horizontal"
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:layout_margin="5dp"
+               >
+                <android.support.v7.widget.AppCompatButton
+                    android:id="@+id/btnTakeCamera"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@drawable/btn_left_corner_rounded"
+                    android:text="@string/camera"
+                    android:textColor="@color/colorSecondary"
+                    android:layout_marginRight="1dp"
+                    android:drawableLeft="@drawable/ic_camera"
+                    android:drawableTint="@color/colorSecondary"
+                    />
+               <android.support.v7.widget.AppCompatButton
+                   android:id="@+id/btnTakeGallery"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:layout_weight="1"
+                   android:background="@drawable/btn_right_corner_rounded"
+                   android:text="@string/gallery"
+                   android:textColor="@color/colorSecondary"
+                   android:layout_marginLeft="1dp"
+                   android:drawableRight="@drawable/ic_image_search"
+                   android:drawableTint="@color/colorSecondary"
+                   />
+           </LinearLayout>
             <!--
             <ImageButton
                 android:id="@+id/btnCamera"
@@ -74,7 +108,7 @@
                 android:textColor="@color/black"
                 android:textStyle="bold"
                 android:drawablePadding="5dp"
-                android:background="@drawable/shape_text_layout"
+
                 android:drawableLeft="@drawable/account_black"
                 />
 
@@ -88,6 +122,7 @@
                 android:layout_marginLeft="@dimen/form_margin_left"
                 android:textColor="@color/colorText"
                 android:layout_marginBottom="@dimen/form_margin_bottom"
+                android:layout_marginTop="5dp"
                 />
             <TextView
                 android:id="@+id/lblCfpValue"
@@ -98,7 +133,7 @@
                 android:textSize="18dp"
                 android:textColor="@color/black"
                 android:drawablePadding="5dp"
-                android:background="@drawable/shape_text_layout"
+
                 android:drawableLeft="@drawable/information"
                 />
 
@@ -111,6 +146,7 @@
                 android:layout_marginLeft="@dimen/form_margin_left"
                 android:textColor="@color/colorText"
                 android:layout_marginBottom="@dimen/form_margin_bottom"
+                android:layout_marginTop="5dp"
                 />
             <TextView
                 android:id="@+id/lblDtNascimentoValue"
@@ -121,7 +157,7 @@
                 android:textStyle="bold"
                 android:textColor="@color/black"
                 android:drawablePadding="5dp"
-                android:background="@drawable/shape_text_layout"
+                android:layout_marginBottom="8dp"
                 android:drawableLeft="@drawable/calendar_range"
 
                 />
@@ -149,6 +185,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
+
                 android:baselineAligned="false">
 
                 <android.support.design.widget.TextInputLayout
@@ -216,12 +253,17 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
-            app:backgroundTint="@color/colorPrimary"
+            android:background="@drawable/btn_rounded_border"
             android:clickable="false"
             android:text="@string/changePassword"
             android:drawableTint="@color/colorButtonText"
-            android:layout_marginBottom="40dp"
-            android:textColor="@color/colorButtonTextDriver" />
+            android:layout_marginBottom="50dp"
+            android:textColor="@color/colorSecondary"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+
+            />
+
 
         </LinearLayout>
     </ScrollView>

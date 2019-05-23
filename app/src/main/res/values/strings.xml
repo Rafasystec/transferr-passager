@@ -130,4 +130,6 @@
     <string name="noDriverAtThisMomentDetail">Speak directly with a driver to make your ride!</string>
     <string name="noPlainTourAtThisMomentDetail">Speak directly with a driver to make your ride!</string>
     <string name="car">Car</string>
+    <string name="stayOnline">Stay online during business hours:</string>
+    <string name="howToSavePhoto">To change the photo just click it and choose one of the options presented. The photo will be saved automatically.</string>
 </resources>

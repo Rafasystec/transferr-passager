@@ -129,4 +129,6 @@
     <string name="noDriverAtThisMomentDetail">Speak directly with a driver to make your ride!</string>
     <string name="noPlainTourAtThisMomentDetail">Hable directamente con un conductor para su tour.</string>
     <string name="car">Coche</string>
+    <string name="stayOnline">Permanezca en línea durante el horario de trabajo:</string>
+    <string name="howToSavePhoto">Para cambiar de la foto basta hacer clic en ella y elegir una de las opciones presentadas. La foto se guardará automáticamente.</string>
 </resources>
