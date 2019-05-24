@@ -1,6 +1,7 @@
 package br.com.transferr.model
 
 import android.os.Parcel
+import br.com.transferr.model.enums.Color
 import br.com.transferr.model.enums.EnumStatus
 import br.com.transferr.model.enums.EnumTypeCar
 
@@ -12,7 +13,7 @@ class Car : Entity(){
 
     var model: String? = ""
     var carIdentity: String?=null
-    var color:String?=null
+    var color:Color?=null
     var externalEquip:Boolean = false
     var nrSeats:String?=null
     var driver:Driver?= null

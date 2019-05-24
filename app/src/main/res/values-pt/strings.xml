@@ -130,5 +130,6 @@
     <string name="car">Carro</string>
     <string name="stayOnline">Ficar online no horário util:</string>
     <string name="howToSavePhoto">Para trocar de a foto basta clicar-la e escolher uma das opções apresentadas. A foto será salva automaticamente.</string>
+    <string name="updated">Atualizado</string>
 
 </resources>

@@ -11,6 +11,7 @@ import android.view.*
 import br.com.transferr.R
 import br.com.transferr.broadcast.InternetBroadCast
 import br.com.transferr.extensions.*
+import br.com.transferr.main.util.LanguageDeviceUtil
 import br.com.transferr.main.util.Prefes
 import br.com.transferr.model.Car
 import br.com.transferr.model.Driver
@@ -70,7 +71,7 @@ class DriverShowInfoFragment : SuperClassFragment() {
     private fun initScreenFields(driver: Driver){
         this.car = driver.car
         Prefes.prefsCar = car?.id!!
-        lblColorValue.text = car?.color
+        lblColorValue.text = LanguageDeviceUtil.getColorAsString(car?.color!!)
         lblDriverValue.text= driver?.name
         lblModelValue.text = car?.model
         lblPlacaValue.text = car?.carIdentity

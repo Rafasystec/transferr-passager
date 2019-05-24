@@ -7,7 +7,6 @@ import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.TextView
 import br.com.transferr.R
-import br.com.transferr.model.Location
 import br.com.transferr.model.TourOption
 
 /**
@@ -38,6 +37,7 @@ class SpTourOptionAdapter(context: Context, values:List<TourOption>) : ArrayAdap
 
     override fun getDropDownView(position: Int, convertView: View?, parent: ViewGroup?): View {
         var label = super.getDropDownView(position, convertView, parent) as TextView
+
         label.setTextColor(Color.BLACK)
         label.text = options[position].name
         return label

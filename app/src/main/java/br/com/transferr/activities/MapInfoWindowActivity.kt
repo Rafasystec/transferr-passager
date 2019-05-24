@@ -9,8 +9,11 @@ import android.view.MenuItem
 import android.view.View
 import br.com.transferr.R
 import br.com.transferr.activities.SuperClassActivity
+import br.com.transferr.main.util.LanguageDeviceUtil
+import br.com.transferr.model.enums.EnumLanguage
 //import br.com.transferr.extensions.log
 import br.com.transferr.passenger.model.responses.ResponseCarsOnline
+import br.com.transferr.passenger.util.DateUtil
 import br.com.transferr.passenger.util.WhatsAppUtil
 import com.squareup.picasso.Callback
 import com.squareup.picasso.MemoryPolicy
@@ -42,20 +45,24 @@ class MapInfoWindowActivity : SuperClassActivity() {
         var model: String
         var plate: String
         var color: String
-        var url: String? = null
+        var date : String
+        var url  : String? = null
         if (car != null) {
             model = "${this?.getString(R.string.car)}: ${car.model!!}"
             plate = "${this?.getString(R.string.plate)}: ${car.placa!!}"
-            color = "${this?.getString(R.string.color)}: ${car.cor!!}"
-            url = car.photo!!
+            color = "${this?.getString(R.string.color)}: ${LanguageDeviceUtil.getColorAsString(car.cor!!) }"
+            url   = car.photo!!
+            date  = "${DateUtil.getDateByLanguageAsString(car.date!!)}"
         } else {
             model = "${this.getString(R.string.car)}: ${this.getString(R.string.noInfor)}"
             plate = "${this.getString(R.string.plate)}: ${this.getString(R.string.noInfor)}"
             color = "${this.getString(R.string.color)}: ${this.getString(R.string.noInfor)}"
+            date  = ""
         }
         tvMapCarModel?.text    = model
         tvMapPlate?.text       = plate
         tvMapCarColor?.text    = color
+        tvLastUpdate.text      = date
         setImageFromPicasso(url)
         btnWhatsapp?.setOnClickListener {
             WhatsAppUtil.callWhatsapp(""+car.whatsapp,context)

@@ -1,5 +1,8 @@
 package br.com.transferr.passenger.util
 
+import android.app.Application
+import br.com.transferr.application.ApplicationTransferr
+import br.com.transferr.model.enums.EnumLanguage
 import java.text.ParseException
 import java.text.SimpleDateFormat
 import java.util.*
@@ -106,6 +109,32 @@ object DateUtil {
         var date    = formatter.parse(stringDate)
         val strFormatedDate = SimpleDateFormat(formatOut).format(date)
         return SimpleDateFormat(formatOut).parse(strFormatedDate)
+    }
+
+    @JvmStatic
+    fun getDateByLanguageAsString(date:Date,enumLanguage: EnumLanguage): String{
+        return when(enumLanguage){
+            EnumLanguage.ES_ES -> {
+                return format(date,"dd/MM/yyyy HH:mm")
+            }EnumLanguage.PT_BR ->{
+                return format(date,"dd/MM/yyyy HH:mm")
+            }else->{
+                return format(date,"MM/dd/yyyy hh:mm a")
+            }
+        }
+    }
+
+    @JvmStatic
+    fun getDateByLanguageAsString(map:Map<EnumLanguage,String>): String{
+        return when(ApplicationTransferr.DEVICE_LANGUAGE){
+            ApplicationTransferr.LANG_ES -> {
+                return map[EnumLanguage.ES_ES].toString()
+            }ApplicationTransferr.LANG_PT ->{
+                return map[EnumLanguage.PT_BR].toString()
+            }else->{
+                return map[EnumLanguage.EN_USA].toString()
+            }
+        }
     }
 
 }

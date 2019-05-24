@@ -131,4 +131,5 @@
     <string name="car">Car</string>
     <string name="stayOnline">Stay online during business hours:</string>
     <string name="howToSavePhoto">To change the photo just click it and choose one of the options presented. The photo will be saved automatically.</string>
+    <string name="updated">Updated</string>
 </resources>

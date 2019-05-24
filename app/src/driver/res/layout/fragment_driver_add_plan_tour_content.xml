@@ -35,7 +35,6 @@
 
         <Spinner
             android:id="@+id/spNameLocation"
-            android:theme="@style/ThemeOverlay.AppCompat.Light"
             android:layout_width="match_parent"
             android:layout_height="35dp"
             android:layout_alignParentTop="true"
@@ -253,7 +252,7 @@
             android:id="@+id/ivPlanTourPassengerOnePhone"
             android:layout_width="@dimen/icon_width"
             android:layout_height="@dimen/icon_height"
-            android:src="@drawable/phone_outgoing"
+            app:srcCompat="@drawable/phone_outgoing"
             android:layout_alignTop="@+id/edtPassengerOnePhone"
             android:paddingRight="5dp"
             />
@@ -332,7 +331,7 @@
             android:id="@+id/ivPlanTourPassengerTwoPhone"
             android:layout_width="@dimen/icon_width"
             android:layout_height="@dimen/icon_height"
-            android:src="@drawable/phone_outgoing"
+            app:srcCompat="@drawable/phone_outgoing"
             android:layout_alignTop="@+id/edtPassengerTwoPhone"
             android:paddingRight="5dp"
             />
@@ -411,7 +410,7 @@
             android:id="@+id/ivPlanTourPassengerThreePhone"
             android:layout_width="@dimen/icon_width"
             android:layout_height="@dimen/icon_height"
-            android:src="@drawable/phone_outgoing"
+            app:srcCompat="@drawable/phone_outgoing"
             android:layout_alignTop="@+id/edtPassengerThreePhone"
             android:paddingRight="5dp"
             />

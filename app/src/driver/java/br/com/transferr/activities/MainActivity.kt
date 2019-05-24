@@ -20,6 +20,7 @@ import android.view.View
 import br.com.transferr.R
 import br.com.transferr.broadcast.InternetBroadCast
 import br.com.transferr.extensions.log
+import br.com.transferr.main.util.LanguageDeviceUtil
 import br.com.transferr.main.util.Prefes
 import br.com.transferr.model.Car
 import br.com.transferr.model.Driver
@@ -129,7 +130,7 @@ class MainActivity : SuperClassActivity() {
         super.onSaveInstanceState(outState, outPersistentState)
         outState?.putBoolean(VariablesUtil.ONLINE, swtOnline.isChecked)
     }
-
+/*
     private fun initScreenFields(car:Car){
         this.car = car
         Prefes.prefsCar = car.id!!
@@ -140,11 +141,11 @@ class MainActivity : SuperClassActivity() {
         swtOnline.isChecked = car.status!=EnumStatus.OFFLINE
         //Prefes.prefsDriver = car?.driver?.id!!
     }
-
+*/
     private fun initScreenFields(driver:Driver){
         this.car = driver.car
         Prefes.prefsCar = car?.id!!
-        lblColorValue.text = car?.color
+        lblColorValue.text = LanguageDeviceUtil.getColorAsString(car?.color!!)
         lblDriverValue.text= driver?.name
         lblModelValue.text = car?.model
         lblPlacaValue.text = car?.carIdentity

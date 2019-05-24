@@ -105,8 +105,8 @@ class MapsFragment : SuperMapFragment(), OnMapReadyCallback,com.google.android.g
             activity?.toast("Acesso ao GPS negado. O aplicativo pode não funcionar corretamente.")
         }
 
-        map?.setMaxZoomPreference(18f)
-        map?.setMinZoomPreference(12f)
+        map?.setMaxZoomPreference(30f)
+        map?.setMinZoomPreference(14f)
         //this.map = map
         fusedLocationClient.lastLocation
                 .addOnSuccessListener { location: Location? ->
