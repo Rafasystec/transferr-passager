@@ -8,4 +8,7 @@
     android:layout_height="50dp"
     android:layout_marginLeft="6dp"
     android:paddingLeft="10dp"
+    android:textSize="18sp"
+    android:textStyle="bold"
+    android:textAllCaps="true"
     android:gravity="start|center" />

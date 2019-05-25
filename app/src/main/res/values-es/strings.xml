@@ -132,4 +132,5 @@
     <string name="stayOnline">Permanezca en línea durante el horario de trabajo:</string>
     <string name="howToSavePhoto">Para cambiar de la foto basta hacer clic en ella y elegir una de las opciones presentadas. La foto se guardará automáticamente.</string>
     <string name="updated">Actualizado</string>
+    <string name="carSeatLimit">excede la capacidad máxima del vehículo.</string>
 </resources>

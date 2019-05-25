@@ -237,6 +237,13 @@ class DriverAddPlanTourFragment : SuperClassFragment() {
             showAlertValidation(R.string.pleaseSelectATour)
             return false
         }
+        if(!edtPlanTourBusySeats.text.isEmpty()) {
+
+            if (Integer.parseInt(edtPlanTourBusySeats.text.toString()) > Integer.parseInt(car?.nrSeats)){
+                showAlertValidation("${edtPlanTourBusySeats.text.toString()} ${getString(R.string.carSeatLimit)}")
+                return false
+            }
+        }
         return true
     }
 
@@ -260,7 +267,6 @@ class DriverAddPlanTourFragment : SuperClassFragment() {
                 alert.dismiss()
                 showAlertError(message)
             }
-
             override fun onFailure(t: Throwable?) {
                 alert.dismiss()
                 showAlertFailure(R.string.SystemFailure)
