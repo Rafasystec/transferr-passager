@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import android.widget.*
 import br.com.transferr.R
 import br.com.transferr.main.util.LanguageDeviceUtil
+import br.com.transferr.main.util.PicassoUtil
 import br.com.transferr.passenger.model.Location
 import com.squareup.picasso.Picasso
 
@@ -42,18 +43,15 @@ class LocationAdapter(val locations: List<Location>, val onClick:(Location)->Uni
         //holder.tvLocationDescription.text = location.description
         holder.tvLocationDescription.text = LanguageDeviceUtil.transform(location.descriptionLanguage!!)
         holder.progress.visibility = View.VISIBLE
-        Picasso.with(holder.itemView.context).load(urlPhoto).fit()
-                //.memoryPolicy(MemoryPolicy.NO_CACHE, MemoryPolicy.NO_STORE)
-                .into(holder.ivMainLocation,
-                object : com.squareup.picasso.Callback {
-                    override fun onSuccess() {
-                        holder.progress.visibility = View.GONE
-                    }
+        PicassoUtil.build(urlPhoto!!,holder.ivMainLocation,object : com.squareup.picasso.Callback {
+            override fun onSuccess() {
+                holder.progress.visibility = View.GONE
+            }
 
-                    override fun onError() {
-                        holder.progress.visibility = View.GONE
-                    }
-                })
+            override fun onError() {
+                holder.progress.visibility = View.GONE
+            }
+        },true)
         holder.cardView.setOnClickListener { onClick(location) }
     }
     //NOTE: Notice a important thing here that we need to use the filtered lit size instead of one passed as parameter

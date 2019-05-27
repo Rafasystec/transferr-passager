@@ -2,13 +2,16 @@ package br.com.transferr.passenger.activities
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
+import android.util.Log
 import br.com.transferr.R
+import br.com.transferr.main.util.PicassoUtil
 import br.com.transferr.passenger.extensions.setupToolbar
 import br.com.transferr.passenger.extensions.switchFragmentToMainContent
 import br.com.transferr.passenger.fragments.MainMenuPassFragment
 import br.com.transferr.passenger.fragments.MapsFragment
 import br.com.transferr.passenger.fragments.TourOptionLisFragment
 import br.com.transferr.passenger.model.Location
+import com.squareup.picasso.LruCache
 import kotlinx.android.synthetic.passenger.content_main.*
 
 class MainActivity : AppCompatActivity() {
@@ -19,6 +22,7 @@ class MainActivity : AppCompatActivity() {
         setupToolbar(R.id.toolbar,R.string.home)
         includeFragment()
         initNavigationBottomMenu()
+        PicassoUtil.buildGlobalCache()
     }
 
     fun setActionBarTitle(title: String) {
@@ -62,5 +66,11 @@ class MainActivity : AppCompatActivity() {
             }
 
         }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        Log.d("DESTROY","On destroy called.")
+        PicassoUtil.clearGlobalCache()
     }
 }

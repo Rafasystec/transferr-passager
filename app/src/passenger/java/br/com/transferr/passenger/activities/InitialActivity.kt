@@ -58,14 +58,6 @@ class InitialActivity : br.com.transferr.passenger.activities.SuperClassActivity
         mLocationManager = this.getSystemService(Context.LOCATION_SERVICE) as LocationManager
 
         checkLocation()
-        //val mapsFragment = MapsFragment()
-        //mapsFragment.arguments = intent.extras
-        //supportFragmentManager
-         //       .beginTransaction()
-          //      .replace(R.id.map,mapsFragment)
-          //      .commit()
-        //startService(Intent(this,SuperIntentService::class.java))
-        //startService(Intent(this,LocationTrackingService::class.java))
     }
 
     override fun onStart() {

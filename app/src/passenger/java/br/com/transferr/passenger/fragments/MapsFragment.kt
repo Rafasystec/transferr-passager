@@ -1,6 +1,7 @@
 package br.com.transferr.passenger.fragments
 
 
+import android.Manifest
 import android.annotation.SuppressLint
 import android.location.Location
 import android.os.Bundle
@@ -11,7 +12,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import br.com.transferr.R
+import br.com.transferr.application.ApplicationTransferr
 import br.com.transferr.fragments.SuperMapFragment
+import br.com.transferr.main.util.GPSUtil
+import br.com.transferr.main.util.PermissionUtil
 import br.com.transferr.model.Quadrant
 import br.com.transferr.passenger.activities.MapInfoWindowActivity
 import br.com.transferr.passenger.extensions.fromJson
@@ -25,6 +29,7 @@ import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.Marker
+import kotlinx.android.synthetic.passenger.fragment_maps.*
 import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.startActivity
 import org.jetbrains.anko.toast
@@ -39,7 +44,8 @@ class MapsFragment : SuperMapFragment(), OnMapReadyCallback
 {
 
     private lateinit var mMap: GoogleMap
-
+    private val gpsUtil = GPSUtil(ApplicationTransferr.getInstance().applicationContext)
+    private var latLng: LatLng? = null
     //private var mLocationManager: LocationManager? = null
     private val ZOOM = 15f
     var marker:Marker?=null
@@ -78,13 +84,14 @@ class MapsFragment : SuperMapFragment(), OnMapReadyCallback
         this.mMap = googleMap!!
         checkPermissionToAccessLocation()
         if(isMapAllowed()) {
-            mMap.isMyLocationEnabled = true
+            mMap.isMyLocationEnabled = false
+            mMap.uiSettings.isMyLocationButtonEnabled = true
         }else{
             activity?.toast("Acesso ao GPS negado. O aplicativo pode não funcionar corretamente.")
         }
         mMap.animateCamera(CameraUpdateFactory.zoomTo(ZOOM))
-        mMap.setMaxZoomPreference(18f)
-        mMap.setMinZoomPreference(10f)
+        mMap.setMaxZoomPreference(30f)
+        mMap.setMinZoomPreference(14f)
         //mMap.setInfoWindowAdapter(br.com.transferr.passenger.adapter.MapInfoWindowsAdapter(this))
         mMap.setOnMarkerClickListener({marker->
             //updateCamera(marker.position!!)
@@ -93,10 +100,17 @@ class MapsFragment : SuperMapFragment(), OnMapReadyCallback
             true
         })
         mMap.mapType = GoogleMap.MAP_TYPE_NORMAL
+        callWebService()
+        myLocationFab.setOnClickListener {
+            if (PermissionUtil.hasPermission(activity!!, Manifest.permission.ACCESS_FINE_LOCATION)) run {
+                latLng = gpsUtil.location
+                updateCamera(mMap!!, latLng)
+            }
+        }
     }
 
 
-
+/*
     private fun updateMapScreen(location: Location?){
         try {
             callWebService()
@@ -104,6 +118,7 @@ class MapsFragment : SuperMapFragment(), OnMapReadyCallback
             Log.e("FATAL_ERRO","try to call car to show on map",e)
         }
     }
+    */
 
     private fun updateMapScreen(){
         try {

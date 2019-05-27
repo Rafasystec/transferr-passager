@@ -1,6 +1,8 @@
 package br.com.transferr.application
 
 import android.support.multidex.MultiDexApplication
+
+
 import java.util.*
 
 /**
@@ -31,4 +33,8 @@ class ApplicationTransferr : MultiDexApplication() {
             return br.com.transferr.application.ApplicationTransferr.Companion.appInstance!!
         }
     }
+
+
+
+
 }

@@ -12,6 +12,7 @@ import android.widget.TextView
 import br.com.transferr.R
 import br.com.transferr.application.ApplicationTransferr
 import br.com.transferr.main.util.LanguageDeviceUtil
+import br.com.transferr.main.util.PicassoUtil
 import br.com.transferr.passenger.model.TourOption
 import com.squareup.picasso.MemoryPolicy
 import com.squareup.picasso.Picasso
@@ -39,19 +40,16 @@ class TourOptionAdapter(val options : List<TourOption>, val onClick: (TourOption
         urlPhoto                    = tour.profileUrl
         holder.ivMainLocation.visibility = View.GONE
         holder.progress.visibility  = View.VISIBLE
+        PicassoUtil.build(urlPhoto!!,holder.ivMainLocation,object : com.squareup.picasso.Callback {
+            override fun onSuccess() {
+                holder.progress.visibility = View.GONE
+                holder.ivMainLocation.visibility = View.VISIBLE
+            }
 
-        Picasso.with(context)
-                .load(urlPhoto).memoryPolicy(MemoryPolicy.NO_CACHE, MemoryPolicy.NO_STORE).into(holder.ivMainLocation,
-                object : com.squareup.picasso.Callback {
-                    override fun onSuccess() {
-                        holder.progress.visibility = View.GONE
-                        holder.ivMainLocation.visibility = View.VISIBLE
-                    }
-
-                    override fun onError() {
-                        holder.progress.visibility = View.GONE
-                    }
-                })
+            override fun onError() {
+                holder.progress.visibility = View.GONE
+            }
+        })
         holder.cardView.setOnClickListener { onClick(tour) }
         holder.tvLocation.text = "${tour.location?.name} - ${tour.location?.subCountry}"
         var description = LanguageDeviceUtil.transform(tour.shortDescriptionLanguage!!)

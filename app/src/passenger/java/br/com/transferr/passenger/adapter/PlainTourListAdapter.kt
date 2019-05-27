@@ -15,6 +15,7 @@ import android.widget.ProgressBar
 import android.widget.TextView
 import br.com.transferr.R
 import br.com.transferr.application.ApplicationTransferr
+import br.com.transferr.main.util.PicassoUtil
 import br.com.transferr.passenger.model.PlainTour
 import br.com.transferr.passenger.model.enums.EnumTypeOfDriver
 import br.com.transferr.passenger.util.DateUtil
@@ -55,29 +56,23 @@ class PlainTourListAdapter(val plainsTour: List<PlainTour> ,val onClick: (PlainT
             holder.ivDriverNameIcon.setImageDrawable(context!!.resources.getDrawable(R.drawable.shopping_house_30))
             holder.tvDriverCarPlate.visibility = View.GONE
         }
-        var lang = ApplicationTransferr.DEVICE_LANGUAGE
-        var formatOut = if(lang == ApplicationTransferr.LANG_PT){
-            "dd/MM HH:mm"
-        }else{
-            "MM-dd hh:mm a"
-        }
-        holder.tvPlainDate.text = DateUtil.format(plain.date!!,formatOut)
+
+        holder.tvPlainDate.text = DateUtil.getDateByLanguageAsString(plain.date!!)
         holder.tvPliantourName.text = plain.tourOption?.name
 
         holder.progress.visibility = View.VISIBLE
-        Picasso.with(context).load(photoUrl).placeholder(R.drawable.no_photo_64).fit().into(holder.img,
-                object : com.squareup.picasso.Callback{
-                    override fun onSuccess() {
-                        holder.img.visibility = View.VISIBLE
-                        holder.progress.visibility = View.GONE
-                    }
+        PicassoUtil.build(photoUrl!!,holder.img, object : com.squareup.picasso.Callback{
+            override fun onSuccess() {
+                holder.img.visibility = View.VISIBLE
+                holder.progress.visibility = View.GONE
+            }
 
-                    override fun onError() {
-                        holder.img.visibility = View.VISIBLE
-                        holder.progress.visibility = View.GONE
-                    }
+            override fun onError() {
+                holder.img.visibility = View.VISIBLE
+                holder.progress.visibility = View.GONE
+            }
 
-                })
+        })
         holder.cardView.setOnClickListener { onClick(plain) }
         holder.btnWhatsapp.setOnClickListener {
             WhatsAppUtil.callWhatsapp(""+plain.driver?.whatsapp,context!!)

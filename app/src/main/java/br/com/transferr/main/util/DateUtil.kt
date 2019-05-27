@@ -137,4 +137,17 @@ object DateUtil {
         }
     }
 
+    @JvmStatic
+    fun getDateByLanguageAsString(date:Date): String{
+        return when(ApplicationTransferr.DEVICE_LANGUAGE){
+            ApplicationTransferr.LANG_PT -> {
+                return format(date,"dd/MM/yyyy HH:mm")
+            }ApplicationTransferr.LANG_ES ->{
+                return format(date,"dd/MM/yyyy HH:mm")
+            }else->{
+                return format(date,"MM/dd/yyyy hh:mm a")
+            }
+        }
+    }
+
 }

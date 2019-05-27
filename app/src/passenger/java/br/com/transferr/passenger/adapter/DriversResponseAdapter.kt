@@ -14,9 +14,11 @@ import android.widget.ImageView
 import android.widget.ProgressBar
 import android.widget.TextView
 import br.com.transferr.R
+import br.com.transferr.main.util.PicassoUtil
 import br.com.transferr.passenger.model.enums.EnumTypeOfDriver
 import br.com.transferr.passenger.model.responses.ResponseDriver
 import br.com.transferr.passenger.util.WhatsAppUtil
+import com.squareup.picasso.MemoryPolicy
 import com.squareup.picasso.Picasso
 import java.net.URLEncoder
 
@@ -58,19 +60,19 @@ class DriversResponseAdapter(val drivers : List<ResponseDriver>,val onClick: (Re
         }
         holder.tvDriverDetail.text          = "${responseDrivers.nameOfCar}"
         holder.progress.visibility = View.VISIBLE
-        Picasso.with(context).load(responseDrivers.imgProfileUrl).placeholder(R.drawable.no_photo_64).into(holder.img,
-            object : com.squareup.picasso.Callback{
-                override fun onSuccess() {
-                    holder.img.visibility = View.VISIBLE
-                    holder.progress.visibility = View.GONE
-                }
 
-                override fun onError() {
-                    holder.img.visibility = View.VISIBLE
-                    holder.progress.visibility = View.GONE
-                }
+        PicassoUtil.build(responseDrivers.imgProfileUrl!!,holder.img,object : com.squareup.picasso.Callback {
+            override fun onSuccess() {
+                holder.img.visibility = View.VISIBLE
+                holder.progress.visibility = View.GONE
+            }
 
-            })
+            override fun onError() {
+                holder.img.visibility = View.VISIBLE
+                holder.progress.visibility = View.GONE
+            }
+        })
+
         holder.btnWhatsapp.setOnClickListener {
             WhatsAppUtil.callWhatsapp(responseDrivers.whatsapp,context!!)
         }

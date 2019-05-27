@@ -10,6 +10,7 @@ import android.widget.ImageView
 import android.widget.ProgressBar
 import android.widget.TextView
 import br.com.transferr.R
+import br.com.transferr.main.util.PicassoUtil
 import br.com.transferr.passenger.model.responses.ResponseLocation
 import com.squareup.picasso.MemoryPolicy
 import com.squareup.picasso.Picasso
@@ -34,18 +35,19 @@ class LocationResponseAdapter(val locations : List<ResponseLocation>, val onClic
         val responseDrivers = locations[position]
         holder.tvName.text = responseDrivers.name
         var urlPhoto: String
-        urlPhoto = responseDrivers.urlMainPicture;
+        urlPhoto = responseDrivers.urlMainPicture
         holder.progress.visibility = View.VISIBLE
-        Picasso.with(context).load(urlPhoto).fit().memoryPolicy(MemoryPolicy.NO_CACHE,MemoryPolicy.NO_STORE).into(holder.ivMainLocation,
-                object : com.squareup.picasso.Callback {
-                    override fun onSuccess() {
-                        holder.progress.visibility = View.GONE
-                    }
 
-                    override fun onError() {
-                        holder.progress.visibility = View.GONE
-                    }
-                })
+
+        PicassoUtil.build(urlPhoto,holder.ivMainLocation, object : com.squareup.picasso.Callback {
+            override fun onSuccess() {
+                holder.progress.visibility = View.GONE
+            }
+
+            override fun onError() {
+                holder.progress.visibility = View.GONE
+            }
+        })
         holder.cardView.setOnClickListener { onClick(responseDrivers) }
 
     }

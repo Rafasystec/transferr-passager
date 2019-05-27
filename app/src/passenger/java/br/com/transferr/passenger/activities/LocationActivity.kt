@@ -8,6 +8,7 @@ import android.support.v7.widget.RecyclerView
 import android.view.View
 import br.com.transferr.R
 import br.com.transferr.main.util.LanguageDeviceUtil
+import br.com.transferr.main.util.PicassoUtil
 import br.com.transferr.passenger.extensions.setupToolbar
 import br.com.transferr.passenger.model.TourOption
 import com.squareup.picasso.MemoryPolicy
@@ -45,19 +46,14 @@ class LocationActivity : br.com.transferr.passenger.activities.SuperClassActivit
         if(tourOption == null){
             return
         }
-        Picasso.with(this).load(tourOption?.profileUrl)
-                .memoryPolicy(MemoryPolicy.NO_STORE,MemoryPolicy.NO_CACHE)
-                .fit()
-                .centerCrop()
-                .into(ivMainPicture)
+
+        PicassoUtil.build(tourOption?.profileUrl!!,ivMainPicture,null,true,true)
         tvLocationDescription.text = LanguageDeviceUtil.transform(tourOption!!.descriptionLanguage!!) //tourOption?.description
         val images: List<String> = tourOption!!.images!!
         initGallery(images)
     }
 
-    //private fun callGalleryActivity(images: List<String>){
-    //    startActivity<br.com.transferr.passenger.activities.GalleryActivity>(TourOption.IMAGE_LIST_KEY to images)
-    //}
+
 
     private fun initGallery(images: List<String>){
         imagens = images as ArrayList<String>

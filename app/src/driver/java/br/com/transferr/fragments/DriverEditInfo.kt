@@ -105,6 +105,7 @@ class DriverEditInfo : SuperClassFragment() {
                     }
 
                 })
+
     }
 
     private fun initScreenFields(driver:Driver){
