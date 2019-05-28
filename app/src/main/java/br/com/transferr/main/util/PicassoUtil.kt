@@ -1,6 +1,7 @@
 package br.com.transferr.main.util
 
 import android.content.Context
+import android.util.Log
 import android.widget.ImageView
 import br.com.transferr.R
 import br.com.transferr.application.ApplicationTransferr
@@ -15,6 +16,9 @@ object PicassoUtil {
 
     fun build(imageURI:String, view:ImageView,callback: Callback?=null, isFit:Boolean = false, isCenterCrop:Boolean = false){
         //var picassoLocalCache = LruCache(ApplicationTransferr.getInstance().applicationContext)
+        if(picassoCache == null){
+            Log.d("DESTROY","Picasso cache is null")
+        }
         var pBuilder = Picasso.Builder(ApplicationTransferr.getInstance().applicationContext)
                 .memoryCache(picassoCache).build()
                 .load(imageURI)
