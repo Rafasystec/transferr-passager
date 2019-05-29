@@ -134,4 +134,5 @@
     <string name="howToSavePhoto">To change the photo just click it and choose one of the options presented. The photo will be saved automatically.</string>
     <string name="updated">Updated</string>
     <string name="carSeatLimit">exceeds the maximum capacity of the vehicle.</string>
+    <string name="cantGetFileImage">Cannot get the image file.</string>
 </resources>

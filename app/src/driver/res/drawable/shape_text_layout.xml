@@ -3,7 +3,10 @@
 
     <corners
         android:bottomRightRadius="40dp"
-        android:topRightRadius="40dp" />
+        android:topRightRadius="40dp"
+        android:topLeftRadius="40px"
+        android:bottomLeftRadius="40px"
+        />
 
     <gradient
         android:angle="45"

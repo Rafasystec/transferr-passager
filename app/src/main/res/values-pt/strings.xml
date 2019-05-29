@@ -132,5 +132,6 @@
     <string name="howToSavePhoto">Para trocar de a foto basta clicar-la e escolher uma das opções apresentadas. A foto será salva automaticamente.</string>
     <string name="updated">Atualizado</string>
     <string name="carSeatLimit">excede a capacidade máxima do veículo.</string>
+    <string name="cantGetFileImage">Não foi possível obter o arquivo de imagem.</string>
 
 </resources>

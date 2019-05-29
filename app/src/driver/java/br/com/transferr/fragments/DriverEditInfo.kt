@@ -11,10 +11,12 @@ import android.graphics.Matrix
 import android.media.ExifInterface
 import android.os.Bundle
 import android.os.Environment
+import android.support.annotation.NonNull
 import android.support.v4.app.ActivityCompat
 import android.support.v4.app.Fragment
 import android.support.v4.content.ContextCompat
 import android.support.v7.widget.PopupMenu
+import android.util.Base64
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -45,8 +47,11 @@ import kotlinx.android.synthetic.driver.fragment_driver_edit_info.*
 import org.jetbrains.anko.alert
 import org.jetbrains.anko.cancelButton
 import org.jetbrains.anko.okButton
+import java.io.ByteArrayOutputStream
 import java.io.File
 import java.io.IOException
+import java.math.BigDecimal
+import id.zelory.compressor.Compressor
 
 
 /**
@@ -93,6 +98,8 @@ class DriverEditInfo : SuperClassFragment() {
                 .memoryPolicy(MemoryPolicy.NO_CACHE,MemoryPolicy.NO_STORE)
                 .networkPolicy(NetworkPolicy.NO_CACHE)
                 .placeholder(R.drawable.no_photo_64)
+                //.fit
+                //.centerCrop()
                 .into(imgProfile,object : Callback {
                     override fun onSuccess() {
                         progressProfile.visibility  = View.GONE
@@ -159,6 +166,7 @@ class DriverEditInfo : SuperClassFragment() {
             return
         }
         anexo.identity      = this.driver!!.id.toString()
+
         anexo.anexoBase64   = HelperBase64.getPhotoString(bitmap)//FileUtil.toBase64(camera.file!!)
         DriverService.savePhoto(anexo!!,
                 object : OnResponseInterface<ResponseOK>{
@@ -339,6 +347,7 @@ class DriverEditInfo : SuperClassFragment() {
     fun onResultActivityForGallery(requestCode: Int, resultCode: Int, data: Intent?){
         if(resultCode == Activity.RESULT_OK){
             var bitmap = ImagePicker.getImageFromResult(getActivity(), requestCode, resultCode, data)
+
             val imagePathFromResult = ImagePicker.getImagePathFromResult(activity, requestCode, resultCode, data)
             var matrix: Matrix? = null
             try {
@@ -366,7 +375,7 @@ class DriverEditInfo : SuperClassFragment() {
         }
     }
 
-    fun onResultActivityForCamera(requestCode: Int, resultCode: Int, data: Intent?){
+    private fun onResultActivityForCamera(requestCode: Int, resultCode: Int, data: Intent?){
         if(resultCode != Activity.RESULT_OK){
             return
         }
@@ -385,29 +394,82 @@ class DriverEditInfo : SuperClassFragment() {
             return
 
         }
+        var bitmapOrigin = BitmapFactory.decodeFile(f.absolutePath)
+        if(bitmapOrigin == null){
+            toast(getString(R.string.cantGetFileImage))
+        }
+        try{
+            var bitmap = compress(f,bitmapOrigin)
+            imgProfile.setImageBitmap(bitmap)
+            postImageProfile(bitmap!!)
+        } catch (e:Exception ) {
+            e.printStackTrace()
+        }
+    }
 
-            var bitmap = BitmapFactory.decodeFile(f.absolutePath)
-            bitmap = Bitmap.createScaledBitmap(bitmap, 400, 300, true)
-            var matrix: Matrix? = null
-            var rotation = 0
-            try {
-                var exif = ExifInterface(f.absolutePath)
-                val rotation = exif.getAttributeInt(ExifInterface.TAG_ORIENTATION, ExifInterface.ORIENTATION_NORMAL)
-                val rotationInDegrees = ImageUtil.exifToDegrees(rotation)
-                matrix = Matrix()
-                if (rotation.toFloat() != 0f) {
-                    matrix.preRotate(rotationInDegrees.toFloat())
-                }
+    private fun compress(f: File, bitmapOrigin: Bitmap): Bitmap? {
 
-                if(bitmap != null) {
-                    bitmap = ImageUtil.rotate(bitmap,matrix)
-                    imgProfile.setImageBitmap(bitmap)
-                    postImageProfile(bitmap)
-                }
+        var width   = bitmapOrigin.width.toDouble()
+        var height  = bitmapOrigin.height.toDouble()
+        var base = 200
+        var margin = 10
 
-            } catch (e:Exception ) {
-                e.printStackTrace()
-            }
+        var scale = if (width > height) {
+            ((base * 100) / width)
+        } else
+            ((base * 100) / height)
+
+        var maxWidth: Int
+        var maxHeight: Int
+        if (width > height) {
+            var led = getRelativeProportion(height,scale)
+            maxWidth = base
+            maxHeight = led + margin
+        } else {
+            var led = getRelativeProportion(width, scale)
+            maxWidth = led + margin
+            maxHeight = base
+        }
+
+        var bitmap = Compressor(activity)
+                .setMaxHeight(maxHeight)
+                .setMaxWidth(maxWidth)
+                .setQuality(60)
+                .setCompressFormat(Bitmap.CompressFormat.JPEG)
+                .compressToBitmap(f)
+        return bitmap
+    }
+/*
+    private fun setScale(bitmap: Bitmap): Bitmap {
+        var bitmap1 = bitmap
+        var width = bitmap1.width.toDouble()
+        var height = bitmap1.height.toDouble()
+        var base = 200
+
+        var scale = if (width > height) {
+            ((base * 100) / width)
+        } else
+            ((base * 100) / height)
+
+
+
+        bitmap1 = if (width > height) {
+            var led = BigDecimal((height * (scale / 100))).setScale(1,BigDecimal.ROUND_HALF_UP).toInt()
+            //createScaledBitmap(bitmap1, base, led , true)
+            Bitmap.createScaledBitmap(bitmap,base,led,true)
+        } else {
+            var led = getRelativeProportion(width, scale)
+            //createScaledBitmap(bitmap1, led, base, true)
+            Bitmap.createScaledBitmap(bitmap,led,base,true)
+        }
+        return bitmap1
+    }
+    */
+
+    private fun getRelativeProportion(width: Double, scale: Double): Int {
+        var set = (width * (scale / 100))
+        var led = BigDecimal(set).setScale(1, BigDecimal.ROUND_HALF_UP).toInt()
+        return led
     }
 
     fun callImage(){
@@ -415,6 +477,45 @@ class DriverEditInfo : SuperClassFragment() {
         intent.type = "image/*"
         intent.action = Intent.ACTION_GET_CONTENT
         startActivityForResult(Intent.createChooser(intent, "Select Picture"), 0)
+    }
+/*
+    fun createScaledBitmap(@NonNull src: Bitmap, dstWidth: Int, dstHeight: Int,
+                           filter: Boolean): Bitmap {
+        val m = Matrix()
+
+        val width = src.width
+        val height = src.height
+        if (width != dstWidth || height != dstHeight) {
+            val sx = dstWidth / width
+            val sy = dstHeight / height
+            //var bgScale = BigDecimal(scale.toDouble())
+            //bgScale = bgScale.setScale(3,BigDecimal.ROUND_HALF_UP)
+           // var floatScale = bgScale.toFloat()
+            m.setScale(sx,sy)
+        }
+        return Bitmap.createBitmap(src, 0, 0, width.toInt(), height.toInt(), m, filter)
+    }
+    */
+
+    fun createScaledBitmap(@NonNull src: Bitmap, dstWidth: Int, dstHeight: Int,
+                           filter: Boolean): Bitmap {
+        val m = Matrix()
+
+        val width = src.width
+        val height = src.height
+        if (width != dstWidth || height != dstHeight) {
+            val sx = dstWidth / width.toFloat()
+            val sy = dstHeight / height.toFloat()
+            m.setScale(sx, sy)
+        }
+        return Bitmap.createBitmap(src, 0, 0, width, height, m, filter)
+    }
+
+
+    private fun getPhotoString(bitmap: Bitmap): String {
+        val stream = ByteArrayOutputStream()
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, stream)
+        return Base64.encodeToString(stream.toByteArray(), Base64.DEFAULT)
     }
 
 

@@ -30,12 +30,13 @@
             android:orientation="vertical">
             <com.makeramen.roundedimageview.RoundedImageView
                 android:id="@+id/imgProfile"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="350px"
+                android:layout_height="350px"
                 android:layout_weight="1"
                 android:layout_gravity="center"
                 android:visibility="visible"
                 android:clickable="true"
+
                 android:src="@drawable/no_photo_64"
                 app:riv_corner_radius="5dip"
                 />
@@ -108,7 +109,7 @@
                 android:textColor="@color/black"
                 android:textStyle="bold"
                 android:drawablePadding="5dp"
-
+                android:background="@drawable/shape_text_layout"
                 android:drawableLeft="@drawable/account_black"
                 />
 
@@ -133,7 +134,7 @@
                 android:textSize="18dp"
                 android:textColor="@color/black"
                 android:drawablePadding="5dp"
-
+                android:background="@drawable/shape_text_layout"
                 android:drawableLeft="@drawable/information"
                 />
 
@@ -159,7 +160,7 @@
                 android:drawablePadding="5dp"
                 android:layout_marginBottom="8dp"
                 android:drawableLeft="@drawable/calendar_range"
-
+                android:background="@drawable/shape_text_layout"
                 />
             <View
                 android:layout_width="match_parent"
