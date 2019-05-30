@@ -7,6 +7,7 @@ import br.com.transferr.passenger.model.enums.EnumTypeOfDriver
  */
 class ResponseDriver {
 
+    var id = 0.toLong()
     var name = ""
     var birthDate = ""
     //Car plate

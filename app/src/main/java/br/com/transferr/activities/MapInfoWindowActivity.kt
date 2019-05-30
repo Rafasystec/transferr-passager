@@ -10,6 +10,7 @@ import android.view.View
 import br.com.transferr.R
 import br.com.transferr.activities.SuperClassActivity
 import br.com.transferr.main.util.LanguageDeviceUtil
+import br.com.transferr.main.util.StatisticUtil
 import br.com.transferr.model.enums.EnumLanguage
 //import br.com.transferr.extensions.log
 import br.com.transferr.passenger.model.responses.ResponseCarsOnline
@@ -65,7 +66,7 @@ class MapInfoWindowActivity : SuperClassActivity() {
         tvLastUpdate.text      = date
         setImageFromPicasso(url)
         btnWhatsapp?.setOnClickListener {
-            WhatsAppUtil.callWhatsapp(""+car.whatsapp,context)
+            WhatsAppUtil.callWhatsapp(""+car.whatsapp,context,StatisticUtil.getStatistic(car.driverId,this))
         }
 
         btnCallPhone?.setOnClickListener {

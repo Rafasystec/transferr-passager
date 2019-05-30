@@ -14,7 +14,10 @@ import android.widget.ImageView
 import android.widget.ProgressBar
 import android.widget.TextView
 import br.com.transferr.R
+import br.com.transferr.main.util.GPSUtil
 import br.com.transferr.main.util.PicassoUtil
+import br.com.transferr.main.util.StatisticUtil
+import br.com.transferr.model.Point
 import br.com.transferr.passenger.model.enums.EnumTypeOfDriver
 import br.com.transferr.passenger.model.responses.ResponseDriver
 import br.com.transferr.passenger.util.WhatsAppUtil
@@ -74,7 +77,7 @@ class DriversResponseAdapter(val drivers : List<ResponseDriver>,val onClick: (Re
         })
 
         holder.btnWhatsapp.setOnClickListener {
-            WhatsAppUtil.callWhatsapp(responseDrivers.whatsapp,context!!)
+            WhatsAppUtil.callWhatsapp(responseDrivers.whatsapp,context!!,StatisticUtil.getStatistic(responseDrivers.id,context!!))//callWhatsapp(responseDrivers.whatsapp,context!!)
         }
 
         holder.btnCallPhone.setOnClickListener {

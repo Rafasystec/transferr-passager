@@ -16,6 +16,8 @@ import android.widget.TextView
 import br.com.transferr.R
 import br.com.transferr.application.ApplicationTransferr
 import br.com.transferr.main.util.PicassoUtil
+import br.com.transferr.main.util.StatisticUtil
+import br.com.transferr.model.StatisticContact
 import br.com.transferr.passenger.model.PlainTour
 import br.com.transferr.passenger.model.enums.EnumTypeOfDriver
 import br.com.transferr.passenger.util.DateUtil
@@ -75,7 +77,7 @@ class PlainTourListAdapter(val plainsTour: List<PlainTour> ,val onClick: (PlainT
         })
         holder.cardView.setOnClickListener { onClick(plain) }
         holder.btnWhatsapp.setOnClickListener {
-            WhatsAppUtil.callWhatsapp(""+plain.driver?.whatsapp,context!!)
+            WhatsAppUtil.callWhatsapp(""+plain.driver?.whatsapp,context!!,StatisticUtil.getStatistic(driver?.id!!,context!!))
         }
 
         holder.btnCallPhone.setOnClickListener {

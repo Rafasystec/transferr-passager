@@ -124,4 +124,13 @@ public class GPSUtil implements LocationListener {
         Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
     }
 
+    private static GPSUtil getInstance(Context context){
+        return new GPSUtil(context);
+    }
+
+    public static LatLng getLocation(Context context){
+        return GPSUtil.getInstance(context).getLocation();
+    }
+
+
 }

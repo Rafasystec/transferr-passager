@@ -10,6 +10,8 @@ import java.util.*
  * Created by Rafael Rocha on 15/02/2018.
  */
 class ResponseCarsOnline : Serializable{
+    var driverId = 0.toLong()
+    var id = 0.toLong()
     var photo: String? = null
     var model: String? = null
     var placa: String? = null
