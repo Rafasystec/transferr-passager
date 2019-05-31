@@ -10,6 +10,7 @@ import android.view.View
 import br.com.transferr.R
 import br.com.transferr.activities.SuperClassActivity
 import br.com.transferr.main.util.LanguageDeviceUtil
+import br.com.transferr.main.util.PhoneUtil
 import br.com.transferr.main.util.StatisticUtil
 import br.com.transferr.model.enums.EnumLanguage
 //import br.com.transferr.extensions.log
@@ -70,7 +71,8 @@ class MapInfoWindowActivity : SuperClassActivity() {
         }
 
         btnCallPhone?.setOnClickListener {
-            this.startActivity(Intent(Intent.ACTION_CALL, Uri.parse("tel:${car.phone}")))
+            //this.startActivity(Intent(Intent.ACTION_CALL, Uri.parse("tel:${car.phone}")))
+            PhoneUtil.call(this,car?.phone.toString(),StatisticUtil.getStatistic(car.driverId,this))
         }
     }
 

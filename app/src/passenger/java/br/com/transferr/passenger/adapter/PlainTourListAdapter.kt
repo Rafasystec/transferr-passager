@@ -15,6 +15,7 @@ import android.widget.ProgressBar
 import android.widget.TextView
 import br.com.transferr.R
 import br.com.transferr.application.ApplicationTransferr
+import br.com.transferr.main.util.PhoneUtil
 import br.com.transferr.main.util.PicassoUtil
 import br.com.transferr.main.util.StatisticUtil
 import br.com.transferr.model.StatisticContact
@@ -82,7 +83,8 @@ class PlainTourListAdapter(val plainsTour: List<PlainTour> ,val onClick: (PlainT
 
         holder.btnCallPhone.setOnClickListener {
             var phoneNumber = "${plain.driver?.ddd}${plain.driver?.phone}"
-            context!!.startActivity(Intent(Intent.ACTION_CALL, Uri.parse("tel:$phoneNumber")))
+            //context!!.startActivity(Intent(Intent.ACTION_CALL, Uri.parse("tel:$phoneNumber")))
+            PhoneUtil.call(context!!,phoneNumber,StatisticUtil.getStatistic(driver?.id!!,context!!))
         }
     }
 

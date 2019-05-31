@@ -15,6 +15,7 @@ import android.widget.ProgressBar
 import android.widget.TextView
 import br.com.transferr.R
 import br.com.transferr.main.util.GPSUtil
+import br.com.transferr.main.util.PhoneUtil
 import br.com.transferr.main.util.PicassoUtil
 import br.com.transferr.main.util.StatisticUtil
 import br.com.transferr.model.Point
@@ -81,7 +82,8 @@ class DriversResponseAdapter(val drivers : List<ResponseDriver>,val onClick: (Re
         }
 
         holder.btnCallPhone.setOnClickListener {
-            context!!.startActivity(Intent(Intent.ACTION_CALL, Uri.parse("tel:${responseDrivers.phone}")))
+            //context!!.startActivity(Intent(Intent.ACTION_CALL, Uri.parse("tel:${responseDrivers.phone}")))
+            PhoneUtil.call(context!!,responseDrivers.phone,StatisticUtil.getStatistic(responseDrivers.id,context!!))
         }
     }
 
