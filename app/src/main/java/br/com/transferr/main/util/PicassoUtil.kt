@@ -29,9 +29,9 @@ object PicassoUtil {
             pBuilder.centerCrop()
         }
         if(callback == null) {
-            pBuilder.placeholder(R.drawable.no_photo_64).into(view)
+            pBuilder.placeholder(R.drawable.no_image).into(view)
         }else{
-            pBuilder.placeholder(R.drawable.no_photo_64).into(view, callback)
+            pBuilder.placeholder(R.drawable.no_image).into(view, callback)
         }
 
 

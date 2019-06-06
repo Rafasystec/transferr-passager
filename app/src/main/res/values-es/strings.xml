@@ -134,4 +134,6 @@
     <string name="updated">Actualizado</string>
     <string name="carSeatLimit">excede la capacidad máxima del vehículo.</string>
     <string name="cantGetFileImage">Cannot get the image file.</string>
+    <string name="title_activity_terms_of_use">Condiciones de uso</string>
+    <string name="soldOff">Agotado</string>
 </resources>

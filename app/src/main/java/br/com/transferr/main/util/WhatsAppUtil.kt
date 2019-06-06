@@ -3,14 +3,9 @@ package br.com.transferr.passenger.util
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
-import android.util.Log
 import br.com.transferr.main.util.StatisticUtil
 import br.com.transferr.model.StatisticContact
-import br.com.transferr.model.enums.EnumDeviceType
 import br.com.transferr.model.enums.EnumTypeContact
-import br.com.transferr.model.responses.ResponseOK
-import br.com.transferr.passenger.interfaces.OnResponseInterface
-import br.com.transferr.webservice.StatisticContactService
 import java.net.URLEncoder
 
 /**

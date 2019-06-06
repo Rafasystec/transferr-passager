@@ -44,7 +44,7 @@ class MapsFragment : SuperMapFragment(), OnMapReadyCallback
 {
 
     private lateinit var mMap: GoogleMap
-    private val gpsUtil = GPSUtil(ApplicationTransferr.getInstance().applicationContext)
+    private var gpsUtil:GPSUtil?=null
     private var latLng: LatLng? = null
     //private var mLocationManager: LocationManager? = null
     private val ZOOM = 15f
@@ -53,6 +53,7 @@ class MapsFragment : SuperMapFragment(), OnMapReadyCallback
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         mHandler = Handler()
+        gpsUtil = GPSUtil(activity)
         startRepeatingTask()
     }
 
@@ -84,8 +85,8 @@ class MapsFragment : SuperMapFragment(), OnMapReadyCallback
         this.mMap = googleMap!!
         checkPermissionToAccessLocation()
         if(isMapAllowed()) {
-            mMap.isMyLocationEnabled = false
-            mMap.uiSettings.isMyLocationButtonEnabled = true
+            mMap.isMyLocationEnabled = true
+            mMap.uiSettings.isMyLocationButtonEnabled = false
         }else{
             activity?.toast("Acesso ao GPS negado. O aplicativo pode não funcionar corretamente.")
         }
@@ -103,7 +104,7 @@ class MapsFragment : SuperMapFragment(), OnMapReadyCallback
         callWebService()
         myLocationFab.setOnClickListener {
             if (PermissionUtil.hasPermission(activity!!, Manifest.permission.ACCESS_FINE_LOCATION)) run {
-                latLng = gpsUtil.location
+                latLng = gpsUtil?.location
                 updateCamera(mMap!!, latLng)
             }
         }

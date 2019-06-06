@@ -87,7 +87,7 @@ class LocationTrackingService : Service(){
             powerRequirement    = Criteria.POWER_LOW
         }
         var provider = mLocationManager?.getBestProvider(criteria,true)
-        var location = mLocationManager?.getLastKnownLocation(provider)
+        //var location = mLocationManager?.getLastKnownLocation(provider)
         mLocationManager?.requestLocationUpdates(provider,10000,10f,locationListener)
         //if(location != null) {
         //    Log.d(TAG, "My Location on  buildLocationAPI method ${location?.latitude} - ${location?.longitude}")

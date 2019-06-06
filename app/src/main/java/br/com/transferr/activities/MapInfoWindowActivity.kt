@@ -83,7 +83,7 @@ class MapInfoWindowActivity : SuperClassActivity() {
                 .fit()
                 .centerInside()
                 .priority(Picasso.Priority.HIGH)
-                .placeholder(R.drawable.loadrealimg)
+                .placeholder(R.drawable.no_image)
                 .memoryPolicy(MemoryPolicy.NO_STORE,MemoryPolicy.NO_CACHE)
                 .networkPolicy(NetworkPolicy.NO_CACHE)
                 .into(photo,

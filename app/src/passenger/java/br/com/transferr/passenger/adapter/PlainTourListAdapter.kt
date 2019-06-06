@@ -7,6 +7,7 @@ import android.net.Uri
 import android.support.v7.widget.AppCompatButton
 import android.support.v7.widget.CardView
 import android.support.v7.widget.RecyclerView
+import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -40,7 +41,16 @@ class PlainTourListAdapter(val plainsTour: List<PlainTour> ,val onClick: (PlainT
         val plain = plainsTour[position]
         holder.tvName.text = plain.driver?.name
         //holder.tvDriverDetail.text = "${this.context!!.getString(R.string.seatsRemaining)} ${plain.seatsRemaining}"
-        holder.tvSeatsRemindingNumber.text  = ""+plain.seatsRemaining
+        holder.tvSeatsRemindingNumber.text = if(plain.seatsRemaining == 0){
+            holder.tvSeatsRemindingNumber.setTextColor(context!!.resources.getColor(R.color.bootstrapBtnDanger))
+            holder.tvSeatsRemindingNumber.setTextSize(TypedValue.COMPLEX_UNIT_SP,22f)
+            holder.tvSeatsRemindingNumber.rotation = 345f
+            holder.tvSeatsReminding.visibility = View.INVISIBLE
+            context!!.getString(R.string.soldOff)
+        }else {
+            "" + plain.seatsRemaining
+        }
+
         holder.tvDriverDetail.text          = plain.driver?.car?.model
         var photoUrl = if(plain.driver?.car?.photo != null && plain.driver?.car?.photo!!.isEmpty()!!){
             null
@@ -104,6 +114,7 @@ class PlainTourListAdapter(val plainsTour: List<PlainTour> ,val onClick: (PlainT
         var btnCallPhone    : AppCompatButton = view.findViewById(R.id.btnCallPhone)
         var btnWhatsapp     : AppCompatButton = view.findViewById(R.id.btnWhatsapp)
         var tvSeatsRemindingNumber : TextView = view.findViewById(R.id.tvSeatsRemindingNumber)
+        var tvSeatsReminding : TextView = view.findViewById(R.id.tvSeatsReminding)
         var tvPlainDate : TextView = view.findViewById(R.id.tvPlainDate)
         var ivCarPlateIcon:ImageView = view.findViewById(R.id.ivCarPlateIcon)
         var ivDriverNameIcon:ImageView = view.findViewById(R.id.ivDriverNameIcon)
