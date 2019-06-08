@@ -18,10 +18,11 @@ object PicassoUtil {
         //var picassoLocalCache = LruCache(ApplicationTransferr.getInstance().applicationContext)
         if(picassoCache == null){
             Log.d("DESTROY","Picasso cache is null")
+            buildGlobalCache()
         }
         var pBuilder = Picasso.Builder(ApplicationTransferr.getInstance().applicationContext)
                 .memoryCache(picassoCache).build()
-                .load(imageURI)
+                .load(imageURI).networkPolicy(NetworkPolicy.NO_CACHE,NetworkPolicy.NO_STORE)
         if(isFit){
             pBuilder.fit()
         }
