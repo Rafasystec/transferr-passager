@@ -149,6 +149,7 @@ class LoginActivity : SuperClassActivity() {
                     override fun onSuccess(driver: Driver?) {
                         progress.dismiss()
                         Prefes.driver = driver!!
+                        Prefes.prefsCar = driver.car?.id!!
                         executeLogin()
                     }
 
