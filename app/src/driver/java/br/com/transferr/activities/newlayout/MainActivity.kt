@@ -32,7 +32,7 @@ class MainActivity : AppCompatActivity() {
         includeFragment()
         initNavigationBottomMenu()
         //getAndSaveDriver()
-        checkLogin()
+        //checkLogin()
     }
     /*
     fun setActionBarTitle(title: String) {
@@ -40,6 +40,10 @@ class MainActivity : AppCompatActivity() {
     }
     */
 
+    override fun onResume() {
+        super.onResume()
+        checkLogin()
+    }
     private fun includeFragment(){
         val fm = supportFragmentManager.beginTransaction()
         val choose = MapsFragment()//MapsFragment()
