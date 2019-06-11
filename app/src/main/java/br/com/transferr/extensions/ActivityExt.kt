@@ -70,6 +70,10 @@ fun AppCompatActivity.showLoadingDialog(message: String = getString(R.string.loa
     return dialog!!
 }
 
+fun AppCompatActivity.showLoadingDialog(@StringRes message:  Int, @StringRes title: Int = R.string.wait): ProgressDialog {
+    return showLoadingDialog(getString(message),getString(title))
+}
+
 fun Activity.showAlert(message:String){
     alert(message,getString(R.string.Advice)!!){
         okButton{ it.dismiss() }

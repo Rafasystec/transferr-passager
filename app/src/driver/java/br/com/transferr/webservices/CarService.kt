@@ -1,5 +1,9 @@
 package br.com.transferr.webservices
 
+import android.app.ProgressDialog
+import android.content.Context
+import android.support.v4.app.FragmentActivity
+import android.support.v7.app.AppCompatActivity
 import br.com.transferr.helpers.HelperCallBackWebService
 import br.com.transferr.model.Car
 import br.com.transferr.model.responses.OnResponseInterface
@@ -23,8 +27,8 @@ object CarService : SuperWebService(){
         service = retrofit.create(ICarService::class.java)
     }
 
-    fun getCar(id:Long,responseInterface: OnResponseInterface<Car>) {
-        service.getCar(id).enqueue(HelperCallBackWebService(responseInterface))
+    fun getCar(id:Long,responseInterface: OnResponseInterface<Car>,appCompatActivity: FragmentActivity? = null,progress: ProgressDialog?) {
+        service.getCar(id).enqueue(HelperCallBackWebService(responseInterface,appCompatActivity,progress))
 
     }
 
@@ -32,8 +36,8 @@ object CarService : SuperWebService(){
         service.getCarByUser(id).enqueue(HelperCallBackWebService(responseInterface))
     }
 
-    fun online(requestCoordinatesUpdate: RequestCoordinatesUpdate,responseInterface: OnResponseInterface<ResponseOK>){
-        service.online(requestCoordinatesUpdate).enqueue(HelperCallBackWebService(responseInterface))
+    fun online(requestCoordinatesUpdate: RequestCoordinatesUpdate, responseInterface: OnResponseInterface<ResponseOK>, appCompatActivity: FragmentActivity? = null, progress:ProgressDialog?=null){
+        service.online(requestCoordinatesUpdate).enqueue(HelperCallBackWebService(responseInterface,appCompatActivity,progress))
     }
 
     fun offline(requestCoordinatesUpdate: RequestCoordinatesUpdate,responseInterface: OnResponseInterface<ResponseOK>){

@@ -80,14 +80,14 @@ class DriverShowInfoFragment : SuperClassFragment() {
     }
 
     private fun getCarFromWebService(){
-        var progress = showLoadingDialogWithDelay(title = "")
+        val progress = showLoadingDialogWithDelay(title = getString(R.string.gettingTheCar))
         DriverService.doGetByUserId(Prefes.prefsLogin,
                 object: OnResponseInterface<Driver> {
                     override fun onSuccess(body: Driver?) {
                         initScreenFields(body!!)
                         progress.dismiss()
                     }
-
+                    /*
                     override fun onError(message: String) {
                         progress.dismiss()
                         toast(message)
@@ -97,9 +97,10 @@ class DriverShowInfoFragment : SuperClassFragment() {
                         progress.dismiss()
                         toast("Erro ao logar ${t?.message}")
                     }
+                    */
 
                 }
-        )
+        , activity!!,progress)
 
     }
 

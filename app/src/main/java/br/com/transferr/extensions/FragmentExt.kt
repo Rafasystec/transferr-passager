@@ -27,6 +27,7 @@ import android.widget.Toast
 import br.com.transferr.R
 import br.com.transferr.dialogs.ProgressLoadDialog
 import br.com.transferr.dialogs.indeterminateLoadingProgressDialog
+import br.com.transferr.main.util.InternetUtil
 //import kotlinx.android.synthetic.driver.activity_main.*
 import org.jetbrains.anko.alert
 import org.jetbrains.anko.indeterminateProgressDialog
@@ -217,4 +218,8 @@ fun Fragment.callEmailHost(emailTo:String, subject:String, mailBody:String, titl
     intent.putExtra(Intent.EXTRA_SUBJECT, subject)
     intent.putExtra(Intent.EXTRA_TEXT, mailBody)
     activity?.startActivity(Intent.createChooser(intent, title))
+}
+
+fun Fragment.hasConnection() : Boolean{
+    return InternetUtil.isNetworkAvailable(activity!!)
 }

@@ -136,4 +136,11 @@
     <string name="cantGetFileImage">Cannot get the image file.</string>
     <string name="title_activity_terms_of_use">Condiciones de uso</string>
     <string name="soldOff">Agotado</string>
+    <string name="noInternetConnection">No internet connection</string>
+    <string name="gettingTheCar">Getting the Car</string>
+    <string name="connectionFailed">No connection. Check if your internet is ok!</string>
+    <string name="errorSystem">System error</string>
+    <string name="errorExecutTheFunction">Error on execute the function.</string>
+    <string name="errorServerNotResponding">Server is not responding.</string>
+    <string name="recoveringPassWord">Recovering password.</string>
 </resources>

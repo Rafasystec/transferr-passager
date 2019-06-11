@@ -1,6 +1,7 @@
 package br.com.transferr.activities
 
 import android.Manifest
+import android.app.ProgressDialog
 import android.content.Context
 import android.content.DialogInterface
 import android.content.Intent
@@ -155,26 +156,7 @@ class MainActivity : SuperClassActivity() {
 
     private fun getCarFromWebService(){
         initProgressBar()
-        //CarService.getCarByUser(Prefes.prefsLogin,
-        DriverService.doGetByUserId(Prefes.prefsLogin,
-            object: OnResponseInterface<Driver>{
-                    override fun onSuccess(body: Driver?) {
-                        initScreenFields(body!!)
-                        stopProgressBar()
-                    }
 
-                    override fun onError(message: String) {
-                        stopProgressBar()
-                        toast(message)
-                    }
-
-                    override fun onFailure(t: Throwable?) {
-                        stopProgressBar()
-                        toast("Erro ao logar ${t?.message}")
-                    }
-
-            }
-        )
 
     }
 
@@ -245,7 +227,7 @@ class MainActivity : SuperClassActivity() {
                             stopProgressBar()
                             log("OK")
                         }
-
+                        /*
                         override fun onError(message: String) {
                             stopProgressBar()
                             //showValidation(message)
@@ -255,6 +237,7 @@ class MainActivity : SuperClassActivity() {
                             stopProgressBar()
                             //showError(t?.message!!)
                         }
+                        */
 
                     }
             )
@@ -265,7 +248,7 @@ class MainActivity : SuperClassActivity() {
                             stopProgressBar()
                             log("OK- Estou offline")
                         }
-
+                        /*
                         override fun onError(message: String) {
                             stopProgressBar()
                             //showValidation(message)
@@ -275,6 +258,7 @@ class MainActivity : SuperClassActivity() {
                             stopProgressBar()
                             //showError(t)
                         }
+                        */
 
                     }
             )

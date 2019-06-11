@@ -1,6 +1,8 @@
 package br.com.transferr.webservices
 
 
+import android.app.ProgressDialog
+import android.support.v4.app.FragmentActivity
 import br.com.transferr.helpers.HelperCallBackWebService
 import br.com.transferr.model.Credentials
 import br.com.transferr.model.responses.OnResponseInterface
@@ -25,10 +27,10 @@ object UserService :SuperWebService(){
 
     }
 
-    fun doLogin(credentials: Credentials,responseInterface: OnResponseInterface<ResponseLogin>){
+    fun doLogin(credentials: Credentials, responseInterface: OnResponseInterface<ResponseLogin>, activity: FragmentActivity?, progress: ProgressDialog){
 
         service.doLogin(credentials).enqueue(
-                HelperCallBackWebService(responseInterface)
+                HelperCallBackWebService(responseInterface,activity,progress)
         )
 
 
@@ -39,8 +41,8 @@ object UserService :SuperWebService(){
         return service.changePassword(idUser,actualPassword,newPassword).enqueue(HelperCallBackWebService(responseInterface))
     }
 
-    fun recoverPassword(email:String,responseInterface: OnResponseInterface<ResponseOK>){
-        return service.recoverPassword(email).enqueue(HelperCallBackWebService(responseInterface))
+    fun recoverPassword(email:String,responseInterface: OnResponseInterface<ResponseOK>,activity: FragmentActivity?,progress:ProgressDialog){
+        return service.recoverPassword(email).enqueue(HelperCallBackWebService(responseInterface,activity,progress))
     }
 
 }

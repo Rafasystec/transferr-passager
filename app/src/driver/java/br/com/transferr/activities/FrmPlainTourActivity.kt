@@ -45,7 +45,7 @@ class FrmPlainTourActivity : AppCompatActivity() {
                         toast("Novo passeio adicionado")
                         callPlainTourActivity()
                     }
-
+                    /*
                     override fun onError(message: String) {
                         //showValidation(message)
                     }
@@ -53,6 +53,7 @@ class FrmPlainTourActivity : AppCompatActivity() {
                     override fun onFailure(t: Throwable?) {
                         //showError(t)
                     }
+                    */
 
                 }
                 )
@@ -64,7 +65,7 @@ class FrmPlainTourActivity : AppCompatActivity() {
                 override fun onSuccess(body: List<TourOption>?) {
                     initializeSpinnerLocation(body!!)
                 }
-
+                /*
                 override fun onError(message: String) {
                     //showValidation(message)
                 }
@@ -72,6 +73,7 @@ class FrmPlainTourActivity : AppCompatActivity() {
                 override fun onFailure(t: Throwable?) {
                     //showError(t)
                 }
+                */
             }
         )
     }
@@ -132,7 +134,7 @@ class FrmPlainTourActivity : AppCompatActivity() {
                         car = pCar
                         initViewComponents(car!!)
                     }
-
+                    /*
                     override fun onError(message: String) {
                         toast(message)
                     }
@@ -140,6 +142,7 @@ class FrmPlainTourActivity : AppCompatActivity() {
                     override fun onFailure(t: Throwable?) {
                         toast("Erro ao logar ${t?.message}")
                     }
+                    */
 
                 }
         )

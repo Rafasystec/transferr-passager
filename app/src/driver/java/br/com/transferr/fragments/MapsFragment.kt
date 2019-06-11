@@ -11,6 +11,7 @@ import android.location.LocationListener
 import android.location.LocationManager
 import android.os.Bundle
 import android.os.Handler
+import android.support.design.widget.Snackbar
 import android.support.v4.app.Fragment
 import android.support.v4.content.ContextCompat
 import android.support.v7.app.AppCompatActivity
@@ -19,10 +20,7 @@ import android.view.*
 import android.widget.Switch
 import br.com.transferr.R
 import br.com.transferr.application.ApplicationTransferr
-import br.com.transferr.extensions.fromJson
-import br.com.transferr.extensions.log
-import br.com.transferr.extensions.setupToolbar
-import br.com.transferr.extensions.showLoadingDialog
+import br.com.transferr.extensions.*
 import br.com.transferr.helpers.HelperPassengersOnline
 import br.com.transferr.main.util.GPSUtil
 import br.com.transferr.main.util.PermissionUtil
@@ -80,7 +78,7 @@ class MapsFragment : SuperMapFragment(), OnMapReadyCallback,com.google.android.g
 
     private var map : GoogleMap? = null
     private var car :Car?=null
-    private val gpsUtil = GPSUtil(ApplicationTransferr.getInstance().applicationContext)
+    private var gpsUtil: GPSUtil?=null//(ApplicationTransferr.getInstance().applicationContext)
     private var latLng: LatLng? = null
     override fun onMapReady(map: GoogleMap) {
         this.map = map
@@ -128,7 +126,7 @@ class MapsFragment : SuperMapFragment(), OnMapReadyCallback,com.google.android.g
         callWebServiceToMark(map!!,true)
         myLocationFab.setOnClickListener {
             if (PermissionUtil.hasPermission(activity!!, Manifest.permission.ACCESS_FINE_LOCATION)) run {
-                latLng = gpsUtil.location
+                latLng = gpsUtil?.location
                 updateCamera(this.map!!, latLng)
             }
         }
@@ -166,6 +164,7 @@ class MapsFragment : SuperMapFragment(), OnMapReadyCallback,com.google.android.g
         setHasOptionsMenu(true)
         locationManager = context?.getSystemService(Context.LOCATION_SERVICE) as LocationManager
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(activity!!)
+        gpsUtil = GPSUtil(activity)
         return view
     }
 
@@ -179,17 +178,20 @@ class MapsFragment : SuperMapFragment(), OnMapReadyCallback,com.google.android.g
             //swtOnOff!!.setOnCheckedChangeListener{buttonView, isChecked ->   onOff(isChecked)}
             swtOnOff!!.setOnClickListener { onOff() }
         }
-        val checked = swtOnOff!!.isChecked
-        changeSwitch(checked)
+        //val checked = swtOnOff!!.isChecked
+        //changeSwitch(checked)
+        changeSwitch(this.car?.status  != EnumStatus.OFFLINE)
     }
 
     private fun changeSwitch(checked: Boolean) {
+        swtOnOff?.isChecked = checked
         if (checked) {
-            swtOnOff!!.text = getString(R.string.online)+"      "
-            swtOnOff!!.setTextColor(resources.getColor(R.color.green))
+            swtOnOff?.text = getString(R.string.online)+"      "
+            swtOnOff?.setTextColor(resources.getColor(R.color.green))
+
         } else {
-            swtOnOff!!.setTextColor(resources.getColor(R.color.red))
-            swtOnOff!!.text = getString(R.string.offline) +"      "
+            swtOnOff?.setTextColor(resources.getColor(R.color.red))
+            swtOnOff?.text = getString(R.string.offline) +"      "
         }
     }
 
@@ -213,23 +215,23 @@ class MapsFragment : SuperMapFragment(), OnMapReadyCallback,com.google.android.g
                             progress.dismiss()
                         }
 
-                        override fun onError(message: String) {
-                            progress.dismiss()
-                        }
+                        //override fun onError(message: String) {
+                        //    progress.dismiss()
+                        //}
 
-                        override fun onFailure(t: Throwable?) {
-                            progress.dismiss()
-                        }
+                        //override fun onFailure(t: Throwable?) {
+                        //    progress.dismiss()
+                        //}
 
                     }
-            )
+            ,activity,progress)
         }else{
             CarService.offline(request,
                     object : OnResponseInterface<ResponseOK> {
                         override fun onSuccess(body: ResponseOK?) {
                             progress.dismiss()
                         }
-
+                        /*
                         override fun onError(message: String) {
                             progress.dismiss()
                         }
@@ -237,7 +239,7 @@ class MapsFragment : SuperMapFragment(), OnMapReadyCallback,com.google.android.g
                         override fun onFailure(t: Throwable?) {
                             progress.dismiss()
                         }
-
+                        */
                     }
             )
         }
@@ -309,7 +311,7 @@ class MapsFragment : SuperMapFragment(), OnMapReadyCallback,com.google.android.g
             override fun onSuccess(body: ResponseOK?) {
                 dialog.dismiss()
             }
-
+            /*
             override fun onError(message: String) {
                 dialog.dismiss()
             }
@@ -317,7 +319,7 @@ class MapsFragment : SuperMapFragment(), OnMapReadyCallback,com.google.android.g
             override fun onFailure(t: Throwable?) {
                 dialog.dismiss()
             }
-
+            */
         })
     }
 
@@ -327,23 +329,23 @@ class MapsFragment : SuperMapFragment(), OnMapReadyCallback,com.google.android.g
     }
 
     private fun getCurrentCar(){
+        var dialog = showLoadingDialog()
         CarService.getCar(Prefes.prefsCar, object :OnResponseInterface<Car>{
-            var dialog = showLoadingDialog()
             override fun onSuccess(carParam: Car?) {
                 car = carParam
                 updateSwitch(carParam!!)
                 dialog.dismiss()
             }
 
-            override fun onError(message: String) {
-                dialog.dismiss()
-            }
+            //override fun onError(message: String) {
+            //    dialog.dismiss()
+            //}
 
-            override fun onFailure(t: Throwable?) {
-                dialog.dismiss()
-            }
+            //override fun onFailure(t: Throwable?) {
+            //    dialog.dismiss()
+           // }
 
-        })
+        },activity,dialog)
     }
 
     private val mInterval = 20000L // 5 seconds by default, can be changed later
@@ -382,6 +384,11 @@ class MapsFragment : SuperMapFragment(), OnMapReadyCallback,com.google.android.g
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         getCurrentCar()
+
+    }
+
+    override fun onResume() {
+        super.onResume()
     }
 
 

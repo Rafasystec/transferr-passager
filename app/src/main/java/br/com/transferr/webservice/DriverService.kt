@@ -1,5 +1,8 @@
 package br.com.transferr.webservices
 
+import android.app.ProgressDialog
+import android.support.v4.app.FragmentActivity
+import android.support.v7.app.AppCompatActivity
 import br.com.transferr.helpers.HelperCallBackWebService
 import br.com.transferr.model.AnexoPhoto
 import br.com.transferr.model.Driver
@@ -24,7 +27,7 @@ object DriverService :SuperWebService(){
         return service.getDriverByCar(id).enqueue(HelperCallBackWebService(responseInterface))
     }
 
-    fun doGetByUserId(userId: Long,responseInterface: OnResponseInterface<Driver>){
-        service.doGetByUserId(userId).enqueue(HelperCallBackWebService(responseInterface))
+    fun doGetByUserId(userId: Long,responseInterface: OnResponseInterface<Driver>,appCompatActivity: FragmentActivity?,progress:ProgressDialog){
+        service.doGetByUserId(userId).enqueue(HelperCallBackWebService(responseInterface,appCompatActivity,progress = progress))
     }
 }

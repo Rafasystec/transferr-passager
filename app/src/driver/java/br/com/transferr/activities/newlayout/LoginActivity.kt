@@ -56,17 +56,9 @@ class LoginActivity : SuperClassActivity() {
                         Prefes.prefsLogin = body?.user?.id!!
                         getDriverFromWebService()
                     }
-                    override fun onError(message: String) {
-                        alert.dismiss()
-                        toast(message)
-                    }
-                    override fun onFailure(t: Throwable?) {
-                        alert.dismiss()
-                        toast(t?.message!!)
-                    }
 
                 }
-            )
+            ,this,alert)
 
 
         }
@@ -105,7 +97,7 @@ class LoginActivity : SuperClassActivity() {
 
     private fun callServiceToRecoverPassword(){
        if(validateRecoverPasswor()){
-           var dialog = showLoadingDialog(message = "Recuperando a senha. Aguarde")
+           var dialog = showLoadingDialog(R.string.recoveringPassWord)
            var email = txtLogin.text.toString().trim()
            UserService.recoverPassword(email,
                object : OnResponseInterface<ResponseOK>{
@@ -114,36 +106,14 @@ class LoginActivity : SuperClassActivity() {
                        showAlert("Um e-mail foi enviado para $email")
                    }
 
-                   override fun onError(message: String) {
-                       dialog.dismiss()
-                       showAlert(message)
-                   }
-
-                   override fun onFailure(t: Throwable?) {
-                       dialog.dismiss()
-                       showAlertError(t?.message!!)
-                   }
-
                }
-           )
+           ,this,dialog)
        }
 
     }
-    /*
-    private fun initProgressBar(){
-        this@LoginActivity.runOnUiThread({
-            progressBar.visibility = View.VISIBLE
-        })
-    }
 
-    private fun stopProgressBar(){
-        this@LoginActivity.runOnUiThread({
-            progressBar.visibility = View.GONE
-        })
-    }
-    */
     private fun getDriverFromWebService(){
-        var progress = showLoadingDialog(message = getString(R.string.getTheDriver))
+        val progress = showLoadingDialog(message = getString(R.string.getTheDriver))
         DriverService.doGetByUserId(Prefes.prefsLogin,
                 object: OnResponseInterface<Driver> {
                     override fun onSuccess(driver: Driver?) {
@@ -153,18 +123,8 @@ class LoginActivity : SuperClassActivity() {
                         executeLogin()
                     }
 
-                    override fun onError(message: String) {
-                        progress.dismiss()
-
-                    }
-
-                    override fun onFailure(t: Throwable?) {
-                        progress.dismiss()
-
-                    }
-
                 }
-        )
+        ,this,progress)
 
     }
 

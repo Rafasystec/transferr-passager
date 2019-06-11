@@ -375,8 +375,9 @@ class DriverAddPlanTourFragment : SuperClassFragment() {
     }
 */
     private fun getCurrentCar(){
+    var dialog = showLoadingDialog()
         CarService.getCar(Prefes.prefsCar, object :OnResponseInterface<Car>{
-            var dialog = showLoadingDialog()
+
             override fun onSuccess(parameterCar: Car?) {
                 dialog.dismiss()
                 car = parameterCar
@@ -391,7 +392,7 @@ class DriverAddPlanTourFragment : SuperClassFragment() {
                 dialog.dismiss()
             }
 
-        })
+        },progress = dialog)
     }
     /*
     fun calculateRemaindSeats(plainTour: PlainTour): Int{

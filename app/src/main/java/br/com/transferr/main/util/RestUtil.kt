@@ -23,6 +23,7 @@ class RestUtil<T> {
             }catch (e:Exception){
                 return ("Erro desconhecido: ${body.errorBody().toString()}")
             }
+        }else if(code == HttpURLConnection.HTTP_UNAVAILABLE){
         }
         return "Desculpe! Sem retorno."
     }

@@ -86,27 +86,17 @@ class MainActivity : AppCompatActivity() {
     }
     */
     private fun getDriverFromWebService(){
-        var progress = showLoadingDialog(message = getString(R.string.getTheDriver))
+        val progress = showLoadingDialog(message = getString(R.string.getTheDriver))
         DriverService.doGetByUserId(Prefes.prefsLogin,
-                object: OnResponseInterface<Driver> {
-                    override fun onSuccess(driver: Driver?) {
-                        progress.dismiss()
-                        Prefes.driver   = driver!!
-                        Prefes.prefsCar = driver!!.car?.id!!
+                    object: OnResponseInterface<Driver> {
+                        override fun onSuccess(driver: Driver?) {
+                            progress.dismiss()
+                            Prefes.driver   = driver!!
+                            Prefes.prefsCar = driver!!.car?.id!!
+                        }
                     }
+            ,this,progress)
 
-                    override fun onError(message: String) {
-                        progress.dismiss()
-
-                    }
-
-                    override fun onFailure(t: Throwable?) {
-                        progress.dismiss()
-
-                    }
-
-                }
-        )
 
     }
 

@@ -1,6 +1,8 @@
 package br.com.transferr.activities
 
 import android.app.Activity
+import android.app.ProgressDialog
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
@@ -135,8 +137,8 @@ class DriverInforActivity : SuperClassActivity() {
                         stopProgressBar()
                         toast("Senha alterada com sucesso!")
                     }
-
-                    override fun onError(message: String) {
+                    /*
+                    override fun onError(message: String,context: Context?,progress:ProgressDialog?) {
                         stopProgressBar()
                         //showValidation(message)
                     }
@@ -145,6 +147,7 @@ class DriverInforActivity : SuperClassActivity() {
                         stopProgressBar()
                         //showError(t?.message!!)
                     }
+                    */
 
                 }
         )
@@ -166,7 +169,7 @@ class DriverInforActivity : SuperClassActivity() {
                     stopProgressBar()
                     toast("Foto salva com sucesso!")
                 }
-
+                /*
                 override fun onError(message: String) {
                     stopProgressBar()
                     //showValidation(message)
@@ -176,6 +179,7 @@ class DriverInforActivity : SuperClassActivity() {
                     stopProgressBar()
                     //showError(t?.message!!)
                 }
+                */
 
             }
         )
@@ -203,7 +207,7 @@ class DriverInforActivity : SuperClassActivity() {
                         stopProgressBar()
                         initScreenFields(driver!!)
                     }
-
+                    /*
                     override fun onError(message: String) {
                         stopProgressBar()
                         //showValidation(message)
@@ -213,6 +217,7 @@ class DriverInforActivity : SuperClassActivity() {
                         stopProgressBar()
                         //showError(t?.message!!)
                     }
+                    */
 
                 })
     }
