@@ -1,7 +1,10 @@
 package br.com.transferr.passenger.webservices
 
+import android.app.ProgressDialog
+import android.support.v4.app.FragmentActivity
+import br.com.transferr.helpers.HelperCallBackWebService
 import br.com.transferr.model.Driver
-import br.com.transferr.passenger.interfaces.OnResponseInterface
+import br.com.transferr.model.responses.OnResponseInterface
 import br.com.transferr.passenger.model.responses.ResponseDrivers
 import retrofit2.Call
 import retrofit2.http.GET
@@ -15,12 +18,12 @@ object WSDriver : BaseWebService() {
 
     private var service : IWSDriver = retrofit.create(IWSDriver::class.java)
 
-    fun doGetByLocation(idLocation: Long, responseInterface: OnResponseInterface<ResponseDrivers>){
-        service.doGetByLocation(idLocation).enqueue(CallBackWS(responseInterface))
+    fun doGetByLocation(idLocation: Long, responseInterface: OnResponseInterface<ResponseDrivers>, activity: FragmentActivity?, progress: ProgressDialog){
+        service.doGetByLocation(idLocation).enqueue(HelperCallBackWebService(responseInterface,activity,progress))
     }
 
     fun doGetByUserId(userId: Long,responseInterface: OnResponseInterface<Driver>){
-        service.doGetByUserId(userId).enqueue(CallBackWS(responseInterface))
+        service.doGetByUserId(userId).enqueue(HelperCallBackWebService(responseInterface))
     }
 
     interface IWSDriver{

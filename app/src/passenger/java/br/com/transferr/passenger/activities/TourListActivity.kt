@@ -5,9 +5,8 @@ import android.support.v7.widget.RecyclerView
 import android.view.View
 import android.widget.ArrayAdapter
 import br.com.transferr.R
-import br.com.transferr.passenger.adapter.LocationResponseAdapter
+import br.com.transferr.model.responses.OnResponseInterface
 import br.com.transferr.passenger.extensions.defaultRecycleView
-import br.com.transferr.passenger.interfaces.OnResponseInterface
 import br.com.transferr.passenger.model.Country
 import br.com.transferr.passenger.model.SubCountry
 import br.com.transferr.passenger.model.responses.ResponseLocation
@@ -73,7 +72,7 @@ class TourListActivity : br.com.transferr.passenger.activities.SuperClassActivit
         }
         */
         progress.visibility = View.VISIBLE
-        WSLocation.doGetBySubCountry(subCountry.id!!, object : OnResponseInterface<List<ResponseLocation>>{
+        WSLocation.doGetBySubCountry(subCountry.id!!, object : OnResponseInterface<List<ResponseLocation>> {
             override fun onSuccess(body: List<ResponseLocation>?) {
                 recycleView!!.adapter = br.com.transferr.passenger.adapter.LocationResponseAdapter(body!!,
                         { responseLocation: ResponseLocation -> onLocationClick(responseLocation) })

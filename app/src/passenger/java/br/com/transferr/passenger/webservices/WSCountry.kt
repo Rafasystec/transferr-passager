@@ -1,6 +1,7 @@
 package br.com.transferr.passenger.webservices
 
-import br.com.transferr.passenger.interfaces.OnResponseInterface
+import br.com.transferr.helpers.HelperCallBackWebService
+import br.com.transferr.model.responses.OnResponseInterface
 import br.com.transferr.passenger.model.Country
 import retrofit2.Call
 import retrofit2.http.GET
@@ -13,7 +14,7 @@ object WSCountry : BaseWebService(){
 
     private var service : IWSCountry = retrofit.create(IWSCountry::class.java)
     fun doGetAll(responseInterface: OnResponseInterface<List<Country>>){
-        service.doGetAll().enqueue(CallBackWS(responseInterface))
+        service.doGetAll().enqueue(HelperCallBackWebService(responseInterface))
     }
 
     interface IWSCountry{

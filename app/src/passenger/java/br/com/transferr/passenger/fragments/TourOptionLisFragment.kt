@@ -11,19 +11,13 @@ import android.view.ViewGroup
 import br.com.transferr.R
 import br.com.transferr.extensions.defaultRecycleView
 import br.com.transferr.extensions.showLoadingDialog
-import br.com.transferr.extensions.switchFragmentToMainContent
 import br.com.transferr.fragments.SuperClassFragment
-import br.com.transferr.passenger.activities.LocationActivity
+import br.com.transferr.model.responses.OnResponseInterface
 import br.com.transferr.passenger.activities.LocationListActivity
-import br.com.transferr.passenger.adapter.TourOptionAdapter
-import br.com.transferr.passenger.extensions.defaultRecycleView
-import br.com.transferr.passenger.extensions.switchFragmentToMainContent
-import br.com.transferr.passenger.interfaces.OnResponseInterface
 import br.com.transferr.passenger.model.Location
 import br.com.transferr.passenger.model.TourOption
 import br.com.transferr.passenger.webservices.WSTourOption
 import kotlinx.android.synthetic.passenger.fragment_tour_option_lis.*
-import org.jetbrains.anko.indeterminateProgressDialog
 import org.jetbrains.anko.progressDialog
 
 /**
@@ -52,41 +46,22 @@ class TourOptionLisFragment : SuperClassFragment() {
             requestTourOption()
         }
         btnWhereToGo.setOnClickListener{
-            //includeFragmentOnMainActivity(LocationListFragment())
-            //switchFragmentToMainContent(LocationListFragment())
             startActivity(Intent(activity,LocationListActivity::class.java))
         }
         setMainTitle(R.string.page_title_tour)
     }
 
-    fun requestTourOption(){
-        //startProgressBar()
+    private fun requestTourOption(){
         var dialog = showLoadingDialog()
-        WSTourOption.doGetAll(object : OnResponseInterface<List<TourOption>>{
-            //val dialog = activity?.progressDialog(message = R.string.loading, title = R.string.wait)
+        WSTourOption.doGetAll(object : OnResponseInterface<List<TourOption>> {
             override fun onSuccess(body: List<TourOption>?) {
                 //dialog?.dismiss()
                 tourOptionList = body
                 setTourOptionListAdapter()
                 dialog?.dismiss()
             }
-
-            override fun onError(message: String) {
-                //stopProgressBar()
-                dialog?.dismiss()
-            }
-
-            override fun onFailure(t: Throwable?) {
-                dialog?.dismiss()
-            }
-
-        })
+        },activity,dialog)
     }
-
-    //override fun onResume() {
-    //    super.onResume()
-        //setTourOptionListAdapter()
-    //}
 
     fun setTourOptionListAdapter(){
         if(tourOptionList != null && !tourOptionList!!.isEmpty()) {
@@ -101,24 +76,15 @@ class TourOptionLisFragment : SuperClassFragment() {
         startActivity(Intent(activity, br.com.transferr.passenger.activities.LocationActivity::class.java).putExtra(TourOption.TOUR_PARAMETER_KEY,tourOption))
     }
 
-    fun requestTourOptionByLocation(location:Location){
+    private fun requestTourOptionByLocation(location:Location){
+        val dialog = activity?.progressDialog(message = R.string.loading, title = R.string.wait)
         WSTourOption.getByLocation(location.id!!,object : OnResponseInterface<List<TourOption>>{
-            val dialog = activity?.progressDialog(message = R.string.loading, title = R.string.wait)
             override fun onSuccess(body: List<TourOption>?) {
                 dialog?.dismiss()
                 tourOptionList = body
                 setTourOptionListAdapter()
             }
-
-            override fun onError(message: String) {
-                dialog?.dismiss()
-            }
-
-            override fun onFailure(t: Throwable?) {
-                dialog?.dismiss()
-            }
-
-        })
+        },activity,dialog!!)
     }
 
 }

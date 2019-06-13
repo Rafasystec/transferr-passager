@@ -9,10 +9,10 @@ import android.view.Menu
 import android.widget.EditText
 import android.widget.ImageView
 import br.com.transferr.R
+import br.com.transferr.model.responses.OnResponseInterface
 import br.com.transferr.passenger.extensions.defaultRecycleView
 import br.com.transferr.passenger.extensions.setupToolbar
 import br.com.transferr.passenger.extensions.showLoadingDialog
-import br.com.transferr.passenger.interfaces.OnResponseInterface
 import br.com.transferr.passenger.model.Location
 import br.com.transferr.passenger.webservices.WSLocation
 import org.jetbrains.anko.startActivity
@@ -75,7 +75,7 @@ class LocationListActivity : AppCompatActivity() {
     }
 
 
-    fun requestAllLocations(){
+    private fun requestAllLocations(){
         var dialog = showLoadingDialog()
         WSLocation.getAll(object : OnResponseInterface<List<Location>> {
             override fun onSuccess(body: List<Location>?) {
@@ -83,49 +83,12 @@ class LocationListActivity : AppCompatActivity() {
                 locationList = body
                 setupRecyclerViewAdapter()
             }
-
-            override fun onError(message: String) {
-                dialog?.dismiss()
-            }
-
-            override fun onFailure(t: Throwable?) {
-                dialog?.dismiss()
-            }
-
-        })
+        },this,dialog)
     }
 
-    fun onLocationClick(location: Location){
-        //var intent = Intent(context,LocationDetailActivity::class.java)
-        //intent.putExtra(Location.LOCATION,location)
-        //startActivity(intent)
-        //var fragment = TourOptionLisFragment()
-        //fragment.arguments = Bundle()
-        //fragment.arguments!!.putSerializable(Location.LOCATION,location)
-        //switchFragmentToMainContent(fragment)
+    private fun onLocationClick(location: Location){
         startActivity<MainActivity>(Location.LOCATION to location)
         finish()
     }
-/*
-    fun initSearchView(){
-        searchView.setOnQueryTextListener(
-                object : SearchView.OnQueryTextListener{
-                    override fun onQueryTextSubmit(query: String?): Boolean {
-                        btnClickOnSearch.visibility = View.VISIBLE
-                        return false
-                    }
 
-                    override fun onQueryTextChange(newText: String?): Boolean {
-                        btnClickOnSearch.visibility = View.GONE
-                        locationAdapter?.filter?.filter(newText)
-                        return false
-                    }
-
-                }
-        )
-
-
-
-    }
-    */
 }

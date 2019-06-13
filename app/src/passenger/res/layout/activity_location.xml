@@ -24,7 +24,13 @@
             app:popupTheme="@style/AppTheme.PopupOverlay" />
 
     </android.support.design.widget.AppBarLayout>
+    <include
+        android:layout_marginTop="50dp"
+        layout="@layout/layout_no_internet_connection"
+        android:layout_height="match_parent"
+        android:layout_width="match_parent" />
     <ScrollView
+        android:id="@+id/scViewLocation"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/toolAction"

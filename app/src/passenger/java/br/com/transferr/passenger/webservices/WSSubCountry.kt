@@ -1,6 +1,8 @@
 package br.com.transferr.passenger.webservices
 
-import br.com.transferr.passenger.interfaces.OnResponseInterface
+
+import br.com.transferr.helpers.HelperCallBackWebService
+import br.com.transferr.model.responses.OnResponseInterface
 import br.com.transferr.passenger.model.SubCountry
 import retrofit2.Call
 import retrofit2.http.GET
@@ -14,7 +16,7 @@ object WSSubCountry : BaseWebService(){
 
     private var service : IWSSubCountry = WSSubCountry.retrofit.create(IWSSubCountry::class.java)
     fun doGetAllByCountry(idCountry: Long,responseInterface: OnResponseInterface<List<SubCountry>>){
-        service.doGetAllByCountry(idCountry).enqueue(CallBackWS(responseInterface))
+        service.doGetAllByCountry(idCountry).enqueue(HelperCallBackWebService(responseInterface))
     }
 
     interface IWSSubCountry{

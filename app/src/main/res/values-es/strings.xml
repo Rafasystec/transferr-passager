@@ -143,4 +143,6 @@
     <string name="errorExecutTheFunction">Error on execute the function.</string>
     <string name="errorServerNotResponding">Server is not responding.</string>
     <string name="recoveringPassWord">Recovering password.</string>
+    <string name="checkYourWifiConnection">Por favor, compruebe su conexión a Internet y vuelva a intentarlo.</string>
+    <string name="tryAgain">Try again</string>
 </resources>

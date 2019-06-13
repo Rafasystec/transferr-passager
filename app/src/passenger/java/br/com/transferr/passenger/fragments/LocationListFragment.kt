@@ -8,18 +8,17 @@ import android.support.v4.view.MenuItemCompat
 import android.support.v7.widget.RecyclerView
 import android.support.v7.widget.SearchView
 import android.view.*
+import android.widget.EditText
+import android.widget.ImageView
 import br.com.transferr.R
 import br.com.transferr.extensions.defaultRecycleView
 import br.com.transferr.extensions.setupToolbar
 import br.com.transferr.extensions.showLoadingDialog
 import br.com.transferr.extensions.switchFragmentToMainContent
 import br.com.transferr.fragments.SuperClassFragment
-import br.com.transferr.passenger.interfaces.OnResponseInterface
+import br.com.transferr.model.responses.OnResponseInterface
 import br.com.transferr.passenger.model.Location
 import br.com.transferr.passenger.webservices.WSLocation
-import org.jetbrains.anko.progressDialog
-import android.widget.EditText
-import android.widget.ImageView
 
 
 /**
@@ -90,54 +89,20 @@ class LocationListFragment : SuperClassFragment() {
 
     fun requestAllLocations(){
         var dialog = showLoadingDialog()
-        WSLocation.getAll(object : OnResponseInterface<List<Location>>{
+        WSLocation.getAll(object : OnResponseInterface<List<Location>> {
             override fun onSuccess(body: List<Location>?) {
                 dialog?.dismiss()
                 locationList = body
                 setupRecyclerViewAdapter()
             }
-
-            override fun onError(message: String) {
-                dialog?.dismiss()
-            }
-
-            override fun onFailure(t: Throwable?) {
-                dialog?.dismiss()
-            }
-
-        })
+        },activity,dialog)
     }
 
     fun onLocationClick(location: Location){
-        //var intent = Intent(context,LocationDetailActivity::class.java)
-        //intent.putExtra(Location.LOCATION,location)
-        //startActivity(intent)
         var fragment = TourOptionLisFragment()
         fragment.arguments = Bundle()
         fragment.arguments!!.putSerializable(Location.LOCATION,location)
         switchFragmentToMainContent(fragment)
     }
-/*
-    fun initSearchView(){
-        searchView.setOnQueryTextListener(
-                object : SearchView.OnQueryTextListener{
-                    override fun onQueryTextSubmit(query: String?): Boolean {
-                        btnClickOnSearch.visibility = View.VISIBLE
-                        return false
-                    }
-
-                    override fun onQueryTextChange(newText: String?): Boolean {
-                        btnClickOnSearch.visibility = View.GONE
-                        locationAdapter?.filter?.filter(newText)
-                        return false
-                    }
-
-                }
-        )
-
-
-
-    }
-    */
 
 }

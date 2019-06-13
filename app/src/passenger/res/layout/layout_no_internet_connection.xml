@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:id="@+id/llNoInternetConn"
+    android:visibility="gone">
+
+    <ImageView
+        android:id="@+id/ivNoListResult"
+        android:layout_width="110dp"
+        android:layout_height="110dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="45dp"
+        android:src="@drawable/no_wifi"
+        />
+    <TextView
+        android:id="@+id/tvTextToAdd"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/noInternetConnection"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:layout_marginTop="12dp"
+        android:textColor="@color/colorPrimaryDark"
+        />
+    <TextView
+        android:id="@+id/tvTextDetail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/checkYourWifiConnection"
+        android:textSize="14sp"
+        android:textStyle="normal"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:layout_marginTop="12dp"
+        android:textColor="@color/colorText"
+        />
+
+    <android.support.v7.widget.AppCompatButton
+        android:id="@+id/btnTryAgain"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/tryAgain"
+        android:textColor="@color/colorButtonText"
+        android:layout_margin="10dp"
+        android:layout_gravity="bottom"
+        app:backgroundTint="@color/colorPrimary"
+        android:drawableRight="@drawable/ic_link_icon_24"
+        />
+
+
+</LinearLayout>

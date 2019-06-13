@@ -110,17 +110,6 @@ class MapsFragment : SuperMapFragment(), OnMapReadyCallback
         }
     }
 
-
-/*
-    private fun updateMapScreen(location: Location?){
-        try {
-            callWebService()
-        }catch (e:Exception){
-            Log.e("FATAL_ERRO","try to call car to show on map",e)
-        }
-    }
-    */
-
     private fun updateMapScreen(){
         try {
             callWebService()

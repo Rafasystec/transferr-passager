@@ -12,7 +12,9 @@ import br.com.transferr.R
 import br.com.transferr.extensions.defaultRecycleView
 import br.com.transferr.extensions.showLoadingDialog
 import br.com.transferr.fragments.SuperClassFragment
-import br.com.transferr.passenger.interfaces.OnResponseInterface
+import br.com.transferr.model.responses.OnResponseInterface
+import br.com.transferr.passenger.extensions.hasConnection
+import br.com.transferr.passenger.extensions.hasInternetConnection
 import br.com.transferr.passenger.model.PlainTour
 import br.com.transferr.passenger.model.TourOption
 import br.com.transferr.passenger.model.responses.ResponsePlainsByTourAndLocation
@@ -20,6 +22,7 @@ import br.com.transferr.passenger.webservices.WSPlainTour
 import kotlinx.android.synthetic.passenger.fragment_plain_tour_list.*
 import kotlinx.android.synthetic.passenger.layout_empty_list.*
 import kotlinx.android.synthetic.passenger.layout_empty_list.view.*
+import kotlinx.android.synthetic.passenger.layout_no_internet_connection.*
 
 
 /**
@@ -49,12 +52,14 @@ class PlainTourListFragment : SuperClassFragment() {
             llEmptyList.tvTextToAdd.text = getString(R.string.noPlainTourAtThisMoment)
             llEmptyList.tvTextDetail.text = getString(R.string.noPlainTourAtThisMomentDetail)
         }
+        btnTryAgain.setOnClickListener {
+            onResume()
+        }
     }
 
     override fun onResume() {
         super.onResume()
-        loadRecyclesView(response)
-        //loadPlainsByTourAndLocation()
+        initView()
     }
 
     private fun loadPlainsByTourAndLocation() {
@@ -63,23 +68,12 @@ class PlainTourListFragment : SuperClassFragment() {
             val dialog = showLoadingDialog()
             WSPlainTour.getByTourAndLocation(tourOption?.id!!, object : OnResponseInterface<ResponsePlainsByTourAndLocation> {
                 override fun onSuccess(body: ResponsePlainsByTourAndLocation?) {
-                    dialog?.dismiss()
+                    dialog.dismiss()
                     response = body
                     loadRecyclesView(body!!)
                 }
 
-                override fun onError(message: String) {
-                    dialog?.dismiss()
-                    alertWarning(message)
-                }
-
-                override fun onFailure(t: Throwable?) {
-                    dialog?.dismiss()
-                    //alertErro(t?.message!!)
-
-                }
-
-            })
+            },activity,dialog)
         }
 
     }
@@ -96,23 +90,55 @@ class PlainTourListFragment : SuperClassFragment() {
                 }
                 checkIfIsEmpty(responsePlainsByTourAndLocation)
             }
-        }
+        }else checkIfIsEmpty(responsePlainsByTourAndLocation)
     }
 
-    fun checkIfIsEmpty(plans: ResponsePlainsByTourAndLocation){
+    private fun checkIfIsEmpty(plans: ResponsePlainsByTourAndLocation?){
         if(plans != null){
             val listFromTour      = plans.plainsFromTour
             val listFromLocation  = plans.plainsFromLocation
             if(listFromLocation?.isEmpty()!! && listFromTour?.isEmpty()!!){
                 llEmptyList.visibility = View.VISIBLE
+                btnSeeMorePlainsTour.visibility = View.GONE
             }else{
                 llEmptyList.visibility = View.GONE
+                btnSeeMorePlainsTour.visibility = View.VISIBLE
             }
+        }else {
+            llEmptyList.visibility = View.VISIBLE
+            btnSeeMorePlainsTour.visibility = View.GONE
         }
     }
 
-    fun onClickPlain(plainTour: PlainTour){
+    private fun onClickPlain(plainTour: PlainTour){
+        Log.d("PLAN", plainTour.toString())
+    }
 
+    private fun initView() {
+        if (hasConnection(activity!!)) {
+            if (hasInternetConnection()) {
+                loadRecyclesView(response)
+                showNoConnectionAdvice(false)
+            } else {
+                showNoConnectionAdvice(true)
+            }
+        } else {
+            showNoConnectionAdvice(true)
+        }
+    }
+
+    private fun showNoConnectionAdvice(visible:Boolean){
+        if(visible) {
+
+            llNoInternetConn.visibility     = View.VISIBLE
+            btnTryAgain.visibility          = View.VISIBLE
+            scViewPlanTour.visibility        = View.GONE
+        }else{
+            llNoInternetConn.visibility     = View.GONE
+            btnTryAgain.visibility          = View.GONE
+            scViewPlanTour.visibility       = View.VISIBLE
+
+        }
     }
 
 

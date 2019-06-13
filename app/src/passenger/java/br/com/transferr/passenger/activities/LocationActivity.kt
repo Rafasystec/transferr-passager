@@ -9,13 +9,13 @@ import android.view.View
 import br.com.transferr.R
 import br.com.transferr.main.util.LanguageDeviceUtil
 import br.com.transferr.main.util.PicassoUtil
+import br.com.transferr.passenger.extensions.hasConnection
+import br.com.transferr.passenger.extensions.hasInternetConnection
 import br.com.transferr.passenger.extensions.setupToolbar
 import br.com.transferr.passenger.model.TourOption
-import com.squareup.picasso.MemoryPolicy
-import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.passenger.activity_location.*
 import kotlinx.android.synthetic.passenger.layout_location_details.*
-import org.jetbrains.anko.startActivity
+import kotlinx.android.synthetic.passenger.layout_no_internet_connection.*
 
 
 class LocationActivity : br.com.transferr.passenger.activities.SuperClassActivity() {
@@ -34,19 +34,34 @@ class LocationActivity : br.com.transferr.passenger.activities.SuperClassActivit
             intent.putExtra(TourOption.TOUR_PARAMETER_KEY,tourOption)
             startActivity(intent)
         }
+        btnTryAgain.setOnClickListener {
+            initView()
+        }
 
     }
 
     override fun onResume() {
         super.onResume()
-        loadFields()
+        initView()
+    }
+
+    private fun initView() {
+        if (hasConnection(this)) {
+            if (hasInternetConnection()) {
+                loadFields()
+            } else {
+                showNoConnectionAdvice(true)
+            }
+        } else {
+            showNoConnectionAdvice(true)
+        }
     }
 
     private fun loadFields(){
         if(tourOption == null){
             return
         }
-
+        showNoConnectionAdvice(false)
         PicassoUtil.build(tourOption?.profileUrl!!,ivMainPicture,null,true,true)
         tvLocationDescription.text = LanguageDeviceUtil.transform(tourOption!!.descriptionLanguage!!) //tourOption?.description
         val images: List<String> = tourOption!!.images!!
@@ -79,4 +94,21 @@ class LocationActivity : br.com.transferr.passenger.activities.SuperClassActivit
             }
         }))
     }
+
+    private fun showNoConnectionAdvice(visible:Boolean){
+        if(visible) {
+
+            llNoInternetConn.visibility     = View.VISIBLE
+            btnTryAgain.visibility          = View.VISIBLE
+            btnSeeDrivers.visibility        = View.GONE
+            scViewLocation.visibility       = View.GONE
+        }else{
+            llNoInternetConn.visibility     = View.GONE
+            btnTryAgain.visibility          = View.GONE
+            scViewLocation.visibility       = View.VISIBLE
+            btnSeeDrivers.visibility        = View.VISIBLE
+        }
+    }
+
+
 }

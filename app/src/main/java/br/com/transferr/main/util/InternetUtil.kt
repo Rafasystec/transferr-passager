@@ -8,6 +8,7 @@ import android.net.NetworkInfo
 import android.support.design.widget.Snackbar
 import android.view.View
 import br.com.transferr.R
+import java.net.InetAddress
 
 /**
  * Created by idoctor on 08/02/2018.
@@ -31,4 +32,18 @@ object InternetUtil {
         }else true
     }
     */
+
+    fun isInternetAvaliable():Boolean{
+        return try {
+            InetAddress.getByName("google.com")
+            true
+        }catch (e:Exception){
+            false
+        }
+    }
+
+    fun isNetworkConnected(context: Context): Boolean {
+        val cm = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+        return cm.activeNetworkInfo != null
+    }
 }

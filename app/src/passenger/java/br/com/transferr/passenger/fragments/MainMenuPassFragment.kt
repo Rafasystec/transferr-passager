@@ -53,20 +53,6 @@ class MainMenuPassFragment : SuperClassFragment() {
 
     }
 
-/*    private fun logout(){
-        activity?.alert(getString(R.string.logout),getString(R.string.areYouSureLogout)){
-            yesButton {
-                Prefes.clear()
-                startActivity(Intent(activity, LoginActivity::class.java))
-                activity!!.finish()
-            }
-            noButton {
-                it.dismiss()
-            }
-        }?.show()
-
-    }
-*/
     private fun rateTheAppOnStore() {
         val uri = Uri.parse("market://details?id=br.com.idoctorbrasil.idoctor_android")// + activity!!.packageName)
         val myAppLinkToMarket = Intent(Intent.ACTION_VIEW, uri)

@@ -2,6 +2,7 @@ package br.com.transferr.passenger.extensions
 
 import android.app.Activity
 import android.app.ProgressDialog
+import android.content.Context
 import android.support.annotation.IdRes
 import android.support.annotation.StringRes
 import android.support.v4.app.Fragment
@@ -12,9 +13,13 @@ import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.support.v7.widget.Toolbar
 import br.com.transferr.R
+import br.com.transferr.main.util.ExecutorServiceUtil
+import br.com.transferr.main.util.InternetUtil
 import org.jetbrains.anko.alert
 import org.jetbrains.anko.indeterminateProgressDialog
 import org.jetbrains.anko.okButton
+import java.util.concurrent.Callable
+import java.util.concurrent.TimeUnit
 
 /**
  * Created by Rafael Rocha on 25/07/18.
@@ -92,4 +97,16 @@ fun Activity.showAlertError(message:String){
 
 fun Activity.showAlertError(@StringRes idResource: Int){
     showAlertError(getString(idResource)!!)
+}
+
+fun hasConnection(context: Context):Boolean{
+    return ExecutorServiceUtil.timedCall<Boolean>(Callable {
+        InternetUtil.isNetworkConnected(context)
+    },2,TimeUnit.SECONDS)
+}
+
+fun hasInternetConnection():Boolean{
+    return ExecutorServiceUtil.timedCall(Callable {
+        InternetUtil.isInternetAvaliable()
+    },2,TimeUnit.SECONDS)
 }

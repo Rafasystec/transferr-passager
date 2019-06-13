@@ -11,15 +11,18 @@ import br.com.transferr.R
 import br.com.transferr.extensions.defaultRecycleView
 import br.com.transferr.extensions.showLoadingDialog
 import br.com.transferr.fragments.SuperClassFragment
-import br.com.transferr.passenger.interfaces.OnResponseInterface
+import br.com.transferr.model.responses.OnResponseInterface
+import br.com.transferr.passenger.extensions.hasConnection
+import br.com.transferr.passenger.extensions.hasInternetConnection
 import br.com.transferr.passenger.model.Location
 import br.com.transferr.passenger.model.TourOption
 import br.com.transferr.passenger.model.responses.ResponseDriver
 import br.com.transferr.passenger.model.responses.ResponseDrivers
 import br.com.transferr.passenger.webservices.WSDriver
+import kotlinx.android.synthetic.passenger.fragment_driver_list.*
 import kotlinx.android.synthetic.passenger.layout_empty_list.*
 import kotlinx.android.synthetic.passenger.layout_empty_list.view.*
-import org.jetbrains.anko.progressDialog
+import kotlinx.android.synthetic.passenger.layout_no_internet_connection.*
 import org.jetbrains.anko.toast
 
 
@@ -41,6 +44,9 @@ class DriverListFragment : SuperClassFragment() {
         super.onViewCreated(view, savedInstanceState)
         location = (arguments?.getSerializable(TourOption.TOUR_PARAMETER_KEY) as TourOption).location
         recycleView = defaultRecycleView(activity!!,R.id.rcDriversFromLocation)
+        btnTryAgain.setOnClickListener {
+            onResume()
+        }
         if(llEmptyList != null) {
             llEmptyList.tvTextToAdd.text = getString(R.string.noDriverAtThisMoment)
             llEmptyList.tvTextDetail.text = ""
@@ -49,7 +55,7 @@ class DriverListFragment : SuperClassFragment() {
 
     override fun onResume() {
         super.onResume()
-        loadDriversByLocation()
+        initView()
     }
 
     private fun loadDriversByLocation() {
@@ -58,23 +64,11 @@ class DriverListFragment : SuperClassFragment() {
             val dialog = showLoadingDialog()
             WSDriver.doGetByLocation(location?.id!!, object : OnResponseInterface<ResponseDrivers> {
                 override fun onSuccess(body: ResponseDrivers?) {
-                    dialog?.dismiss()
+                    dialog.dismiss()
                     recycleView?.adapter = br.com.transferr.passenger.adapter.DriversResponseAdapter(body?.drivers!!, onClick = { driver: ResponseDriver -> cardViewOnClick(drivers = driver) })
                     checkIfIsEmpty(body)
                 }
-
-                override fun onError(message: String) {
-                    dialog?.dismiss()
-                    alertWarning(message)
-                }
-
-                override fun onFailure(t: Throwable?) {
-                    dialog?.dismiss()
-                    alertErro(t?.message!!)
-
-                }
-
-            })
+            },activity,dialog)
         }
 
     }
@@ -84,13 +78,41 @@ class DriverListFragment : SuperClassFragment() {
     }
 
     fun checkIfIsEmpty(responseDrivers: ResponseDrivers){
-        if(responseDrivers != null){
+        //if(responseDrivers != null){
             val drivers = responseDrivers.drivers
             if(drivers?.isEmpty()!!){
                 llEmptyList.visibility = View.VISIBLE
             }else{
                 llEmptyList.visibility = View.GONE
             }
+        //}
+    }
+
+    private fun initView() {
+        if (hasConnection(activity!!)) {
+            if (hasInternetConnection()) {
+                loadDriversByLocation()
+                showNoConnectionAdvice(false)
+            } else {
+                showNoConnectionAdvice(true)
+            }
+        } else {
+            showNoConnectionAdvice(true)
+        }
+    }
+
+    private fun showNoConnectionAdvice(visible:Boolean){
+        if(visible) {
+
+            llNoInternetConn.visibility     = View.VISIBLE
+            btnTryAgain.visibility          = View.VISIBLE
+            rcDriversFromLocation.visibility        = View.GONE
+
+        }else{
+            llNoInternetConn.visibility     = View.GONE
+            btnTryAgain.visibility          = View.GONE
+            rcDriversFromLocation.visibility       = View.VISIBLE
+
         }
     }
 
