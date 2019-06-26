@@ -23,6 +23,8 @@ import com.squareup.picasso.NetworkPolicy
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.inforwindows_map.*
 import kotlinx.android.synthetic.main.infowindow_map_content.*
+import org.jetbrains.anko.alert
+import org.jetbrains.anko.okButton
 
 
 class MapInfoWindowActivity : SuperClassActivity() {
@@ -67,7 +69,12 @@ class MapInfoWindowActivity : SuperClassActivity() {
         tvLastUpdate.text      = date
         setImageFromPicasso(url)
         btnWhatsapp?.setOnClickListener {
-            WhatsAppUtil.callWhatsapp(""+car.whatsapp,context,StatisticUtil.getStatistic(car.driverId,this))
+            alert(getString(R.string.dontForgotToSayAboutUs),getString(R.string.Advice)){
+                okButton{
+                    WhatsAppUtil.callWhatsapp(""+car.whatsapp,context,StatisticUtil.getStatistic(car.driverId,context))
+                }
+            }?.show()
+
         }
 
         btnCallPhone?.setOnClickListener {

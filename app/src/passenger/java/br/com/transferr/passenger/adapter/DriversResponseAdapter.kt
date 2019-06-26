@@ -2,8 +2,10 @@ package br.com.transferr.passenger.adapter
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.content.DialogInterface
 import android.content.Intent
 import android.net.Uri
+import android.support.v7.app.AlertDialog
 import android.support.v7.widget.AppCompatButton
 import android.support.v7.widget.CardView
 import android.support.v7.widget.RecyclerView
@@ -78,7 +80,15 @@ class DriversResponseAdapter(val drivers : List<ResponseDriver>,val onClick: (Re
         })
 
         holder.btnWhatsapp.setOnClickListener {
-            WhatsAppUtil.callWhatsapp(responseDrivers.whatsapp,context!!,StatisticUtil.getStatistic(responseDrivers.id,context!!))//callWhatsapp(responseDrivers.whatsapp,context!!)
+
+            AlertDialog.Builder(context!!)
+                    .setTitle(context!!.getString(R.string.Advice))
+                    .setMessage(context!!.getString(R.string.dontForgotToSayAboutUs))
+                    .setPositiveButton(R.string.ok, { paramDialogInterface, paramInt ->
+                        WhatsAppUtil.callWhatsapp(responseDrivers.whatsapp, context!!, StatisticUtil.getStatistic(responseDrivers.id, context!!))//callWhatsapp(responseDrivers.whatsapp,context!!)
+                    }).show()
+
+
         }
 
         holder.btnCallPhone.setOnClickListener {

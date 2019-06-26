@@ -19,10 +19,11 @@ import br.com.transferr.passenger.model.PlainTour
 import br.com.transferr.passenger.model.TourOption
 import br.com.transferr.passenger.model.responses.ResponsePlainsByTourAndLocation
 import br.com.transferr.passenger.webservices.WSPlainTour
+import kotlinx.android.synthetic.main.layout_no_internet_connection.*
 import kotlinx.android.synthetic.passenger.fragment_plain_tour_list.*
 import kotlinx.android.synthetic.passenger.layout_empty_list.*
 import kotlinx.android.synthetic.passenger.layout_empty_list.view.*
-import kotlinx.android.synthetic.passenger.layout_no_internet_connection.*
+//import kotlinx.android.synthetic.passenger.layout_no_internet_connection.*
 
 
 /**

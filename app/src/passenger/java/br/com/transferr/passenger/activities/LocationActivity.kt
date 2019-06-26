@@ -13,9 +13,10 @@ import br.com.transferr.passenger.extensions.hasConnection
 import br.com.transferr.passenger.extensions.hasInternetConnection
 import br.com.transferr.passenger.extensions.setupToolbar
 import br.com.transferr.passenger.model.TourOption
+import kotlinx.android.synthetic.main.layout_no_internet_connection.*
 import kotlinx.android.synthetic.passenger.activity_location.*
 import kotlinx.android.synthetic.passenger.layout_location_details.*
-import kotlinx.android.synthetic.passenger.layout_no_internet_connection.*
+//import kotlinx.android.synthetic.passenger.layout_no_internet_connection.*
 
 
 class LocationActivity : br.com.transferr.passenger.activities.SuperClassActivity() {

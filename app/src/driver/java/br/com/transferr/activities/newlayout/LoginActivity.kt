@@ -13,6 +13,7 @@ import br.com.transferr.model.responses.ResponseOK
 import br.com.transferr.passenger.extensions.showAlert
 import br.com.transferr.passenger.extensions.showAlertError
 import br.com.transferr.passenger.extensions.showLoadingDialog
+import br.com.transferr.passenger.util.WhatsAppUtil
 import br.com.transferr.webservices.DriverService
 import br.com.transferr.webservices.UserService
 import kotlinx.android.synthetic.main.activity_login.*
@@ -29,6 +30,10 @@ class LoginActivity : SuperClassActivity() {
         }
         btnRecoverPass.setOnClickListener{
             callServiceToRecoverPassword()
+        }
+
+        btnWannaRegister.setOnClickListener {
+            WhatsAppUtil.callWhatsapp("+5585985635021",this,"Olá! Quero me cadastrar no BOORA! ")
         }
         checkUserLogin()
     }

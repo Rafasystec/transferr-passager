@@ -145,5 +145,7 @@
     <string name="recoveringPassWord">Recovering password.</string>
     <string name="checkYourWifiConnection">Por favor verifique a sua conexão com a internet e tente novamente.</string>
     <string name="tryAgain">Try again</string>
+    <string name="wannaGetIn">Quero me cadastrar!</string>
+    <string name="dontForgotToSayAboutUs">Por favor, não se esqueça de informar ao motorista que conseguiu o contato no BOORA</string>
 
 </resources>

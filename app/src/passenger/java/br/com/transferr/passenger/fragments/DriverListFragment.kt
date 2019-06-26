@@ -19,10 +19,11 @@ import br.com.transferr.passenger.model.TourOption
 import br.com.transferr.passenger.model.responses.ResponseDriver
 import br.com.transferr.passenger.model.responses.ResponseDrivers
 import br.com.transferr.passenger.webservices.WSDriver
+import kotlinx.android.synthetic.main.layout_no_internet_connection.*
 import kotlinx.android.synthetic.passenger.fragment_driver_list.*
 import kotlinx.android.synthetic.passenger.layout_empty_list.*
 import kotlinx.android.synthetic.passenger.layout_empty_list.view.*
-import kotlinx.android.synthetic.passenger.layout_no_internet_connection.*
+//import kotlinx.android.synthetic.passenger.layout_no_internet_connection.*
 import org.jetbrains.anko.toast
 
 
