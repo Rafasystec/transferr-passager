@@ -107,7 +107,7 @@ fun Fragment.backToFragment(fragment: Fragment){
 }
 
 @SuppressLint("NewApi")
-fun Fragment.showLoadingDialogWithDelay(message: String = getString(R.string.loading), title: String): ProgressDialog {
+fun Fragment.showLoadingDialogWithDelay(message: String = getString(R.string.loading), title: String = ""): ProgressDialog {
     val dialog = activity?.indeterminateLoadingProgressDialog(message) {
         setProgressStyle(ProgressDialog.STYLE_SPINNER)
         setCancelable(false)

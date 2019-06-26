@@ -44,8 +44,8 @@ object CarService : SuperWebService(){
         service.offline(requestCoordinatesUpdate).enqueue(HelperCallBackWebService(responseInterface))
     }
 
-    fun changeAlwaysParameter(idCar:Long, always:Boolean,responseInterface: OnResponseInterface<ResponseOK>){
-        service.doPutAlwaysParameter(idCar,always).enqueue(HelperCallBackWebService(responseInterface))
+    fun changeAlwaysParameter(idCar:Long, always:Boolean,responseInterface: OnResponseInterface<ResponseOK>,activity: FragmentActivity?, progress: ProgressDialog?){
+        service.doPutAlwaysParameter(idCar,always).enqueue(HelperCallBackWebService(responseInterface,activity,progress))
     }
 
     fun updateStatus(responseCarOnline: ResponseCarOnline,responseInterface: OnResponseInterface<ResponseOK>){

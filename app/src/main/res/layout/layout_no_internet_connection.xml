@@ -48,7 +48,7 @@
         android:textColor="@color/colorButtonText"
         android:layout_margin="10dp"
         android:layout_gravity="bottom"
-        app:backgroundTint="@color/colorPrimary"
+        app:backgroundTint="@color/colorForBtnNoInternetTryAgain"
         android:drawableRight="@drawable/ic_link_icon_24"
         />
 

@@ -31,14 +31,7 @@ class MainActivity : AppCompatActivity() {
         setupToolbar(R.id.toolbar,getString(R.string.home))
         includeFragment()
         initNavigationBottomMenu()
-        //getAndSaveDriver()
-        //checkLogin()
     }
-    /*
-    fun setActionBarTitle(title: String) {
-        supportActionBar!!.title = title
-    }
-    */
 
     override fun onResume() {
         super.onResume()
@@ -63,8 +56,10 @@ class MainActivity : AppCompatActivity() {
                     true
                 }
                 R.id.menuTourDriver ->{
-                    switchFragmentToMainContent(DriverListPlainTourFragment())
-                    true
+                    if(isConnected()) {
+                        switchFragmentToMainContent(DriverListPlainTourFragment())
+                        true
+                    }else false
                 }
                 R.id.menuDriver -> {
                    switchFragmentToMainContent(MainMenuFragment())
@@ -77,14 +72,7 @@ class MainActivity : AppCompatActivity() {
 
         }
     }
-/*
-    fun getAndSaveDriver(){
-        var driver = Prefes.driver
-        if(driver == null || driver.id == 0L){
-            getDriverFromWebService()
-        }
-    }
-    */
+
     private fun getDriverFromWebService(){
         val progress = showLoadingDialog(message = getString(R.string.getTheDriver))
         DriverService.doGetByUserId(Prefes.prefsLogin,
@@ -130,27 +118,5 @@ class MainActivity : AppCompatActivity() {
         }
         return true
     }
-    /*
-    private fun getCarFromWebService(){
-        var progress = showLoadingDialog(message = getString(R.string.pleaseWaitWhileWeGetTheCar))
-        DriverService.doGetByUserId(Prefes.prefsLogin,
-                object: OnResponseInterface<Driver> {
-                    override fun onSuccess(body: Driver?) {
-                        Prefes.driver = body!!
-                        progress.dismiss()
-                    }
 
-                    override fun onError(message: String) {
-                        progress.dismiss()
-                    }
-
-                    override fun onFailure(t: Throwable?) {
-                        progress.dismiss()
-                    }
-
-                }
-        )
-
-    }
-    */
 }

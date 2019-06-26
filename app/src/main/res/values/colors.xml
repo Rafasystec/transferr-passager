@@ -33,4 +33,5 @@
     <color name="black">#000</color>
     <color name="colorButton">#99000000</color>
     <color name="logoBackGround">#2F2F2F</color>
+    <color name="colorForBtnNoInternetTryAgain">#ffc107</color>
 </resources>

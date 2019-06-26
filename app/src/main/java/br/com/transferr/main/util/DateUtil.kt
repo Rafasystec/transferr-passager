@@ -34,17 +34,17 @@ object DateUtil {
         val APPLICATION_FORMAT_INPUT = "ddMMyyyy"
         dateTime = getOnlyDate(dateTime, APPLICATION_FORMAT_INPUT)
         return if (dateTime.before(getOnlyDate(getDateTimeNow(), APPLICATION_FORMAT_INPUT))) {
-            "Ontem, " + getDayOfTheWeekExtention(dateTime) + " - " + DateUtil.showTime(dateTimeParam,showTime)
+            "Ontem, " + getDayOfTheWeekExtention(dateTime) + " às " + DateUtil.showTime(dateTimeParam,showTime)
         } else if (dateTime.equals(getOnlyDate(getDateTimeNow(), APPLICATION_FORMAT_INPUT))) {
-            "Hoje, " + getDayOfTheWeekExtention(dateTime) + " - " + DateUtil.showTime(dateTimeParam,showTime)
+            "Hoje, " + getDayOfTheWeekExtention(dateTime) + " às " + DateUtil.showTime(dateTimeParam,showTime)
         } else if (dateTime.equals(getOnlyDate(addDaysForADate(getDateTimeNow(), 1), APPLICATION_FORMAT_INPUT))) {
-            "Amanhã, " + getDayOfTheWeekExtention(dateTime) + " - " + DateUtil.showTime(dateTimeParam,showTime)
+            "Amanhã, " + getDayOfTheWeekExtention(dateTime) + " às " + DateUtil.showTime(dateTimeParam,showTime)
         } else if (dateTime.equals(getOnlyDate(addDaysForADate(getDateTimeNow(), 2), APPLICATION_FORMAT_INPUT))) {
-            getDayOfTheWeekExtention(dateTime) + " - dia " + getDayOfTheMonth(dateTime) + "-" + DateUtil.showTime(dateTimeParam,showTime)
+            getDayOfTheWeekExtention(dateTime) + " - dia " + getDayOfTheMonth(dateTime) + " às " + DateUtil.showTime(dateTimeParam,showTime)
         } else if (dateTime.after(getOnlyDate(addDaysForADate(getDateTimeNow(), 2), APPLICATION_FORMAT_INPUT))) {
-            getDayOfTheWeekExtention(dateTime) + " - dia " + getDayOfTheMonth(dateTime)+ "-" + DateUtil.showTime(dateTimeParam,showTime)
+            getDayOfTheWeekExtention(dateTime) + " - dia " + getDayOfTheMonth(dateTime)+ " às " + DateUtil.showTime(dateTimeParam,showTime)
         } else {
-            getDayOfTheWeekExtention(dateTime) + " - dia " + getDayOfTheMonth(dateTime)+ "-" + DateUtil.showTime(dateTimeParam,showTime)
+            getDayOfTheWeekExtention(dateTime) + " - dia " + getDayOfTheMonth(dateTime)+ " às " + DateUtil.showTime(dateTimeParam,showTime)
         }
     }
     @JvmStatic

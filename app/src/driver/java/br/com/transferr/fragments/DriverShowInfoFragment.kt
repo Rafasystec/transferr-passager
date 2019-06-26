@@ -21,6 +21,7 @@ import br.com.transferr.util.NetworkUtil
 import br.com.transferr.webservices.CarService
 import br.com.transferr.webservices.DriverService
 import kotlinx.android.synthetic.driver.fragment_driver_show_info.*
+import kotlinx.android.synthetic.main.layout_no_internet_connection.*
 import org.jetbrains.anko.alert
 import org.jetbrains.anko.cancelButton
 import org.jetbrains.anko.okButton
@@ -51,18 +52,26 @@ class DriverShowInfoFragment : SuperClassFragment() {
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         return when(item?.itemId){
             R.id.action_edit_driver->{
-                switchFragmentToMainContent(DriverEditInfo())
-                true
+                if(isConnected()) {
+                    switchFragmentToMainContent(DriverEditInfo())
+                    true
+                }else false
             }else -> super.onOptionsItemSelected(item)
         }
     }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setupToolbar(R.id.toolbar,getString(R.string.myInformation))
+        initScreenAndControls()
+        btnTryAgain.setOnClickListener { initScreenAndControls() }
+    }
+
+    private fun initScreenAndControls() {
         registerInternetReceiver()
         getCarFromWebService()
         initView()
     }
+
     private fun initView(){
         swtOnOffAlwaysParam.setOnClickListener { updateAlwaysParameter() }
         checkNetwork()
@@ -84,21 +93,12 @@ class DriverShowInfoFragment : SuperClassFragment() {
         DriverService.doGetByUserId(Prefes.prefsLogin,
                 object: OnResponseInterface<Driver> {
                     override fun onSuccess(body: Driver?) {
-                        initScreenFields(body!!)
-                        progress.dismiss()
+                        try {
+                            initScreenFields(body!!)
+                        }finally {
+                            progress.dismiss()
+                        }
                     }
-                    /*
-                    override fun onError(message: String) {
-                        progress.dismiss()
-                        toast(message)
-                    }
-
-                    override fun onFailure(t: Throwable?) {
-                        progress.dismiss()
-                        toast("Erro ao logar ${t?.message}")
-                    }
-                    */
-
                 }
         , activity!!,progress)
 
@@ -108,6 +108,11 @@ class DriverShowInfoFragment : SuperClassFragment() {
         var isConnectedNow = isConnected()
         if(!isConnectedNow){
             showMessage(isConnectedNow)
+            llNoInternetConn.visibility = View.VISIBLE
+            llDriverShowInfo.visibility = View.GONE
+        }else{
+            llNoInternetConn.visibility = View.GONE
+            llDriverShowInfo.visibility = View.VISIBLE
         }
     }
 
@@ -136,24 +141,21 @@ class DriverShowInfoFragment : SuperClassFragment() {
 
     private fun confirmUpdateAlwaysParameter() {
         var isChecked = swtOnOffAlwaysParam.isChecked
-        var alert = showLoadingDialogWithDelay(title = "")
-        CarService.changeAlwaysParameter(car?.id!!, isChecked, object : OnResponseInterface<ResponseOK> {
-            override fun onSuccess(body: ResponseOK?) {
-                alert.dismiss()
-                //showAlert(R.string.dataSavedSuccessfully)
-            }
+        var alert = showLoadingDialogWithDelay()
+        if(car != null) {
+            CarService.changeAlwaysParameter(car?.id!!, isChecked, object : OnResponseInterface<ResponseOK> {
+                override fun onSuccess(body: ResponseOK?) {
+                    alert.dismiss()
+                }
 
-            override fun onError(message: String) {
+            }, activity, alert)
+        }else {
+            try{
+                swtOnOffAlwaysParam.isChecked = false
+            }finally {
                 alert.dismiss()
-                showAlertValidation(message)
             }
-
-            override fun onFailure(t: Throwable?) {
-                alert.dismiss()
-                showAlertFailure(t?.message!!)
-            }
-
-        })
+        }
     }
 
     private fun registerInternetReceiver(){

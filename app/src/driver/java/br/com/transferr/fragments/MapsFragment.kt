@@ -215,14 +215,6 @@ class MapsFragment : SuperMapFragment(), OnMapReadyCallback,com.google.android.g
                             progress.dismiss()
                         }
 
-                        //override fun onError(message: String) {
-                        //    progress.dismiss()
-                        //}
-
-                        //override fun onFailure(t: Throwable?) {
-                        //    progress.dismiss()
-                        //}
-
                     }
             ,activity,progress)
         }else{
@@ -231,15 +223,7 @@ class MapsFragment : SuperMapFragment(), OnMapReadyCallback,com.google.android.g
                         override fun onSuccess(body: ResponseOK?) {
                             progress.dismiss()
                         }
-                        /*
-                        override fun onError(message: String) {
-                            progress.dismiss()
-                        }
 
-                        override fun onFailure(t: Throwable?) {
-                            progress.dismiss()
-                        }
-                        */
                     }
             )
         }
@@ -311,15 +295,6 @@ class MapsFragment : SuperMapFragment(), OnMapReadyCallback,com.google.android.g
             override fun onSuccess(body: ResponseOK?) {
                 dialog.dismiss()
             }
-            /*
-            override fun onError(message: String) {
-                dialog.dismiss()
-            }
-
-            override fun onFailure(t: Throwable?) {
-                dialog.dismiss()
-            }
-            */
         })
     }
 
@@ -332,19 +307,14 @@ class MapsFragment : SuperMapFragment(), OnMapReadyCallback,com.google.android.g
         var dialog = showLoadingDialog()
         CarService.getCar(Prefes.prefsCar, object :OnResponseInterface<Car>{
             override fun onSuccess(carParam: Car?) {
-                car = carParam
-                updateSwitch(carParam!!)
-                dialog.dismiss()
+                try {
+                    car = carParam
+                    updateSwitch(carParam!!)
+                }finally {
+                    dialog.dismiss()
+                }
+
             }
-
-            //override fun onError(message: String) {
-            //    dialog.dismiss()
-            //}
-
-            //override fun onFailure(t: Throwable?) {
-            //    dialog.dismiss()
-           // }
-
         },activity,dialog)
     }
 

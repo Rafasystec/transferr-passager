@@ -69,44 +69,9 @@ class TourAdapter(private val tours:List<PlainTour>,private val context: Context
             val description     = itemView.note_item_description
             titleView.text      = DateUtil.getDateDescription(tour.date!!,true)
             description.text    = tour.tourOption?.name
-            /*
-            itemView.imgTrash.setOnClickListener {
 
-                context.alert("Confirme exclusão"){
-                    title = "Exclusão"
-                    yesButton { excluir(tour) }
-                    noButton {  }
-                }.show()
-            }
-            */
         }
 
-        /*
-        fun showMessage(message:String){
-            Toast.makeText(context,message,Toast.LENGTH_SHORT).show()
-        }
-        */
-        /*
-        fun excluir(tour: PlainTour){
-            PlainTourService.delete(tour.id!!,
-                    object: OnResponseInterface<ResponseOK> {
-                        override fun onSuccess(body: ResponseOK?) {
-                            showMessage("Excluido com sucesso!")
-
-                        }
-
-                        override fun onError(message: String) {
-                            showMessage("Erro ao tentar excluir: $message")
-                        }
-
-                        override fun onFailure(t: Throwable?) {
-                            showMessage("Falha grave: ${t!!.message}")
-                        }
-
-                    }
-            )
-        }
-        */
     }
 
     private fun startFrmPlainTourActivity(plainTour: PlainTour){

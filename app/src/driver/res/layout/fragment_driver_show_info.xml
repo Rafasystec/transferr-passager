@@ -6,160 +6,152 @@
     android:id="@+id/mainActivity"
     android:background="@color/activityBackground"
     >
-
-
-    <ProgressBar
-        style="?android:attr/progressBarStyleLarge"
-        android:id="@+id/progressBar"
+    <include layout="@layout/layout_no_internet_connection"/>
+    <LinearLayout
+        android:id="@+id/llDriverShowInfo"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:padding="10dp"
-        android:background="@color/black"
-        android:visibility="gone"/>
-
-    <TextView
-        android:id="@+id/lblIdentificacao"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/plate"
-        android:textSize="18dp"
-        android:layout_marginLeft="@dimen/form_margin_left"
-        android:textColor="@color/colorPrimaryDark"
-        android:layout_marginBottom="@dimen/form_margin_bottom"/>
-    <TextView
-        android:id="@+id/lblPlacaValue"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="XXX-0000"
-        android:textSize="18dp"
-        android:textColor="@color/black"
-        android:textStyle="bold"
-        android:drawableLeft="@drawable/ic_licence_plate_filled"
-        android:drawablePadding="5dp"
-        android:padding="@dimen/text_padding_left"
-        android:background="@drawable/shape_text_layout"
-        />
-
-
-    <TextView
-        android:id="@+id/lblModelo"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/model"
-        android:textSize="18dp"
-        android:layout_marginLeft="@dimen/form_margin_left"
-        android:textColor="@color/colorPrimaryDark"
-        android:layout_marginBottom="@dimen/form_margin_bottom"
-        />
-    <TextView
-        android:id="@+id/lblModelValue"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Modelo"
-        android:textSize="18dp"
-        android:textColor="@color/black"
-        android:textStyle="bold"
-        android:drawableLeft="@drawable/ic_jeep_wrangler"
-        android:drawablePadding="5dp"
-        android:padding="@dimen/text_padding_left"
-        android:background="@drawable/shape_text_layout"
-
-        />
-
-
-    <TextView
-        android:id="@+id/lblColor"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/color"
-        android:textSize="18dp"
-        android:layout_marginLeft="@dimen/form_margin_left"
-        android:textColor="@color/colorText"
-        android:layout_marginBottom="@dimen/form_margin_bottom"
-        />
-    <TextView
-        android:id="@+id/lblColorValue"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Cor"
-        android:textSize="18dp"
-        android:textColor="@color/colorText"
-        android:textStyle="bold"
-        android:padding="@dimen/text_padding_left"
-        android:drawableLeft="@drawable/format_color_fill"
-        android:drawablePadding="5dp"
-        android:background="@drawable/shape_text_layout"
-        />
-
-    <TextView
-        android:id="@+id/lblMotorista"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/driver"
-        android:textSize="18dp"
-        android:layout_marginLeft="@dimen/form_margin_left"
-        android:textColor="@color/colorText"
-        android:layout_marginBottom="@dimen/form_margin_bottom"
-        />
-    <TextView
-        android:id="@+id/lblDriverValue"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Meu nome"
-        android:textSize="18dp"
-        android:textColor="@color/colorText"
-        android:textStyle="bold"
-        android:drawableLeft="@drawable/ic_steering_wheel"
-        android:drawablePadding="5dp"
-        android:padding="@dimen/text_padding_left"
-        android:background="@drawable/shape_text_layout"
-        />
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="25dp"
+        android:orientation="vertical"
         >
+        <TextView
+            android:id="@+id/lblIdentificacao"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/plate"
+            android:textSize="18dp"
+            android:layout_marginLeft="@dimen/form_margin_left"
+            android:textColor="@color/colorPrimaryDark"
+            android:layout_marginBottom="@dimen/form_margin_bottom"/>
+        <TextView
+            android:id="@+id/lblPlacaValue"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="18dp"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            android:drawableLeft="@drawable/ic_licence_plate_filled"
+            android:drawablePadding="5dp"
+            android:padding="@dimen/text_padding_left"
+            android:background="@drawable/shape_text_layout"
+            />
+
 
         <TextView
-            android:layout_width="280dp"
+            android:id="@+id/lblModelo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/model"
+            android:textSize="18dp"
+            android:layout_marginLeft="@dimen/form_margin_left"
+            android:textColor="@color/colorPrimaryDark"
+            android:layout_marginBottom="@dimen/form_margin_bottom"
+            />
+        <TextView
+            android:id="@+id/lblModelValue"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="18dp"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            android:drawableLeft="@drawable/ic_jeep_wrangler"
+            android:drawablePadding="5dp"
+            android:padding="@dimen/text_padding_left"
+            android:background="@drawable/shape_text_layout"
+
+            />
+
+
+        <TextView
+            android:id="@+id/lblColor"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/color"
+            android:textSize="18dp"
+            android:layout_marginLeft="@dimen/form_margin_left"
+            android:textColor="@color/colorText"
+            android:layout_marginBottom="@dimen/form_margin_bottom"
+            />
+        <TextView
+            android:id="@+id/lblColorValue"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="18dp"
+            android:textColor="@color/colorText"
+            android:textStyle="bold"
+            android:padding="@dimen/text_padding_left"
+            android:drawableLeft="@drawable/format_color_fill"
+            android:drawablePadding="5dp"
+            android:background="@drawable/shape_text_layout"
+            />
+
+        <TextView
+            android:id="@+id/lblMotorista"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/driver"
+            android:textSize="18dp"
+            android:layout_marginLeft="@dimen/form_margin_left"
+            android:textColor="@color/colorText"
+            android:layout_marginBottom="@dimen/form_margin_bottom"
+            />
+        <TextView
+            android:id="@+id/lblDriverValue"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="18dp"
+            android:textColor="@color/colorText"
+            android:textStyle="bold"
+            android:drawableLeft="@drawable/ic_steering_wheel"
+            android:drawablePadding="5dp"
+            android:padding="@dimen/text_padding_left"
+            android:background="@drawable/shape_text_layout"
+            />
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="25dp"
+            >
+
+            <TextView
+                android:layout_width="280dp"
+                android:layout_height="wrap_content"
+                android:layout_alignBaseline="@+id/swtOnOffAlwaysParam"
+                android:layout_alignBottom="@+id/swtOnOffAlwaysParam"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:text="@string/stayOnline"
+                android:layout_marginLeft="@dimen/form_margin_left"
+                android:layout_weight="3"
+                android:textStyle="bold" />
+
+            <Switch
+                android:id="@+id/swtOnOffAlwaysParam"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginEnd="13dp"
+                android:layout_marginRight="13dp"
+                android:showText="true"
+                android:splitTrack="false"
+                android:textOff="@string/OFF"
+                android:textOn="@string/ON"
+                android:thumb="@drawable/custom_switch_selector"
+                android:layout_weight="1"
+                android:track="@drawable/custom_switch_track" />
+
+        </RelativeLayout>
+
+        <TextView
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignBaseline="@+id/swtOnOffAlwaysParam"
             android:layout_alignBottom="@+id/swtOnOffAlwaysParam"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
-            android:text="@string/stayOnline"
-            android:layout_marginLeft="@dimen/form_margin_left"
-            android:layout_weight="3"
-            android:textStyle="bold" />
-
-        <Switch
-            android:id="@+id/swtOnOffAlwaysParam"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentTop="true"
-            android:layout_marginEnd="13dp"
-            android:layout_marginRight="13dp"
-            android:showText="true"
-            android:splitTrack="false"
-            android:textOff="@string/OFF"
-            android:textOn="@string/ON"
-            android:thumb="@drawable/custom_switch_selector"
-            android:layout_weight="1"
-            android:track="@drawable/custom_switch_track" />
-
-    </RelativeLayout>
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/swtOnOffAlwaysParam"
-        android:layout_alignBottom="@+id/swtOnOffAlwaysParam"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginLeft="5dp"
-        android:text="@string/alwaysParameterDescription" />
-
+            android:layout_marginLeft="5dp"
+            android:text="@string/alwaysParameterDescription" />
+    </LinearLayout>
 </LinearLayout>
 
