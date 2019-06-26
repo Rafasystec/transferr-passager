@@ -33,7 +33,7 @@ class LoginActivity : SuperClassActivity() {
         }
 
         btnWannaRegister.setOnClickListener {
-            WhatsAppUtil.callWhatsapp("+5585985635021",this,"Olá! Quero me cadastrar no BOORA! ")
+            WhatsAppUtil.callWhatsapp("+5585982082248",this,"Olá! Quero me cadastrar no BOORA! ")
         }
         checkUserLogin()
     }
