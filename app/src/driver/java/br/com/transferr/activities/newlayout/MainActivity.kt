@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import br.com.transferr.R
 import br.com.transferr.activities.LoginActivity
+import br.com.transferr.extensions.hasConnection
 import br.com.transferr.extensions.setupToolbar
 import br.com.transferr.extensions.toast
 import br.com.transferr.fragments.DriverListPlainTourFragment
@@ -108,7 +109,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun isConnected():Boolean{
-        return NetworkUtil.isNetworkAvailable(this)
+        return hasConnection(this)
     }
 
     private fun checkUserLogin():Boolean{

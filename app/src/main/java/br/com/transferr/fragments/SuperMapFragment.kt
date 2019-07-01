@@ -38,7 +38,7 @@ import org.jetbrains.anko.*
 open class SuperMapFragment : SuperClassFragment() {
 
     val PERMISSION_TO_ACCESS_LOCATION = 1
-    var isWaitingResponse = false
+    //var isWaitingResponse = false
     lateinit var locationManager: LocationManager
     var tempListOfOnlineCars: MutableList<ResponseCarsOnline> = mutableListOf()
 
@@ -111,9 +111,9 @@ open class SuperMapFragment : SuperClassFragment() {
         if(map == null){
             return
         }
-        if(isWaitingResponse){
-            return
-        }
+        //if(isWaitingResponse){
+        //    return
+        //}
         var visibleRegion = map!!.projection.visibleRegion
         var quadrant = Quadrant()
         if (visibleRegion != null) {
@@ -127,10 +127,10 @@ open class SuperMapFragment : SuperClassFragment() {
             quadrant.nearRightLng   = visibleRegion.nearRight.longitude
             doAsync {
                 try {
-                    isWaitingResponse = true
+                    //isWaitingResponse = true
                     var carOnlineList = CarServiceMain().getCarOnline(quadrant)
                     uiThread {
-                        isWaitingResponse = false
+                        //isWaitingResponse = false
                         if (clearMap) {
                             map!!.clear()
                         }
@@ -157,7 +157,7 @@ open class SuperMapFragment : SuperClassFragment() {
                         }
                     }
                 }catch (exception : Exception){
-                    isWaitingResponse = false
+                    //isWaitingResponse = false
                 }
             }
         }

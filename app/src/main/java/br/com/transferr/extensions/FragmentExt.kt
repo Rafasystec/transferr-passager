@@ -6,6 +6,7 @@ import android.app.DatePickerDialog
 import android.app.DatePickerDialog.OnDateSetListener
 import android.app.ProgressDialog
 import android.app.TimePickerDialog
+import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Handler
@@ -28,6 +29,7 @@ import br.com.transferr.R
 import br.com.transferr.dialogs.ProgressLoadDialog
 import br.com.transferr.dialogs.indeterminateLoadingProgressDialog
 import br.com.transferr.main.util.InternetUtil
+import br.com.transferr.util.NetworkUtil
 //import kotlinx.android.synthetic.driver.activity_main.*
 import org.jetbrains.anko.alert
 import org.jetbrains.anko.indeterminateProgressDialog
@@ -220,6 +222,10 @@ fun Fragment.callEmailHost(emailTo:String, subject:String, mailBody:String, titl
     activity?.startActivity(Intent.createChooser(intent, title))
 }
 
-fun Fragment.hasConnection() : Boolean{
-    return InternetUtil.isNetworkAvailable(activity!!)
+fun hasConnection(context: Context):Boolean{
+    return NetworkUtil.hasConnection(context)
+}
+
+fun hasInternetConnection():Boolean{
+    return NetworkUtil.hasInternetConnection()
 }

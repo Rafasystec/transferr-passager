@@ -15,6 +15,7 @@ import android.support.v7.widget.Toolbar
 import br.com.transferr.R
 import br.com.transferr.main.util.ExecutorServiceUtil
 import br.com.transferr.main.util.InternetUtil
+import br.com.transferr.util.NetworkUtil
 import org.jetbrains.anko.alert
 import org.jetbrains.anko.indeterminateProgressDialog
 import org.jetbrains.anko.okButton
@@ -100,13 +101,9 @@ fun Activity.showAlertError(@StringRes idResource: Int){
 }
 
 fun hasConnection(context: Context):Boolean{
-    return ExecutorServiceUtil.timedCall<Boolean>(Callable {
-        InternetUtil.isNetworkConnected(context)
-    },2,TimeUnit.SECONDS)
+    return NetworkUtil.hasConnection(context)
 }
 
 fun hasInternetConnection():Boolean{
-    return ExecutorServiceUtil.timedCall(Callable {
-        InternetUtil.isInternetAvaliable()
-    },2,TimeUnit.SECONDS)
+   return NetworkUtil.hasInternetConnection()
 }
