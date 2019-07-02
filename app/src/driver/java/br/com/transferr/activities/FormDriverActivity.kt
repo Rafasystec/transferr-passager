@@ -22,7 +22,7 @@ class FormDriverActivity : AppCompatActivity() {
 
     private fun clearFields(){
         txtDtNacimento.text.clear()
-        txtName.text.clear()
+        txtName.text?.clear()
     }
 
     private fun save(){

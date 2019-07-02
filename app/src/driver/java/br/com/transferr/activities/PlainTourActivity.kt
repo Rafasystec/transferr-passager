@@ -29,7 +29,7 @@ class PlainTourActivity : SuperClassActivity() {
         }
         fabRefeshPlainTour.setOnClickListener{
             callWSToGetAllOpenDriverPlainTour()
-            rcviewTours.adapter.notifyDataSetChanged()
+            rcviewTours.adapter?.notifyDataSetChanged()
             rcviewTours.refreshDrawableState()
         }
 
