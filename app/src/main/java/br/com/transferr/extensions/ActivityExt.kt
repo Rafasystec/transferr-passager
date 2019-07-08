@@ -107,3 +107,11 @@ fun hasConnection(context: Context):Boolean{
 fun hasInternetConnection():Boolean{
    return NetworkUtil.hasInternetConnection()
 }
+
+inline fun Activity.defaultRecycleView(recycleView: RecyclerView) {
+    //var recycleView = view.findViewById<RecyclerView>(resId)
+    recycleView?.layoutManager = LinearLayoutManager(this)
+    recycleView?.itemAnimator = DefaultItemAnimator()
+    recycleView?.setHasFixedSize(true)
+    //return recycleView
+}

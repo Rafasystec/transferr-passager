@@ -147,4 +147,8 @@
     <string name="tryAgain">Try again</string>
     <string name="wannaGetIn">¡Quiero inscribirse!</string>
     <string name="dontForgotToSayAboutUs">Por favor, no se olvide de informar al conductor que consiguió el contacto en el BOORA</string>
+    <string name="workshop">Oficinas</string>
+    <string name="autoparts">Auto Parts</string>
+    <string name="insurance">Insurance</string>
+    <string name="feeding">Feeding</string>
 </resources>
