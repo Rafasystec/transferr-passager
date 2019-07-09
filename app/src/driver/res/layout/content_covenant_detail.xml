@@ -22,8 +22,8 @@
             >
             <ImageView
                 android:id="@+id/imgDetailCovenantLogo"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
                 android:layout_gravity="center"
                 />
             <TextView
@@ -32,7 +32,6 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
                 android:textSize="18sp"
-                android:text="Remover depois"
                 android:textStyle="bold"
                 android:textAlignment="center"
                 />

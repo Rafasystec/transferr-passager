@@ -3,6 +3,7 @@ package br.com.transferr.main.util
 import android.content.Context
 import android.util.Log
 import android.widget.ImageView
+import android.widget.ProgressBar
 import br.com.transferr.R
 import br.com.transferr.application.ApplicationTransferr
 import br.com.transferr.webservices.SuperWebService
@@ -17,10 +18,13 @@ object PicassoUtil {
     var picassoCache:LruCache?=null
 
 
-    fun build(imageURI:String, view:ImageView,callback: Callback?=null, isFit:Boolean = false, isCenterCrop:Boolean = false){
-        //var picassoLocalCache = LruCache(ApplicationTransferr.getInstance().applicationContext)
-        //var okHttoClient = OkHttpClient()
-        //var cache = Cache.NONE
+    fun build(imageURI:String, view:ImageView,callback: Callback?=null, isFit:Boolean = false, isCenterCrop:Boolean = false, progressBar: ProgressBar? = null){
+
+        var target : ImageViewTarget?=null
+        if(progressBar != null) {
+            target = ImageViewTarget(view, progressBar)
+        }
+
         if(picassoCache == null){
             Log.d("DESTROY","Picasso cache is null")
             buildGlobalCache()
@@ -29,7 +33,10 @@ object PicassoUtil {
                 .memoryCache(picassoCache!!)
                 //.downloader(OkHttp3Downloader(SuperWebService().httpClient))
                 .build()
-                .load(imageURI).networkPolicy(NetworkPolicy.NO_CACHE,NetworkPolicy.NO_STORE)
+                .load(imageURI)
+                .networkPolicy(NetworkPolicy.NO_CACHE,NetworkPolicy.NO_STORE)
+                .memoryPolicy(MemoryPolicy.NO_STORE)
+                .error(R.drawable.no_image)
         if(isFit){
             pBuilder.fit()
         }
@@ -37,9 +44,14 @@ object PicassoUtil {
             pBuilder.centerCrop()
         }
         if(callback == null) {
-            pBuilder.placeholder(R.drawable.no_image).into(view)
+            if(target != null){
+                pBuilder.placeholder(R.drawable.picasso_load_animation).into(target)
+            }else{
+                pBuilder.placeholder(R.drawable.picasso_load_animation).into(view)
+            }
+
         }else{
-            pBuilder.placeholder(R.drawable.no_image).into(view, callback)
+            pBuilder.placeholder(R.drawable.picasso_load_animation).into(view, callback)
         }
 
     }

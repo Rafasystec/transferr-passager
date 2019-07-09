@@ -29,23 +29,44 @@
         android:background="@color/control"
         >
 
+        <android.support.v7.widget.AppCompatButton
+            android:id="@+id/btnMenuSeeCovenants"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:text="@string/covenants"
+            android:textColor="@color/colorButtonText"
+            android:drawableLeft="@drawable/handshake_32"
+            android:drawableRight="@drawable/chevron_right"
+            android:background="@color/control"
+            android:visibility="visible"
+            style="?attr/borderlessButtonStyle"
+            android:layout_marginLeft="8dp"
+            />
 
-    <android.support.v7.widget.AppCompatButton
-        android:id="@+id/btnMainMenuContact"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:text="@string/contactUs"
-        android:textColor="@color/colorButtonText"
-        android:layout_marginBottom="2dp"
-        android:layout_gravity="top"
-        android:drawableLeft="@drawable/ic_nova_mensagem"
-        android:drawableRight="@drawable/chevron_right"
-        android:background="@color/control"
-        style="?attr/borderlessButtonStyle"
-        android:layout_marginLeft="8dp"
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/activityBackground"
+            android:layout_marginLeft="40dp"
+            />
 
-        />
+        <android.support.v7.widget.AppCompatButton
+            android:id="@+id/btnMainMenuContact"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:text="@string/contactUs"
+            android:textColor="@color/colorButtonText"
+            android:layout_marginBottom="2dp"
+            android:layout_gravity="top"
+            android:drawableLeft="@drawable/ic_nova_mensagem"
+            android:drawableRight="@drawable/chevron_right"
+            android:background="@color/control"
+            style="?attr/borderlessButtonStyle"
+            android:layout_marginLeft="8dp"
+
+            />
 
         <View
             android:layout_width="match_parent"
@@ -112,27 +133,9 @@
         android:layout_marginLeft="8dp"
         />
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@color/activityBackground"
-            android:layout_marginLeft="40dp"
-            />
 
-        <android.support.v7.widget.AppCompatButton
-            android:id="@+id/btnMenuSeeCovenants"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:text="@string/covenants"
-            android:textColor="@color/colorButtonText"
-            android:drawableLeft="@drawable/handshake_32"
-            android:drawableRight="@drawable/chevron_right"
-            android:background="@color/control"
-            android:visibility="visible"
-            style="?attr/borderlessButtonStyle"
-            android:layout_marginLeft="8dp"
-            />
+
+
 
     </LinearLayout>
 

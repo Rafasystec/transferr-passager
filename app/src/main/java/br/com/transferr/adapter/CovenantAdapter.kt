@@ -1,21 +1,16 @@
 package br.com.transferr.adapter
 
-import android.annotation.SuppressLint
-import android.app.Activity
 import android.content.Context
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.ProgressBar
 import android.widget.TextView
 import br.com.transferr.R
-import br.com.transferr.adapters.TourAdapter
 import br.com.transferr.main.util.PicassoUtil
 import br.com.transferr.model.Covenant
-import br.com.transferr.model.PlainTour
-import br.com.transferr.passenger.util.DateUtil
-import kotlinx.android.synthetic.driver.rc_view_tours.view.*
 import kotlinx.android.synthetic.main.adapter_covenant_list_menu.view.*
 
 class CovenantAdapter(private val covenants:List<Covenant>, private val context: Context, val callBack:(Covenant) -> Unit) : RecyclerView.Adapter<CovenantAdapter.ViewHolder>(){
@@ -44,5 +39,6 @@ class CovenantAdapter(private val covenants:List<Covenant>, private val context:
         //var txtTitle : TextView = itemView.txtConvItemTitle
         var txtDescription : TextView = itemView.txtConvItemDescription
         var imgLogo : ImageView = itemView.ivImgCovenantList
+        //var progress: ProgressBar = itemView.progressCovList
     }
 }
