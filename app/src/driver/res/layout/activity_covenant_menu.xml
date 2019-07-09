@@ -6,11 +6,30 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@color/activityBackground"
-    tools:context="br.com.transferr.activities.newlayout.CovenantMenuActivity">
 
+    tools:context="br.com.transferr.activities.newlayout.CovenantMenuActivity">
+    <android.support.design.widget.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/AppTheme.AppBarOverlay">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/toolListCovenants"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:background="?attr/colorPrimary"
+                app:popupTheme="@style/AppTheme.PopupOverlay" >
+
+            </android.support.v7.widget.Toolbar>
+        </RelativeLayout>
+    </android.support.design.widget.AppBarLayout>
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent"
+        android:layout_margin="8dp"
+        >
 
         <include layout="@layout/layout_content_covenant_list"/>
     </ScrollView>

@@ -7,4 +7,5 @@
     <dimen name="textBackground">35dp</dimen>
     <dimen name="fab_margin">16dp</dimen>
     <dimen name="text_padding_left">5dp</dimen>
+    <dimen name="fieldset">8dp</dimen>
 </resources>

@@ -38,7 +38,7 @@ class HelperCallBackWebService <T>(responseInterface:OnResponseInterface<T>, act
             }else{
                 R.string.errorExecutTheFunction
             }
-            responseInterface?.onError(ApplicationTransferr.getString(resId!!),localActivity)
+            responseInterface?.onError(ApplicationTransferr.getString(resId!!),localActivity,localProgress)
         }
     }
 

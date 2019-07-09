@@ -11,6 +11,7 @@ import br.com.transferr.BuildConfig
 import br.com.transferr.R
 import br.com.transferr.activities.LoginActivity
 import br.com.transferr.activities.TermsOfUseActivity
+import br.com.transferr.activities.newlayout.CovenantMenuActivity
 import br.com.transferr.extensions.callEmailHost
 import br.com.transferr.extensions.setupToolbar
 import br.com.transferr.main.util.Prefes
@@ -42,6 +43,10 @@ class MainMenuFragment : SuperClassFragment() {
 
         btnMainMenuTerms.setOnClickListener {
             activity?.startActivity(Intent(activity,TermsOfUseActivity::class.java))
+        }
+
+        btnMenuSeeCovenants.setOnClickListener {
+            activity?.startActivity(Intent(activity,CovenantMenuActivity::class.java))
         }
 
         btnMainMenuRateApp.setOnClickListener { AppRate.with(activity).showRateDialog(activity) }

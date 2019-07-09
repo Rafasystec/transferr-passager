@@ -34,4 +34,6 @@
     <color name="colorButton">#99000000</color>
     <color name="logoBackGround">#2F2F2F</color>
     <color name="colorForBtnNoInternetTryAgain">#ffc107</color>
+    <color name="primaryBackground">#cbc693</color>
+    <color name="colorItemFieldset">#fffff7</color>
 </resources>

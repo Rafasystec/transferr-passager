@@ -24,7 +24,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppThemeDriver">
-        <activity android:name="br.com.transferr.activities.newlayout.CovenantMenuActivity"></activity>
+        <activity
+            android:name="br.com.transferr.activities.newlayout.CovenantDetailActivity"
+            android:label="@string/title_activity_covenant_detail"
+            android:theme="@style/AppThemeDriver.NoActionBar"></activity>
+        <activity android:name="br.com.transferr.activities.newlayout.CovenantMenuActivity" />
         <activity
             android:name="br.com.transferr.activities.newlayout.MainActivity"
             android:excludeFromRecents="false"

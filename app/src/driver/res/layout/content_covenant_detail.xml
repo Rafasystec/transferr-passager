@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="br.com.transferr.activities.newlayout.CovenantDetailActivity"
+    tools:showIn="@layout/activity_covenant_detail"
+    android:orientation="vertical"
+    >
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="8dp"
+        >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            >
+            <ImageView
+                android:id="@+id/imgDetailCovenantLogo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                />
+            <TextView
+                android:id="@+id/txtDetailCovenantMessage"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:textSize="18sp"
+                android:text="Remover depois"
+                android:textStyle="bold"
+                android:textAlignment="center"
+                />
+
+            <TextView
+                android:id="@+id/txtDetailCovenantAdvice"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                />
+
+        </LinearLayout>
+
+    </ScrollView>
+
+
+</LinearLayout>

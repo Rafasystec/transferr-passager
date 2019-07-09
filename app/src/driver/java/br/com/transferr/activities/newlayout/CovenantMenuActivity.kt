@@ -1,53 +1,96 @@
 package br.com.transferr.activities.newlayout
 
-import android.content.Context
+import android.content.Intent
 import android.os.Bundle
-import android.util.AttributeSet
 import android.view.View
 import br.com.transferr.R
 import br.com.transferr.activities.SuperClassActivity
+import br.com.transferr.adapter.CovenantAdapter
+import br.com.transferr.model.COVENANT_PARAM_NAME
 import br.com.transferr.model.Covenant
 import br.com.transferr.model.enums.EnumCategory
+import br.com.transferr.model.responses.OnResponseInterface
 import br.com.transferr.passenger.extensions.defaultRecycleView
+import br.com.transferr.passenger.extensions.setupToolbar
+import br.com.transferr.passenger.extensions.showLoadingDialog
+import br.com.transferr.webservice.CovenantService
 import kotlinx.android.synthetic.main.layout_content_covenant_list.*
 
 class CovenantMenuActivity : SuperClassActivity() {
 
+    var autoPartList:MutableList<Covenant>?= mutableListOf()
+    var insuranceList:MutableList<Covenant>?=mutableListOf()
+    var feedingList:MutableList<Covenant>?=mutableListOf()
+    var workshopList:MutableList<Covenant>?=mutableListOf()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_covenant_menu)
-    }
-
-    override fun onCreateView(parent: View?, name: String?, context: Context?, attrs: AttributeSet?): View {
         defaultRecycleView(rcAutoParts)
         defaultRecycleView(rcFeeding)
         defaultRecycleView(rcInsurance)
         defaultRecycleView(rcWorkshopList)
-
-
-
-        return super.onCreateView(parent, name, context, attrs)
+        setupToolbar(R.id.toolListCovenants,getString(R.string.covenants))
+        getCovenants()
     }
 
+    fun getCovenants(){
+        var dialog = showLoadingDialog()
+        CovenantService.getActives(object : OnResponseInterface<List<Covenant>>{
+            override fun onSuccess(body: List<Covenant>?) {
+                buildMenu(body!!)
+                dialog.dismiss()
+            }
+        },this ,dialog)
+    }
 
-    fun getCovenants() : List<Covenant> {
+    private fun buildMenu(covenants:List<Covenant>){
+        for(covenant in covenants){
+            when(covenant.category){
+                EnumCategory.AUTOPARTS -> {
+                    autoPartList?.add(covenant)
+                }
+                EnumCategory.FOOD -> {
+                    feedingList?.add(covenant)
+                }
+                EnumCategory.INSURANCE -> {
+                    insuranceList?.add(covenant)
+                }
+                EnumCategory.WORKSHOP -> {
+                    workshopList?.add(covenant)
+                }
+            }
+        }
+        if(autoPartList?.isNotEmpty()!!) {
+            rcAutoParts.adapter = CovenantAdapter(autoPartList!!, this, this::onMenuListClick)
+            llAutoParts.visibility = View.VISIBLE
+        }else{
+            llAutoParts.visibility = View.GONE
+        }
+        if(workshopList?.isNotEmpty()!!){
+            rcWorkshopList.adapter = CovenantAdapter(workshopList!!,this,this::onMenuListClick)
+            llWorkShops.visibility = View.VISIBLE
+        }else{
+            llWorkShops.visibility = View.GONE
+        }
+        if(feedingList?.isNotEmpty()!!){
+            rcFeeding.adapter = CovenantAdapter(feedingList!!,this,this::onMenuListClick)
+            llFeeding.visibility = View.VISIBLE
+        }else{
+            llFeeding.visibility = View.GONE
+        }
+        if(insuranceList?.isNotEmpty()!!){
+            rcInsurance.adapter = CovenantAdapter(insuranceList!!,this,this::onMenuListClick)
+            llInsurance.visibility = View.VISIBLE
+        }else{
+            llInsurance.visibility = View.GONE
+        }
+    }
 
-        var covenant = Covenant()
-        with(covenant){
-            description = "Covenio Padre Cícero Auto-peças"
-            category = EnumCategory.AUTOPARTS
-            urlLogo = "https://media.licdn.com/dms/image/C4D0BAQGqZFO3y7mE1Q/company-logo_200_200/0?e=2159024400&v=beta&t=Nca71jPdX0aiVPrtyVdlk516Apneb5YwTJrxXoq1qxE"
-            message = "Tudo em auto peças, voce tem 10% de deconto em qualquer compra"
-        }
-        var covenant1 = Covenant()
-        with(covenant1){
-            description = "Covenio Bezerra Oliveira"
-            category = EnumCategory.AUTOPARTS
-            urlLogo = "http://bezerraoliveira.com.br/wp/wp-content/uploads/2016/09/logo-bezerra-oliveira-autopecas@2x.png"
-            message = "Tudo em auto peças, voce tem 10% de deconto em qualquer compra"
-        }
-        var covenants = mutableListOf<Covenant>(covenant,covenant1)
-        return covenants
+    fun onMenuListClick(covenant: Covenant){
+        val intent = Intent(this,CovenantDetailActivity::class.java)
+        intent.putExtra(COVENANT_PARAM_NAME,covenant)
+        startActivity(intent)
+
     }
 }
