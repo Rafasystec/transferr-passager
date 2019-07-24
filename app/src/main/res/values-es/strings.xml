@@ -152,4 +152,11 @@
     <string name="insurance">Insurance</string>
     <string name="feeding">Feeding</string>
     <string name="covenants">Pactos</string>
+    <string name="forBetterExperience">For a better app experience, we suggest submitting the information below.</string>
+    <string name="send">Send</string>
+    <string name="notNow">Not now</string>
+    <string name="email">Email</string>
+    <string name="ddd">DDD</string>
+    <string name="pleaseTellUsYourEmail">Please enter your email address</string>
+    <string name="emailSent">E-mail sent</string>
 </resources>

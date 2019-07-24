@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.util.Log
 import br.com.transferr.R
+import br.com.transferr.dialogs.CustomDIalogSendEmail
 import br.com.transferr.main.util.PicassoUtil
 import br.com.transferr.passenger.extensions.setupToolbar
 import br.com.transferr.passenger.extensions.switchFragmentToMainContent
@@ -23,6 +24,7 @@ class MainActivity : AppCompatActivity() {
         includeFragment()
         initNavigationBottomMenu()
         PicassoUtil.buildGlobalCache()
+
     }
 
     fun setActionBarTitle(title: String) {
@@ -40,6 +42,7 @@ class MainActivity : AppCompatActivity() {
         }
         fm.add(R.id.mainFragment,fragment,R.string.tour.toString())
         fm.commit()
+
     }
 
     fun initNavigationBottomMenu() {
@@ -73,4 +76,6 @@ class MainActivity : AppCompatActivity() {
         Log.d("DESTROY","On destroy called.")
         PicassoUtil.clearGlobalCache()
     }
+
+
 }

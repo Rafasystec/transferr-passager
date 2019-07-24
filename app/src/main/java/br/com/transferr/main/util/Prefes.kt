@@ -16,7 +16,8 @@ object Prefes {
     val ID_USER          = "br.com.transferr.user.id"
     val ID_CAR           = "br.com.transferr.car.id"
     val ID_CAR_JSON      = "br.com.transferr.car.id.json"
-    val ID_DRIVER_JSON      = "br.com.transferr.car.id.json"
+    val ID_DRIVER_JSON   = "br.com.transferr.car.id.json"
+    val SENT_EMAIL       = "br.com.transferr.car.id.json"
 
     private fun prefs() : SharedPreferences{
         val contex = ApplicationTransferr.getInstance().applicationContext
@@ -45,5 +46,9 @@ object Prefes {
     fun clear(){
        prefs().edit().clear().commit()
     }
+    fun setBoolean(flag: String,value:Boolean) = prefs().edit().putBoolean(flag,value).apply()
+    var prefsIsEmailSent: Boolean
+        get() = prefs().getBoolean(SENT_EMAIL,true)
+        set(value) = setBoolean(SENT_EMAIL,value)
 
 }

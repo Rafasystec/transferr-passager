@@ -18,7 +18,7 @@ object PicassoUtil {
     var picassoCache:LruCache?=null
 
 
-    fun build(imageURI:String, view:ImageView,callback: Callback?=null, isFit:Boolean = false, isCenterCrop:Boolean = false, progressBar: ProgressBar? = null){
+    fun build(imageURI:String, view:ImageView,callback: Callback?=null, isFit:Boolean = false, isCenterCrop:Boolean = false, progressBar: ProgressBar? = null, context: Context?=null){
 
         var target : ImageViewTarget?=null
         if(progressBar != null) {
@@ -29,9 +29,13 @@ object PicassoUtil {
             Log.d("DESTROY","Picasso cache is null")
             buildGlobalCache()
         }
-        var pBuilder = Picasso.Builder(ApplicationTransferr.getInstance().applicationContext)
+        var pBuilder =
+                if(context != null){
+                    Picasso.Builder(context)
+                }else{
+                    Picasso.Builder(ApplicationTransferr.getInstance().applicationContext)
+                }
                 .memoryCache(picassoCache!!)
-                //.downloader(OkHttp3Downloader(SuperWebService().httpClient))
                 .build()
                 .load(imageURI)
                 .networkPolicy(NetworkPolicy.NO_CACHE,NetworkPolicy.NO_STORE)
@@ -45,21 +49,24 @@ object PicassoUtil {
         }
         if(callback == null) {
             if(target != null){
-                pBuilder.placeholder(R.drawable.picasso_load_animation).into(target)
+                pBuilder
+                        //.placeholder(R.drawable.picasso_load_animation)
+                        .into(target)
             }else{
-                pBuilder.placeholder(R.drawable.picasso_load_animation).into(view)
+                pBuilder
+                        //.placeholder(R.drawable.picasso_load_animation)
+                        .into(view)
             }
-
         }else{
-            pBuilder.placeholder(R.drawable.picasso_load_animation).into(view, callback)
+            pBuilder
+                    .placeholder(R.drawable.picasso_load_animation)
+                    .into(view, callback)
         }
 
     }
 
     fun buildGlobalCache(){
-
         picassoCache = LruCache(ApplicationTransferr.getInstance().applicationContext)
-
     }
 
     fun clearGlobalCache(){

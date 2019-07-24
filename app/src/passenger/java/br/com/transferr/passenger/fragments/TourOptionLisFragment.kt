@@ -9,6 +9,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import br.com.transferr.R
+import br.com.transferr.dialogs.CustomDIalogSendEmail
 import br.com.transferr.extensions.defaultRecycleView
 import br.com.transferr.extensions.showLoadingDialog
 import br.com.transferr.fragments.SuperClassFragment
@@ -49,6 +50,7 @@ class TourOptionLisFragment : SuperClassFragment() {
             startActivity(Intent(activity,LocationListActivity::class.java))
         }
         setMainTitle(R.string.page_title_tour)
+
     }
 
     private fun requestTourOption(){
@@ -66,7 +68,8 @@ class TourOptionLisFragment : SuperClassFragment() {
     fun setTourOptionListAdapter(){
         if(tourOptionList != null && !tourOptionList!!.isEmpty()) {
             tvNoResultByLocation.visibility = View.GONE
-            recycleView?.adapter = br.com.transferr.passenger.adapter.TourOptionAdapter(tourOptionList!!, { tourOption: TourOption -> onTourClick(tourOption) })
+            recycleView?.adapter = br.com.transferr.passenger.adapter.TourOptionAdapter(tourOptionList!!) { tourOption: TourOption -> onTourClick(tourOption) }
+            showDialogSend()
         }else{
             tvNoResultByLocation.visibility = View.VISIBLE
         }
@@ -83,8 +86,12 @@ class TourOptionLisFragment : SuperClassFragment() {
                 dialog?.dismiss()
                 tourOptionList = body
                 setTourOptionListAdapter()
+                //showDialogSend()
             }
         },activity,dialog!!)
+    }
+    private fun showDialogSend(){
+        CustomDIalogSendEmail.show(activity!!)
     }
 
 }
