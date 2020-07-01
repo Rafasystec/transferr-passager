@@ -2,9 +2,6 @@ package br.com.transferr.passenger.adapter
 
 import android.annotation.SuppressLint
 import android.content.Context
-import android.content.DialogInterface
-import android.content.Intent
-import android.net.Uri
 import android.support.v7.app.AlertDialog
 import android.support.v7.widget.AppCompatButton
 import android.support.v7.widget.CardView
@@ -16,17 +13,14 @@ import android.widget.ImageView
 import android.widget.ProgressBar
 import android.widget.TextView
 import br.com.transferr.R
-import br.com.transferr.main.util.GPSUtil
 import br.com.transferr.main.util.PhoneUtil
-import br.com.transferr.main.util.PicassoUtil
 import br.com.transferr.main.util.StatisticUtil
-import br.com.transferr.model.Point
 import br.com.transferr.passenger.model.enums.EnumTypeOfDriver
 import br.com.transferr.passenger.model.responses.ResponseDriver
 import br.com.transferr.passenger.util.WhatsAppUtil
 import com.squareup.picasso.MemoryPolicy
+import com.squareup.picasso.NetworkPolicy
 import com.squareup.picasso.Picasso
-import java.net.URLEncoder
 
 
 /**
@@ -67,26 +61,31 @@ class DriversResponseAdapter(val drivers : List<ResponseDriver>,val onClick: (Re
         holder.tvDriverDetail.text          = "${responseDrivers.nameOfCar}"
         holder.progress.visibility = View.VISIBLE
 
-        PicassoUtil.build(responseDrivers.imgProfileUrl!!,holder.img,object : com.squareup.picasso.Callback {
-            override fun onSuccess() {
-                holder.img.visibility = View.VISIBLE
-                holder.progress.visibility = View.GONE
-            }
+        Picasso.with(context)
+                .load(responseDrivers.imgProfileUrl!!)
+                .memoryPolicy(MemoryPolicy.NO_CACHE,MemoryPolicy.NO_STORE)
+                .networkPolicy(NetworkPolicy.NO_CACHE,NetworkPolicy.NO_STORE)
+                .fit()
+                .centerCrop()
+                .into(holder.img,object : com.squareup.picasso.Callback {
+                    override fun onSuccess() {
+                        holder.img.visibility = View.VISIBLE
+                        holder.progress.visibility = View.GONE
+                    }
 
-            override fun onError() {
-                holder.img.visibility = View.VISIBLE
-                holder.progress.visibility = View.GONE
-            }
-        })
+                    override fun onError() {
+                        holder.img.visibility = View.VISIBLE
+                        holder.progress.visibility = View.GONE
+                    }});
 
         holder.btnWhatsapp.setOnClickListener {
 
             AlertDialog.Builder(context!!)
                     .setTitle(context!!.getString(R.string.Advice))
                     .setMessage(context!!.getString(R.string.dontForgotToSayAboutUs))
-                    .setPositiveButton(R.string.ok, { paramDialogInterface, paramInt ->
+                    .setPositiveButton(R.string.ok) { _, _ ->
                         WhatsAppUtil.callWhatsapp(responseDrivers.whatsapp, context!!, StatisticUtil.getStatistic(responseDrivers.id, context!!))//callWhatsapp(responseDrivers.whatsapp,context!!)
-                    }).show()
+                    }.show()
 
 
         }

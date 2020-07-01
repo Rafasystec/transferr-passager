@@ -2,6 +2,7 @@ package br.com.transferr.main.util
 
 import android.content.Context
 import android.util.Log
+import android.view.View
 import android.widget.ImageView
 import android.widget.ProgressBar
 import br.com.transferr.R
@@ -53,11 +54,13 @@ object PicassoUtil {
                         //.placeholder(R.drawable.picasso_load_animation)
                         .into(target)
             }else{
+                view.visibility = View.VISIBLE
                 pBuilder
                         //.placeholder(R.drawable.picasso_load_animation)
                         .into(view)
             }
         }else{
+            view.visibility = View.VISIBLE
             pBuilder
                     .placeholder(R.drawable.picasso_load_animation)
                     .into(view, callback)
@@ -74,4 +77,14 @@ object PicassoUtil {
             picassoCache?.clear()
         }
     }
+
+    fun load(context: Context,url: String, imageView: ImageView,callback: Callback){
+        Picasso.with(context)
+                .load(url)
+                .memoryPolicy(MemoryPolicy.NO_CACHE,MemoryPolicy.NO_STORE)
+                .networkPolicy(NetworkPolicy.NO_CACHE,NetworkPolicy.NO_STORE)
+                .centerCrop()
+                .into(imageView,callback)
+    }
+
 }

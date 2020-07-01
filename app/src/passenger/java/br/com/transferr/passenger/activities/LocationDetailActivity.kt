@@ -7,6 +7,8 @@ import android.support.v4.app.ActivityCompat
 import android.support.v4.content.ContextCompat
 import br.com.transferr.R
 import br.com.transferr.passenger.adapter.TabLocationAdapter
+import br.com.transferr.passenger.extensions.switchFragment
+import br.com.transferr.passenger.fragments.DriverListFragment
 import br.com.transferr.passenger.model.TourOption
 import kotlinx.android.synthetic.passenger.activity_location_detail.*
 import org.jetbrains.anko.alert
@@ -20,17 +22,32 @@ class LocationDetailActivity : br.com.transferr.passenger.activities.SuperClassA
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_location_detail)
-        setupViewPageTabs()
+//--------------------------------------------------------
+//        To Active tab layout uncomment below
+//--------------------------------------------------------
+//        setupViewPageTabs()
+//--------------------------------------------------------
         requestPermissionToPhoneCall()
+        val tourOption = intent.getSerializableExtra(TourOption.TOUR_PARAMETER_KEY) as TourOption
+        val fragment = DriverListFragment()
+        if(fragment.arguments == null){
+            fragment.arguments = Bundle()
+        }
+        fragment.arguments!!.putSerializable(TourOption.TOUR_PARAMETER_KEY,tourOption)
+        switchFragment(R.id.frmDriversLocation,fragment)
     }
 
-    fun setupViewPageTabs(){
-        viewPageLocation.offscreenPageLimit = 1
-        viewPageLocation.adapter = br.com.transferr.passenger.adapter.TabLocationAdapter(context, supportFragmentManager, intent.getSerializableExtra(TourOption.TOUR_PARAMETER_KEY) as TourOption)
-        tabLayoutLocation.setupWithViewPager(viewPageLocation)
-        val colorText = ContextCompat.getColor(context,R.color.selectedItemClient)
-        tabLayoutLocation.setTabTextColors(colorText,colorText)
-    }
+//--------------------------------------------------------
+//        To Active tab layout uncomment below
+//--------------------------------------------------------
+//    fun setupViewPageTabs(){
+//        viewPageLocation.offscreenPageLimit = 1
+//        viewPageLocation.adapter = br.com.transferr.passenger.adapter.TabLocationAdapter(context, supportFragmentManager, intent.getSerializableExtra(TourOption.TOUR_PARAMETER_KEY) as TourOption)
+//        tabLayoutLocation.setupWithViewPager(viewPageLocation)
+//        val colorText = ContextCompat.getColor(context,R.color.selectedItemClient)
+//        tabLayoutLocation.setTabTextColors(colorText,colorText)
+//    }
+//--------------------------------------------------------
 
     private fun requestPermissionToPhoneCall(){
         if(ContextCompat.checkSelfPermission(this@LocationDetailActivity, Manifest.permission.CALL_PHONE) !=

@@ -121,8 +121,8 @@ class MapsActivity : br.com.transferr.passenger.activities.SuperClassActivity(),
      */
     @SuppressLint("MissingPermission")
     override fun onMapReady(googleMap: GoogleMap) {
-        var mylocationListener = MyLocationLister()
-        var myLocationLatLng = mylocationListener.getLocation(this.context)
+        val mylocationListener = MyLocationLister()
+        val myLocationLatLng = mylocationListener.getLocation(this.context)
         if(myLocationLatLng != null) {
             val update = CameraUpdateFactory.newLatLngZoom(myLocationLatLng, 16f)
             googleMap.moveCamera(update)
@@ -162,18 +162,18 @@ class MapsActivity : br.com.transferr.passenger.activities.SuperClassActivity(),
         val dialog = AlertDialog.Builder(this)
         dialog.setTitle(R.string.enableLocation)
                 .setMessage(R.string.needEnableLocation)
-                .setPositiveButton(R.string.enableGPS, DialogInterface.OnClickListener { paramDialogInterface, paramInt ->
+                .setPositiveButton(R.string.enableGPS) { _: DialogInterface?, _: Int ->
                     val myIntent = Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS)
                     startActivity(myIntent)
-                })
-                .setNegativeButton(R.string.cancel, DialogInterface.OnClickListener { paramDialogInterface, paramInt -> })
+                }
+                .setNegativeButton(R.string.cancel) { _, _ -> }
         dialog.show()
     }
 
 
     private fun callWebService(){
-        var visibleRegion = mMap.projection.visibleRegion
-        var quadrant      = Quadrant()
+        val visibleRegion = mMap.projection.visibleRegion
+        val quadrant      = Quadrant()
         if(visibleRegion != null){
             quadrant.farLeftLat   = visibleRegion.farLeft.latitude
             quadrant.farLeftLng   = visibleRegion.farLeft.longitude
@@ -186,24 +186,22 @@ class MapsActivity : br.com.transferr.passenger.activities.SuperClassActivity(),
             quadrant.nearRightLng = visibleRegion.nearRight.longitude
 
             doAsync {
-                var carOnlineList   = CarService().getCarOnline(quadrant)
+                val carOnlineList   = CarService().getCarOnline(quadrant)
                 uiThread {
-                    if(carOnlineList != null) {
-                        var markers = HelperCar.transformInMarkers(carOnlineList)
-                        if(numCarFound == 0){
-                            numCarFound = markers.size
-                        }else{
-                            var size = markers.size
-                            if(size != numCarFound){
-                                numCarFound = size
-                                //Snackbar.make(contex, "Replace with your own action", Snackbar.LENGTH_LONG)
-                                        //.setAction("Action", null).show()
-                            }
+                    val markers = HelperCar.transformInMarkers(carOnlineList)
+                    if(numCarFound == 0){
+                        numCarFound = markers.size
+                    }else{
+                        val size = markers.size
+                        if(size != numCarFound){
+                            numCarFound = size
+                            //Snackbar.make(contex, "Replace with your own action", Snackbar.LENGTH_LONG)
+                                    //.setAction("Action", null).show()
                         }
+                    }
 
-                        for (mark in markers) {
-                            mMap.addMarker(mark)
-                        }
+                    for (mark in markers) {
+                        mMap.addMarker(mark)
                     }
                 }
             }
@@ -231,12 +229,12 @@ class MapsActivity : br.com.transferr.passenger.activities.SuperClassActivity(),
 
         var fusedLocationProviderClient :
                 FusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
-        fusedLocationProviderClient .getLastLocation()
-                .addOnSuccessListener(this, { location ->
+        fusedLocationProviderClient .lastLocation
+                .addOnSuccessListener(this) { location ->
                     if (location != null) {
                         mLocation = location
                     }
-                })
+                }
     }
 
     override fun onConnectionSuspended(p0: Int) {

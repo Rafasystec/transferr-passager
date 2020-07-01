@@ -54,6 +54,7 @@ class CallRESTMethodsUtil <T>{
         val responseBody = response.body()
         if(responseBody != null){
             val json = responseBody.string()
+            log("URL ${request!!.url().toString()}")
             log("JSON returned -->> $json")
             return json
         }

@@ -157,7 +157,7 @@ class MapsFragment : SuperMapFragment(), OnMapReadyCallback
     var mStatusChecker: Runnable = object : Runnable {
         override fun run() {
             try {
-                updateMapScreen()
+//                updateMapScreen()
             } finally {
                 // 100% guarantee that this always happens, even if
                 // your update method throws an exception

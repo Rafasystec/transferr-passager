@@ -39,6 +39,7 @@ open class SuperMapFragment : SuperClassFragment() {
 
     val PERMISSION_TO_ACCESS_LOCATION = 1
     //var isWaitingResponse = false
+    var enableTrace = false
     lateinit var locationManager: LocationManager
     var tempListOfOnlineCars: MutableList<ResponseCarsOnline> = mutableListOf()
 
@@ -111,6 +112,9 @@ open class SuperMapFragment : SuperClassFragment() {
         if(map == null){
             return
         }
+//        if(!enableTrace){
+//            return
+//        }
         //if(isWaitingResponse){
         //    return
         //}

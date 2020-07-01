@@ -25,7 +25,7 @@ class CarServiceMain {
     }
     var callRESTCarOnline = CallRESTMethodsUtil<MutableList<ResponseCarsOnline>>()
     fun getCarOnline(quadrant: Quadrant):MutableList<ResponseCarsOnline>{
-        var stringBuilder = StringBuilder("car/online/")
+        val stringBuilder = StringBuilder("car/online/")
         //Far points location
         stringBuilder.append(quadrant.farLeftLng).append("/")
         stringBuilder.append(quadrant.farLeftLat).append("/")
@@ -36,8 +36,8 @@ class CarServiceMain {
         stringBuilder.append(quadrant.nearLeftLat).append("/")
         stringBuilder.append(quadrant.nearLeftLng).append("/")
         stringBuilder.append(quadrant.nearRightLat).append("")
-        var url = urlBase+stringBuilder.toString()
-        var json = callRESTCarOnline.get(url)
+        val url = urlBase+stringBuilder.toString()
+        val json = callRESTCarOnline.get(url)
         return callRESTCarOnline.fromJson(json)
     }
 }
