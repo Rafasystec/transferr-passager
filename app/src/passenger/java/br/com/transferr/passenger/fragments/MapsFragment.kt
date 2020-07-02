@@ -3,16 +3,17 @@ package br.com.transferr.passenger.fragments
 
 import android.Manifest
 import android.annotation.SuppressLint
+import android.content.pm.PackageManager
 import android.location.Location
 import android.os.Bundle
 import android.os.Handler
+import android.support.v4.app.ActivityCompat
 import android.support.v4.app.Fragment
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import br.com.transferr.R
-import br.com.transferr.application.ApplicationTransferr
 import br.com.transferr.fragments.SuperMapFragment
 import br.com.transferr.main.util.GPSUtil
 import br.com.transferr.main.util.PermissionUtil
@@ -23,6 +24,10 @@ import br.com.transferr.passenger.helpers.HelperCar
 import br.com.transferr.passenger.model.responses.ResponseCarsOnline
 import br.com.transferr.passenger.util.MyLocationLister
 import br.com.transferr.passenger.webservices.CarService
+import com.google.android.gms.common.ConnectionResult
+import com.google.android.gms.common.api.GoogleApiClient
+import com.google.android.gms.location.LocationRequest
+import com.google.android.gms.location.LocationServices
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
@@ -40,9 +45,13 @@ import org.jetbrains.anko.uiThread
  * A simple [Fragment] subclass.
  */
 class MapsFragment : SuperMapFragment(), OnMapReadyCallback
+//        GoogleApiClient.ConnectionCallbacks,
+//        GoogleApiClient.OnConnectionFailedListener,
+//        com.google.android.gms.location.LocationListener
 
 {
 
+    private var googleApiclient: GoogleApiClient?=null
     private lateinit var mMap: GoogleMap
     private var gpsUtil:GPSUtil?=null
     private var latLng: LatLng? = null
@@ -52,9 +61,9 @@ class MapsFragment : SuperMapFragment(), OnMapReadyCallback
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        mHandler = Handler()
+//        mHandler = Handler()
         gpsUtil = GPSUtil(activity)
-        startRepeatingTask()
+//        startRepeatingTask()
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
@@ -67,6 +76,7 @@ class MapsFragment : SuperMapFragment(), OnMapReadyCallback
         //Start the map
         val mapFragment = childFragmentManager.findFragmentById(R.id.mapFragment) as SupportMapFragment
         mapFragment.getMapAsync(this)
+//        buildMapsAPI()
         return view
     }
 
@@ -108,6 +118,9 @@ class MapsFragment : SuperMapFragment(), OnMapReadyCallback
                 updateCamera(mMap!!, latLng)
             }
         }
+        mMap.setOnCameraIdleListener {
+            updateMapScreen()
+        }
     }
 
     private fun updateMapScreen(){
@@ -118,11 +131,11 @@ class MapsFragment : SuperMapFragment(), OnMapReadyCallback
         }
     }
     private fun callWebService() {
-        if(mMap == null){
-            return
-        }
-        var visibleRegion = mMap.projection.visibleRegion
-        var quadrant = Quadrant()
+//        if(mMap == null){
+//            return
+//        }
+        val visibleRegion = mMap.projection.visibleRegion
+        val quadrant = Quadrant()
         if (visibleRegion != null) {
             quadrant.farLeftLat = visibleRegion.farLeft.latitude
             quadrant.farLeftLng = visibleRegion.farLeft.longitude
@@ -135,7 +148,7 @@ class MapsFragment : SuperMapFragment(), OnMapReadyCallback
             quadrant.nearRightLng = visibleRegion.nearRight.longitude
 
             doAsync {
-                var carOnlineList = CarService().getCarOnline(quadrant)
+                val carOnlineList = CarService().getCarOnline(quadrant)
                 uiThread {
                     if (carOnlineList != null) {
                         mMap.clear()
@@ -151,40 +164,81 @@ class MapsFragment : SuperMapFragment(), OnMapReadyCallback
 
 
 
-    private val mInterval = 10000L // 5 seconds by default, can be changed later
-    private var mHandler: Handler? = null
+//    private val mInterval = 10000L // 5 seconds by default, can be changed later
+//    private var mHandler: Handler? = null
+//
+//    var mStatusChecker: Runnable = object : Runnable {
+//        override fun run() {
+//            try {
+////                updateMapScreen()
+//            } finally {
+//                // 100% guarantee that this always happens, even if
+//                // your update method throws an exception
+//                mHandler?.postDelayed(this, mInterval)
+//            }
+//        }
+//    }
 
-    var mStatusChecker: Runnable = object : Runnable {
-        override fun run() {
-            try {
-//                updateMapScreen()
-            } finally {
-                // 100% guarantee that this always happens, even if
-                // your update method throws an exception
-                mHandler?.postDelayed(this, mInterval)
-            }
-        }
-    }
+//    fun startRepeatingTask() {
+//        mStatusChecker.run()
+//    }
 
-    fun startRepeatingTask() {
-        mStatusChecker.run()
-    }
+//    fun stopRepeatingTask() {
+//        mHandler?.removeCallbacks(mStatusChecker)
+//    }
 
-    fun stopRepeatingTask() {
-        mHandler?.removeCallbacks(mStatusChecker)
-    }
+//    override fun onDestroy() {
+//        super.onDestroy()
+//        stopRepeatingTask()
+//    }
 
-    override fun onDestroy() {
-        super.onDestroy()
-        stopRepeatingTask()
-    }
+//    internal fun updateCamera(latLng: LatLng?) {
+//        if (latLng != null) {
+//            mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 11f))
+//        }
+//    }
 
-    internal fun updateCamera(latLng: LatLng?) {
-        if (latLng != null) {
-            mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 11f))
-        }
+//    fun buildMapsAPI(){
+//        googleApiclient = GoogleApiClient.Builder(activity!!)
+//                .addConnectionCallbacks(this)
+//                .addOnConnectionFailedListener(this)
+//                .addApi(LocationServices.API)
+//                .build()
+//        googleApiclient!!.connect()
+//    }
 
+//    override fun onConnected(p0: Bundle?) {
+//        startLocationUpdates()
+//    }
+//
+//    override fun onConnectionSuspended(p0: Int) {
+//
+//    }
+//
+//    override fun onConnectionFailed(p0: ConnectionResult) {
+//
+//    }
+//    private var mLocationRequest: LocationRequest? = null
+//    private val UPDATE_INTERVAL = (2 * 1000).toLong()  /* 10 secs */
+//    private val FASTEST_INTERVAL: Long = 2000 /* 2 sec */
+//    override fun onLocationChanged(location: Location?) {
+//        updateMapScreen()
+//    }
 
-    }
+//    private fun startLocationUpdates() {
+//
+//        // Create the location request
+//        mLocationRequest = LocationRequest.create()
+//                .setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY)
+//                .setInterval(UPDATE_INTERVAL)
+//                .setFastestInterval(FASTEST_INTERVAL)
+//        // Request location updates
+//        if (ActivityCompat.checkSelfPermission(activity!!, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(activity!!, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+//            return
+//        }
+//        LocationServices.FusedLocationApi.requestLocationUpdates(googleApiclient,
+//                mLocationRequest, this)
+//
+//    }
 
 }
