@@ -4,7 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:card_view="http://schemas.android.com/tools"
     android:id="@+id/cvLocation"
-    android:layout_height="110dp"
+    android:layout_height="150dp"
     android:layout_width="match_parent"
     android:clickable="true"
     android:padding="5dp"
@@ -95,18 +95,6 @@
             android:textSize="12sp"
             android:text="Detalhe" />
 
-        <TextView
-            android:id="@+id/tvLocation"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignBottom="@+id/llTvProfile"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentRight="true"
-            android:layout_marginEnd="20dp"
-            android:layout_marginRight="20dp"
-            android:textStyle="bold"
-            android:text="Detalhe" />
-
         <!--
         <TextView
             android:layout_width="wrap_content"
@@ -121,6 +109,19 @@
             android:text=">"
             android:id="@+id/textView" />
             -->
+        <TextView
+            android:id="@+id/tvLocation"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/llTvProfile"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginEnd="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginBottom="-43dp"
+            android:text="Detalhe"
+            android:textStyle="bold" />
+
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
