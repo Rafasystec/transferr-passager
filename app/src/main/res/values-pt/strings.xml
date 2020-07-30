@@ -115,7 +115,7 @@
     <string name="alwaysParamIsTrueMessage">The parameter that make the car always on map is True, so your car will still on map.</string>
     <string name="selectATime">Selecione a hora</string>
     <string name="noPlainTourAtThisMoment">Sem passeios no momento.</string>
-    <string name="noDriverAtThisMoment">Infelizmente não temos nenhum agendamento para o passeio escolhido!</string>
+    <string name="noDriverAtThisMoment">Infelizmente não temos nenhum motorista para esse passeio!</string>
     <string name="permissionGranted">Permissão concedida!</string>
     <string name="permissionDied">Permissão negada!</string>
     <string name="enableLocation">Habilitar Localização</string>

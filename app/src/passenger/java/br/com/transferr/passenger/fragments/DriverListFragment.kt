@@ -34,7 +34,8 @@ class DriverListFragment : SuperClassFragment() {
 
     private var recycleView: RecyclerView?=null
     //private var idLocation = 0
-    private var location:Location?=null
+//    private var location:Location?=null
+    private var tour:TourOption?=null
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
@@ -43,7 +44,9 @@ class DriverListFragment : SuperClassFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        location = (arguments?.getSerializable(TourOption.TOUR_PARAMETER_KEY) as TourOption).location
+
+        tour = arguments?.getSerializable(TourOption.TOUR_PARAMETER_KEY) as TourOption
+//        location = (arguments?.getSerializable(TourOption.TOUR_PARAMETER_KEY) as TourOption).location
         recycleView = defaultRecycleView(activity!!,R.id.rcDriversFromLocation)
         btnTryAgain.setOnClickListener {
             onResume()
@@ -59,11 +62,26 @@ class DriverListFragment : SuperClassFragment() {
         initView()
     }
 
-    private fun loadDriversByLocation() {
+//    private fun loadDriversByLocation() {
+//
+//        if(location != null) {
+//            val dialog = showLoadingDialog()
+//            WSDriver.doGetByLocation(location?.id!!, object : OnResponseInterface<ResponseDrivers> {
+//                override fun onSuccess(body: ResponseDrivers?) {
+//                    dialog.dismiss()
+//                    recycleView?.adapter = br.com.transferr.passenger.adapter.DriversResponseAdapter(body?.drivers!!, onClick = { driver: ResponseDriver -> cardViewOnClick(drivers = driver) })
+//                    checkIfIsEmpty(body)
+//                }
+//            },activity,dialog)
+//        }
+//
+//    }
 
-        if(location != null) {
+    private fun loadDriversByTourOption() {
+
+        if(tour != null) {
             val dialog = showLoadingDialog()
-            WSDriver.doGetByLocation(location?.id!!, object : OnResponseInterface<ResponseDrivers> {
+            WSDriver.doGetByTourOption(tour?.id!!, object : OnResponseInterface<ResponseDrivers> {
                 override fun onSuccess(body: ResponseDrivers?) {
                     dialog.dismiss()
                     recycleView?.adapter = br.com.transferr.passenger.adapter.DriversResponseAdapter(body?.drivers!!, onClick = { driver: ResponseDriver -> cardViewOnClick(drivers = driver) })
@@ -92,7 +110,8 @@ class DriverListFragment : SuperClassFragment() {
     private fun initView() {
         if (hasConnection(activity!!)) {
             if (hasInternetConnection()) {
-                loadDriversByLocation()
+//                loadDriversByLocation()
+                loadDriversByTourOption()
                 showNoConnectionAdvice(false)
             } else {
                 showNoConnectionAdvice(true)

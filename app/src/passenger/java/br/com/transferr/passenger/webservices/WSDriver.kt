@@ -21,15 +21,20 @@ object WSDriver : BaseWebService() {
     fun doGetByLocation(idLocation: Long, responseInterface: OnResponseInterface<ResponseDrivers>, activity: FragmentActivity?, progress: ProgressDialog){
         service.doGetByLocation(idLocation).enqueue(HelperCallBackWebService(responseInterface,activity,progress))
     }
+    fun doGetByTourOption(idTourOption: Long, responseInterface: OnResponseInterface<ResponseDrivers>, activity: FragmentActivity?, progress: ProgressDialog){
+        service.doGetByTourOption(idTourOption).enqueue(HelperCallBackWebService(responseInterface,activity,progress))
+    }
 
     fun doGetByUserId(userId: Long,responseInterface: OnResponseInterface<Driver>){
         service.doGetByUserId(userId).enqueue(HelperCallBackWebService(responseInterface))
     }
 
     interface IWSDriver{
-        @GET(ROOT_URL_DRIVER+"/by/location/{idLocation}")
+        @GET("$ROOT_URL_DRIVER/by/location/{idLocation}")
         fun doGetByLocation(@Path("idLocation") idLocation:Long):Call<ResponseDrivers>
-        @GET(ROOT_URL_DRIVER+"/by/user/{userId}")
+        @GET("$ROOT_URL_DRIVER/by/user/{userId}")
         fun doGetByUserId(@Path("userId") userId:Long):Call<Driver>
+        @GET("$ROOT_URL_DRIVER/by/touroption/{idTourOption}")
+        fun doGetByTourOption(@Path("idTourOption") idTourOption:Long):Call<ResponseDrivers>
     }
 }
